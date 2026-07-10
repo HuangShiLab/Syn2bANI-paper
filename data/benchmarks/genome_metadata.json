@@ -1,0 +1,345 @@
+{
+  "GCF_000025765.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000025765.1.fna",
+    "seq": 2495334,
+    "length": 2495334,
+    "contigs": 1,
+    "gc": 0.6010393798986429
+  },
+  "GCF_000008345.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000008345.1.fna",
+    "seq": 2560265,
+    "length": 2560265,
+    "contigs": 1,
+    "gc": 0.6001074107563085
+  },
+  "GCF_006739385.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_006739385.1.fna",
+    "seq": 2494738,
+    "length": 2494738,
+    "contigs": 1,
+    "gc": 0.6002790673810235
+  },
+  "GCF_000240015.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000240015.1.fna",
+    "seq": 2489623,
+    "length": 2489623,
+    "contigs": 1,
+    "gc": 0.6004230359375696
+  },
+  "GCF_000213155.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000213155.1.fna",
+    "seq": 2494578,
+    "length": 2494578,
+    "contigs": 1,
+    "gc": 0.600275878324911
+  },
+  "GCF_000231215.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000231215.1.fna",
+    "seq": 2488626,
+    "length": 2488626,
+    "contigs": 1,
+    "gc": 0.6003999797478609
+  },
+  "GCF_000240035.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000240035.1.fna",
+    "seq": 2522885,
+    "length": 2522885,
+    "contigs": 1,
+    "gc": 0.6007320983715072
+  },
+  "GCF_000217615.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000217615.1.fna",
+    "seq": 2560282,
+    "length": 2560282,
+    "contigs": 1,
+    "gc": 0.6001014731970932
+  },
+  "GCF_000302515.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000302515.1.fna",
+    "seq": 2519002,
+    "length": 2519002,
+    "contigs": 1,
+    "gc": 0.6005918216817613
+  },
+  "GCF_000240055.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/complete_genomes/GCF_000240055.1.fna",
+    "seq": 2498766,
+    "length": 2498766,
+    "contigs": 1,
+    "gc": 0.6003359258129813
+  },
+  "GCA_020254085.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_020254085.1.fna",
+    "seq": 2715392,
+    "length": 2715392,
+    "contigs": 500,
+    "gc": 0.5941068545535967
+  },
+  "GCA_946476895.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_946476895.1.fna",
+    "seq": 1744276,
+    "length": 1744276,
+    "contigs": 343,
+    "gc": 0.5995112012089829
+  },
+  "GCA_005887575.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_005887575.1.fna",
+    "seq": 2107664,
+    "length": 2107664,
+    "contigs": 62,
+    "gc": 0.6028546295804265
+  },
+  "GCF_020254005.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCF_020254005.1.fna",
+    "seq": 2443483,
+    "length": 2443483,
+    "contigs": 371,
+    "gc": 0.6019297044423881
+  },
+  "GCA_002084605.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_002084605.1.fna",
+    "seq": 1706845,
+    "length": 1706845,
+    "contigs": 160,
+    "gc": 0.6024811860479422
+  },
+  "GCA_000521425.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_000521425.1.fna",
+    "seq": 2536557,
+    "length": 2536557,
+    "contigs": 48,
+    "gc": 0.5992134219731707
+  },
+  "GCA_000477835.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_000477835.1.fna",
+    "seq": 2472171,
+    "length": 2472171,
+    "contigs": 2,
+    "gc": 0.6003508656965881
+  },
+  "GCF_005774075.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCF_005774075.1.fna",
+    "seq": 2495583,
+    "length": 2495583,
+    "contigs": 6,
+    "gc": 0.6023678635413048
+  },
+  "GCA_003131265.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_003131265.1.fna",
+    "seq": 2618221,
+    "length": 2618221,
+    "contigs": 226,
+    "gc": 0.5998970293187627
+  },
+  "GCA_003243365.1": {
+    "path": "/Users/shihuang/Downloads/2bRAD\u540c\u6e90\u6027/new_genomes/GCA_003243365.1.fna",
+    "seq": 2341642,
+    "length": 2341642,
+    "contigs": 624,
+    "gc": 0.6015488277029537
+  },
+  "F52": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/F52.fasta",
+    "seq": 3453054,
+    "length": 3453054,
+    "contigs": 3871,
+    "gc": 0.37572566197922186
+  },
+  "LF046": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LF046.fasta",
+    "seq": 2357744,
+    "length": 2357744,
+    "contigs": 1104,
+    "gc": 0.5051269349004811
+  },
+  "LA100": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LA100.fasta",
+    "seq": 1993775,
+    "length": 1993775,
+    "contigs": 1,
+    "gc": 0.3470968389111108
+  },
+  "HNU082": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/HNU082.fasta",
+    "seq": 3355058,
+    "length": 3355058,
+    "contigs": 6,
+    "gc": 0.44457413254852823
+  },
+  "A1271": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/A1271.fasta",
+    "seq": 2435485,
+    "length": 2435485,
+    "contigs": 1310,
+    "gc": 0.38023679061870636
+  },
+  "BB005": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/BB005.fasta",
+    "seq": 2425409,
+    "length": 2425409,
+    "contigs": 2,
+    "gc": 0.5914874563424148
+  },
+  "LP618": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LP618.fasta",
+    "seq": 3329828,
+    "length": 3329828,
+    "contigs": 5,
+    "gc": 0.4437757746045742
+  },
+  "F132": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/F132.fasta",
+    "seq": 3573553,
+    "length": 3573553,
+    "contigs": 845,
+    "gc": 0.44151241075758496
+  },
+  "LP1024": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LP1024.fasta",
+    "seq": 3356297,
+    "length": 3356297,
+    "contigs": 5,
+    "gc": 0.4433320412347298
+  },
+  "JUAN": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/JUAN.fasta",
+    "seq": 2394736,
+    "length": 2394736,
+    "contigs": 2,
+    "gc": 0.37218591109834237
+  },
+  "BB007": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/BB007.fasta",
+    "seq": 2807397,
+    "length": 2807397,
+    "contigs": 932,
+    "gc": 0.5839993417389846
+  },
+  "PD007": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/PD007.fasta",
+    "seq": 2506005,
+    "length": 2506005,
+    "contigs": 1891,
+    "gc": 0.4964722735988156
+  },
+  "BB18": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/BB18.fasta",
+    "seq": 1944143,
+    "length": 1944143,
+    "contigs": 1,
+    "gc": 0.6048958332797536
+  },
+  "F113": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/F113.fasta",
+    "seq": 2030040,
+    "length": 2030040,
+    "contigs": 520,
+    "gc": 0.38977113751453174
+  },
+  "LR99": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LR99.fasta",
+    "seq": 2041190,
+    "length": 2041190,
+    "contigs": 2,
+    "gc": 0.3898549375609326
+  },
+  "F111": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/F111.fasta",
+    "seq": 2728621,
+    "length": 2728621,
+    "contigs": 1885,
+    "gc": 0.4003077012161088
+  },
+  "PD002": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/PD002.fasta",
+    "seq": 3109829,
+    "length": 3109829,
+    "contigs": 3243,
+    "gc": 0.4768146415767555
+  },
+  "PA011": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/PA011.fasta",
+    "seq": 2352918,
+    "length": 2352918,
+    "contigs": 1563,
+    "gc": 0.4183579708260126
+  },
+  "LR66": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LR66.fasta",
+    "seq": 2062486,
+    "length": 2062486,
+    "contigs": 8,
+    "gc": 0.3903803468241724
+  },
+  "LF047": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LF047.fasta",
+    "seq": 3413493,
+    "length": 3413493,
+    "contigs": 4734,
+    "gc": 0.518491469002573
+  },
+  "LG006": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LG006.fasta",
+    "seq": 2086166,
+    "length": 2086166,
+    "contigs": 729,
+    "gc": 0.3546242245343851
+  },
+  "LR66X-1": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LR66X-1.fasta",
+    "seq": 2038659,
+    "length": 2038659,
+    "contigs": 3,
+    "gc": 0.3899548673907701
+  },
+  "BB006": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/BB006.fasta",
+    "seq": 2590242,
+    "length": 2590242,
+    "contigs": 1,
+    "gc": 0.6011137183321095
+  },
+  "LS002": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LS002.fasta",
+    "seq": 3120676,
+    "length": 3120676,
+    "contigs": 4018,
+    "gc": 0.37292496882085807
+  },
+  "M520": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/M520.fasta",
+    "seq": 2961419,
+    "length": 2961419,
+    "contigs": 1,
+    "gc": 0.46807425764473043
+  },
+  "BB21": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/BB21.fasta",
+    "seq": 1944154,
+    "length": 1944154,
+    "contigs": 1,
+    "gc": 0.6048913820612977
+  },
+  "LF004": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LF004.fasta",
+    "seq": 2128828,
+    "length": 2128828,
+    "contigs": 1,
+    "gc": 0.5149612838613546
+  },
+  "LF041": {
+    "path": "/Users/shihuang/Downloads/genome_260305_2/LF041.fasta",
+    "seq": 2097770,
+    "length": 2097770,
+    "contigs": 1,
+    "gc": 0.5179666979697488
+  },
+  "GCF_002953055.1_ASM295305v1_genomic": {
+    "path": "/Users/shihuang/test_data/GCF_002953055.1_ASM295305v1_genomic.fna",
+    "seq": 4651848,
+    "length": 4651848,
+    "contigs": 1,
+    "gc": 0.5080490592125968
+  }
+}

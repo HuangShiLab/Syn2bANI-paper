@@ -1,0 +1,46 @@
+{
+  "reference": "NZ_CP026351.1",
+  "length": 4651848,
+  "queries": {
+    "query_div0.0005": {
+      "div": 0.0005,
+      "gt_ani": 0.9994873005308857,
+      "mutations": 2385
+    },
+    "query_div0.0010": {
+      "div": 0.001,
+      "gt_ani": 0.9990034068181075,
+      "mutations": 4636
+    },
+    "query_div0.0020": {
+      "div": 0.002,
+      "gt_ani": 0.9979844569298051,
+      "mutations": 9376
+    },
+    "query_div0.0050": {
+      "div": 0.005,
+      "gt_ani": 0.995007145547318,
+      "mutations": 23226
+    },
+    "query_div0.0100": {
+      "div": 0.01,
+      "gt_ani": 0.9900056923614013,
+      "mutations": 46492
+    },
+    "query_div0.0200": {
+      "div": 0.02,
+      "gt_ani": 0.9800292270942644,
+      "mutations": 92901
+    },
+    "query_div0.0300": {
+      "div": 0.03,
+      "gt_ani": 0.9700243860074533,
+      "mutations": 139442
+    },
+    "query_div0.0500": {
+      "div": 0.05,
+      "gt_ani": 0.9501632469504593,
+      "mutations": 231833
+    }
+  }
+}

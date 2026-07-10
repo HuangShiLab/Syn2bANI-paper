@@ -1,0 +1,32 @@
+# Data
+*.fasta
+*.fna
+*.fa
+*.fastq
+*.fastq.gz
+*.fasta.gz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.ipynb_checkpoints/
+
+# Models (optional — keep JSON, ignore pickles)
+*.pkl
+*.h5
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large binary files
+*.s2ba
+*.sketch

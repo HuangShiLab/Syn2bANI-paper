@@ -1,0 +1,7 @@
+name,true_svs,detected_svs,ani,af,shared_tags
+inversion_only,1,1,1.0,0.9925,2914
+translocation_only,1,1,1.0,1.0,2942
+deletion_only,1,1,1.0,1.0,2937
+insertion_only,1,1,1.0,0.9993,2942
+combined,3,1,1.0,0.9925,2909
+combined_with_snps,4,1,0.9983,0.9819,2877
