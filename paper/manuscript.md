@@ -130,6 +130,38 @@ A critical concern for any ML-based correction model is whether it generalizes t
 
 Finally, we tested Syn2b-ani on simulated realistic MAGs incorporating multiple artifacts simultaneously: 5% contamination from *B. subtilis*, 5 chimera breakpoints, 5% duplication, and 0.1% assembly error. Syn2b-ani produced ANI = 99.9% and AF = 90.7%, correctly identifying the query as a high-quality strain match (Fig. 7). The contamination was effectively masked by the max-containment normalization: foreign tags from *B. subtilis* had no matches in the *E. coli* reference and were simply excluded from the ANI calculation. Chimerism (shuffled contigs) did not affect ANI because the tag sequences themselves are unchanged; only their genomic positions are altered, which the matching algorithm accommodates naturally. Duplication increased the tag count proportionally but did not bias the ANI because duplicated tags match identically. Assembly errors (0.1% random substitutions) caused a slight ANI underestimate (99.9% vs. 100% ground truth) because erroneous tags were excluded from matching, but the effect was minor (< 0.1%). In comparison, skani produced ANI = 94.2% and AF = 71.3% on the same dataset, failing to correctly classify the MAG as a strain match due to fragmentation-induced chaining breakdown. FastANI was unable to complete the analysis because the combined fragmentation and chimerism fell below its minimum chaining threshold.
 
+### 3.8 Large-scale GTDB-R207 validation and effective ANI range
+
+To validate Syn2b-ani at scale, we benchmarked it against 64,747 representative genomes from the GTDB-R207 dataset (65,703 total representatives; 956 permanently unavailable from NCBI). The dataset spans 169 bacterial and archaeal phyla, with genome sizes ranging from 0.5 Mb to 13.2 Mb and GC contents from 14% to 75%.
+
+#### Empirical detection threshold
+
+The Type IIB restriction-site anchor approach has an inherent biological detection limit. When two genomes share too few Type IIB restriction sites, Syn2b-ani cannot find sufficient anchor points to estimate ANI, and the tool reports `ANI = 0.0`. Through systematic evaluation of 1,150 cross-taxonomic pairs spanning the full ANI spectrum, we identified this threshold at approximately **83% ANI** (Fig. 8a). Pairs with ANI below 83% typically return `raw_ani = 0.0` because the shared tag count falls below the minimum threshold (`min_shared_tags = 10`) or the alignment fraction drops below `min_af = 0.1`. This is not a model training limitation but a fundamental property of the Type IIB anchor method: for sufficiently distant genomes, Type IIB sites become statistically absent. For comparisons below 83% ANI (e.g., across-family or cross-phylum phylogenetics), users should use alignment-based tools such as FastANI or Mash.
+
+#### GBRT v3.6 model performance
+
+To correct systematic bias across the full 83–100% ANI range, we retrained the GBRT model (v3.6) on 622 pairs. The training set comprised 296 pairs with skani-validated ANI (ground truth, 95–100% range) and 326 pairs with Mash-calibrated ANI (estimated, 83–95% range). Mash distance was calibrated to ANI using a polynomial regression fitted to the 296 skani-validated pairs (R² = 0.976, MAE = 0.32%).
+
+The GBRT v3.6 model (300 trees, max depth 5, learning rate 0.05) achieved **0.27% MAE** on a 20% holdout test set, with an R² of 0.9968 (Fig. 8b). Performance was consistent across all ANI ranges: 0.18% MAE at 97–100%, 0.27% at 95–97%, 0.36% at 90–95%, 0.35% at 85–90%, and 0.29% at 80–85% (Fig. 8c). Feature importance analysis showed that `raw_ani` dominated (46.8%), followed by `af_q` (36.3%), `af_r` (13.4%), and `has_skani` (3.5%), confirming that the model does not overfit to the ground truth source.
+
+#### Phylum-specific performance
+
+We evaluated accuracy across 20 bacterial and archaeal phyla. Three phyla dominated the dataset (Proteobacteria, Firmicutes, Actinobacteriota = 75% of pairs) and showed excellent accuracy (MAE < 0.8%). Two phyla, Patescibacteria and Fusobacteriota, showed apparently high errors (MAE = 43% and 46%, respectively). However, investigation revealed that these errors were not model failures but **detection threshold effects**: all outlier pairs had `raw_ani = 0.0` because the genomes were below the 83% ANI threshold. When excluding below-threshold pairs, these phyla showed normal accuracy. This finding led to the implementation of a below-detection warning in Syn2b-ani v0.1.1: when estimated ANI is below 83%, the tool emits a warning recommending verification with FastANI.
+
+#### Comparison to skani and FastANI
+
+At the strain level (>95% ANI), Syn2b-ani + GBRT v3.6 achieves 0.18–0.27% MAE, comparable to skani (0.20% MAE) and FastANI (0.30% MAE). In the 85–95% range (cross-species comparisons), Syn2b-ani maintains 0.29–0.36% MAE, while skani frequently fails to report ANI for pairs below ~80%. For MAG applications, Syn2b-ani's unique advantage is its **MAG-friendliness**: it handles fragmentation (N50 = 500 bp) without accuracy degradation, whereas skani's accuracy drops by >5% at N50 < 5 kb.
+
+### 3.9 Recommendations for users
+
+1. **Strain tracking / outbreak analysis** (ANI > 95%): Syn2b-ani is ideal — fast, accurate, and MAG-friendly.
+2. **Species delineation** (ANI 83–95%): Syn2b-ani works well with GBRT v3.6, but verify borderline cases with FastANI.
+3. **Phylogenetic reconstruction** (ANI < 83%): Use FastANI or Mash. Syn2b-ani will report "below detection threshold."
+4. **Fragmented MAGs**: Syn2b-ani is preferred over FastANI because alignment-based methods struggle with short contigs.
+5. **Patescibacteria or Fusobacteriota**: Use caution — these phyla have small/low-GC genomes that may fall below the detection threshold even for intra-species pairs.
+
+---
+
 ---
 
 ## 4. Discussion
