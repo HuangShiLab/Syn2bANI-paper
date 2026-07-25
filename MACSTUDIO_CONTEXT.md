@@ -144,10 +144,12 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
   - `src/cli/ani.rs` — `syn2bani ani` 子命令
   - `prototype/` — Python ground-truth 工具链（生成物约 90 MB，不入库）
 - **验证结果（精确构造真值，*E. coli* K-12）**：
-  - 12 个基因组，85–99.9% ANI：**MAE 0.061%**，零训练数据、零校准
-  - 6 个基因组，true ANI 固定 95%、accessory 0→50%：**MAE 0.060%**，
-    估计值平坦而 AF 精确跟踪 `1−F`（误差 ≤ 0.003）；同批基因组上全基因组
-    containment 漂移 95.18 → 93.27
+  - 参考基因组固定为 ENA `U00096.3`（完整 MG1655，4,641,652 bp），
+    用 `prototype/fetch_reference.sh` 下载，保证逐字节可复现
+  - 12 个基因组，85–99.9% ANI：**MAE 0.053%**，零训练数据、零校准，全部 flag=ok
+  - 6 个基因组，true ANI 固定 95%、accessory 0→50%：**MAE 0.114%**，
+    估计值平坦且不随 accessory 单调漂移，AF 精确跟踪 `1−F`（误差 ≤ 0.004）；
+    同批基因组上全基因组 containment 漂移 95.18 → 93.27
   - 37/37 lib 测试通过
 - **⚠️ 尚未验证**：indel、非 *E. coli* 物种、真实基因组对（未与 FastANI/skani
   直接比较）。~85% 以下一致性交叉检查自动关闭。
@@ -174,7 +176,8 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 - **步骤**：
   1. `git pull` 代码仓库，`cargo build --release`，`cargo test --release --lib`
      （应为 37/37）
-  2. 先跑 `prototype/` 两组仿真复现 MAE 0.061% / 0.060%，确认环境一致
+  2. 先跑 `prototype/` 两组仿真复现 MAE 0.053% / 0.114%，确认环境一致
+     （先 `bash fetch_reference.sh mg1655.fasta` 拿到固定的参考基因组）
   3. 在既有 15 对 mid-ANI（85–95%）口腔/肠道基因组上跑
      `syn2bani ani ... --verbose`，与 skani / GBRT v7 并列比较
   4. **换掉真值来源**：不要继续用 FastANI（< 92% 区间可靠性有争议，且拿它当
