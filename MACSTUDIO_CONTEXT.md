@@ -15,9 +15,12 @@
 
 **当前分支**：`main`（两个仓库均已 push 最新）
 
-**最新提交**：
-- CODE: `7378e4f` — feat: add --threads and --parallel CLI options to all subcommands
-- paper: `ce7854a` — docs: add full manuscript draft
+**最新提交**（2026-07-25 更新）：
+- CODE: `3048177` — feat: chain-restricted stratified MLE ANI (`syn2bani ani`)
+- paper: 见本次提交
+
+**当前推荐路径**：`syn2bani ani`（§4.6）。`dist` + GBRT 是旧路径，
+已知缺陷记录在 `V8_MLE_VALIDATION.md` §5。下一步首要任务是 §5 Task 0。
 
 ---
 
@@ -116,13 +119,81 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
   - Syn2bANI chained_kmer_ani（默认）：MAE 2.971%
   - Syn2bANI -0.028 经验校准：MAE 1.031%
   - **Syn2bANI GBRT v7：MAE 1.142%**
-- **下一步**：扩大训练集（加入口腔/肠道物种、更多 intra_genus pair）、尝试加入物种/GC/基因组大小等特征，进一步逼近 skani
+- **结论（2026-07-25 修订）**：这条路线已被 4.6 取代。`chained_kmer_ani` 的
+  Pearson r = −0.107 不是"block 偏保守区"造成的（系统偏差会保留相关性），
+  而是 block 区间本身算错了——详见 `V8_MLE_VALIDATION.md` §5。
+  v2–v7 模型文件保留作为对照，不再继续扩大训练集。
+
+### 4.6 v8 算法：chain-restricted stratified MLE（当前推荐路径）
+
+- **实现时间**：2026-07-25
+- **代码提交**：Syn2bANI `3048177`
+- **详细文档**：代码仓库 `ALGORITHM_MLE.md`（推导 + CLI），
+  本仓库 `V8_MLE_VALIDATION.md`（验证记录 + 论文影响）
+- **核心思想**：`raw_ani` 和 `mash_ani` 不是两个待回归的特征，而是**同一个
+  截断二项似然的两个矩**。拟合该似然即可，不需要学习组合，也不会在多酶精确
+  匹配把 `raw_ani` 钉到 1 时退化。
+- **新增模块**（全部是新增路径，`dist`/`sketch`/`db`/`search`/`struct` 未改动）：
+  - `src/core/mle.rs` — 按酶分层的截断二项 MLE，外加 loss-only / histogram-only
+    两个偏估计量和一个按存留率门控的一致性检查
+  - `src/core/chain_ani.rs` — 鸽巢原理容忍种子、按
+    `(q_contig, r_contig, orientation)` 分组的带 gap penalty + max_gap 的
+    chaining DP、链内 seed-and-extend 局部填充
+  - `tag_extractor.rs` — `revcomp_packed` / `canonical_packed` /
+    `GenomeTag::canonical()`，修复倒位段和反向 draft contig 无法匹配的问题
+  - `src/cli/ani.rs` — `syn2bani ani` 子命令
+  - `prototype/` — Python ground-truth 工具链（生成物约 90 MB，不入库）
+- **验证结果（精确构造真值，*E. coli* K-12）**：
+  - 12 个基因组，85–99.9% ANI：**MAE 0.061%**，零训练数据、零校准
+  - 6 个基因组，true ANI 固定 95%、accessory 0→50%：**MAE 0.060%**，
+    估计值平坦而 AF 精确跟踪 `1−F`（误差 ≤ 0.003）；同批基因组上全基因组
+    containment 漂移 95.18 → 93.27
+  - 37/37 lib 测试通过
+- **⚠️ 尚未验证**：indel、非 *E. coli* 物种、真实基因组对（未与 FastANI/skani
+  直接比较）。~85% 以下一致性交叉检查自动关闭。
+- **用法**：
+  ```bash
+  syn2bani ani <queries> <reference> --verbose -p -o mle.tsv
+  # 列：query reference ani af_query af_reference std_err
+  #     + --verbose: ani_from_loss ani_from_hist n_anchors n_chains n_tags flag
+  ```
+  `--verbose` 的诊断列用于定位真实数据上的问题：`n_anchors`/`n_chains` 看
+  chaining 是否成功，两个偏估计量 + `flag` 看模型是否拟合观测。
 
 ---
 
 ## 5. 剩余开发任务（优先级排序）
 
-### 🔴 高优先级（数据密集型，Mac Studio 优势）
+> 2026-07-25 修订：Task 0 新增并置顶；原 Task 2（扩大 GBRT 训练）已废弃。
+
+### 🔴 高优先级（数据密集型，Mac Studio / HPC 优势）
+
+#### Task 0: 在真实基因组上验证 v8 MLE 路径 ★最高优先级
+
+- **目标**：确认 `ani` 在真实数据上是否复现仿真上的精度，这是 v8 唯一的未知项
+- **步骤**：
+  1. `git pull` 代码仓库，`cargo build --release`，`cargo test --release --lib`
+     （应为 37/37）
+  2. 先跑 `prototype/` 两组仿真复现 MAE 0.061% / 0.060%，确认环境一致
+  3. 在既有 15 对 mid-ANI（85–95%）口腔/肠道基因组上跑
+     `syn2bani ani ... --verbose`，与 skani / GBRT v7 并列比较
+  4. **换掉真值来源**：不要继续用 FastANI（< 92% 区间可靠性有争议，且拿它当
+     真值又和 skani 比有方法学偏差）。改用 nucmer/MUMmer（ANIm）或
+     minimap2 比对得到的真值
+- **诊断优先于调参**：如果真实数据上明显变差，先看 `--verbose` 的
+  `n_anchors` / `n_chains` / `flag` 三列定位是 chaining 失败还是模型不拟合，
+  **不要加经验偏移**（见 `V8_MLE_VALIDATION.md` §1.2：常数偏移等价于硬编码
+  一个固定的共享含量比例）
+- **输出**：真实数据验证表，补进 `V8_MLE_VALIDATION.md` §3.3
+
+#### Task 0b: 补齐仿真覆盖面
+
+- **indel**：`simulate.py` 已支持 `indel_rate` 但当前跑的是 0，需要开启以压测
+  gap 算术路径
+- **多物种**：除 *E. coli* 外增加高 GC（如 *Streptomyces*）和低 GC（如
+  *Staphylococcus*）各一个，检查 GC 偏好对 tag 密度和 MLE 的影响
+- **碎片化**：把参考切成 20/50/100/200 contig 并随机翻转方向，验证
+  `canonical_packed` 修复确实生效（旧代码在这个场景下会丢掉约一半共享 tag）
 
 #### Task 1: 大规模 MAG 真实数据验证（原 Task 3）
 - **目标**：从 NCBI 或 EBI 下载 100+ 真实 MAG 数据集
@@ -136,13 +207,19 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
   - 结构变异检测的召回率/精确率
 - **输出**：benchmark 报告 + 图表（建议用 `seaborn`/`matplotlib`）
 
-#### Task 2: 更大范围 GBRT 训练（原 Task 6）
-- **目标**：覆盖更多物种，提高模型泛化能力
-- **数据需求**：
-  - 50-100 个代表性物种的基因组对
-  - 覆盖不同 GC 含量、基因组大小、进化距离
-- **训练规模**：100-200 个物种，500-1000 棵树
-- **输出**：`gbrt_model_v3.json`
+#### ~~Task 2: 更大范围 GBRT 训练~~（已废弃 2026-07-25）
+
+被 4.6 的 MLE 路径取代。废弃理由不是"模型不够大"，而是这个建模框架本身有问题：
+
+- GBRT v7 in-sample MAE 0.238% → out-of-sample 1.142%，**约 5 倍过拟合/分布外**
+- 特征重要性最高的 `raw_ani`（0.3197）实测对真值斜率只有 **0.336**，被
+  `near_match_tolerance = 2` 的截断钉死在 `≥ 1 − 2/32`
+- 喂进去的 `containment` 特征是从 `raw_ani` 伪造的，实际是常数，零信息量
+- 模型真正在学的是"用 `af_q` 反推 accessory 比例造成的偏差"，而这个偏差
+  在链内计数下根本不会出现
+
+扩大训练集只会让模型更精确地拟合一个错误参数化。v2–v7 模型文件保留在代码仓库
+中作为论文对照。
 
 #### Task 3: 结构变异（SV）检测完整实现（原 Task 4）
 - **当前状态**：`struct` 子命令存在但仅返回 0
