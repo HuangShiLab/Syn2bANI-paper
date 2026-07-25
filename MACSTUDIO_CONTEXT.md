@@ -151,8 +151,14 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
     估计值平坦且不随 accessory 单调漂移，AF 精确跟踪 `1−F`（误差 ≤ 0.004）；
     同批基因组上全基因组 containment 漂移 95.18 → 93.27
   - 37/37 lib 测试通过
+- **链断裂判据（2026-07-25 修订）**：改为数"跳过多少个 query tag 位点"，
+  阈值 `j* = ln(α)/ln(1−p)` 由拟合分歧度两趟确定。固定 bp 的 `max_gap` 在原理上
+  不可行——详见 `V8_MLE_VALIDATION.md` §3.4。**真实 accessory 区段（前噬菌体、
+  基因组岛）通常远小于 50 kb，旧默认值会把它们吞进链里系统性压低 ANI**，
+  Task 0 里要专门核对 AF 列。
 - **⚠️ 尚未验证**：indel、非 *E. coli* 物种、真实基因组对（未与 FastANI/skani
-  直接比较）。~85% 以下一致性交叉检查自动关闭。
+  直接比较）。~85% 以下一致性交叉检查自动关闭。小于 5 个 tag 位点的等长
+  accessory 区段仍会被跨过。
 - **用法**：
   ```bash
   syn2bani ani <queries> <reference> --verbose -p -o mle.tsv
