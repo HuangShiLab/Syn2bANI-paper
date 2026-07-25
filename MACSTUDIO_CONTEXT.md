@@ -64,6 +64,7 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 1. **固定酶切位点锚定**（16 种 Type IIB 酶）—— 保证可重复、与组装质量无关
 2. **2bRAD-M 实验验证** —— 从湿实验角度验证 ANI 精度
 3. **结构变异（SV）检测** —— 通过单体型相位标签检测插入/缺失/重排
+   （注："对极端碎片化鲁棒"这条旧卖点已被实测推翻，见 `V8_MLE_VALIDATION.md` §3.7）
 4. **GBRT 偏差修正** —— 跨物种泛化误差 < 0.3% MAE
 
 ### 性能定位
