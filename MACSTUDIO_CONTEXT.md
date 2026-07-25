@@ -176,9 +176,15 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 
 ### 🔴 高优先级（数据密集型，Mac Studio / HPC 优势）
 
-#### Task 0: 在真实基因组上验证 v8 MLE 路径 ★最高优先级
+#### Task 0: 在真实基因组上验证 v8 MLE 路径 ★部分完成 2026-07-25
 
-- **目标**：确认 `ani` 在真实数据上是否复现仿真上的精度，这是 v8 唯一的未知项
+- **已完成部分**：13 条肠杆菌科染色体对 *E. coli* K-12，三方对比 skani + FastANI。
+  发现速率异质性是真实数据上的主要偏差来源，已用 gamma 混合模型修复
+  （详见 `V8_MLE_VALIDATION.md` §3.6）。可报告的 8 对上 MAE 0.314（vs skani）
+  / 0.256（vs FastANI）。用 `prototype/realgenome_bench.sh` 可一键复现。
+- **仍待完成**：你那 15 对口腔/肠道基因组；draft assembly / MAG；高低 GC 类群；
+  换用 ANIm 或 minimap2 作为真值而非 FastANI
+- **目标**：确认 `ani` 在真实数据上是否复现仿真上的精度
 - **步骤**：
   1. `git pull` 代码仓库，`cargo build --release`，`cargo test --release --lib`
      （应为 37/37）
