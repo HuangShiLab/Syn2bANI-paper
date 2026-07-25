@@ -98,6 +98,26 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 - **`.s2ba`** — 二进制 sketch 格式（自定义，包含 `TgtSketch`）
 - 支持：`sketch`, `db build`, `db add`, `db merge` 等操作
 
+### 4.5 v7 算法：TGT sparse chaining + chain 内 k-mer ANI + GBRT v7 校准模型
+- **实现时间**：2026-07-25
+- **核心改动**：
+  - `TagSet` 携带原始 contig 序列 (`sequences: Vec<Vec<u8>>`)
+  - `SyntenyBuilder` 改为按 `(q_contig_id, r_contig_id, orientation)` 分组，组内用 DP 稀疏链式算法（indel tolerance 5000 bp）构建共线性 block
+  - `AniCalculator` 在每个 synteny block 的 query/reference 区间内用 canonical k-mer（默认 k=15）计算局部 ANI，按 anchor tag 数加权平均
+  - `dist` / `struct` 默认输出改为 `chained_kmer_ani`
+  - raw-features TSV 新增 `chained_kmer_ani` 列
+  - 新增 GBRT v7 校准模型：features = `[raw_ani, mash_ani, chained_kmer_ani, shared_log, af_q, af_r]`，在 GTDB-R207 728 对有效 pair 上训练
+- **对应脚本**：
+  - 实现/验证：`benchmark_v7_mid_ani.py`、`slurm_v7_mid_ani.sh`
+  - 特征提取/训练：`extract_syn2bani_features.py`、`train_gbrt_v7.py`、`submit_v7_feature_extraction_and_training.sh`
+- **15 对 mid-ANI（85–95%）口腔/肠道验证结果 vs FastANI**：
+  - skani：MAE 0.468%
+  - Syn2bANI mash_ani：MAE 2.808%
+  - Syn2bANI chained_kmer_ani（默认）：MAE 2.971%
+  - Syn2bANI -0.028 经验校准：MAE 1.031%
+  - **Syn2bANI GBRT v7：MAE 1.142%**
+- **下一步**：扩大训练集（加入口腔/肠道物种、更多 intra_genus pair）、尝试加入物种/GC/基因组大小等特征，进一步逼近 skani
+
 ---
 
 ## 5. 剩余开发任务（优先级排序）
