@@ -2,7 +2,7 @@
 #SBATCH --job-name=s2b_strata_amd
 #SBATCH --partition=amd
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=128G
+#SBATCH --mem=240G
 #SBATCH --time=24:00:00
 #SBATCH --output=strata_amd_%j.out
 #SBATCH --error=strata_amd_%j.err
