@@ -66,20 +66,23 @@ def _parse_syn2bani_v8_line(stdout: str) -> Optional[dict]:
         if len(parts) < 15:
             continue
         try:
+            flag = parts[14]
+            # BELOW_DETECTION prints 0.0 placeholders; treat as missing estimate
+            is_below = flag == 'BELOW_DETECTION'
             return {
-                's2b_ani': float(parts[2]),
-                's2b_ani_uniform': float(parts[3]),
+                's2b_ani': np.nan if is_below else float(parts[2]),
+                's2b_ani_uniform': np.nan if is_below else float(parts[3]),
                 's2b_af_q': float(parts[4]),
                 's2b_af_r': float(parts[5]),
-                's2b_std_err': float(parts[6]),
+                's2b_std_err': np.nan if is_below else float(parts[6]),
                 's2b_het_shape': parts[7],
-                's2b_retention': float(parts[8]),
-                's2b_ani_from_loss': float(parts[9]),
-                's2b_ani_from_hist': float(parts[10]),
+                's2b_retention': np.nan if is_below else float(parts[8]),
+                's2b_ani_from_loss': np.nan if is_below else float(parts[9]),
+                's2b_ani_from_hist': np.nan if is_below else float(parts[10]),
                 's2b_n_anchors': int(parts[11]),
                 's2b_n_chains': int(parts[12]),
                 's2b_n_tags': int(parts[13]),
-                's2b_flag': parts[14],
+                's2b_flag': flag,
             }
         except (ValueError, IndexError):
             return None
