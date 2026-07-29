@@ -81,7 +81,11 @@ def read_s2b_ani(path, seqid_to_asm):
     df["query_asm"] = df["query_seqid"].map(seqid_to_asm)
     df["ref_asm"] = df["ref_seqid"].map(seqid_to_asm)
     df = df.dropna(subset=["query_asm", "ref_asm"])
-    return df[["query_asm", "ref_asm", "s2b_ani"]]
+    cols = ["query_asm", "ref_asm", "s2b_ani"]
+    if "ani_cal" in df.columns:
+        df = df.rename(columns={"ani_cal": "s2b_ani_cal"})
+        cols.append("s2b_ani_cal")
+    return df[cols]
 
 
 def metrics(pred, truth):
@@ -99,6 +103,7 @@ def metrics(pred, truth):
 
 def evaluate(df):
     rows = []
+    has_cal = "s2b_ani_cal" in df.columns
     for band, sub in df.groupby("band"):
         if len(sub) < 2:
             continue
@@ -107,6 +112,12 @@ def evaluate(df):
             **metrics(sub["s2b_ani"].values, sub["anim_ani"].values),
             "method": "Syn2bANI_default",
         })
+        if has_cal:
+            rows.append({
+                "band": band,
+                **metrics(sub["s2b_ani_cal"].values, sub["anim_ani"].values),
+                "method": "Syn2bANI_cal",
+            })
         rows.append({
             "band": band,
             **metrics(sub["skani_ani"].values, sub["anim_ani"].values),
@@ -117,6 +128,12 @@ def evaluate(df):
         **metrics(df["s2b_ani"].values, df["anim_ani"].values),
         "method": "Syn2bANI_default",
     })
+    if has_cal:
+        rows.append({
+            "band": "all",
+            **metrics(df["s2b_ani_cal"].values, df["anim_ani"].values),
+            "method": "Syn2bANI_cal",
+        })
     rows.append({
         "band": "all",
         **metrics(df["skani_ani"].values, df["anim_ani"].values),
@@ -185,6 +202,8 @@ def main():
     merged["phylum_pair"] = merged["q_phylum"] + " vs " + merged["r_phylum"]
     merged.to_csv(Path(args.outdir) / "eval_pairs.tsv", sep="\t", index=False)
 
+    has_cal = "s2b_ani_cal" in merged.columns
+
     summary = {
         "n_pairs": len(merged),
         "by_band": evaluate(merged).to_dict(orient="records"),
@@ -200,6 +219,12 @@ def main():
             **metrics(sub["s2b_ani"].values, sub["anim_ani"].values),
             "method": "Syn2bANI_default",
         })
+        if has_cal:
+            phylum_rows.append({
+                "phylum": phylum,
+                **metrics(sub["s2b_ani_cal"].values, sub["anim_ani"].values),
+                "method": "Syn2bANI_cal",
+            })
         phylum_rows.append({
             "phylum": phylum,
             **metrics(sub["skani_ani"].values, sub["anim_ani"].values),
