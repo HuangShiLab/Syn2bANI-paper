@@ -57,6 +57,7 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
     chunk_tag = Path(chunk_tsv).stem
     tmp_dir = Path(out_strata).parent / ".tmp" / chunk_tag
     tmp_dir.mkdir(parents=True, exist_ok=True)
+    do_calibrate = calibrate
 
     def run_one(ref_path, items):
         # Write temporary query list and reference list for this reference
@@ -80,7 +81,7 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
             "--strata-out", str(ref_strata),
             "-p", "-t", str(threads_per_run),
         ]
-        if args.calibrate:
+        if do_calibrate:
             cmd.append("--calibrate")
         try:
             subprocess.run(cmd, check=True, capture_output=True, text=True)
