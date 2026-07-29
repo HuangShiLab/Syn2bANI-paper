@@ -54,12 +54,14 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
     for _, row in df.iterrows():
         by_ref[row["ref_path"]].append((row["query_path"], row["query"]))
 
+    chunk_tag = Path(chunk_tsv).stem
+    tmp_dir = Path(out_strata).parent / ".tmp" / chunk_tag
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+
     def run_one(ref_path, items):
         # Write temporary query list and reference list for this reference
         q_paths = [x[0] for x in items]
         q_names = [x[1] for x in items]
-        tmp_dir = Path(out_strata).parent / ".tmp"
-        tmp_dir.mkdir(parents=True, exist_ok=True)
         tag = os.path.basename(ref_path).replace(".fna", "")
         ql_file = tmp_dir / f"ql_{tag}.txt"
         rl_file = tmp_dir / f"rl_{tag}.txt"
@@ -92,7 +94,6 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
             results.append(fut.result())
 
     # Merge per-reference outputs into chunk output files
-    tmp_dir = Path(out_strata).parent / ".tmp"
     with open(out_strata, "w") as sfh, open(out_ani, "w") as afh:
         strata_header = "query\treference\tenzyme\ttag_len\tbody_len\tn_miss\thist\n"
         ani_header = "query\treference\tani\tani_uniform\taf_query\taf_reference\tstd_err\n"
