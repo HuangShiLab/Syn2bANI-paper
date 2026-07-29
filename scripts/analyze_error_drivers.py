@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.impute import SimpleImputer
 from sklearn.linear_model import RidgeCV
 from sklearn.metrics import mean_absolute_error
 
@@ -89,16 +90,18 @@ def correlation_table(df, cols):
 
 
 def calibration_experiment(df):
-    """Try simple Ridge regression to predict residual from available features."""
+    """Try simple Ridge regression to predict ANIm from available features."""
     features = ["s2b_ani", "s2b_ani_uniform", "s2b_af_q", "s2b_af_r",
                 "s2b_std_err", "s2b_retention", "s2b_n_anchors",
                 "s2b_n_chains", "s2b_n_tags", "skani_ani"]
     Xdf = df[features].copy()
-    # skani_ani may be NaN for some pairs; fill with s2b_ani if missing
+    # skani_ani may be NaN for low-ANI pairs; fill with s2b_ani if missing
     Xdf["skani_ani"] = Xdf["skani_ani"].fillna(Xdf["s2b_ani"])
-    X = Xdf.values
+    # Impute any remaining NaNs with median
+    imputer = SimpleImputer(strategy="median")
+    X_full = imputer.fit_transform(Xdf)
     y = df["anim_ani"].values
-    # Split by band to avoid leakage due to stratification
+    # Band-stratified holdout to avoid leakage
     bands = df["band"].values
     unique_bands = df["band"].unique()
     preds = np.empty(len(df))
@@ -109,8 +112,8 @@ def calibration_experiment(df):
         if train.sum() < 50 or test.sum() < 10:
             continue
         model = RidgeCV(alphas=[1e-3, 1e-2, 0.1, 1, 10, 100], cv=5)
-        model.fit(X[train], y[train])
-        preds[test] = model.predict(X[test])
+        model.fit(X_full[train], y[train])
+        preds[test] = model.predict(X_full[test])
     valid = ~np.isnan(preds)
     if valid.sum() == 0:
         return None
@@ -121,7 +124,6 @@ def calibration_experiment(df):
         "bias": float(np.mean(calib_err)),
         "rmse": float(np.sqrt(np.mean(calib_err ** 2))),
     }
-    # Compare to uncalibrated
     raw_err = df.loc[valid, "s2b_ani"].values - y[valid]
     out["raw_mae"] = float(np.mean(np.abs(raw_err)))
     out["raw_bias"] = float(np.mean(raw_err))
