@@ -89,23 +89,25 @@ def correlation_table(df, cols):
     return pd.DataFrame(out)
 
 
-def calibration_experiment(df):
+def calibration_experiment(df, include_skani=True):
     """Try simple Ridge regression to predict ANIm from available features."""
     features = ["s2b_ani", "s2b_ani_uniform", "s2b_af_q", "s2b_af_r",
                 "s2b_std_err", "s2b_retention", "s2b_n_anchors",
-                "s2b_n_chains", "s2b_n_tags", "skani_ani"]
+                "s2b_n_chains", "s2b_n_tags"]
+    if include_skani:
+        features.append("skani_ani")
     Xdf = df[features].copy()
-    # skani_ani may be NaN for low-ANI pairs; fill with s2b_ani if missing
-    Xdf["skani_ani"] = Xdf["skani_ani"].fillna(Xdf["s2b_ani"])
-    # Impute any remaining NaNs with median
+    if include_skani:
+        Xdf["skani_ani"] = Xdf["skani_ani"].fillna(Xdf["s2b_ani"])
     imputer = SimpleImputer(strategy="median")
     X_full = imputer.fit_transform(Xdf)
     y = df["anim_ani"].values
-    # Band-stratified holdout to avoid leakage
     bands = df["band"].values
     unique_bands = df["band"].unique()
     preds = np.empty(len(df))
     preds[:] = np.nan
+    coef_sum = np.zeros(len(features))
+    n_fits = 0
     for band in unique_bands:
         test = bands == band
         train = ~test
@@ -114,6 +116,8 @@ def calibration_experiment(df):
         model = RidgeCV(alphas=[1e-3, 1e-2, 0.1, 1, 10, 100], cv=5)
         model.fit(X_full[train], y[train])
         preds[test] = model.predict(X_full[test])
+        coef_sum += model.coef_
+        n_fits += 1
     valid = ~np.isnan(preds)
     if valid.sum() == 0:
         return None
@@ -123,6 +127,8 @@ def calibration_experiment(df):
         "mae": float(np.mean(np.abs(calib_err))),
         "bias": float(np.mean(calib_err)),
         "rmse": float(np.sqrt(np.mean(calib_err ** 2))),
+        "features": features,
+        "mean_coef": (coef_sum / n_fits).tolist() if n_fits else None,
     }
     raw_err = df.loc[valid, "s2b_ani"].values - y[valid]
     out["raw_mae"] = float(np.mean(np.abs(raw_err)))
@@ -152,7 +158,8 @@ def main():
     for col in ["s2b_af_q", "s2b_retention", "s2b_n_anchors", "s2b_n_tags"]:
         report[f"by_{col}"] = bin_summary(df, col).to_dict(orient="records")
 
-    report["calibration_ridge_band_holdout"] = calibration_experiment(df)
+    report["calibration_ridge_band_holdout"] = calibration_experiment(df, include_skani=True)
+    report["calibration_ridge_no_skani"] = calibration_experiment(df, include_skani=False)
 
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     with open(args.out, "w") as fh:
@@ -163,8 +170,10 @@ def main():
     print(pd.DataFrame(report["by_flag"]).to_string(index=False))
     print("\n=== correlations with s2b error ===")
     print(pd.DataFrame(report["correlations"]).to_string(index=False))
-    print("\n=== calibration experiment (band holdout) ===")
+    print("\n=== calibration experiment (band holdout, with skani) ===")
     print(json.dumps(report["calibration_ridge_band_holdout"], indent=2))
+    print("\n=== calibration experiment (band holdout, NO skani) ===")
+    print(json.dumps(report["calibration_ridge_no_skani"], indent=2))
 
 
 if __name__ == "__main__":
