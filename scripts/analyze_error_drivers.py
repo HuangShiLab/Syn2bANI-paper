@@ -10,6 +10,7 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import RidgeCV
 from sklearn.metrics import mean_absolute_error
+from sklearn.preprocessing import StandardScaler
 
 
 def load_data(eval_pairs, matrix):
@@ -136,11 +137,54 @@ def calibration_experiment(df, include_skani=True):
     return out
 
 
+def train_final_model(df, out_path):
+    """Train a StandardScaler + Ridge model on the full sample and serialize it."""
+    rust_features = [
+        "ani_het", "ani_uniform", "af_query", "af_reference",
+        "std_err", "retention", "n_anchors", "n_chains", "n_tags_in_chains",
+    ]
+    df_features = [
+        "s2b_ani", "s2b_ani_uniform", "s2b_af_q", "s2b_af_r",
+        "s2b_std_err", "s2b_retention", "s2b_n_anchors",
+        "s2b_n_chains", "s2b_n_tags",
+    ]
+    Xdf = df[df_features].copy()
+    imputer = SimpleImputer(strategy="median")
+    X_imp = imputer.fit_transform(Xdf)
+    scaler = StandardScaler()
+    X_std = scaler.fit_transform(X_imp)
+    y = df["anim_ani"].values
+
+    model = RidgeCV(alphas=[1e-3, 1e-2, 0.1, 1, 10, 100, 1000], cv=5)
+    model.fit(X_std, y)
+    preds = model.predict(X_std)
+    mae = mean_absolute_error(y, preds)
+
+    out = {
+        "name": "gtdb_r207_linear_cal",
+        "feature_names": rust_features,
+        "means": scaler.mean_.tolist(),
+        "scales": scaler.scale_.tolist(),
+        "coefficients": model.coef_.tolist(),
+        "intercept": float(model.intercept_),
+        "imputer_medians": imputer.statistics_.tolist(),
+        "training_n": int(len(df)),
+        "training_mae": float(mae),
+    }
+    Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w") as fh:
+        json.dump(out, fh, indent=2)
+    print(f"wrote calibration model to {out_path} (MAE {mae:.4f}%)")
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--eval-pairs", default="results/panel_by_band/eval_pairs.tsv")
     ap.add_argument("--matrix", default="results/matrix_gtdb_r207_100k_v8_final.tsv")
     ap.add_argument("--out", default="results/panel_by_band/error_driver_report.json")
+    ap.add_argument("--model-out", default="../Syn2bANI/models/gtdb_r207_linear_cal.json",
+                    help="path to write the trained calibration model JSON")
     args = ap.parse_args()
 
     df = load_data(args.eval_pairs, args.matrix)
@@ -160,6 +204,8 @@ def main():
 
     report["calibration_ridge_band_holdout"] = calibration_experiment(df, include_skani=True)
     report["calibration_ridge_no_skani"] = calibration_experiment(df, include_skani=False)
+
+    train_final_model(df, args.model_out)
 
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     with open(args.out, "w") as fh:
