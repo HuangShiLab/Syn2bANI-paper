@@ -14,8 +14,8 @@ cd /lustre1/g/aos_shihuang/Syn2bANI-paper
 
 IDX="$SLURM_ARRAY_TASK_ID"
 CHUNK_TSV=$(printf "results/strata_ref_chunks/pairs_%03d.tsv" "$IDX")
-OUT_STRATA=$(printf "results/strata_ref_chunks/strata_%03d.tsv" "$IDX")
-OUT_ANI=$(printf "results/strata_ref_chunks/ani_%03d.tsv" "$IDX")
+OUT_STRATA=$(printf "results/strata_ref_chunks/strata_cal_%03d.tsv" "$IDX")
+OUT_ANI=$(printf "results/strata_ref_chunks/ani_cal_%03d.tsv" "$IDX")
 
 echo "Starting chunk $IDX at $(date)"
 echo "Chunk file: $CHUNK_TSV"
@@ -25,6 +25,7 @@ python3 scripts/run_strata_by_reference.py run "$CHUNK_TSV" \
     --strata-out "$OUT_STRATA" \
     --ani-out "$OUT_ANI" \
     --threads-per-run 4 \
-    --max-workers 8
+    --max-workers 8 \
+    --calibrate
 
 echo "Finished chunk $IDX at $(date)"

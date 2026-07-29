@@ -48,7 +48,7 @@ def split_pairs(pairs_tsv, outdir, genome_dir, n_chunks, suffix=".fna"):
         print(f"chunk {i+1}: {len(chunk)} pairs")
 
 
-def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_strata, out_ani):
+def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_strata, out_ani, calibrate=False):
     df = pd.read_csv(chunk_tsv, sep="\t")
     by_ref = defaultdict(list)
     for _, row in df.iterrows():
@@ -80,6 +80,8 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
             "--strata-out", str(ref_strata),
             "-p", "-t", str(threads_per_run),
         ]
+        if args.calibrate:
+            cmd.append("--calibrate")
         try:
             subprocess.run(cmd, check=True, capture_output=True, text=True)
             return (ref_path, len(items), None, ref_ani, ref_strata)
@@ -119,10 +121,10 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
     print(f"chunk {chunk_tsv}: {success}/{len(results)} references OK")
 
 
-def merge_chunks(chunk_dir, strata_out, ani_out):
+def merge_chunks(chunk_dir, strata_out, ani_out, prefix=""):
     chunk_dir = Path(chunk_dir)
-    strata_files = sorted(chunk_dir.glob("strata_*.tsv"))
-    ani_files = sorted(chunk_dir.glob("ani_*.tsv"))
+    strata_files = sorted(chunk_dir.glob(f"{prefix}strata_*.tsv"))
+    ani_files = sorted(chunk_dir.glob(f"{prefix}ani_*.tsv"))
 
     if not strata_files or not ani_files:
         print("No chunk outputs found", file=sys.stderr)
@@ -176,11 +178,14 @@ def main():
     rp.add_argument("--max-workers", type=int, default=8)
     rp.add_argument("--strata-out", required=True)
     rp.add_argument("--ani-out", required=True)
+    rp.add_argument("--calibrate", action="store_true", help="pass --calibrate to syn2bani ani")
 
     mp = sub.add_parser("merge", help="merge chunk outputs")
     mp.add_argument("chunk_dir")
     mp.add_argument("--strata-out", default="results/gtdb_r207_100k_strata.tsv")
     mp.add_argument("--ani-out", default="results/gtdb_r207_100k_11enzyme.tsv")
+    mp.add_argument("--prefix", default="",
+                    help="filename prefix to select chunks, e.g. 'cal_'")
 
     args = ap.parse_args()
 
@@ -188,9 +193,9 @@ def main():
         split_pairs(args.pairs_tsv, args.outdir, args.genome_dir, args.n_chunks, args.suffix)
     elif args.cmd == "run":
         run_chunk(args.chunk_tsv, args.syn2bani, args.panel, args.threads_per_run,
-                  args.max_workers, args.strata_out, args.ani_out)
+                  args.max_workers, args.strata_out, args.ani_out, args.calibrate)
     elif args.cmd == "merge":
-        return merge_chunks(args.chunk_dir, args.strata_out, args.ani_out)
+        return merge_chunks(args.chunk_dir, args.strata_out, args.ani_out, args.prefix)
     return 0
 
 
