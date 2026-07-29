@@ -18,17 +18,21 @@ from pathlib import Path
 
 
 def read_sample(path):
-    """Return dict (query,ref) -> band."""
+    """Return (bands, paths). bands: (query,ref) -> band; paths: assembly -> fna path."""
     bands = {}
+    paths = {}
     with open(path) as fh:
         header = fh.readline().rstrip("\n").split("\t")
         for line in fh:
             f = line.rstrip("\n").split("\t")
-            if len(f) < 4:
+            if len(f) < 7:
                 continue
             q, r, band = f[0], f[1], f[2]
+            q_path, r_path = f[5], f[6]
             bands[(q, r)] = band
-    return bands
+            paths[q] = q_path
+            paths[r] = r_path
+    return bands, paths
 
 
 def read_anim_truth(anim_dir):
@@ -49,6 +53,33 @@ def read_anim_truth(anim_dir):
                     continue
                 truth[(q, r)] = v
     return truth
+
+
+def build_seqid_map(paths):
+    """Map assembly accession to first sequence ID in FASTA."""
+    seqid_map = {}
+    for asm, fna in sorted(paths.items()):
+        if not Path(fna).exists():
+            continue
+        with open(fna) as fh:
+            first = fh.readline()
+        if not first.startswith(">"):
+            continue
+        seqid = first[1:].split()[0]
+        seqid_map[asm] = seqid
+    return seqid_map
+
+
+def remap_keys(mapping, seqid_map):
+    """Remap a dict keyed by assembly accessions to first-seqid keys."""
+    remapped = {}
+    for (q, r), v in mapping.items():
+        qid = seqid_map.get(q)
+        rid = seqid_map.get(r)
+        if qid is None or rid is None:
+            continue
+        remapped[(qid, rid)] = v
+    return remapped
 
 
 def split_truth_by_band(truth, bands, outdir):
@@ -141,9 +172,17 @@ def main():
         print(f"error: strata file not found: {args.strata}", file=sys.stderr)
         return 1
 
-    bands = read_sample(args.sample)
-    truth = read_anim_truth(args.anim_dir)
-    print(f"collected truth for {len(truth)} pairs")
+    bands_asm, paths = read_sample(args.sample)
+    truth_asm = read_anim_truth(args.anim_dir)
+    print(f"collected truth for {len(truth_asm)} pairs")
+
+    print("building assembly -> first-seqid map...")
+    seqid_map = build_seqid_map(paths)
+    print(f"mapped {len(seqid_map)} assemblies")
+
+    bands = remap_keys(bands_asm, seqid_map)
+    truth = remap_keys(truth_asm, seqid_map)
+    print(f"truth pairs with seqid mapping: {len(truth)}")
 
     pooled_truth, truth_by_band = split_truth_by_band(truth, bands, args.outdir)
     strata_by_band = split_strata_by_band(args.strata, bands, args.outdir)
