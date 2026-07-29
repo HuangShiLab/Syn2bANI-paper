@@ -55,21 +55,24 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
         by_ref[row["ref_path"]].append((row["query_path"], row["query"]))
 
     def run_one(ref_path, items):
-        # Write temporary query list for this reference
+        # Write temporary query list and reference list for this reference
         q_paths = [x[0] for x in items]
         q_names = [x[1] for x in items]
         tmp_dir = Path(out_strata).parent / ".tmp"
         tmp_dir.mkdir(parents=True, exist_ok=True)
         tag = os.path.basename(ref_path).replace(".fna", "")
         ql_file = tmp_dir / f"ql_{tag}.txt"
+        rl_file = tmp_dir / f"rl_{tag}.txt"
         ref_ani = tmp_dir / f"ani_{tag}.tsv"
         ref_strata = tmp_dir / f"strata_{tag}.tsv"
         with open(ql_file, "w") as fh:
             fh.write("\n".join(q_paths) + "\n")
+        with open(rl_file, "w") as fh:
+            fh.write(ref_path + "\n")
         cmd = [
             syn2bani, "ani",
             "--ql", str(ql_file),
-            "--rl", ref_path,
+            "--rl", str(rl_file),
             "-e", panel,
             "-o", str(ref_ani),
             "--strata-out", str(ref_strata),
