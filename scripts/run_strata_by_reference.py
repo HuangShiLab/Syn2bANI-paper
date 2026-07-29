@@ -97,9 +97,25 @@ def run_chunk(chunk_tsv, syn2bani, panel, threads_per_run, max_workers, out_stra
             results.append(fut.result())
 
     # Merge per-reference outputs into chunk output files
+    # syn2bani ani --calibrate adds an `ani_cal` column, so take headers from
+    # the first successful per-reference output rather than hard-coding them.
+    first_strata = next(
+        (rs for _, _, e, _, rs in results if e is None and rs and rs.exists()), None
+    )
+    first_ani = next(
+        (ra for _, _, e, ra, _ in results if e is None and ra and ra.exists()), None
+    )
+    strata_header = (
+        first_strata.read_text().splitlines()[0] + "\n"
+        if first_strata
+        else "query\treference\tenzyme\ttag_len\tbody_len\tn_miss\thist\n"
+    )
+    ani_header = (
+        first_ani.read_text().splitlines()[0] + "\n"
+        if first_ani
+        else "query\treference\tani\tani_uniform\taf_query\taf_reference\tstd_err\n"
+    )
     with open(out_strata, "w") as sfh, open(out_ani, "w") as afh:
-        strata_header = "query\treference\tenzyme\ttag_len\tbody_len\tn_miss\thist\n"
-        ani_header = "query\treference\tani\tani_uniform\taf_query\taf_reference\tstd_err\n"
         sfh.write(strata_header)
         afh.write(ani_header)
         for ref_path, nq, err, ref_ani, ref_strata in results:
