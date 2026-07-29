@@ -109,15 +109,22 @@ def split_strata_by_band(strata_path, bands, outdir):
     return band_paths
 
 
-def run_panel(syn2bani, strata_path, truth_path, band):
+def run_panel(syn2bani, strata_path, truth_path, band, outdir):
     print(f"\n=== panel {band} ===")
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    out_file = outdir / f"panel_{band.replace('.', '_')}.txt"
     cmd = [
         syn2bani, "panel",
         "--strata", str(strata_path),
         "--truth", str(truth_path),
         "--greedy",
     ]
-    subprocess.run(cmd, check=False)
+    with open(out_file, "w") as fh:
+        fh.write(f"# {' '.join(cmd)}\n")
+        proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        fh.write(proc.stdout)
+    print(f"wrote {out_file} (exit {proc.returncode})")
 
 
 def main():
@@ -142,7 +149,7 @@ def main():
     strata_by_band = split_strata_by_band(args.strata, bands, args.outdir)
 
     # Run pooled panel
-    run_panel(args.syn2bani, args.strata, pooled_truth, "all")
+    run_panel(args.syn2bani, args.strata, pooled_truth, "all", args.outdir)
 
     # Run per-band panels
     for band in sorted(set(bands.values())):
@@ -151,7 +158,7 @@ def main():
         if st is None or tr is None:
             print(f"skipping {band}: missing strata or truth")
             continue
-        run_panel(args.syn2bani, st, tr, band)
+        run_panel(args.syn2bani, st, tr, band, args.outdir)
 
     return 0
 
