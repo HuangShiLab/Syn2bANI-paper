@@ -1,0 +1,13 @@
+isolate	species	sra_run	library_layout	url1	url2	bytes1	bytes2
+NG_01	Neisseria_gonorrhoeae	SRR24303588	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/088/SRR24303588/SRR24303588_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/088/SRR24303588/SRR24303588_2.fastq.gz	792870177	911696888
+NG_02	Neisseria_gonorrhoeae	SRR24303589	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/089/SRR24303589/SRR24303589_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/089/SRR24303589/SRR24303589_2.fastq.gz	738216656	876862912
+NG_03	Neisseria_gonorrhoeae	SRR24303590	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/090/SRR24303590/SRR24303590_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/090/SRR24303590/SRR24303590_2.fastq.gz	821349869	979129427
+NG_04	Neisseria_gonorrhoeae	SRR24303591	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/091/SRR24303591/SRR24303591_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/091/SRR24303591/SRR24303591_2.fastq.gz	931120998	1037955124
+NG_05	Neisseria_gonorrhoeae	SRR24303592	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/092/SRR24303592/SRR24303592_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/092/SRR24303592/SRR24303592_2.fastq.gz	876440171	968314138
+NG_06	Neisseria_gonorrhoeae	SRR24303593	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/093/SRR24303593/SRR24303593_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/093/SRR24303593/SRR24303593_2.fastq.gz	849744987	965556561
+NG_07	Neisseria_gonorrhoeae	SRR24303594	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/094/SRR24303594/SRR24303594_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/094/SRR24303594/SRR24303594_2.fastq.gz	847693090	935954640
+NG_08	Neisseria_gonorrhoeae	SRR24303595	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/095/SRR24303595/SRR24303595_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/095/SRR24303595/SRR24303595_2.fastq.gz	842069648	930042836
+NG_09	Neisseria_gonorrhoeae	SRR24303596	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/096/SRR24303596/SRR24303596_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/096/SRR24303596/SRR24303596_2.fastq.gz	784196011	900225650
+NG_10	Neisseria_gonorrhoeae	SRR24303597	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/097/SRR24303597/SRR24303597_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/097/SRR24303597/SRR24303597_2.fastq.gz	927237283	1053550817
+NG_11	Neisseria_gonorrhoeae	SRR24303598	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/098/SRR24303598/SRR24303598_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/098/SRR24303598/SRR24303598_2.fastq.gz	828707068	918062661
+NG_12	Neisseria_gonorrhoeae	SRR24303599	PAIRED	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/099/SRR24303599/SRR24303599_1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/fastq/SRR243/099/SRR24303599/SRR24303599_2.fastq.gz	774678783	876437825

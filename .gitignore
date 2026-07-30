@@ -26,6 +26,7 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+.pydeps/
 
 # Large binary files
 *.s2ba
