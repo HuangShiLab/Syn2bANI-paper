@@ -3,6 +3,12 @@
 # Called by the SLURM array driver (03_assemble_array.sh).
 set -euo pipefail
 
+# Make SPAdes available on HPC2021 compute nodes.
+if command -v conda >/dev/null 2>&1; then
+  source "$(conda info --base)/etc/profile.d/conda.sh"
+  conda activate spades 2>/dev/null || true
+fi
+
 isolate="${1:-}"
 reads_dir="${2:-}"
 asm_dir="${3:-}"
