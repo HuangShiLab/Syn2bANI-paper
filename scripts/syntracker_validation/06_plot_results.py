@@ -8,14 +8,16 @@ import seaborn as sns
 
 
 def norm_pair(a, b):
-    return tuple(sorted([a, b]))
+    return tuple(sorted([str(a), str(b)]))
 
 
 def load_syn2bani(path):
     df = pd.read_csv(path, sep='\t')
-    # Use calibrated ANI when available, otherwise rate-heterogeneous ani
-    ani_col = 'ani_cal' if 'ani_cal' in df.columns else 'ani'
-    df = df.rename(columns={ani_col: 'ani_syn2bani'})
+    # Use the raw rate-heterogeneous estimate, not ani_cal: the embedded linear
+    # calibration was trained on GTDB mid-ANI pairs and is unphysical on the
+    # near-clonal comparisons here (it produces ANI > 100% and drags >99.5%
+    # pairs down by ~1 point).
+    df = df.rename(columns={'ani': 'ani_syn2bani'})
     # Syn2bANI output uses the first contig ID; after our normalisation this equals the isolate
     df['pair'] = [norm_pair(q, r) for q, r in zip(df['query'], df['reference'])]
     df = df[['pair', 'ani_syn2bani', 'synteny_score', 'breakpoint_count']].copy()
@@ -30,11 +32,14 @@ def load_skani(path):
     colmap = {}
     for c in df.columns:
         low = c.lower().replace(' ', '_')
+        # skani emits both *_file (path) and *_name columns; prefer the path
         if 'query' in low:
-            colmap[c] = 'query_path'
-        elif 'reference' in low and 'ani' not in low:
-            colmap[c] = 'ref_path'
-        elif 'ani' in low:
+            if 'query_path' not in colmap.values() or 'file' in low:
+                colmap[c] = 'query_path'
+        elif ('reference' in low or 'ref' in low) and 'ani' not in low and 'align' not in low:
+            if 'ref_path' not in colmap.values() or 'file' in low:
+                colmap[c] = 'ref_path'
+        elif low == 'ani':
             colmap[c] = 'ani_skani'
     df = df.rename(columns=colmap)
     df['query'] = df['query_path'].apply(lambda x: Path(x).stem)
@@ -85,6 +90,8 @@ def main():
         else:
             merged = syn.copy()
             merged['ani_skani'] = float('nan')
+        # Keep one row per unordered pair
+        merged = merged.drop_duplicates(subset='pair')
         merged['species'] = sp
 
         # Add host/participant info for H. pylori

@@ -221,10 +221,20 @@ evolutionary patterns from Enav et al. 2024 (Fig. 3).
 | Parse isolate metadata & pair lists | `data/syntracker/samples_*.tsv`, `pairs_*.tsv` | ✅ Done |
 | Build ENA FASTQ manifests (132 isolates) | `data/syntracker/fastq_manifest_*.tsv` | ✅ Done |
 | HPC workflow scripts | `scripts/syntracker_validation/` | ✅ Done / pushed |
-| Download references & reads on HPC | `/lustre1/g/aos_shihuang/data/syntracker_validation/` | ⏳ Handed over |
-| Assemble isolates (SLURM array) | `assemblies/*.fna` | ⏳ Pending reads |
-| Run Syn2bANI + skani per species | `syn2bani/syn2bani_*.tsv`, `skani/skani_*.tsv` | ⏳ Pending assemblies |
-| Plot ANI vs synteny_score | `figures/syntracker_validation/ani_vs_synteny_syntracker_species.png` | ⏳ Pending results |
+| Download references & reads on HPC | `/lustre1/g/aos_shihuang/data/syntracker_validation/` | ✅ Done (132 isolates, 75 GB) |
+| Assemble isolates (SLURM array) | `assemblies/*.fna` | ✅ Done 2026-08-09 (132/132; 补跑 45 个时序错位样本，S. rimosus 需 6h+/断点续跑 `03b_resume_one.sh`) |
+| Run Syn2bANI + skani per species | `syn2bani/syn2bani_*.tsv`, `skani/skani_*.tsv` | ✅ Done 2026-08-10 |
+| Plot ANI vs synteny_score | `figures/syntracker_validation/ani_vs_synteny_syntracker_species.png` | ✅ Done 2026-08-10 |
+
+**结果（Spearman ρ，ANI vs synteny_score）**：四个物种全部重现预期进化模式——
+E. coli hypermutator ρ=0.06（ANI 99.96–100，synteny 平稳 ~0.76，SNP 主导）；
+H. pylori ρ=0.81（混合模式）；N. gonorrhoeae ρ=0.59（混合 SNP+SV）；
+S. rimosus ANI 钉在 99.98–100（克隆）而 synteny 0.89–0.955 大幅变化（SV 主导）。
+
+**注意**：`--calibrate` 的线性校准模型在这些近克隆对上失效（S. rimosus 出现
+ANI>100% 的外推，N. gonorrhoeae 被拉低约 1.2 个百分点），绘图与结论均使用
+原始 `ani`（gamma 异质）列。校准模型的适用域是 GTDB 中低 ANI 区间，
+不应外推到 >99.5% 的近克隆比较。
 
 ### Expected evolutionary signatures
 
@@ -268,4 +278,4 @@ python3 /lustre1/g/aos_shihuang/Syn2bANI-paper/scripts/syntracker_validation/06_
 1. ✅ GBRT v4 model trained on 6.2k pairs, embedded, and validated; report/figures updated.
 2. ✅ HPC workflow designed, scripted, and locally dry-run validated (200 pairs).
 3. Submit `scripts/submit_hpc_workflow.sh` on a cluster for 100k+ pairs when HPC access is available.
-4. ⏳ Execute SynTracker Fig. 3 validation workflow on HPC2021 and collect ANI + synteny results.
+4. ✅ SynTracker Fig. 3 validation completed on HPC2021 (2026-08-10): 132 isolates assembled, Syn2bANI + skani compared per species, all four expected evolutionary patterns reproduced — see §6.

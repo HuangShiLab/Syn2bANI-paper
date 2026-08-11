@@ -37,7 +37,7 @@ for sp in "${SPECIES_LIST[@]}"; do
   [ -s "${genomes_list}" ] || continue
   out_tsv="${OUT_DIR}/skani_${sp}.tsv"
   echo "[skani] ${sp}: $(wc -l < "${genomes_list}") genomes -> ${out_tsv}"
-  skani dist -q "${genomes_list}" -r "${genomes_list}" -t "${THREADS}" -o "${out_tsv}"
+  skani dist --ql "${genomes_list}" --rl "${genomes_list}" -t "${THREADS}" -o "${out_tsv}"
 done
 
 echo "skani results in ${OUT_DIR}"

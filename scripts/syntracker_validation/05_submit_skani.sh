@@ -5,7 +5,7 @@ set -euo pipefail
 BASE="/lustre1/g/aos_shihuang/data/syntracker_validation"
 mkdir -p "${BASE}/logs"
 
-sbatch <<'EOF'
+sbatch <<EOF
 #!/bin/bash
 #SBATCH --job-name=syntracker_skani
 #SBATCH --partition=amd
