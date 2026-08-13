@@ -1,0 +1,21 @@
+[00:00:00.000] (1fc625e80) INFO   /Users/macstudio/.cargo/bin/skani sketch -t 16 -o /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n15 /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_BL21_DE3.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_flexneri_301.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_sonnei_Ss046.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Escherichia_fergusonii.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhimurium_LT2.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhi_CT18.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Klebsiella_pneumoniae_MGH78578.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Enterobacter_cloacae_13047.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Citrobacter_rodentium.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001075925.fasta
+[00:00:00.000] (1fc625e80) INFO   Sketching files...
+[00:00:00.023] (1fc625e80) INFO   Sketching time: 0.022935793
+        0.02 real         0.17 user         0.06 sys
+           283066368  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               20195  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 798  involuntary context switches
+          2766484922  instructions retired
+           905430320  cycles elapsed
+           281903752  peak memory footprint

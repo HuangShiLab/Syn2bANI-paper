@@ -1,0 +1,57 @@
+>>>>>>>>>>>>>>>>>>
+Reference = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta]
+Query = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta]
+Kmer size = 16
+Fragment length = 3000
+Threads = 16
+ANI output file = /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/logs/fastani_n2_r1.tsv
+Sanity Check  = 0
+>>>>>>>>>>>>>>>>>>
+INFO [thread 0], skch::main, Count of threads executing parallel_for : 16
+INFO [thread 0], skch::Sketch::build, window size for minimizer sampling  = 24
+INFO [thread 0], skch::Sketch::build, minimizers picked from reference = 371301
+INFO [thread 0], skch::Sketch::index, unique minimizers = 361568
+INFO [thread 0], skch::Sketch::computeFreqHist, Frequency histogram of minimizers = (1, 357382) ... (59, 1)
+INFO [thread 0], skch::Sketch::computeFreqHist, consider all minimizers during lookup.
+INFO [thread 0], skch::main, Time spent sketching the reference : 0.141971 sec
+INFO [thread 0], skch::main, Start Map 1
+INFO [thread 8], skch::main, ready to exit the loop
+INFO [thread 11], skch::main, ready to exit the loop
+INFO [thread 3], skch::main, ready to exit the loop
+INFO [thread 13], skch::main, ready to exit the loop
+INFO [thread 6], skch::main, ready to exit the loop
+INFO [thread 14], skch::main, ready to exit the loop
+INFO [thread 5], skch::main, ready to exit the loop
+INFO [thread 9], skch::main, ready to exit the loop
+INFO [thread 7], skch::main, ready to exit the loop
+INFO [thread 15], skch::main, ready to exit the loop
+INFO [thread 2], skch::main, ready to exit the loop
+INFO [thread 4], skch::main, ready to exit the loop
+INFO [thread 10], skch::main, ready to exit the loop
+INFO [thread 12], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #1 : 0.574624 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000131417 sec
+INFO [thread 0], skch::main, Start Map 2
+INFO [thread 0], skch::main, Time spent mapping fragments in query #2 : 0.447669 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.0001035 sec
+INFO [thread 0], skch::main, ready to exit the loop
+INFO [thread 1], skch::main, ready to exit the loop
+INFO, skch::main, parallel_for execution finished
+        1.25 real         6.58 user         0.08 sys
+           265191424  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               27493  page reclaims
+                   5  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                2183  involuntary context switches
+         80473839592  instructions retired
+         25438879049  cycles elapsed
+           264127208  peak memory footprint

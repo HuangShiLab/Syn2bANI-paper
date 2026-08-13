@@ -1,0 +1,5 @@
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5/Ecoli_CFT073.fasta.sketch
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5/Ecoli_K12_MG1655.fasta.sketch
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5/Ecoli_K12_W3110.fasta.sketch
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5/Ecoli_O157H7_Sakai.fasta.sketch
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5/Ecoli_UTI89.fasta.sketch

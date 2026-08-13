@@ -1,0 +1,66 @@
+>>>>>>>>>>>>>>>>>>
+Reference = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta]
+Query = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta]
+Kmer size = 16
+Fragment length = 3000
+Threads = 16
+ANI output file = /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/logs/fastani_n5_r2.tsv
+Sanity Check  = 0
+>>>>>>>>>>>>>>>>>>
+INFO [thread 0], skch::main, Count of threads executing parallel_for : 16
+INFO [thread 0], skch::Sketch::build, window size for minimizer sampling  = 24
+INFO [thread 0], skch::Sketch::build, minimizers picked from reference = 371301
+INFO [thread 0], skch::Sketch::index, unique minimizers = 361568
+INFO [thread 0], skch::Sketch::computeFreqHist, Frequency histogram of minimizers = (1, 357382) ... (59, 1)
+INFO [thread 0], skch::Sketch::computeFreqHist, consider all minimizers during lookup.
+INFO [thread 0], skch::main, Time spent sketching the reference : 0.174525 sec
+INFO [thread 0], skch::main, Start Map 1
+INFO [thread 15], skch::main, ready to exit the loop
+INFO [thread 8], skch::main, ready to exit the loop
+INFO [thread 14], skch::main, ready to exit the loop
+INFO [thread 11], skch::main, ready to exit the loop
+INFO [thread 6], skch::main, ready to exit the loop
+INFO [thread 13], skch::main, ready to exit the loop
+INFO [thread 7], skch::main, ready to exit the loop
+INFO [thread 9], skch::main, ready to exit the loop
+INFO [thread 5], skch::main, ready to exit the loop
+INFO [thread 10], skch::main, ready to exit the loop
+INFO [thread 12], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #1 : 0.690333 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000146375 sec
+INFO [thread 0], skch::main, Start Map 2
+INFO [thread 0], skch::main, Time spent mapping fragments in query #2 : 0.509718 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000109917 sec
+INFO [thread 0], skch::main, Start Map 3
+INFO [thread 0], skch::main, Time spent mapping fragments in query #3 : 0.628229 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.00016425 sec
+INFO [thread 0], skch::main, Start Map 4
+INFO [thread 0], skch::main, Time spent mapping fragments in query #4 : 0.49713 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000109333 sec
+INFO [thread 0], skch::main, Start Map 5
+INFO [thread 4], skch::main, ready to exit the loop
+INFO [thread 3], skch::main, ready to exit the loop
+INFO [thread 1], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #5 : 0.455246 sec
+INFO [thread 0], skch::main, Time spent post mapping : 8.8542e-05 sec
+INFO [thread 0], skch::main, ready to exit the loop
+INFO [thread 2], skch::main, ready to exit the loop
+INFO, skch::main, parallel_for execution finished
+        3.01 real        22.18 user         0.18 sys
+           383057920  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               61549  page reclaims
+                   5  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                5960  involuntary context switches
+        233641841912  instructions retired
+         84427031040  cycles elapsed
+           382042928  peak memory footprint

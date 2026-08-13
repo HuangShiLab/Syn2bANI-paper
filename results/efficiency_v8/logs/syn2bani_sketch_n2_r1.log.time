@@ -1,0 +1,19 @@
+wrote 2 sketches to /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n2 (4 enzymes)
+        0.04 real         0.04 user         0.00 sys
+            33882112  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2247  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                  14  involuntary context switches
+           479393150  instructions retired
+           207941963  cycles elapsed
+            32588160  peak memory footprint

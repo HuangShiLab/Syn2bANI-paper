@@ -1,0 +1,10 @@
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_BL21_DE3.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_flexneri_301.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_sonnei_Ss046.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Escherichia_fergusonii.fasta
+/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhimurium_LT2.fasta

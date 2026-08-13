@@ -1,0 +1,117 @@
+>>>>>>>>>>>>>>>>>>
+Reference = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_BL21_DE3.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_flexneri_301.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_sonnei_Ss046.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Escherichia_fergusonii.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhimurium_LT2.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhi_CT18.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Klebsiella_pneumoniae_MGH78578.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Enterobacter_cloacae_13047.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Citrobacter_rodentium.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001075925.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001077875.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283205.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283245.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283605.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283865.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284145.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284645.fasta]
+Query = [/Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_BL21_DE3.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_flexneri_301.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_sonnei_Ss046.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Escherichia_fergusonii.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhimurium_LT2.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhi_CT18.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Klebsiella_pneumoniae_MGH78578.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Enterobacter_cloacae_13047.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Citrobacter_rodentium.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001075925.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001077875.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283205.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283245.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283605.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283865.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284145.fasta, /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284645.fasta]
+Kmer size = 16
+Fragment length = 3000
+Threads = 16
+ANI output file = /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/logs/fastani_n22_r1.tsv
+Sanity Check  = 0
+>>>>>>>>>>>>>>>>>>
+INFO [thread 0], skch::main, Count of threads executing parallel_for : 16
+INFO [thread 0], skch::Sketch::build, window size for minimizer sampling  = 24
+INFO [thread 0], skch::Sketch::build, minimizers picked from reference = 807632
+INFO [thread 0], skch::Sketch::index, unique minimizers = 513780
+INFO [thread 0], skch::Sketch::computeFreqHist, Frequency histogram of minimizers = (1, 235039) ... (99, 1)
+INFO [thread 0], skch::Sketch::computeFreqHist, consider all minimizers during lookup.
+INFO [thread 0], skch::main, Time spent sketching the reference : 0.466782 sec
+INFO [thread 0], skch::main, Start Map 1
+INFO [thread 0], skch::main, Time spent mapping fragments in query #1 : 1.09644 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000444167 sec
+INFO [thread 0], skch::main, Start Map 2
+INFO [thread 0], skch::main, Time spent mapping fragments in query #2 : 0.974238 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.00041925 sec
+INFO [thread 0], skch::main, Start Map 3
+INFO [thread 0], skch::main, Time spent mapping fragments in query #3 : 1.19863 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000482917 sec
+INFO [thread 0], skch::main, Start Map 4
+INFO [thread 0], skch::main, Time spent mapping fragments in query #4 : 0.925324 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000351708 sec
+INFO [thread 0], skch::main, Start Map 5
+INFO [thread 0], skch::main, Time spent mapping fragments in query #5 : 0.829609 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000313042 sec
+INFO [thread 0], skch::main, Start Map 6
+INFO [thread 0], skch::main, Time spent mapping fragments in query #6 : 1.09422 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000463083 sec
+INFO [thread 0], skch::main, Start Map 7
+INFO [thread 11], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #7 : 1.09568 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000610208 sec
+INFO [thread 0], skch::main, Start Map 8
+INFO [thread 12], skch::main, ready to exit the loop
+INFO [thread 9], skch::main, ready to exit the loop
+INFO [thread 10], skch::main, ready to exit the loop
+INFO [thread 8], skch::main, ready to exit the loop
+INFO [thread 13], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #8 : 1.07985 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000693541 sec
+INFO [thread 0], skch::main, Start Map 9
+INFO [thread 14], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #9 : 0.516888 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000250875 sec
+INFO [thread 0], skch::main, Start Map 10
+INFO [thread 0], skch::main, Time spent mapping fragments in query #10 : 0.416805 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.0001695 sec
+INFO [thread 0], skch::main, Start Map 11
+INFO [thread 15], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #11 : 0.41295 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000175458 sec
+INFO [thread 0], skch::main, Start Map 12
+INFO [thread 0], skch::main, Time spent mapping fragments in query #12 : 0.369249 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000148791 sec
+INFO [thread 0], skch::main, Start Map 13
+INFO [thread 0], skch::main, Time spent mapping fragments in query #13 : 0.380296 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000170042 sec
+INFO [thread 0], skch::main, Start Map 14
+INFO [thread 0], skch::main, Time spent mapping fragments in query #14 : 0.480937 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000219875 sec
+INFO [thread 0], skch::main, Start Map 15
+INFO [thread 0], skch::main, Time spent mapping fragments in query #15 : 0.497401 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000235334 sec
+INFO [thread 0], skch::main, Start Map 16
+INFO [thread 0], skch::main, Time spent mapping fragments in query #16 : 0.730818 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000349875 sec
+INFO [thread 0], skch::main, Start Map 17
+INFO [thread 0], skch::main, Time spent mapping fragments in query #17 : 0.777299 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000377167 sec
+INFO [thread 0], skch::main, Start Map 18
+INFO [thread 0], skch::main, Time spent mapping fragments in query #18 : 0.739529 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000377542 sec
+INFO [thread 0], skch::main, Start Map 19
+INFO [thread 0], skch::main, Time spent mapping fragments in query #19 : 0.723226 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000351417 sec
+INFO [thread 0], skch::main, Start Map 20
+INFO [thread 6], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #20 : 0.700433 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000330833 sec
+INFO [thread 0], skch::main, Start Map 21
+INFO [thread 4], skch::main, ready to exit the loop
+INFO [thread 1], skch::main, ready to exit the loop
+INFO [thread 3], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #21 : 0.723279 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000350167 sec
+INFO [thread 0], skch::main, Start Map 22
+INFO [thread 2], skch::main, ready to exit the loop
+INFO [thread 0], skch::main, Time spent mapping fragments in query #22 : 0.720627 sec
+INFO [thread 0], skch::main, Time spent post mapping : 0.000338375 sec
+INFO [thread 0], skch::main, ready to exit the loop
+INFO [thread 5], skch::main, ready to exit the loop
+INFO [thread 7], skch::main, ready to exit the loop
+INFO, skch::main, parallel_for execution finished
+       17.70 real       193.07 user         0.87 sys
+           959299584  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              178402  page reclaims
+                   5  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               70034  involuntary context switches
+       1610208062137  instructions retired
+        724918080753  cycles elapsed
+           958629136  peak memory footprint

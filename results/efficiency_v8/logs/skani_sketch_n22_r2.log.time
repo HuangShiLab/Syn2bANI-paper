@@ -1,0 +1,21 @@
+[00:00:00.000] (1fc625e80) INFO   /Users/macstudio/.cargo/bin/skani sketch -t 16 -o /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n22.tmp /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_W3110.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_CFT073.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_UTI89.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_BL21_DE3.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_flexneri_301.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Shigella_sonnei_Ss046.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Escherichia_fergusonii.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhimurium_LT2.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Salmonella_Typhi_CT18.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Klebsiella_pneumoniae_MGH78578.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Enterobacter_cloacae_13047.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Citrobacter_rodentium.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001075925.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001077875.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283205.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283245.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283605.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001283865.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284145.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/draftbench/drafts/GCA_001284645.fasta
+[00:00:00.000] (1fc625e80) INFO   Sketching files...
+[00:00:00.029] (1fc625e80) INFO   Sketching time: 0.029222665
+        0.03 real         0.23 user         0.06 sys
+           208306176  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               15966  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                1327  involuntary context switches
+          3920582602  instructions retired
+          1154016990  cycles elapsed
+           207143488  peak memory footprint

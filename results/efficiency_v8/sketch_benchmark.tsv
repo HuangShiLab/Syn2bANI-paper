@@ -1,0 +1,31 @@
+tool	n_genomes	rep	wall_s	total_size_kb	artifact_path
+skani	2	1	0.01	1852	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n2
+skani	2	2	0.01	1852	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n2.tmp (deleted; same inputs as rep 1)
+skani	2	3	0.02	1852	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n2.tmp (deleted; same inputs as rep 1)
+skani	5	1	0.01	4600	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5
+skani	5	2	0.01	4600	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5.tmp (deleted; same inputs as rep 1)
+skani	5	3	0.01	4600	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n5.tmp (deleted; same inputs as rep 1)
+skani	10	1	0.02	8856	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n10
+skani	10	2	0.02	8856	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n10.tmp (deleted; same inputs as rep 1)
+skani	10	3	0.02	8856	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n10.tmp (deleted; same inputs as rep 1)
+skani	15	1	0.02	14812	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n15
+skani	15	2	0.02	14812	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n15.tmp (deleted; same inputs as rep 1)
+skani	15	3	0.02	14812	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n15.tmp (deleted; same inputs as rep 1)
+skani	22	1	0.03	21592	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n22
+skani	22	2	0.03	21592	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n22.tmp (deleted; same inputs as rep 1)
+skani	22	3	0.03	21592	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n22.tmp (deleted; same inputs as rep 1)
+syn2bani	2	1	0.04	248	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n2
+syn2bani	2	2	0.04	248	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n2.tmp (deleted; same inputs as rep 1)
+syn2bani	2	3	0.04	248	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n2.tmp (deleted; same inputs as rep 1)
+syn2bani	5	1	0.12	624	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n5
+syn2bani	5	2	0.11	624	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n5.tmp (deleted; same inputs as rep 1)
+syn2bani	5	3	0.11	624	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n5.tmp (deleted; same inputs as rep 1)
+syn2bani	10	1	0.22	1192	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n10
+syn2bani	10	2	0.21	1192	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n10.tmp (deleted; same inputs as rep 1)
+syn2bani	10	3	0.21	1192	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n10.tmp (deleted; same inputs as rep 1)
+syn2bani	15	1	0.35	3012	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15
+syn2bani	15	2	0.34	3012	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15.tmp (deleted; same inputs as rep 1)
+syn2bani	15	3	0.34	3012	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15.tmp (deleted; same inputs as rep 1)
+syn2bani	22	1	0.51	4020	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n22
+syn2bani	22	2	0.50	4020	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n22.tmp (deleted; same inputs as rep 1)
+syn2bani	22	3	0.50	4020	/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n22.tmp (deleted; same inputs as rep 1)

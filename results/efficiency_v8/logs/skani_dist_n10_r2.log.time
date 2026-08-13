@@ -1,0 +1,23 @@
+[00:00:00.000] (1fc625e80) INFO   /Users/macstudio/.cargo/bin/skani dist -t 16 --ql /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/lists/skani_n10.txt --rl /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/lists/skani_n10.txt -o /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/logs/skani_dist_n10_r2.tsv
+[00:00:00.000] (1fc625e80) INFO   Sketches detected.
+[00:00:00.003] (1fc625e80) INFO   Generating sketch time: 0.003489792
+[00:00:00.039] (1fc625e80) INFO   Learned ANI mode detected. ANI may be adjusted according to a regression model trained on MAGs.
+[00:00:00.041] (1fc625e80) INFO   ANI calculation time: 0.03783317
+        0.04 real         0.50 user         0.02 sys
+           122421248  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                9107  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 802  involuntary context switches
+          6269802361  instructions retired
+          1935139986  cycles elapsed
+           120537616  peak memory footprint

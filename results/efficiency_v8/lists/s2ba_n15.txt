@@ -1,0 +1,15 @@
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Citrobacter_rodentium.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_BL21_DE3.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_CFT073.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_K12_MG1655.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_K12_W3110.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_O157H7_Sakai.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Ecoli_UTI89.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Enterobacter_cloacae_13047.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Escherichia_fergusonii.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/GCA_001075925.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Klebsiella_pneumoniae_MGH78578.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Salmonella_Typhi_CT18.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Salmonella_Typhimurium_LT2.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Shigella_flexneri_301.s2ba
+/Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/syn2bani_n15/Shigella_sonnei_Ss046.s2ba

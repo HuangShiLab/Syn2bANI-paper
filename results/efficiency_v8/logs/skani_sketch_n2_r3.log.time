@@ -1,0 +1,21 @@
+[00:00:00.000] (1fc625e80) INFO   /Users/macstudio/.cargo/bin/skani sketch -t 16 -o /Users/macstudio/Downloads/Syn2bANI-paper/results/efficiency_v8/sketches/skani_n2.tmp /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_K12_MG1655.fasta /Users/macstudio/Downloads/Syn2bANI/prototype/realbench/genomes/Ecoli_O157H7_Sakai.fasta
+[00:00:00.000] (1fc625e80) INFO   Sketching files...
+[00:00:00.021] (1fc625e80) INFO   Sketching time: 0.021509709
+        0.02 real         0.01 user         0.00 sys
+            47595520  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                3349  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 150  involuntary context switches
+           383849306  instructions retired
+           102797414  cycles elapsed
+            46268824  peak memory footprint
