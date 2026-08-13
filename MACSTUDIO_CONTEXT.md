@@ -177,14 +177,19 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 
 ### 🔴 高优先级（数据密集型，Mac Studio / HPC 优势）
 
-#### Task 0: 在真实基因组上验证 v8 MLE 路径 ★部分完成 2026-07-25
+#### Task 0: 在真实基因组上验证 v8 MLE 路径 ★部分完成 2026-08-11
 
 - **已完成部分**：13 条肠杆菌科染色体对 *E. coli* K-12，三方对比 skani + FastANI。
   发现速率异质性是真实数据上的主要偏差来源，已用 gamma 混合模型修复
   （详见 `V8_MLE_VALIDATION.md` §3.6）。可报告的 8 对上 MAE 0.314（vs skani）
   / 0.256（vs FastANI）。用 `prototype/realgenome_bench.sh` 可一键复现。
-- **仍待完成**：你那 15 对口腔/肠道基因组；draft assembly / MAG；高低 GC 类群；
-  换用 ANIm 或 minimap2 作为真值而非 FastANI
+- **已完成（2026-08-11）**：15 对口腔/肠道 mid-ANI 基因组用 **ANIm（dnadiff）
+  独立真值**重验（`V8_MLE_VALIDATION.md` §3.13）。两个结论：(1) FastANI 在
+  87–90% 区间系统性偏低 1.5–2 个点，此前"vs FastANI"的数字都要重新解读；
+  (2) v8 **uniform** MAE 0.86% 是四个方法里最好的，但 **gamma 在低 retention
+  + 高分歧区间向下过冲**（15/15 被 INCONSISTENT 正确标记）——gamma 自动退回
+  uniform 是明确的改进方向。
+- **仍待完成**：draft assembly / MAG；高低 GC 类群；肠杆菌科用 ANIm 复核
 - **目标**：确认 `ani` 在真实数据上是否复现仿真上的精度
 - **步骤**：
   1. `git pull` 代码仓库，`cargo build --release`，`cargo test --release --lib`
@@ -202,14 +207,16 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
   一个固定的共享含量比例）
 - **输出**：真实数据验证表，补进 `V8_MLE_VALIDATION.md` §3.3
 
-#### Task 0b: 补齐仿真覆盖面
+#### Task 0b: 补齐仿真覆盖面 ✅ 2026-08-11
 
-- **indel**：`simulate.py` 已支持 `indel_rate` 但当前跑的是 0，需要开启以压测
-  gap 算术路径
-- **多物种**：除 *E. coli* 外增加高 GC（如 *Streptomyces*）和低 GC（如
-  *Staphylococcus*）各一个，检查 GC 偏好对 tag 密度和 MLE 的影响
-- **碎片化**：把参考切成 20/50/100/200 contig 并随机翻转方向，验证
-  `canonical_packed` 修复确实生效（旧代码在这个场景下会丢掉约一半共享 tag）
+- **indel**：✅ 已测（`V8_MLE_VALIDATION.md` §3.14）。200–2000 bp 缺失、
+  率至 4/100kb（删除 4.3%）下 MAE 0.081%，无单调漂移；`simulate.py` 新增
+  `indel_rate` CLI 参数，新增 `simulate_indel_sweep.py`。
+- **多物种/高低 GC**：✅ 已被 `ALGORITHM_MLE.md` §4.8 覆盖（GC 27–72%，5 基因组）。
+- **碎片化**：✅ 20/50/100/200 contig + 随机翻转，MAE 0.093%，canonical 修复确认。
+- **附带发现**：BslFI registry 几何错误（tag_length 21→25，已修复）；当前默认
+  panel `AloI,BslFI` 在精确真值下 MAE 3.08%（4 酶 panel 0.074%），机制是
+  突变创造新位点未被丢失模型表示——**建议把默认 panel 改回 `BcgI,AlfI,AloI,FalI`**。
 
 #### Task 1: 大规模 MAG 真实数据验证（原 Task 3）
 - **目标**：从 NCBI 或 EBI 下载 100+ 真实 MAG 数据集
@@ -237,13 +244,17 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 扩大训练集只会让模型更精确地拟合一个错误参数化。v2–v7 模型文件保留在代码仓库
 中作为论文对照。
 
-#### Task 3: 结构变异（SV）检测完整实现（原 Task 4）
-- **当前状态**：`struct` 子命令存在但仅返回 0
+#### Task 3: 结构变异（SV）检测完整实现（原 Task 4）✅ 2026-08-11
+- **当前状态**：✅ 已完成。`struct` 子命令已从有缺陷的 v7 路径整体重写为走
+  `chain_ani`（v8 验证过的 chaining），新增 `src/core/sv.rs`。
 - **实现内容**：
-  - PAF 格式输出（`--paf`）
-  - 重排检测（`--rearrangement`）
-  - 插入/缺失检测（`--indel`）
-  - 单体型相位信息（haplotype phasing）
+  - PAF 格式输出（`--paf`，每链一行标准 12 列；nmatch/alnlen 为 anchor 近似，注释已注明）
+  - 重排检测（`--rearrangement`：反向链→Inversion，相邻链跨 r_contig 或顺序矛盾→Translocation）
+  - 插入/缺失检测（`--indel`，阈值 `--indel-min` 默认 1 kb：链内 anchor offset 跳变 + 链间 accessory 区段）
+  - 单体型相位信息以 `support_left`/`support_right`（断点两侧链的 anchor 数）输出
+- **验证**：62 个 lib 测试全过（新增 7 个 SV 单测）；端到端精确真值——
+  400 kb 倒位端点误差 < 650 bp，5 个合成缺失/插入全部检出且 size 精确，
+  自比对 0 SV。等长非同源替换不报 SV 是正确行为（只表现为断链）。
 
 #### Task 4: Benchmark 扩展（原 Task 7）
 - **时间基准**： skani vs FastANI vs Syn2bANI（完整数据集）
