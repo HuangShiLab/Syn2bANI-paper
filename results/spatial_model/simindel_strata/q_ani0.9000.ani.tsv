@@ -1,0 +1,2 @@
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+q_ani0.9000	ref	90.0480	90.0480	0.9961	0.9962	0.10105	3	0.9988	2	inf	0.2891	90.0233	90.0452	1.5455	7.15	AlfI:90.40,AloI:89.72,BcgI:90.18,FalI:88.86	1888	3	5890	978	552.6666666666666	ok	90.0480	uniform

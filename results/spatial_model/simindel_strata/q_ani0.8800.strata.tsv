@@ -1,0 +1,5 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+q_ani0.8800	ref	AlfI	32	26	1386	41,115,187
+q_ani0.8800	ref	AloI	27	20	388	30,42,61
+q_ani0.8800	ref	BcgI	32	26	2198	44,188,271
+q_ani0.8800	ref	FalI	27	21	714	17,71,93

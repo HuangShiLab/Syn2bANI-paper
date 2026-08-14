@@ -1,0 +1,5 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+q_ani0.9500__gamma_a2.0_ani95	ref	AlfI	32	26	590	616,469,267
+q_ani0.9500__gamma_a2.0_ani95	ref	AloI	27	20	182	176,114,57
+q_ani0.9500__gamma_a2.0_ani95	ref	BcgI	32	26	961	883,676,357
+q_ani0.9500__gamma_a2.0_ani95	ref	FalI	27	21	312	249,160,98

@@ -1,0 +1,2 @@
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+NZ_CP084012.1	NZ_CM126634.1	84.0532	91.1414	0.6918	0.7609	0.11857	32	0.8284	225	1.174	0.3504	90.1342	95.9093	1.0877	2.39	AlfI:91.21,AloI:91.07,BcgI:90.97,FalI:92.06	1313	32	3796	192	34.9375	INCONSISTENT	91.1414	uniform_fallback

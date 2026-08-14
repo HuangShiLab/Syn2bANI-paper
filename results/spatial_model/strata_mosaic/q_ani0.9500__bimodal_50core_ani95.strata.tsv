@@ -1,0 +1,5 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+q_ani0.9500__bimodal_50core_ani95	ref	AlfI	32	26	611	797,325,164
+q_ani0.9500__bimodal_50core_ani95	ref	AloI	27	20	188	215,66,45
+q_ani0.9500__bimodal_50core_ani95	ref	BcgI	32	26	997	1136,438,262
+q_ani0.9500__bimodal_50core_ani95	ref	FalI	27	21	324	318,108,65
