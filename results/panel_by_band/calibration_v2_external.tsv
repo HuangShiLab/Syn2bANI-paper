@@ -1,0 +1,11 @@
+dataset	method	n	MAE	bias	r
+oralgut_same_species_vs_fastani	raw_gamma	100	0.5518	0.4213	0.9804
+oralgut_same_species_vs_fastani	raw_uniform	100	1.1646	1.1646	0.9745
+oralgut_same_species_vs_fastani	calibrated_v2_setA	100	0.4599	0.1523	0.9953
+midani_15_vs_anim	raw_gamma	15	4.4824	-4.4137	-0.543
+midani_15_vs_anim	raw_uniform	15	1.4231	1.4231	0.6834
+midani_15_vs_anim	calibrated_v2_setB	15	1.2292	-0.8454	-0.206
+oralgut_same_species_vs_fastani_v8current	raw_gamma	100	0.5518	0.4213	0.9804
+oralgut_same_species_vs_fastani_v8current	raw_uniform	100	1.1646	1.1646	0.9745
+oralgut_same_species_vs_fastani_v8current	calibrated_v2_setA	100	0.4599	0.1523	0.9953
+oralgut_same_species_vs_fastani_v8current	calibrated_v2_setB	100	0.6356	-0.0948	0.9271

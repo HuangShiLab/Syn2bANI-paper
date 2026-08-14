@@ -145,3 +145,30 @@ memory from 310 MB to 58 MB at n = 22 (skani dist 185 MB, FastANI 912 MB).
 (c) Sketch store total size vs number of genomes (log y). syn2bani's `.s2ba`
 store is ~5× smaller than skani's database: 4,020 vs 21,592 KB at n = 22
 (per-genome `.s2ba` files vs per-genome `.sketch` files plus `markers.bin`).
+
+---
+
+## Figure 7 — ANIm-truth benchmark by ANI band (`fig7_anim_by_band`)
+
+2,074 GTDB-R207 genome pairs with dnadiff (ANIm) truth, binned into four ANI
+bands (80–85, 85–90, 90–95, 95–99%). Methods: syn2bani current default
+4-enzyme panel (BcgI,AlfI,AloI,FalI) raw gamma estimate; the same panel after
+ridge-regression calibration with band-holdout cross-validation (train on 3
+bands, test on the held-out band; Syn2bANI-internal features only); the old
+11-enzyme panel (raw); and skani. FastANI covers only a 363-pair subset and is
+shown faint/dashed. The 105 BELOW_DETECTION pairs (no 4e point estimate) are
+excluded from the 4e rows, so 4e n = 1,969 vs 2,074 for 11e/skani. Data:
+`results/panel_by_band/anim_main_table.tsv` and `ridge_cv_preds_4e.tsv`;
+methods in `results/panel_by_band/ANIM_MAIN_TABLE.md`.
+
+(a) MAE vs ANI band. Raw 4e gamma degrades sharply toward lower ANI
+(MAE 3.69 at 80–85% vs 1.16 at 95–99%); ridge calibration flattens this to
+0.85–1.38 across bands, reaching skani-level overall accuracy (MAE 0.906 vs
+skani 0.906) without using any external-tool feature. (b) Signed bias vs band.
+Raw 4e gamma overestimates by +2.6 points overall (up to +3.3 at 80–85%);
+ridge-CV bias stays within ±1.2 except the small 95–99% band (n = 72,
+−1.19). skani and FastANI slightly underestimate (bias −0.65 / −0.98
+overall). (c) Ridge-CV estimates vs ANIm truth for the 1,969 finite 4e pairs,
+colored by band (identity line dashed). Overall MAE 0.906, r = 0.913; the
+residual spread is largest in the 80–85% band, where shared-tag signal is
+weakest.

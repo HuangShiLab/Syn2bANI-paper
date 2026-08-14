@@ -10,6 +10,9 @@ F3  Enzyme-panel optimization: per-enzyme bias, panel-size trade-off, tag
     composition vs GC.
 F4  Mid-ANI validation against ANIm truth (15 pairs, all INCONSISTENT).
 F5  GTDB R207 large-scale benchmark vs FastANI (672 pairs where FastANI reports).
+F6  Computational efficiency.
+F7  ANIm-truth benchmark by ANI band (2,074 GTDB R207 pairs; ridge-band-holdout
+    calibration of the current 4-enzyme panel).
 
 Pure pandas/matplotlib plotting from existing files; no heavy compute.
 Run:  python3 analysis/plot_report_figures.py
@@ -41,6 +44,8 @@ F5_MATRIX = PAPER / "results" / "matrix_gtdb_r207_100k_v8_final.tsv"
 F5_SUMMARY_OUT = FIGDIR / "gtdb_metrics_summary.tsv"
 F6_RUNTIME = PAPER / "results" / "efficiency_v8" / "runtime_scaling.tsv"
 F6_SKETCH = PAPER / "results" / "efficiency_v8" / "sketch_benchmark.tsv"
+F7_TABLE = PAPER / "results" / "panel_by_band" / "anim_main_table.tsv"
+F7_PREDS = PAPER / "results" / "panel_by_band" / "ridge_cv_preds_4e.tsv"
 
 # Future cross-tool ladder TSV (columns: name, skani_ani, fastani_ani) on the same
 # simulated genomes as F1. Does not exist yet; the code path is written and gated.
@@ -659,6 +664,96 @@ def fig6():
 
 
 # --------------------------------------------------------------------------
+# F7 — ANIm-truth benchmark by ANI band (2,074 GTDB R207 pairs)
+# --------------------------------------------------------------------------
+
+# method -> (color, marker, label). FastANI is plotted faint/dashed because it
+# covers only a 363-pair subset of the 2,074 ANIm-truth pairs.
+F7_METHODS = [
+    ("syn2bani_4e_gamma", C_GAMMA, "o", "syn2bani 4e (gamma)"),
+    ("syn2bani_4e_ridge_cv", C_UNIFORM, "^", "syn2bani 4e (ridge CV)"),
+    ("syn2bani_11e", "#E69F00", "s", "syn2bani 11e (old panel)"),
+    ("skani", C_SKANI, "D", L_SKANI),
+]
+F7_BANDS = ["0.8-0.85", "0.85-0.9", "0.9-0.95", "0.95-0.99"]
+F7_BAND_LABELS = ["80–85", "85–90", "90–95", "95–99"]
+F7_BAND_COLORS = ["#0072B2", "#E69F00", "#009E73", "#CC79A7"]
+
+
+def fig7_anim_by_band():
+    print("F7: ANIm benchmark by band")
+    tab = pd.read_csv(F7_TABLE, sep="\t")
+    tab = tab[tab["band"] != "all"]
+    x = np.arange(len(F7_BANDS))
+
+    fig, axes = plt.subplots(1, 3, figsize=(7, 2.9))
+
+    def series(method, col):
+        d = tab[tab["method"] == method].set_index("band")
+        return np.array([d.loc[b, col] if b in d.index else np.nan
+                         for b in F7_BANDS])
+
+    # (a) MAE vs band --------------------------------------------------------
+    ax = axes[0]
+    for method, color, marker, label in F7_METHODS:
+        ax.plot(x, series(method, "MAE"), color=color, marker=marker, label=label)
+    fa = series("FastANI_subset", "MAE")
+    ax.plot(x, fa, color=C_FASTANI, marker="D", ls="--", alpha=0.45,
+            label="FastANI (subset)")
+    ax.annotate("FastANI: 363-pair\nsubset only", xy=(0.97, 0.62),
+                xycoords="axes fraction", ha="right", va="top",
+                fontsize=5.5, color=C_FASTANI, style="italic")
+    ax.set_ylim(0, 4.6)
+    ax.set_xticks(x)
+    ax.set_xticklabels(F7_BAND_LABELS, fontsize=6.5)
+    ax.set_xlabel("ANIm band (%)")
+    ax.set_ylabel("MAE vs ANIm (ANI points)")
+    ax.grid(True, axis="y")
+    ax.legend(loc="upper left", fontsize=5.8)
+    panel_label(ax, "a")
+
+    # (b) signed bias vs band -------------------------------------------------
+    ax = axes[1]
+    ax.axhline(0, color=C_TRUTH, lw=0.8, ls="--")
+    for method, color, marker, label in F7_METHODS:
+        ax.plot(x, series(method, "bias"), color=color, marker=marker, label=label)
+    ax.plot(x, series("FastANI_subset", "bias"), color=C_FASTANI, marker="D",
+            ls="--", alpha=0.45, label="FastANI (subset)")
+    ax.set_xticks(x)
+    ax.set_xticklabels(F7_BAND_LABELS, fontsize=6.5)
+    ax.set_xlabel("ANIm band (%)")
+    ax.set_ylabel("Bias (est − ANIm, ANI points)")
+    ax.grid(True, axis="y")
+    ax.legend(loc="upper right", fontsize=5.8)
+    panel_label(ax, "b")
+
+    # (c) scatter ridge-CV vs ANIm truth --------------------------------------
+    ax = axes[2]
+    d = pd.read_csv(F7_PREDS, sep="\t")
+    lo, hi = 82, 99
+    identity_line(ax, lo, hi)
+    for band, color in zip(F7_BANDS, F7_BAND_COLORS):
+        sub = d[d["band"] == band]
+        ax.scatter(sub["anim_ani"], sub["ridge_pred"], color=color, s=4,
+                   alpha=0.6, linewidths=0, label=f"{band} (n={len(sub)})",
+                   zorder=3)
+    mae = (d["ridge_pred"] - d["anim_ani"]).abs().mean()
+    r = d["ridge_pred"].corr(d["anim_ani"])
+    ax.text(0.03, 0.97, f"MAE = {mae:.3f}\nr = {r:.3f}\nn = {len(d)}",
+            transform=ax.transAxes, va="top", fontsize=6.5)
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.set_xlabel("ANIm ANI (%, truth)")
+    ax.set_ylabel("syn2bani 4e ridge-CV ANI (%)")
+    ax.grid(True)
+    ax.legend(loc="lower right", fontsize=5.8, markerscale=2)
+    panel_label(ax, "c")
+
+    fig.tight_layout()
+    save(fig, "fig7_anim_by_band")
+
+
+# --------------------------------------------------------------------------
 
 def main():
     FIGDIR.mkdir(parents=True, exist_ok=True)
@@ -668,6 +763,7 @@ def main():
     fig4()
     fig5()
     fig6()
+    fig7_anim_by_band()
     print("done.")
 
 

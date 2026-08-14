@@ -1,0 +1,20 @@
+18378 pairs (2074 with truth), 11 enzymes: AlfI,AloI,BcgI,BplI,BsaXI,Bsp24I,CjeI,CjePI,FalI,PpiI,PsrI
+
+per-enzyme, alone:
+  enzyme          MAE     bias      n
+  CjePI        1.6058  +0.6436   2074
+  CjeI         1.6792  +0.2850   2074
+  Bsp24I       2.1361  +0.1756   2074
+  FalI         2.3725  +1.0624   2074
+  BsaXI        2.5165  -1.0038   2074
+  AloI         2.5534  +0.7763   2074
+  AlfI         2.8608  +0.1038   2074
+  PpiI         3.0667  +0.6197   2074
+  PsrI         3.0796  +0.9937   2074
+  BcgI         3.3508  -1.2952   2074
+  BplI         3.4844  -1.8495   2073
+
+named panels:
+  panel                                             MAE     bias      n
+  BcgI,AlfI,AloI,FalI                            1.8465  +0.6624   2074
+

@@ -1,0 +1,55 @@
+{
+  "n_pairs": 2074,
+  "n_below_detection_excluded_4e": 105,
+  "below_detection_flags": {
+    "BELOW_DETECTION": 105
+  },
+  "features": [
+    "s2b_ani",
+    "s2b_ani_uniform",
+    "s2b_af_q",
+    "s2b_af_r",
+    "s2b_std_err",
+    "s2b_retention",
+    "s2b_n_anchors",
+    "s2b_n_chains",
+    "s2b_n_tags"
+  ],
+  "alphas_grid": [
+    0.001,
+    0.01,
+    0.1,
+    1,
+    10,
+    100
+  ],
+  "fold_alphas": {
+    "0.8-0.85": 0.001,
+    "0.85-0.9": 1.0,
+    "0.9-0.95": 10.0,
+    "0.95-0.99": 10.0
+  },
+  "mean_coef": {
+    "s2b_ani": 0.5436944622172193,
+    "s2b_ani_uniform": -1.1225707516266208,
+    "s2b_af_q": 0.4986023960820951,
+    "s2b_af_r": 0.9657753048529747,
+    "s2b_std_err": -0.4087791175080439,
+    "s2b_retention": 2.84979098115721,
+    "s2b_n_anchors": 0.3644379986102091,
+    "s2b_n_chains": 0.1153930148020495,
+    "s2b_n_tags": -0.6461057858742743
+  },
+  "ridge_overall": [
+    {
+      "method": "syn2bani_4e_ridge_cv",
+      "band": "all",
+      "n": 1969,
+      "MAE": 0.906,
+      "RMSE": 1.3073,
+      "bias": -0.037,
+      "r": 0.9128
+    }
+  ],
+  "fastani_subset_n": 363
+}
