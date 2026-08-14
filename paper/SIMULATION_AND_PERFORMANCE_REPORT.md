@@ -19,11 +19,11 @@ FastANI 1.33/1.34, ANIm (dnadiff 1-to-1) as alignment truth.
 | Benchmark | syn2bani | skani | FastANI | Source |
 |---|---|---|---|---|
 | Sim ladder, exact truth (12 pairs, 85–99.9% + indels) | **MAE 0.073** (gamma ≡ uniform) | 0.377 (bias −0.377) | 0.742 (bias −0.742) | F1 |
-| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | gated MAE **0.959** (uniform 1.423; gamma 4.482 overshoots low, gate falls back on 12/15) | 1.396 | 1.864 | F4 |
+| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | gated MAE **0.959**, calibrated v3 **0.739** (uniform 1.423; gamma 4.482 overshoots low, gate falls back on 12/15) | 1.396 | 1.864 | F4 |
 | GTDB R207 vs ANIm truth (2,074 pairs, 80–99% ANI) | raw gamma MAE 2.87 (bias +2.60), gated 2.82; **ridge-calibrated 0.906 (bias −0.04)** — parity with skani | 0.906 | 1.056 (363-pair subset) | F7 |
 | Enterobacteriaceae vs skani (8 pairs) | gamma MAE **0.094** | (reference) | 0.207 | V8 §3.6 |
 | Real draft E. coli vs K-12 (8 assemblies) | gamma MAE 0.334 | (reference) | 0.369 | V8 §3.8 |
-| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980); `ok`-only 0.293 under the old flag, 0.514 under the recalibrated one (§6) | 0.169 | (reference) | §3.7 here |
+| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980), calibrated v3 **0.424** (r 0.995); `ok`-only 0.293 under the old flag, 0.514 under the recalibrated one (§6) | 0.169 | (reference) | §3.7 here |
 | Wall time, n = 22 (484 pairs) | 2.79 s (sketch reuse) / 3.73 s (FASTA) | **0.15 s** (see caveat) | 17.7 s | F6 |
 | Peak RSS, n = 22 | **58 MB** (sketch reuse) / 310 MB | 185 MB | 912 MB | F6 |
 | Sketch store, n = 22 | **4.0 MB** | 21.6 MB (~5× larger) | n/a | F6 |
@@ -360,7 +360,8 @@ fixes the gamma overshoot in exactly the band where gamma fails (§3.4).
 Net recommendation: ship Set A — **shipped** as the embedded
 `--calibrate` model (pure JSON swap of `models/gtdb_r207_linear_cal.json`;
 feature order and scaling match `predict_from_result` exactly, all 62 lib
-tests pass). Two behaviors of the shipped model are worth knowing. On
+tests pass; **since superseded by v3, below**). Two behaviors of the shipped
+calibration (true of v2 and v3 alike) are worth knowing. On
 exact-truth uniform-rate simulations it slightly *under*estimates (e.g.
 94.66 against truth 95.000): the model learned the real-data association
 "high retention → overestimation", which is absent in uniform sims, so
@@ -374,9 +375,25 @@ vs 1.97 for INCONSISTENT (n = 1,137) (§3.6). Since then the flag has been
 recalibrated and the estimator gated (§5 item 1, §6): the raw estimator
 underneath the calibration improves to MAE 2.819 (`ani_gated`, vs 2.881
 gamma; per-pair oracle bound 2.788) on this matrix and to 0.959 from 4.482
-on the mid-ANI set. Note that `--calibrate` still consumes the ungated
-`ani`/`ani_uniform` columns; retraining the ridge model against `ani_gated`
-is a possible small follow-up.
+on the mid-ANI set.
+
+**Calibration v3 (gated estimator) — the shipped model.** The ridge was
+retrained against `ani_gated` (`results/anim_truth_2074_gated.tsv`;
+`scripts/calibration_v3.py`; CALIBRATION_V2.md §6) and shipped at Syn2bANI
+`15da386` — a one-line `predict_from_result` change (feature slot 1
+`ani_het` → `ani_gated`) plus the JSON swap; 73 lib tests pass. On GTDB
+band-holdout CV v3 is a **wash** with v2 (0.938 vs 0.941 at matched folds)
+— expected, since the gating oracle bound on GTDB is only ~0.09 MAE and the
+ridge already smooths the overshoot in-distribution. The gain lands
+externally, where v2 was weakest: oral/gut same-species MAE **0.424** (v2
+0.460, raw 0.552; bias +0.151, r 0.995) and mid-ANI vs ANIm MAE **0.739,
+bias −0.044** (v2 1.343) — the calibration now also neutralizes the
+gamma-overshoot regime. Two honesty notes: (1) RidgeCV's inner unshuffled
+KFold makes CV estimates row-order-dependent (v2 Set A spans 0.933–0.988
+across shuffles; the 0.988 above is the same effect), so only matched-fold
+comparisons are meaningful; (2) the mid-ANI set is **not gate-independent**
+— the gate threshold was designed for that regime — so it validates the
+calibration fairly but not the gate itself.
 
 Four statements carry the weight of this section:
 
@@ -671,22 +688,23 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   0.093% to 200 contigs, real Sakai drifts +0.65 at N50 5 kb, worse than
   k-mer tools below ~20 kb N50 (§2.4). Candidate fix: `min_chain_anchors`
   adaptive to contig length.
-- **Calibration demonstrated externally and shipped.**
+- **Calibration demonstrated externally and shipped (v3, gated).**
   The raw GTDB overestimation (bias +2.60 vs ANIm) is removed by a
-  band-holdout ridge calibration on internal features (§3.5). The v2 models
-  are trained on current-binary features and both external checks are done:
-  oral/gut same-species vs FastANI (current-binary re-run) — **Set A
-  MAE 0.460, r 0.995; Set B 0.636, r 0.927** — and mid-ANI 15 pairs vs
-  ANIm (Set B 1.229, Set A 1.343). Set B's in-distribution CV edge (0.963
-  vs 0.988) reverses out-of-distribution, so **Set A**
-  (`linear_cal_v2_setA.json`) is what shipped: no Rust changes were needed
-  — the existing 9-feature `predict_from_result` matches it exactly, and
-  the embedded `models/gtdb_r207_linear_cal.json` was replaced by the v2
-  JSON (Syn2bANI main, post-`69ce9f4`; 62 lib tests pass; spec in
-  `results/panel_by_band/CALIBRATION_V2.md` §5). The 95–99% band stays
-  underpowered (n = 72, MAE 1.39), and on exact-truth uniform sims the
-  calibrated value underestimates slightly — the raw estimate remains the
-  reference there. A mechanistic fix (spatial rate model,
+  band-holdout ridge calibration on internal features (§3.5). The shipped
+  model is **v3** — the 9-feature ridge with the primary feature switched to
+  `ani_gated` — embedded at Syn2bANI `15da386` (one-line
+  `predict_from_result` change + JSON swap of
+  `models/gtdb_r207_linear_cal.json`; 73 lib tests pass; spec in
+  `results/panel_by_band/CALIBRATION_V2.md` §6). Evidence: GTDB CV a wash
+  vs v2 (0.938 vs 0.941, matched folds — the gate's GTDB oracle bound is
+  ~0.09); external — oral/gut same-species vs FastANI **MAE 0.424**
+  (r 0.995) and mid-ANI 15 pairs vs ANIm **MAE 0.739, bias −0.044** (v2 was
+  0.460 and 1.343 respectively). Caveats: the CV estimates are
+  row-order-sensitive (unshuffled inner KFold; v2 spans 0.933–0.988 across
+  shuffles), and the mid-ANI set is not gate-independent. The 95–99% band
+  stays underpowered (n = 72, MAE ~1.4), and on exact-truth uniform sims
+  the calibrated value underestimates slightly — the raw estimate remains
+  the reference there. A mechanistic fix (spatial rate model,
   roadmap item 3 in §5) remains future work — the tilted-Gamma correction
   made things worse and is not applied.
 - **Small-scale efficiency benchmark.** n ≤ 22, all-vs-all; skani's n = 22
@@ -732,6 +750,10 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   `results/panel_by_band/calibration_v2_{cv,external,midani_pairs}.tsv`,
   `results/panel_by_band/linear_cal_v2{,_setA}.json`,
   write-up + Rust spec `results/panel_by_band/CALIBRATION_V2.md`.
+- Calibration v3 (shipped @ `15da386`): `scripts/calibration_v3.py`,
+  `results/panel_by_band/linear_cal_v3.json`,
+  `results/panel_by_band/calibration_v3_{cv,external}.tsv`,
+  `results/anim_truth_2074_gated.tsv`; spec in CALIBRATION_V2.md §6.
 - Estimator gating + flag recalibration (§5 item 1, §6):
   `results/gating_flag/` — `RULES.md` (chosen rules, thresholds, and the
   three-dataset evidence tables), prototype scripts (`prep_data.py`,

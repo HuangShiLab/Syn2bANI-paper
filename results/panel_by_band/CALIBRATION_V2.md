@@ -124,6 +124,10 @@ numbers either way.
 
 ## 4. Recommendation
 
+*(Superseded 2026-08-15 by §6: with the gated estimator @ 98177dc, ship
+**v3a** — `linear_cal_v3.json` — instead; it matches v2 Set A on GTDB CV,
+beats it on both external sets, and needs only a one-slot Rust change.)*
+
 **Ship Set A (`linear_cal_v2_setA.json`, 9 features).** The full evidence
 (updated 2026-08-14 with the oral/gut Set-B re-run):
 
@@ -219,3 +223,83 @@ After either swap, sanity-check with:
 column against applying the JSON in Python (already verified equivalent:
 the Rust `predict()` is the same impute→standardize→dot-product this
 script's `model_predict` performs).
+
+---
+
+## 6. v3: recalibration against the gated estimator (2026-08-15)
+
+Estimator change: Syn2bANI @ `98177dc` adds `ani_gated` (gamma unless
+`|ani_from_loss − ani_from_hist| > 5` points → uniform fallback) and a
+`gate` column. The gate rule was verified in Python against the shipped
+column: 2,074/2,074 pairs match (`results/anim_truth_2074_gated.tsv`).
+Script: `scripts/calibration_v3.py` (reuses the v2 protocol helpers).
+Training set identical to v2 (same 2,053 finite pairs; feature columns
+verified byte-identical to the v8current matrix — only `ani_gated`/`gate`
+are new).
+
+### Band-holdout CV (MAE vs ANIm)
+
+| experiment | 80–85 | 85–90 | 90–95 | 95–99 | all | bias | r |
+|---|---|---|---|---|---|---|---|
+| raw gated | 3.369 | 3.490 | 1.818 | 1.159 | 2.819 | +2.680 | 0.745 |
+| v2 Set A, re-run on this matrix | 0.954 | 0.871 | 0.973 | 1.344 | 0.941 | −0.001 | 0.910 |
+| **v3a (9 feat, ani→ani_gated)** | 0.971 | 0.869 | **0.956** | 1.360 | **0.938** | +0.014 | 0.911 |
+| v3b (v3a + gate_fallback 0/1) | 0.959 | 0.867 | 0.956 | 1.364 | 0.935 | +0.011 | 0.911 |
+
+(`results/panel_by_band/calibration_v3_cv.tsv`.) v3b's 0.3% gain does not
+earn the extra parameter (threshold: 0.5%) → **v3a is the final v3 model**
+(`results/panel_by_band/linear_cal_v3.json`, 9 features, alpha = 10,
+in-sample MAE 0.776).
+
+**CV methodology caveat (honest):** RidgeCV's inner cv=5 uses an unshuffled
+KFold, so the CV estimate depends on row order. The v2 headline 0.988
+reproduces exactly only on the old matrix's row order; on the gated
+matrix's row order the identical features give 0.941, and across 3 random
+shuffles v2 Set A spans 0.933–0.988 while v3a spans 0.932–0.937. At matched
+folds v3a vs v2 differs by ≤ 0.004 — **on GTDB CV the two models are a
+wash**, as expected (the per-pair oracle bound for gating on GTDB is only
+~0.09 MAE, and the ridge already smooths the gamma overshoot via the other
+features). Future refits should use a fixed or shuffled fold assignment.
+
+### External validation (v3a)
+
+| dataset | method | n | MAE | bias | r |
+|---|---|---|---|---|---|
+| oral/gut same-species vs FastANI | raw gated | 100 | 0.552 | +0.421 | 0.980 |
+| oral/gut same-species vs FastANI | **calibrated v3** | 100 | **0.424** | +0.151 | 0.995 |
+| mid-ANI 15 vs ANIm | raw gated | 15 | 0.959 | +0.890 | 0.873 |
+| mid-ANI 15 vs ANIm | **calibrated v3** | 15 | **0.739** | **−0.044** | 0.567 |
+
+(`results/panel_by_band/calibration_v3_external.tsv`.) Oral/gut: the
+current matrix there predates the gate, so `ani_gated` was recomputed in
+Python from `ani_from_loss/hist` via the verified rule — legitimate, and 0
+of the 100 pairs fall back anyway (the gate never fires at same-species
+ANI); the small v3 gain (0.424 vs 0.460) comes from retraining on the
+current matrix. Mid-ANI: `results/gating_flag/midani_15_gated.tsv` already
+has gated columns; 12/15 pairs fall back to uniform. The gate alone fixes
+most of the gamma overshoot (raw 4.482 → 0.959) and v3 calibration removes
+nearly all remaining bias (−0.04). Caveat: the mid-ANI set is the regime
+the gate threshold was designed for (see `results/gating_flag/RULES.md`),
+so it is not an independent validation of the *gate*; it is a fair
+v2-vs-v3 *calibration* comparison on identical pairs.
+
+### Ship recommendation: **ship v3a, replacing v2 Set A**
+
+| evidence | v2 Set A | v3a |
+|---|---|---|
+| GTDB band-holdout CV | 0.941 (same folds) | 0.938 — wash |
+| oral/gut 100 vs FastANI | 0.460 / +0.152 / 0.995 | **0.424 / +0.151 / 0.995** |
+| mid-ANI 15 vs ANIm | 1.343 / −0.887 | **0.739 / −0.044** |
+
+v3 is never worse and is dramatically better exactly where v2 was weakest
+(the gamma-overshoot band). **Rust spec for v3** (supersedes §5 for the
+shipped model): in `src/core/calibration.rs::predict_from_result`, feature
+slot 1 changes from `res.ani_het * 100.0` to **`res.ani_gated * 100.0`**;
+slots 2–9 are unchanged and already match `linear_cal_v3.json`
+(`feature_names`: `ani_gated, ani_uniform, af_query, af_reference, std_err,
+retention, n_anchors, n_chains, n_tags_in_chains`). Replace
+`models/gtdb_r207_linear_cal.json` with `linear_cal_v3.json`. The
+`embedded_model_loads` test stays at 9 features; the dummy-result tests
+already set `ani_gated` (98177dc added the field). The early-NaN guard is
+unchanged and consistent (`ani_gated` is NaN exactly when `ani` is or
+`below_detection`). Estimated diff: one line plus the JSON swap.
