@@ -1,0 +1,5 @@
+tool	phase	n	rep	wall_s	max_rss_kb	exit_status	timestamp_utc	out_rows
+syn2bani	search	100x5000	1	558.33	1557100	0	2026-08-14T17:58:34Z	150
+skani	search	100x5000	1	3.14	1146452	0	2026-08-14T17:58:37Z	12
+syn2bani	search	100x5000	2	550.93	1565556	0	2026-08-14T18:07:48Z	150
+skani	search	100x5000	2	3.16	1148652	0	2026-08-14T18:07:51Z	12

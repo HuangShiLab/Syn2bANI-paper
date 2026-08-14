@@ -1,0 +1,113 @@
+== syn2bani version ==
+syn2bani 0.1.0
+== skani version ==
+skani 0.3.2
+== syn2bani ani --help ==
+Chain-restricted ANI by maximum likelihood (no calibration model)
+
+Usage: syn2bani ani [OPTIONS] [QUERY]...
+
+Arguments:
+  [QUERY]...  Positional form: every path but the last is a query, the last is the reference. Two greedy lists cannot be split any other way, so use --ql/--rl when you need more than one reference
+
+Options:
+      --ql <FILE>
+          File listing query paths, one per line
+      --rl <FILE>
+          File listing reference paths, one per line
+  -e, --enzymes <ENZYMES>
+          Comma-separated enzyme panel (tags must be <= 32 bp) [default: BcgI,AlfI,AloI,FalI]
+      --mismatch-tolerance <MISMATCH_TOLERANCE>
+          Mismatch budget per tag; 0 = exact match only [default: 2]
+      --min-chain-anchors <MIN_CHAIN_ANCHORS>
+          Minimum anchors for a trusted chain [default: 4]
+      --max-gap <MAX_GAP>
+          Max bp between chained anchors [default: 50000]
+  -t, --threads <THREADS>
+          Number of threads (0 = auto) [default: 0]
+  -p, --parallel
+          Enable parallel processing
+      --verbose
+          Also report the two partial estimators and chain diagnostics
+      --strata-out <FILE>
+          Dump per-enzyme sufficient statistics for `panel` re-scoring
+      --calibrate
+          Apply embedded linear calibration model; adds an ani_cal column
+      --calibrate-model <FILE>
+          Path to a custom calibration model JSON (requires --calibrate)
+  -o, --output <OUTPUT>
+          
+  -h, --help
+          Print help
+== syn2bani dist --help ==
+Usage: syn2bani dist [OPTIONS] <QUERY>... <REFERENCE>...
+
+Arguments:
+  <QUERY>...      
+  <REFERENCE>...  
+
+Options:
+  -e, --enzyme <ENZYME>    [default: AloI,BslFI]
+  -t, --threads <THREADS>  Number of threads (0 = auto) [default: 0]
+  -p, --parallel           Enable parallel processing
+      --multi-enzyme       
+      --enzymes <ENZYMES>  Comma-separated enzyme list (overrides --enzyme and --multi-enzyme)
+      --structural         
+      --min-af <MIN_AF>    [default: 0.1]
+      --raw-features       Output raw GBRT features for model training
+      --mash-ani           Report GBRT-debiased ANI instead of the default mash_ani
+  -o, --output <OUTPUT>    
+  -h, --help               Print help
+== syn2bani sketch --help ==
+Usage: syn2bani sketch [OPTIONS] --output <OUTPUT> <GENOMES>...
+
+Arguments:
+  <GENOMES>...  
+
+Options:
+  -o, --output <OUTPUT>    
+  -e, --enzyme <ENZYME>    [default: BcgI]
+      --enzymes <ENZYMES>  Comma-separated panel; use the same list as `ani`
+  -t, --threads <THREADS>  Number of threads (0 = auto) [default: 0]
+  -p, --parallel           Enable parallel processing
+      --multi-enzyme       
+  -h, --help               Print help
+== syn2bani search --help ==
+Usage: syn2bani search [OPTIONS] <QUERY>... <DATABASE>
+
+Arguments:
+  <QUERY>...  
+  <DATABASE>  
+
+Options:
+  -o, --output <OUTPUT>    
+  -t, --threads <THREADS>  Number of threads (0 = auto) [default: 0]
+  -p, --parallel           Enable parallel processing
+  -m, --min-ani <MIN_ANI>  [default: 0.8]
+  -h, --help               Print help
+== syn2bani triangle --help ==
+Usage: syn2bani triangle [OPTIONS] <GENOMES>...
+
+Arguments:
+  <GENOMES>...  
+
+Options:
+  -o, --output <OUTPUT>    
+      --edge-list          
+  -t, --threads <THREADS>  Number of threads (0 = auto) [default: 0]
+  -p, --parallel           Enable parallel processing
+  -h, --help               Print help
+== syn2bani db --help ==
+Usage: syn2bani db <COMMAND>
+
+Commands:
+  build   
+  add     
+  remove  
+  list    
+  search  
+  merge   
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help

@@ -1,0 +1,14 @@
+host=GPA-2-4 job=3907622 start=2026-08-14T17:33:34Z
+CPU(s):              128
+Model name:          AMD EPYC 7742 64-Core Processor
+[17:33:35] sketch bench n=2000 reps=2 threads=32
+[17:33:56] sketch bench n=2000 done
+[17:33:56] sketch bench n=5000 reps=1 threads=32
+[17:34:20] sketch bench n=5000 done
+[17:34:20] triangle bench n=2000 reps=1 threads=32
+[17:49:15] triangle bench n=2000 done
+[17:49:16] search bench: 100 queries vs n=5000 DB, reps=2 threads=32
+[18:07:51] search bench done
+[18:07:52] accuracy cross-check: 500 pairs
+[18:08:01] accuracy cross-check done: 500 rows
+ALL DONE 2026-08-14T18:08:01Z

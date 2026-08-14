@@ -1,0 +1,46 @@
+  65703 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/master_perm.txt
+    100 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/n100.txt
+   2000 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/n2000.txt
+   5000 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/n5000.txt
+    500 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/n500.txt
+    100 /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/lists/queries100.txt
+  73403 total
+--- smoke: sketch 4-enzyme panel
+wrote 3 sketches to /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/s2ba4 (4 enzymes)
+GCA_002368955.1.s2ba
+GCA_002409455.1.s2ba
+GCF_014217625.1.s2ba
+--- smoke: sketch default (BcgI)
+wrote 3 sketches to /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/s2ba_bcgi (1 enzyme)
+--- smoke: dist 4-enzyme (2 positional fastas)
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+--- smoke: dist default enzyme AloI,BslFI
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+--- smoke: dist --mash-ani (GBRT v7 output)
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+--- smoke: dist positional split check (3 fastas: which is ref?)
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+--- smoke: triangle edge list
+query	reference	ani	shared_tags
+GCA_002368955.1	GCA_002409455.1	0.0000	0
+GCA_002368955.1	GCF_014217625.1	0.0000	2
+GCA_002409455.1	GCF_014217625.1	0.0000	0
+--- smoke: search (fasta query vs 4-enzyme db)
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCA_002368955.1.fna	/lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/s2ba4/GCA_002368955.1.s2ba	0.9017	1.0000	0.4265	GCA_002368955.1	GCA_002368955.1	1785	0
+--- smoke: search vs BcgI db
+query_file	ref_file	ani	af_q	af_r	query_name	ref_name	shared_tags	sv_count
+/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCA_002368955.1.fna	/lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/s2ba_bcgi/GCA_002368955.1.s2ba	0.9063	1.0000	1.0000	GCA_002368955.1	GCA_002368955.1	1785	0
+--- smoke: ani (validated path)
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	ani_gated	gate
+DFDY01000113.1	DHNI01000101.1	NaN	NaN	0.0000	0.0000	NaN	0	0.0000	0	NaN	none
+--- smoke: skani sketch
+[00:00:00.000] (1518fc9da800) INFO   skani sketch -l /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/g3.txt -o /lustre1/g/aos_shihuang/Syn2bANI-paper/results/db_scale/out/smoke/skani_db -t 4
+[00:00:00.000] (1518fc9da800) INFO   Sketching files...
+[00:00:00.028] (1518fb256700) INFO   Consolidated sketch database written with 3 sketches
+[00:00:00.029] (1518fc9da800) INFO   Successfully wrote 3 sketches to consolidated database
+[00:00:00.029] (1518fc9da800) INFO   Sketching time: 0.029394608
+index.db
+markers.bin
+sketches.db
+SMOKE DONE
