@@ -19,11 +19,11 @@ FastANI 1.33/1.34, ANIm (dnadiff 1-to-1) as alignment truth.
 | Benchmark | syn2bani | skani | FastANI | Source |
 |---|---|---|---|---|
 | Sim ladder, exact truth (12 pairs, 85–99.9% + indels) | **MAE 0.073** (gamma ≡ uniform) | 0.377 (bias −0.377) | 0.742 (bias −0.742) | F1 |
-| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | uniform MAE **1.423**; gamma 4.482 (all 15 flagged INCONSISTENT) | 1.396 | 1.864 | F4 |
-| GTDB R207 vs ANIm truth (2,074 pairs, 80–99% ANI) | raw gamma MAE 2.87 (bias +2.60); **ridge-calibrated 0.906 (bias −0.04)** — parity with skani | 0.906 | 1.056 (363-pair subset) | F7 |
+| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | gated MAE **0.959** (uniform 1.423; gamma 4.482 overshoots low, gate falls back on 12/15) | 1.396 | 1.864 | F4 |
+| GTDB R207 vs ANIm truth (2,074 pairs, 80–99% ANI) | raw gamma MAE 2.87 (bias +2.60), gated 2.82; **ridge-calibrated 0.906 (bias −0.04)** — parity with skani | 0.906 | 1.056 (363-pair subset) | F7 |
 | Enterobacteriaceae vs skani (8 pairs) | gamma MAE **0.094** | (reference) | 0.207 | V8 §3.6 |
 | Real draft E. coli vs K-12 (8 assemblies) | gamma MAE 0.334 | (reference) | 0.369 | V8 §3.8 |
-| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980); `ok`-only 0.293 | 0.169 | (reference) | §3.7 here |
+| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980); `ok`-only 0.293 under the old flag, 0.514 under the recalibrated one (§6) | 0.169 | (reference) | §3.7 here |
 | Wall time, n = 22 (484 pairs) | 2.79 s (sketch reuse) / 3.73 s (FASTA) | **0.15 s** (see caveat) | 17.7 s | F6 |
 | Peak RSS, n = 22 | **58 MB** (sketch reuse) / 310 MB | 185 MB | 912 MB | F6 |
 | Sketch store, n = 22 | **4.0 MB** | 21.6 MB (~5× larger) | n/a | F6 |
@@ -36,10 +36,12 @@ predictable from Syn2bANI-internal signal-strength features, and a
 band-holdout ridge calibration removes it (MAE 0.906, bias −0.04), reaching
 exact parity with skani on 2,074 independent-truth pairs (§3.5). A
 mechanistic fix for the underlying rate-heterogeneity artifact (spatial rate
-model) is future work (§3.6, §5). The per-enzyme consistency flag catches
-most of the bad pairs (68% of the FastANI-reportable GTDB pairs are flagged),
-but on GTDB the flag ranking is inverted relative to oral/gut (§3.6), so it
-is a heuristic gate, not a guarantee. skani's 0.15 s at n = 22 is **not
+model) is future work (§3.6, §5). The old per-enzyme consistency flag's
+ranking inverted on GTDB relative to oral/gut (§3.6); the recalibrated flag
+(gate fallback or >0.5 breakpoints per anchor) no longer inverts on any
+validation set, at the cost of some near-clonal sensitivity — flagged pairs
+are reliably worse, but not all bad pairs are flagged (§6). skani's 0.15 s
+at n = 22 is **not
 like-for-like**: it reported only 302/484 pairs (min-AF filter) and the time
 excludes its sketch step (§4).
 
@@ -299,11 +301,13 @@ shape and mean are coupled at the identifiability boundary and gamma
 overshoots low by 4–10 points (V8 §3.13); the LRT gate (2·ΔlnL > 3.841) is
 too permissive to stop it.
 
-The saving grace is the diagnostic: **all 15/15 pairs are flagged
+The saving grace was the diagnostic: **all 15/15 pairs were flagged
 INCONSISTENT in both runs** (hist−loss gap 6.5–10.3, far over threshold), so
-a user filtering on the flag never sees these numbers. Open item: the flag
-thresholds were calibrated on the old panel's feature distribution and need
-recalibration per divergence band for the 4-enzyme panel (§6).
+a user filtering on the flag never saw these numbers. This is now fixed at
+the estimator level (§5 item 1): the effect-size gate falls back to the
+homogeneous fit on 12/15 pairs — gated MAE **0.959** vs gamma 4.482 — and
+the recalibrated flag marks exactly those 12; the 3 pairs it keeps on gamma
+are the ones where gamma was already right (errors 0.15–0.52).
 
 ### 3.5 Independent-truth benchmark: 2,074 GTDB-R207 pairs vs ANIm (F7)
 
@@ -366,7 +370,13 @@ reference on clean simulated data. And it returns NaN by design on
 One training-choice caution: pairs were
 **not** filtered by the consistency flag, because the flag is inverted on
 GTDB — on the current matrix vs ANIm, `ok` pairs score MAE 4.11 (n = 832)
-vs 1.97 for INCONSISTENT (n = 1,137) (§3.6).
+vs 1.97 for INCONSISTENT (n = 1,137) (§3.6). Since then the flag has been
+recalibrated and the estimator gated (§5 item 1, §6): the raw estimator
+underneath the calibration improves to MAE 2.819 (`ani_gated`, vs 2.881
+gamma; per-pair oracle bound 2.788) on this matrix and to 0.959 from 4.482
+on the mid-ANI set. Note that `--calibrate` still consumes the ungated
+`ani`/`ani_uniform` columns; retraining the ridge model against `ani_gated`
+is a possible small follow-up.
 
 Four statements carry the weight of this section:
 
@@ -477,7 +487,10 @@ the diagnostic as designed.
   pairs (r 0.980, bias +0.421, RMSE 1.056; skani 0.169 on the same pairs);
   34 of 122 reported pairs INCONSISTENT. Restricting to `ok` pairs (88
   pairs, `data/ok_only.tsv`): gamma MAE **0.293**, bias +0.240, r 0.903 —
-  the flag works as intended on this dataset (contrast §3.6).
+  the flag works as intended on this dataset (contrast §3.6). These two
+  sentences describe the pre-recalibration flag; under the recalibrated flag
+  (§6) the oral/gut kept set scores MAE 0.514 (99/100 kept) — less
+  sensitive here, but the ranking no longer inverts on GTDB.
 - **SynTracker Fig-3 replication** (Enav et al. 2024; 132 isolates, 4
   species; STATUS_AND_SCHEDULE.md §6, `scripts/syntracker_validation/`):
   Spearman ρ of ANI vs `synteny_score` reproduces the expected evolutionary
@@ -582,16 +595,30 @@ were caught by the INCONSISTENT flag — but that is a heuristic alarm, not
 model selection.
 
 **Conclusion.** The uniform/gamma choice must be a **function of divergence
-and tag evidence, not a global switch**. Today the flag gates reporting
-after the fact; it does not choose the model.
+and tag evidence, not a global switch** — and as of the gating work below it
+now is: `ani_gated` chooses per pair, via the effect-size fallback of
+roadmap item 1.
 
 **Roadmap, ordered by cost:**
 
-1. **Formal nested-model gating.** Uniform is the α→∞ boundary of gamma, so
-   standard machinery applies: LRT with boundary correction or BIC, plus
-   automatic fallback to uniform when α hits the clamp boundary or when
-   |gamma − uniform| exceeds the joint standard error. Pure likelihood
-   plumbing; no new data needed.
+1. ~~**Formal nested-model gating.**~~ **IMPLEMENTED — and the formal
+   machinery lost.** Prototyping on the 2,053-pair GTDB-ANIm matrix (with
+   exact per-pair likelihoods re-fitted from dumped per-enzyme strata) showed
+   the significance-based gates are all no better than the existing LRT
+   support gate on GTDB: BIC (`lrt > ln n_tags`) scores MAE 2.913 vs 2.881
+   for the plain gamma column, the chi-bar-square boundary threshold is
+   identical to the current gate (2.881), and `|gamma − uniform| > k·SE`
+   rules collapse toward always-uniform (3.46+). What works is an
+   **effect-size gate**: fall back to the homogeneous fit when
+   `|ani_from_loss − ani_from_hist| > 5` ANI points. Chosen on GTDB-ANIm
+   (flat optimum over 4.5–6 points; MAE 2.819 vs the 2.788 per-pair oracle
+   bound), it fires on 12/15 mid-ANI pairs (MAE 4.482 → **0.959** — the
+   §3.4 overshoot is fixed at the estimator level), 0/100 oral/gut
+   same-species pairs, 0/12 uniform-rate sims, and 0/9 mosaic sims, where
+   the gamma advantage (1.711 vs 2.975) is fully preserved. Shipped as new
+   output columns `ani_gated` (the recommended raw estimate) and `gate`
+   (`gamma`/`uniform`/`uniform_fallback`/`none`); `ani` and `ani_uniform`
+   are unchanged. Full evidence: `results/gating_flag/RULES.md`.
 2. **Discrete gamma (4 categories).** More stable than continuous α when
    tag counts are sparse; cheap to fit by the same MLE path.
 3. **Exploit chain spatial information.** Per-block divergence estimates
@@ -599,10 +626,14 @@ after the fact; it does not choose the model.
    mean–variance relationship across blocks discriminates overdispersion
    families; two-component conserved/hypervariable mixtures can be compared
    by BIC or parametric bootstrap; per-block estimates can be combined by
-   empirical Bayes. This is where the real evidence is — with ~thousands of
-   tags per pair, the power to discriminate gamma from a 2-component mixture
-   on counts alone is limited; spatial resolution across blocks is what buys
-   it.
+   empirical Bayes. The gating work sharpened the motivation: there is an
+   irreducible conflict cell — GTDB pairs with retention 0.3–0.4 and gap
+   5–6 are better under gamma (by 1.26 MAE, n=16) while mid-ANI pairs in
+   the *same* (retention, gap) cell are better under uniform (by ~4.5,
+   n=12), and no current per-pair statistic (retention, α, n_anchors, AF)
+   separates them. With ~thousands of tags per pair, the power to
+   discriminate gamma from a 2-component mixture on counts alone is
+   limited; spatial resolution across blocks is what buys it.
 4. **Model averaging** (BIC weights) to avoid discontinuous switching
    between models at the gate threshold.
 
@@ -615,14 +646,26 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
 
 ## 6. Limitations and next steps
 
-- **Gamma fallback gating is unimplemented.** In the mid-ANI/low-retention
-  regime the LRT gate admits gamma fits that overshoot by 4–10 points
-  (§3.4); the fix is roadmap item 1 in §5.
-- **INCONSISTENT flag needs recalibration per divergence band** for the
-  4-enzyme panel — it catches all 15 bad mid-ANI pairs (good) but its
-  ranking inverts on GTDB, where `ok` pairs are worse than INCONSISTENT
-  ones (4.862 vs 2.476; §3.6). Structural cause documented; a statistic
-  that does not share the chain-restricted denominator is the open fix.
+- ~~**Gamma fallback gating is unimplemented.**~~ **DONE** — see §5 item 1:
+  the effect-size gate (`|ani_from_loss − ani_from_hist| > 5` points ⇒
+  homogeneous fit) ships as the `ani_gated` column and fixes the mid-ANI
+  overshoot (4.482 → 0.959) without touching the regimes where gamma wins.
+- ~~**INCONSISTENT flag needs recalibration per divergence band**~~
+  **DONE.** The flag is recalibrated, not per band but by construction:
+  `INCONSISTENT` now means the gate fell back (model disagreement) **or**
+  the chains carry more than 0.5 rearrangement breakpoints per anchor — a
+  structural statistic that does not share the chain-restricted likelihood
+  denominator, the fix this bullet asked for. `BELOW_DETECTION`
+  (retention < 0.20) is unchanged and takes precedence. The new ranking
+  does not invert on any validation set (kept vs flagged MAE: GTDB-ANIm
+  2.415 vs 4.153; oral/gut 0.514 vs 4.269; mid-ANI 0.343 vs 1.113), where
+  the old flag ranked GTDB backwards (§3.6). The honest residual: the old
+  flag's near-clonal sensitivity (oral/gut kept-set MAE 0.293) is not fully
+  recovered (new kept 0.514) — that sensitivity came from the
+  significance-scaled gap, which inverts on GTDB at every threshold — and
+  the mosaic-sim bias is systematic rather than per-pair detectable, so
+  those sims now read `ok`. Flagged pairs are now reliably worse; not all
+  bad pairs are flagged.
 - **Fragmentation realism gap.** Simulated cuts (random boundaries, no
   sequence loss) cannot reproduce real assembly behavior: sims say MAE
   0.093% to 200 contigs, real Sakai drifts +0.65 at N50 5 kb, worse than
@@ -689,3 +732,10 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   `results/panel_by_band/calibration_v2_{cv,external,midani_pairs}.tsv`,
   `results/panel_by_band/linear_cal_v2{,_setA}.json`,
   write-up + Rust spec `results/panel_by_band/CALIBRATION_V2.md`.
+- Estimator gating + flag recalibration (§5 item 1, §6):
+  `results/gating_flag/` — `RULES.md` (chosen rules, thresholds, and the
+  three-dataset evidence tables), prototype scripts (`prep_data.py`,
+  `het_fit.py`, `task_a_*.py`, `task_b_*.py`, `task_d_eval.py`), per-pair
+  strata dumps and the exact-likelihood refit cache, before/after TSVs;
+  regenerated feature matrix with the new `ani_gated`/`gate` columns and
+  recalibrated flag `results/anim_truth_2074_gated.tsv`.
