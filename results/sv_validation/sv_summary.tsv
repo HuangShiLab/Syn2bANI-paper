@@ -1,0 +1,4 @@
+pair	syn_inversions	syn_translocations	truth_inv_clusters	syn_indels	indel_tp	indel_fp	truth_indels	truth_covered	truth_missed	truth_missed_ge5kb	syn_struct_s	dnadiff_s	speedup
+MG1655_vs_W3110	1	0	1	10	10	0	13	10	3	0	0.048	8.24	172
+MG1655_vs_Sakai	0	1	7	121	112	9	197	174	23	9	0.054	9.59	178
+CT18_vs_LT2	8	4	10	70	62	8	104	70	34	9	0.05	8.52	170

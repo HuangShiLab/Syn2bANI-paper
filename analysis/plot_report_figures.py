@@ -755,6 +755,100 @@ def fig7_anim_by_band():
 
 # --------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------
+# F8 — SV detection on real genomes (dnadiff truth)
+# --------------------------------------------------------------------------
+SV_DIR = PAPER / "results" / "sv_validation"
+
+F8_PAIR_LABEL = {
+    "MG1655_vs_W3110": "K-12 MG1655 vs W3110",
+    "MG1655_vs_Sakai": "K-12 vs O157:H7 Sakai",
+    "CT18_vs_LT2": "Typhi CT18 vs Typhimurium LT2",
+}
+F8_PAIR_COLOR = {
+    "MG1655_vs_W3110": C_TRUTH,
+    "MG1655_vs_Sakai": C_UNIFORM,
+    "CT18_vs_LT2": C_GAMMA,
+}
+
+
+def fig8_sv_detection():
+    summ = pd.read_csv(SV_DIR / "sv_summary.tsv", sep="\t")
+    indel = pd.read_csv(SV_DIR / "sv_indel_compare.tsv", sep="\t")
+    inv = pd.read_csv(SV_DIR / "sv_inversion_compare.tsv", sep="\t")
+
+    fig, axes = plt.subplots(1, 3, figsize=(7, 2.9))
+
+    # (a) chain dotplot, Typhi CT18 (query) vs Typhimurium LT2 (reference)
+    ax = axes[0]
+    paf = pd.read_csv(SV_DIR / "CT18_vs_LT2" / "chains.paf", sep="\t", header=None,
+                      names=["q", "qlen", "qs", "qe", "strand", "r", "rlen",
+                             "rs", "re", "nmatch", "alnlen", "mapq"])
+    for _, c in paf.iterrows():
+        color = C_UNIFORM if c.strand == "+" else C_GAMMA
+        # reverse chains run anti-diagonal: high ref at low query and vice versa
+        r_lo, r_hi = (c.rs, c.re) if c.strand == "+" else (c.re, c.rs)
+        ax.plot([c.qs / 1e6, c.qe / 1e6], [r_lo / 1e6, r_hi / 1e6],
+                color=color, lw=1.6, solid_capstyle="butt")
+    ax.plot([], [], color=C_UNIFORM, lw=1.6, label="forward chain")
+    ax.plot([], [], color=C_GAMMA, lw=1.6, label="reverse chain")
+    ax.set_xlabel("S. Typhi CT18 position (Mb)")
+    ax.set_ylabel("S. Typhimurium LT2 position (Mb)")
+    ax.legend(loc="upper left", fontsize=5.8)
+    panel_label(ax, "a")
+
+    # (b) detected vs dnadiff SV size, 1:1 matched indels + the W3110 inversion
+    ax = axes[1]
+    one = indel[(indel.matched == True) & (indel.n_truth_covered == 1)]  # noqa: E712
+    for pair, g in one.groupby("pair"):
+        ax.scatter(g.truth_size, g.syn_size, s=6, alpha=0.75, linewidths=0,
+                   color=F8_PAIR_COLOR[pair], label=F8_PAIR_LABEL[pair], zorder=3)
+    w = inv[inv.pair == "MG1655_vs_W3110"].iloc[0]
+    ax.scatter([w.truth_q_size], [w.syn_size], marker="*", s=60,
+               color=C_TRUTH, zorder=4, label="W3110 inversion")
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    lo, hi = 8e2, 3e6
+    identity_line(ax, lo, hi)
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.set_xlabel("dnadiff event size (bp)")
+    ax.set_ylabel("syn2bani call size (bp)")
+    ax.text(0.03, 0.97, f"1:1 matched events (n = {len(one)})\n"
+            f"median size ratio = {one.size_ratio.median():.3f}",
+            transform=ax.transAxes, va="top", fontsize=6.5)
+    ax.legend(loc="lower right", fontsize=5.2, markerscale=1.5)
+    ax.grid(True)
+    panel_label(ax, "b")
+
+    # (c) runtime: syn2bani struct vs dnadiff (end-to-end, wall clock)
+    ax = axes[2]
+    x = np.arange(len(summ))
+    wdt = 0.38
+    ax.bar(x - wdt / 2, summ.dnadiff_s, wdt, color=C_GREY, label="dnadiff (nucmer pipeline)")
+    ax.bar(x + wdt / 2, summ.syn_struct_s, wdt, color=C_UNIFORM, label="syn2bani struct")
+    for i, r in summ.iterrows():
+        ax.text(i - wdt / 2, r.dnadiff_s * 1.15, f"{r.dnadiff_s:.1f} s",
+                ha="center", fontsize=5.8)
+        ax.text(i + wdt / 2, r.syn_struct_s * 1.15, f"{r.syn_struct_s*1000:.0f} ms",
+                ha="center", fontsize=5.8)
+        ax.text(i, max(r.dnadiff_s, r.syn_struct_s) * 3.2, f"{r.speedup:.0f}×",
+                ha="center", fontsize=6.5, fontweight="bold")
+    ax.set_yscale("log")
+    ax.set_ylim(0.02, 200)
+    ax.set_xticks(x)
+    ax.set_xticklabels(["MG1655\nvs W3110", "MG1655\nvs Sakai", "CT18\nvs LT2"],
+                       fontsize=6)
+    ax.set_ylabel("wall time (s, log)")
+    ax.legend(loc="upper right", fontsize=5.8)
+    panel_label(ax, "c")
+
+    fig.tight_layout()
+    save(fig, "fig8_sv_detection")
+
+
+# --------------------------------------------------------------------------
+
 def main():
     FIGDIR.mkdir(parents=True, exist_ok=True)
     fig1()
@@ -764,6 +858,7 @@ def main():
     fig5()
     fig6()
     fig7_anim_by_band()
+    fig8_sv_detection()
     print("done.")
 
 

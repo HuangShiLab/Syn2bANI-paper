@@ -1,0 +1,62 @@
+=== summary ===
+           pair  syn_inversions  syn_translocations  truth_inv_clusters  syn_indels  indel_tp  indel_fp  truth_indels  truth_covered  truth_missed  truth_missed_ge5kb  syn_struct_s  dnadiff_s  speedup
+MG1655_vs_W3110               1                   0                   1          10        10         0            13             10             3                   0         0.048       8.24      172
+MG1655_vs_Sakai               0                   1                   7         121       112         9           197            174            23                   9         0.054       9.59      178
+    CT18_vs_LT2               8                   4                  10          70        62         8           104             70            34                   9         0.050       8.52      170
+
+=== inversions ===
+           pair  syn_q_start  syn_q_end  syn_size  matched  truth_q_start  truth_q_end  truth_q_size  overlap_bp  start_err  end_err
+MG1655_vs_W3110      3429150    4207770    778620     True        3423662      4213165        789503      778620       5488    -5395
+    CT18_vs_LT2      1235579    1538888    303309     True        1235882      1791253        555371      303006       -303  -252365
+    CT18_vs_LT2      1573204    1778831    205627     True        1235882      1791253        555371      205627     337322   -12422
+    CT18_vs_LT2      3424380    3515240     90860     True        1322927      4262466       2939539       90860    2101453  -747226
+    CT18_vs_LT2      3558222    3615836     57614     True        1322927      4262466       2939539       57614    2235295  -646630
+    CT18_vs_LT2      3628457    3743827    115370     True        1322927      4262466       2939539      115370    2305530  -518639
+    CT18_vs_LT2      3749620    4083055    333435     True        1322927      4262466       2939539      333435    2426693  -179411
+    CT18_vs_LT2      3831127    3836098      4971     True        1322927      4262466       2939539        4971    2508200  -426368
+    CT18_vs_LT2      4089118    4255098    165980     True        1322927      4262466       2939539      165980    2766191    -7368
+
+=== 1:1 matched indels (n=128) ===
+median size ratio 1.000; within [0.8, 1.25]: 121/128
+
+=== false-positive calls ===
+           pair   sv_type  syn_q_start  syn_q_end  syn_r_start  syn_r_end  syn_size  n_truth_covered  matched  truth_pos  truth_size  size_ratio truth_src  truth_size_sum missed
+MG1655_vs_Sakai  Deletion      19183.0    20931.0      17851.0    25337.0    5738.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion     379800.0   385224.0     437899.0   446227.0    2904.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion     829768.0   833154.0     952136.0   957595.0    2073.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai Insertion    1502473.0  1505696.0    2020121.0  2021596.0    1748.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion    2467544.0  2479145.0    3194277.0  3207416.0    1538.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion    2754978.0  2780404.0    3475120.0  3502715.0    2169.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion    2990684.0  2999361.0    3713449.0  3737818.0   15692.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai Insertion    3108190.0  3135340.0    3849911.0  3875821.0    1240.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+MG1655_vs_Sakai  Deletion    4426743.0  4428243.0    5280596.0  5283844.0    1748.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2  Deletion     936175.0   939191.0    1024479.0  1028657.0    1162.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2 Insertion    1319346.0  1323610.0    1786140.0  1786333.0    4071.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2 Insertion    1881348.0  1934336.0    1959848.0  1968696.0   44140.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2  Deletion    2296570.0  2298534.0    2330182.0  2341581.0    9435.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2 Insertion    2459940.0  2466567.0    2504970.0  2506629.0    4968.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2 Insertion    2584905.0  2588829.0    2621189.0  2623962.0    1151.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2  Deletion    2942867.0  2944953.0    3094030.0  3098008.0    1892.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+    CT18_vs_LT2 Insertion    4682947.0  4719178.0    4726866.0  4754036.0    9061.0              0.0    False        NaN         NaN         NaN       NaN             NaN    NaN
+
+=== missed truth events, by pair and size ===
+                           count     50%      max
+pair            sv_type                          
+CT18_vs_LT2     Deletion    11.0  2813.0  28241.0
+                Insertion   23.0  3201.0  64264.0
+MG1655_vs_Sakai Deletion     7.0  6134.0  21202.0
+                Insertion   16.0  1614.0  16047.0
+MG1655_vs_W3110 Deletion     2.0  1271.0   1339.0
+                Insertion    1.0  1206.0   1206.0
+
+large missed (>=10 kb):
+           pair   sv_type  syn_q_start  syn_q_end  syn_r_start  syn_r_end  syn_size  n_truth_covered  matched  truth_pos  truth_size  size_ratio truth_src  truth_size_sum missed
+MG1655_vs_Sakai Insertion          NaN        NaN          NaN        NaN       NaN              NaN    False  1202407.0     12066.0         NaN qdiff:BRK             NaN   True
+MG1655_vs_Sakai Insertion          NaN        NaN          NaN        NaN       NaN              NaN    False  1217420.0     11579.0         NaN qdiff:BRK             NaN   True
+MG1655_vs_Sakai  Deletion          NaN        NaN          NaN        NaN       NaN              NaN    False  1640119.0     18142.0         NaN rdiff:BRK             NaN   True
+MG1655_vs_Sakai Insertion          NaN        NaN          NaN        NaN       NaN              NaN    False  2763979.0     16047.0         NaN qdiff:BRK             NaN   True
+MG1655_vs_Sakai  Deletion          NaN        NaN          NaN        NaN       NaN              NaN    False  3864300.0     21202.0         NaN rdiff:BRK             NaN   True
+MG1655_vs_Sakai  Deletion          NaN        NaN          NaN        NaN       NaN              NaN    False  4496477.0     10236.0         NaN qdiff:GAP             NaN   True
+    CT18_vs_LT2  Deletion          NaN        NaN          NaN        NaN       NaN              NaN    False  2892090.0     28241.0         NaN rdiff:BRK             NaN   True
+    CT18_vs_LT2 Insertion          NaN        NaN          NaN        NaN       NaN              NaN    False  4441700.0     64264.0         NaN qdiff:BRK             NaN   True
+    CT18_vs_LT2 Insertion          NaN        NaN          NaN        NaN       NaN              NaN    False  4519381.0     21452.0         NaN qdiff:BRK             NaN   True

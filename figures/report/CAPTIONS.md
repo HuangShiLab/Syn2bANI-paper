@@ -172,3 +172,38 @@ overall). (c) Ridge-CV estimates vs ANIm truth for the 1,969 finite 4e pairs,
 colored by band (identity line dashed). Overall MAE 0.906, r = 0.913; the
 residual spread is largest in the 80–85% band, where shared-tag signal is
 weakest.
+
+
+---
+
+## Figure 8 — Structural-variant detection on real genomes (`fig8_sv_detection`)
+
+Three Enterobacteriaceae chromosome pairs with dnadiff (MUMMER 3.23) as
+structural truth: E. coli K-12 MG1655 vs W3110 (near-clonal control carrying
+the documented ~780 kb rrnD–rrnE inversion), K-12 MG1655 vs O157:H7 Sakai
+(collinear backbones, many prophage indels), and Salmonella Typhi CT18 vs
+Typhimurium LT2 (heavily rearranged). syn2bani `struct` calls (default
+4-enzyme panel) are compared at junction level: a call matches when a
+same-type dnadiff event (GAP/DUP/BRK ≥ 1 kb) falls inside its span; dnadiff
+fragments large accessory regions, so matching is one-to-many. Data and
+method: `results/sv_validation/` (`sv_summary.tsv`, `sv_indel_compare.tsv`,
+`sv_inversion_compare.tsv`, `SV_REAL_VALIDATION.md`).
+
+(a) Chain dotplot for Typhi CT18 vs Typhimurium LT2: each collinear tag chain
+(one PAF record, `struct --paf`) drawn as a segment, forward chains blue,
+reverse chains vermillion. The two anti-diagonal blocks (q ~1.2–1.8 Mb and
+~3.4–4.3 Mb) and the offset-diagonal translocated arm are exactly the regions
+nucmer reports as inverted/relocated; all 8 inversion and 4 translocation
+calls fall inside them.
+
+(b) Detected vs dnadiff event size for the 128 one-to-one matched indel
+calls across the three pairs (log–log, identity dashed); the star is the
+W3110 inversion (call 778,620 bp vs truth 789,503 bp, endpoints within
+5.5 kb). Median size ratio 1.000; 121/128 within ±25%. Not shown: 17 calls
+without a dnadiff counterpart (mostly small relocated/mobile blocks dnadiff
+classifies as relocations, not indels) and 60 small dnadiff events
+(median ~3 kb) not called, nearly all inside anchor-poor accessory regions.
+
+(c) End-to-end wall time per pair: syn2bani struct (48–54 ms, Mac Studio)
+vs dnadiff (8.2–9.6 s, HPC login node; nucmer + delta-filter + show-diff +
+show-snps) — 170–178× faster.

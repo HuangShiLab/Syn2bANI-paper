@@ -1,0 +1,44 @@
+Building alignments
+1: PREPARING DATA
+2,3: RUNNING mummer AND CREATING CLUSTERS
+# reading input file "out.ntref" of length 5498579
+# construct suffix tree for sequence of length 5498579
+# (maximum reference length is 2305843009213693948)
+# (maximum query length is 18446744073709551615)
+# process 54985 characters per dot
+#....................................................................................................
+# CONSTRUCTIONTIME /share1/MUMMER/3.23/opt/mummer-3.23/mummer out.ntref 2.23
+# reading input file "/home/shihuang/svval/genomes/Ecoli_K12_MG1655.fasta" of length 4641652
+# matching query-file "/home/shihuang/svval/genomes/Ecoli_K12_MG1655.fasta"
+# against subject-file "out.ntref"
+# COMPLETETIME /share1/MUMMER/3.23/opt/mummer-3.23/mummer out.ntref 6.34
+# SPACE /share1/MUMMER/3.23/opt/mummer-3.23/mummer out.ntref 9.83
+4: FINISHING DATA
+Filtering alignments
+Extracting alignment coordinates
+Analyzing SNPs
+Extracting alignment breakpoints
+Generating report file
+	Command being timed: "dnadiff -p out /home/shihuang/svval/genomes/Ecoli_O157H7_Sakai.fasta /home/shihuang/svval/genomes/Ecoli_K12_MG1655.fasta"
+	User time (seconds): 9.06
+	System time (seconds): 0.26
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.59
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 174320
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 165
+	Minor (reclaiming a frame) page faults: 99089
+	Voluntary context switches: 2131
+	Involuntary context switches: 41
+	Swaps: 0
+	File system inputs: 59312
+	File system outputs: 29232
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
