@@ -1,0 +1,5 @@
+dataset	method	n	MAE	bias	r
+oralgut_same_species_vs_fastani_gated	raw_gated	100	0.5518	0.4213	0.9804
+oralgut_same_species_vs_fastani_gated	calibrated_v4	100	0.4634	0.3744	0.9949
+midani_15_vs_anim_gated	raw_gated	15	0.9588	0.8902	0.8734
+midani_15_vs_anim_gated	calibrated_v4	15	0.7942	-0.2192	0.5467
