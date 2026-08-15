@@ -35,8 +35,11 @@ pairs by +2.6 ANI points** against ANIm truth — but this bias is fully
 predictable from Syn2bANI-internal signal-strength features, and a
 band-holdout ridge calibration removes it (MAE 0.906, bias −0.04), reaching
 exact parity with skani on 2,074 independent-truth pairs (§3.5). A
-mechanistic fix for the underlying rate-heterogeneity artifact (spatial rate
-model) is future work (§3.6, §5). The old per-enzyme consistency flag's
+mechanistic fix for the underlying rate-heterogeneity artifact (spatial
+rate model) was attempted and produced a rigorous negative result: the raw
+estimator sits at its identifiability floor at the current tag density, so
+calibration is the correction layer (§5 item 3,
+`results/spatial_model/MODELS.md`). The old per-enzyme consistency flag's
 ranking inverted on GTDB relative to oral/gut (§3.6); the recalibrated flag
 (gate fallback or >0.5 breakpoints per anchor) no longer inverts on any
 validation set, at the cost of some near-clonal sensitivity — flagged pairs
@@ -638,21 +641,40 @@ roadmap item 1.
    are unchanged. Full evidence: `results/gating_flag/RULES.md`.
 2. **Discrete gamma (4 categories).** More stable than continuous α when
    tag counts are sparse; cheap to fit by the same MLE path.
-3. **Exploit chain spatial information.** Per-block divergence estimates
-   give an *empirical* rate distribution instead of an assumed family: the
-   mean–variance relationship across blocks discriminates overdispersion
-   families; two-component conserved/hypervariable mixtures can be compared
-   by BIC or parametric bootstrap; per-block estimates can be combined by
-   empirical Bayes. The gating work sharpened the motivation: there is an
-   irreducible conflict cell — GTDB pairs with retention 0.3–0.4 and gap
-   5–6 are better under gamma (by 1.26 MAE, n=16) while mid-ANI pairs in
-   the *same* (retention, gap) cell are better under uniform (by ~4.5,
-   n=12), and no current per-pair statistic (retention, α, n_anchors, AF)
-   separates them. With ~thousands of tags per pair, the power to
-   discriminate gamma from a 2-component mixture on counts alone is
-   limited; spatial resolution across blocks is what buys it.
-4. **Model averaging** (BIC weights) to avoid discontinuous switching
-   between models at the gate threshold.
+3. ~~**Exploit chain spatial information.**~~ **DONE — NEGATIVE RESULT.**
+   A full Phase-1 prototype (Python, gated on 19 exact-truth mosaic sims
+   including new 1/5/20 kb block-size replicates, then evaluated on
+   GTDB-ANIm and both negative controls) establishes that the bias has two
+   additive terms, and only the smaller one is fixable. **(a) Distribution-
+   family term:** even with infinite in-chain data the parametric fits
+   misplace tail mass (asymptotic MAE: gamma 2.25, free two-component 2.20,
+   capped grid NPMLE 1.25); a capped NPMLE fixes this term on the mosaic
+   sims (2.64 → **1.47**, near the 1.25 floor). **(b) Coverage term:** the
+   unchained fraction's divergence is *not identifiable* from tag data at
+   this density — the out-of-chain anchor residual is ≈ 0 within
+   multi-match noise whether the unchained mass is saturated-divergent or
+   accessory, and an oracle knowing the exact chained-sample identity still
+   errs by MAE 1.36 against whole-genome truth. On GTDB the unchained mass
+   is accessory-dominated (ANIm excludes accessory too): the implied
+   unchained identity is band-determined, not pair-determined, and within
+   every band the error tracks AF at r ≈ −0.75 while truth is flat in AF —
+   exactly the association the ridge calibration already captures. No
+   candidate beats the gated baseline (2.819) while holding all simulation
+   gates: the capped NPMLE fails the uniform-sim gate ungated (0.216 > 0.1)
+   and the mid-ANI control gated (1.359 vs 0.959), and its LRT-gated form
+   passes sims but *loses* on GTDB (2.867). Per-block exports
+   (`ani --blocks-out`) were evaluated and rejected on paper: they sharpen
+   only the in-chain family term (≤ 0.6 GTDB MAE), not the coverage term
+   where the bias lives. The raw estimator is therefore at its
+   identifiability floor at 4-enzyme tag density, and calibration is the
+   correct correction layer. Full derivation, candidates, and per-dataset
+   tables: `results/spatial_model/MODELS.md`.
+4. ~~**Model averaging** (BIC weights)~~ **EVALUATED — REJECTED.** The
+   item-3 analysis included averaging (gamma/NPMLE 50/50 and LRT-gated
+   switching): the average is the best GTDB variant (2.634 vs 2.819) but
+   fails the uniform-sim gate (0.107) and interpolates the mid-ANI
+   degradation (~1.2 vs 0.959). Discontinuous switching is not the
+   bottleneck; identifiability is.
 
 **Statistical honesty:** any new model must be validated on mosaic
 simulations with known truth (`simulate_mosaic.py` runs in about a minute)
@@ -704,9 +726,16 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   shuffles), and the mid-ANI set is not gate-independent. The 95–99% band
   stays underpowered (n = 72, MAE ~1.4), and on exact-truth uniform sims
   the calibrated value underestimates slightly — the raw estimate remains
-  the reference there. A mechanistic fix (spatial rate model,
-  roadmap item 3 in §5) remains future work — the tilted-Gamma correction
-  made things worse and is not applied.
+  the reference there. A mechanistic fix (spatial rate model, roadmap item
+  3 in §5) was attempted and produced a rigorous negative result: the raw
+  estimator is at its identifiability floor at the current tag density —
+  the fixable in-chain family term is worth ≤ 0.6 GTDB MAE, and the
+  dominant coverage term is not observable in tag statistics — so
+  calibration is the right correction layer for this bias. Forward
+  pointer: revisit the capped-NPMLE in-chain fit (mosaic 2.64 → 1.47; fits
+  already computed in `results/spatial_model/gtdb_spatial.tsv`) if tag
+  density rises once the IUPAC geometry fix enables a wider enzyme panel —
+  deeper retention makes the divergent tail directly observable in-chain.
 - **Small-scale efficiency benchmark.** n ≤ 22, all-vs-all; skani's n = 22
   time covers only 302/484 reported pairs; database-scale `search` not
   measured (§4).
@@ -761,3 +790,12 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   strata dumps and the exact-likelihood refit cache, before/after TSVs;
   regenerated feature matrix with the new `ani_gated`/`gate` columns and
   recalibrated flag `results/anim_truth_2074_gated.tsv`.
+- Spatial rate model (§5 items 3–4, negative result):
+  `results/spatial_model/` — `MODELS.md` (mechanism decomposition,
+  identifiability analysis, candidate derivations, per-dataset tables,
+  verdict), prototype scripts (`explore_mosaic.py`, `asymptotic_floor.py`,
+  `model_{mosaic,spatial,discrete}.py`, `gate_{uniform,lrt}.py`,
+  `eval_{gtdb,controls}.py`, `final_summary.py`), result TSVs
+  (`summary_table.tsv`, `gtdb_spatial.tsv` — per-pair capped-NPMLE fits on
+  the 2,053 GTDB pairs, `bic_mosaic.tsv`), and the 19 mosaic-sim +
+  control-set estimator outputs/strata.
