@@ -163,15 +163,19 @@ methods in `results/panel_by_band/ANIM_MAIN_TABLE.md`.
 
 (a) MAE vs ANI band. Raw 4e gamma degrades sharply toward lower ANI
 (MAE 3.69 at 80–85% vs 1.16 at 95–99%); ridge calibration flattens this to
-0.85–1.38 across bands, reaching skani-level overall accuracy (MAE 0.906 vs
-skani 0.906) without using any external-tool feature. (b) Signed bias vs band.
-Raw 4e gamma overestimates by +2.6 points overall (up to +3.3 at 80–85%);
-ridge-CV bias stays within ±1.2 except the small 95–99% band (n = 72,
-−1.19). skani and FastANI slightly underestimate (bias −0.65 / −0.98
-overall). (c) Ridge-CV estimates vs ANIm truth for the 1,969 finite 4e pairs,
-colored by band (identity line dashed). Overall MAE 0.906, r = 0.913; the
-residual spread is largest in the 80–85% band, where shared-tag signal is
-weakest.
+0.85–1.38 across bands. The deployed v4 model (heavy blue line; trained on
+2,520 pairs after the 95–99.5% band was expanded 72 → 539 with new
+ANIm-truth pairs) cuts the 95–99% band from 1.33 to 0.86 and reaches
+overall MAE 0.852 vs skani 0.906, without using any external-tool feature.
+(b) Signed bias vs band. Raw 4e gamma overestimates by +2.6 points overall
+(up to +3.3 at 80–85%); v4 ridge-CV bias stays within ±0.6 in every band.
+skani and FastANI slightly underestimate (bias −0.65 / −0.98
+overall). (c) v4 ridge-CV estimates vs ANIm truth for the 2,520 training
+pairs (band-holdout predictions), colored by band (identity line dashed).
+Overall MAE 0.852, r = 0.949; the residual spread is largest in the
+80–85% band, where shared-tag signal is weakest. v4 data:
+`results/panel_by_band/calibration_v4_cv.tsv` and `ridge_cv_preds_v4.tsv`
+(export script `scripts/export_v4_cv_preds.py`).
 
 
 ---
