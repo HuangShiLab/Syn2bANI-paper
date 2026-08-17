@@ -123,27 +123,48 @@ Two findings justify keeping it this simple:
   any special mechanism — uniform substitution on a motif-poor genome is
   enough — which is what made the mechanism measurable at all.
 
-### 2.4 Known failure of the paradigm: fragmentation
+### 2.4 Known failure of the paradigm: fragmentation — diagnosed and fixed
 
 Simulated fragmentation says syn2bani is robust (MAE 0.093% up to 200
-contigs, V8 §3.14; F2b). Real fragmentation says otherwise: fragmenting the
-real *E. coli* O157:H7 Sakai assembly drifts the estimate **+0.65 ANI points
-at N50 5 kb** — worse than skani (0.38) and FastANI (0.35) on the same files
-(V8 §3.7). The cause is structural: a chain needs `min_chain_anchors` (4)
-anchors on one contig, a 5 kb contig holds ~7 tags, and contigs that cannot
-form a chain are dropped — selecting for well-anchored contigs biases the
-estimate high. Simulated cuts cannot capture this because they preserve
-every base at random boundaries, while real assemblies lose sequence at
-repeat boundaries and have coverage-driven contig length distributions.
+contigs, V8 §3.14; F2b). Real fragmentation said otherwise: fragmenting the
+real *E. coli* O157:H7 Sakai assembly drifted the estimate **+0.65 ANI points
+at N50 5 kb** (V8 §3.7). The cause was structural: a chain needs
+`min_chain_anchors` (4) anchors on one contig, a 5 kb contig holds ~7 tags,
+and contigs that cannot form a chain were dropped from the likelihood —
+selecting for well-anchored (i.e. conserved) contigs, so the miss count
+eroded faster than the hit count and the estimate drifted high. Simulated
+cuts cannot capture this because they preserve every base at random
+boundaries, while real assemblies lose sequence at repeat boundaries and have
+coverage-driven contig length distributions.
+
+**Fix (code repo 0aabd0c): the short-contig rescue pass.** A short contig
+(< 8 × `min_chain_anchors` tags) with no accepted chain but a collinear
+≥ 2-unique-anchor group is folded into the likelihood without chaining: its
+tags are match-tested against the reference locus the anchors point to,
+counting exactly what pass-2 chaining would count on a complete genome
+(chain-interior tags; tails only while a bracketing anchor follows within
+`max_skip`-scaled distance). Contigs with 0–1 placeable anchors stay dropped
+— the genuinely accessory fraction, which AF keeps reporting. The pass is
+gated on contig tag count, so complete and high-N50 assemblies are
+**bit-identical** to before. Results on the Sakai ladder: drift at N50 20 kb
++0.283 → **−0.032**, N50 10 kb +0.491 → **−0.017**, N50 5 kb +0.654 →
+**+0.200** (skani −0.24, FastANI −0.64 on the same file; AF improves 0.434 →
+0.580). On the 8 real ENA drafts the rc self-controls stay 99.9999 and the
+worst-case bias (8,025-contig assembly) shrinks +0.91 → **+0.36** vs skani.
+Full details: `results/frag_rescue/VALIDATION.md`.
 
 The same limitation bit harder once: the CspCI 33 bp > 32-bit packing bug
 (91% anchor loss on reverse strands, V8 §3.7) was **in principle**
 undetectable by same-orientation simulation; only a reverse-complement
 control or real drafts could see it. Both are now standard controls (§3.7).
 
-**Status of the "robust to extreme fragmentation" claim: retracted.** The
-honest statement is "drift ≤ 0.15 down to ~20 kb N50; beyond that the point
-estimate degrades and AF reports the loss honestly (0.385 at 5 kb N50)."
+**Status of the "robust to extreme fragmentation" claim: restored with
+bounds.** The honest statement is now "drift ≤ 0.03 down to 10 kb N50 and
+≤ 0.20 at 5 kb N50 — tighter than skani and FastANI on the same files — with
+AF honestly reporting the unplaceable remainder." Caveat: the deployed v4
+linear calibration was trained on pre-rescue features; its feature
+distributions shift on fragmented inputs only, so `--calibrate` values on
+drafts await a recalibration (complete genomes are unaffected).
 
 ---
 
@@ -529,13 +550,14 @@ the diagnostic as designed.
 - **Real ENA drafts** (8 *E. coli* assemblies, 88–8,025 contigs; V8 §3.8):
   the reverse-complement self-control returns **99.9999** on all 8,
   including the 8,025-contig contaminated assembly. vs K-12, gamma MAE
-  0.334 (skani) / 0.369 (FastANI), with bias growing exactly as the Sakai
-  fragmentation curve predicts (+0.03 at N50 221 kb → +0.91 on the
-  8,025-contig assembly, mean contig 1,104 bp — most contigs cannot hold
-  `min_chain_anchors` tags at any enzyme density). AF agrees with both
-  reference tools to 0.01–0.04 on ordinary drafts **once FastANI's AF is
-  put on the same denominator** (it fragments only contigs ≥ 3 kb and
-  silently skipped 54% of the worst assembly).
+  0.334 (skani) / 0.369 (FastANI), with bias growing as the pre-fix Sakai
+  fragmentation curve predicted (+0.03 at N50 221 kb → +0.91 on the
+  8,025-contig assembly, mean contig 1,104 bp). **Post-rescue (§2.4)** the
+  rc controls are unchanged and the worst-case bias shrinks to **+0.36**;
+  per-assembly before/after in `results/frag_rescue/VALIDATION.md`. AF
+  agrees with both reference tools to 0.01–0.04 on ordinary drafts **once
+  FastANI's AF is put on the same denominator** (it fragments only contigs
+  ≥ 3 kb and silently skipped 54% of the worst assembly).
 - **Oral/gut independent validation** (1,225 pairs, 50 species, run by the
   lab; ALGORITHM_MLE §4.8): MAE 0.552 vs FastANI on the 100 same-species
   pairs (r 0.980, bias +0.421, RMSE 1.056; skani 0.169 on the same pairs);
@@ -739,11 +761,16 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   the mosaic-sim bias is systematic rather than per-pair detectable, so
   those sims now read `ok`. Flagged pairs are now reliably worse; not all
   bad pairs are flagged.
-- **Fragmentation realism gap.** Simulated cuts (random boundaries, no
-  sequence loss) cannot reproduce real assembly behavior: sims say MAE
-  0.093% to 200 contigs, real Sakai drifts +0.65 at N50 5 kb, worse than
-  k-mer tools below ~20 kb N50 (§2.4). Candidate fix: `min_chain_anchors`
-  adaptive to contig length.
+- ~~**Fragmentation realism gap.**~~ **DONE** (§2.4). The mechanism was not
+  chain acceptance per se but miss-count selection on unchainable contigs;
+  the fix is the short-contig rescue pass, which re-admits those contigs
+  under the intact-genome counting rule. Sakai N50 5 kb drift +0.654 →
+  +0.200 (beats skani/FastANI on the same file), worst real-draft bias
+  +0.91 → +0.36, complete genomes bit-identical. The residual +0.20 at
+  N50 5 kb is contigs with 0–1 placeable anchors (~1.3 Mb), which carry no
+  positional evidence; rescuing them would mean guessing homology. The
+  simulation/realism gap itself stands as a methodological lesson — the
+  fix was validated on real drafts, not sims.
 - **Calibration demonstrated externally; v4 deployed.** The raw GTDB
   overestimation (bias +2.60 vs ANIm) is removed by a band-holdout ridge
   calibration on internal features (§3.5). The deployed model is **v4**:
