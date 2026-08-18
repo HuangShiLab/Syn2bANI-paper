@@ -46,8 +46,8 @@ F6_RUNTIME = PAPER / "results" / "efficiency_v8" / "runtime_scaling.tsv"
 F6_SKETCH = PAPER / "results" / "efficiency_v8" / "sketch_benchmark.tsv"
 F7_TABLE = PAPER / "results" / "panel_by_band" / "anim_main_table.tsv"
 F7_PREDS = PAPER / "results" / "panel_by_band" / "ridge_cv_preds_4e.tsv"
-F7_V4_CV = PAPER / "results" / "panel_by_band" / "calibration_v4_cv.tsv"
-F7_V4_PREDS = PAPER / "results" / "panel_by_band" / "ridge_cv_preds_v4.tsv"
+F7_V5_CV = PAPER / "results" / "panel_by_band" / "calibration_v5_cv.tsv"
+F7_V5_PREDS = PAPER / "results" / "panel_by_band" / "ridge_cv_preds_v5.tsv"
 
 # Future cross-tool ladder TSV (columns: name, skani_ani, fastani_ani) on the same
 # simulated genomes as F1. Does not exist yet; the code path is written and gated.
@@ -686,13 +686,13 @@ def fig7_anim_by_band():
     print("F7: ANIm benchmark by band")
     tab = pd.read_csv(F7_TABLE, sep="\t")
     tab = tab[tab["band"] != "all"]
-    # v4 (deployed model): seed-0 band-holdout CV rows from calibration v4,
-    # trained on 2,520 pairs (2,053 + 467 hi95); plotted as a heavier line.
-    v4 = pd.read_csv(F7_V4_CV, sep="\t")
-    v4 = v4[(v4["experiment"] == "v4a_gated9") & (v4["seed"] == "0") &
-            (v4["band"] != "all")].set_index("band")
-    v4_mae = np.array([v4.loc[b, "MAE"] for b in F7_BANDS])
-    v4_bias = np.array([v4.loc[b, "bias"] for b in F7_BANDS])
+    # v5 (deployed model): seed-0 band-holdout CV rows from calibration v5,
+    # trained on 2,520 post-rescue pairs (2,053 + 467 hi95); heavier line.
+    v5 = pd.read_csv(F7_V5_CV, sep="\t")
+    v5 = v5[(v5["experiment"] == "v5a_gated9") & (v5["seed"] == "0") &
+            (v5["band"] != "all")].set_index("band")
+    v5_mae = np.array([v5.loc[b, "MAE"] for b in F7_BANDS])
+    v5_bias = np.array([v5.loc[b, "bias"] for b in F7_BANDS])
     x = np.arange(len(F7_BANDS))
 
     fig, axes = plt.subplots(1, 3, figsize=(7, 2.9))
@@ -707,15 +707,15 @@ def fig7_anim_by_band():
     for method, color, marker, label in F7_METHODS:
         ax.plot(x, series(method, "MAE"), color=color, marker=marker, label=label,
                 alpha=0.45 if method == "syn2bani_4e_ridge_cv" else 1.0)
-    ax.plot(x, v4_mae, color=C_UNIFORM, marker="^", lw=2.0, ms=5,
-            label="syn2bani 4e (ridge CV v4, deployed)")
+    ax.plot(x, v5_mae, color=C_UNIFORM, marker="^", lw=2.0, ms=5,
+            label="syn2bani 4e (ridge CV v5, deployed)")
     fa = series("FastANI_subset", "MAE")
     ax.plot(x, fa, color=C_FASTANI, marker="D", ls="--", alpha=0.45,
             label="FastANI (subset)")
     ax.annotate("FastANI: 363-pair\nsubset only", xy=(0.97, 0.62),
                 xycoords="axes fraction", ha="right", va="top",
                 fontsize=5.5, color=C_FASTANI, style="italic")
-    ax.annotate("v4: n=2,520 (95–99 band\n72 → 539 pairs)", xy=(0.97, 0.40),
+    ax.annotate("v5: n=2,520 (95–99 band\n72 → 539 pairs)", xy=(0.97, 0.40),
                 xycoords="axes fraction", ha="right", va="top",
                 fontsize=5.5, color=C_UNIFORM, style="italic")
     ax.set_ylim(0, 4.6)
@@ -733,8 +733,8 @@ def fig7_anim_by_band():
     for method, color, marker, label in F7_METHODS:
         ax.plot(x, series(method, "bias"), color=color, marker=marker, label=label,
                 alpha=0.45 if method == "syn2bani_4e_ridge_cv" else 1.0)
-    ax.plot(x, v4_bias, color=C_UNIFORM, marker="^", lw=2.0, ms=5,
-            label="syn2bani 4e (ridge CV v4, deployed)")
+    ax.plot(x, v5_bias, color=C_UNIFORM, marker="^", lw=2.0, ms=5,
+            label="syn2bani 4e (ridge CV v5, deployed)")
     ax.plot(x, series("FastANI_subset", "bias"), color=C_FASTANI, marker="D",
             ls="--", alpha=0.45, label="FastANI (subset)")
     ax.set_xticks(x)
@@ -745,9 +745,9 @@ def fig7_anim_by_band():
     ax.legend(loc="upper right", fontsize=5.8)
     panel_label(ax, "b")
 
-    # (c) scatter ridge-CV vs ANIm truth (deployed v4 model, n = 2,520) -------
+    # (c) scatter ridge-CV vs ANIm truth (deployed v5 model, n = 2,520) -------
     ax = axes[2]
-    d = pd.read_csv(F7_V4_PREDS, sep="\t")
+    d = pd.read_csv(F7_V5_PREDS, sep="\t")
     lo, hi = 82, 99
     identity_line(ax, lo, hi)
     for band, color in zip(F7_BANDS, F7_BAND_COLORS):
@@ -762,7 +762,7 @@ def fig7_anim_by_band():
     ax.set_xlim(lo, hi)
     ax.set_ylim(lo, hi)
     ax.set_xlabel("ANIm ANI (%, truth)")
-    ax.set_ylabel("syn2bani 4e ridge-CV v4 ANI (%)")
+    ax.set_ylabel("syn2bani 4e ridge-CV v5 ANI (%)")
     ax.grid(True)
     ax.legend(loc="lower right", fontsize=5.8, markerscale=2)
     panel_label(ax, "c")

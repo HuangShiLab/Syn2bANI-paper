@@ -19,11 +19,11 @@ FastANI 1.33/1.34, ANIm (dnadiff 1-to-1) as alignment truth.
 | Benchmark | syn2bani | skani | FastANI | Source |
 |---|---|---|---|---|
 | Sim ladder, exact truth (12 pairs, 85–99.9% + indels) | **MAE 0.073** (gamma ≡ uniform) | 0.377 (bias −0.377) | 0.742 (bias −0.742) | F1 |
-| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | gated MAE **0.959**, calibrated v4 **0.794** (v3 0.739; uniform 1.423; gamma 4.482 overshoots low, gate falls back on 12/15) | 1.396 | 1.864 | F4 |
-| GTDB R207 vs ANIm truth (2,074 pairs, 80–99% ANI) | raw gamma MAE 2.87 (bias +2.60), gated 2.82; **ridge-calibrated v4 0.852 (bias +0.05)** on 2,520 training pairs (2,074 + 467 new 95–99.5% ANIm pairs) — now ahead of skani | 0.906 | 1.056 (363-pair subset) | F7 |
+| Mid-ANI vs ANIm truth (15 pairs, 87.6–90.2%) | gated MAE **0.959**, calibrated v5 **0.806** (v4 0.794, v3 0.739; uniform 1.423; gamma 4.482 overshoots low, gate falls back on 12/15) | 1.396 | 1.864 | F4 |
+| GTDB R207 vs ANIm truth (2,074 pairs, 80–99% ANI) | raw gamma MAE 2.35 (bias +2.02), gated 2.35 (post-rescue, §2.4); **ridge-calibrated v5 0.731 (bias +0.05, r 0.963)** on 2,520 training pairs (2,074 + 467 new 95–99.5% ANIm pairs) — ahead of skani | 0.906 | 1.056 (363-pair subset) | F7 |
 | Enterobacteriaceae vs skani (8 pairs) | gamma MAE **0.094** | (reference) | 0.207 | V8 §3.6 |
 | Real draft E. coli vs K-12 (8 assemblies) | gamma MAE 0.334 | (reference) | 0.369 | V8 §3.8 |
-| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980), calibrated v4 **0.463** (v3 0.424, r 0.995); `ok`-only 0.293 under the old flag, 0.514 under the recalibrated one (§6) | 0.169 | (reference) | §3.7 here |
+| Oral/gut 1,225 pairs vs FastANI | all-reported MAE 0.552 (r 0.980), calibrated v5 **0.497** (v4 0.463, v3 0.424, r 0.995); `ok`-only 0.293 under the old flag, 0.514 under the recalibrated one (§6) | 0.169 | (reference) | §3.7 here |
 | Wall time, n = 22 (484 pairs) | 2.79 s (sketch reuse) / 3.73 s (FASTA) | **0.15 s** (see caveat) | 17.7 s | F6 |
 | Peak RSS, n = 22 | **58 MB** (sketch reuse) / 310 MB | 185 MB | 912 MB | F6 |
 | Sketch store, n = 22 | **4.0 MB** | 21.6 MB (~5× larger) | n/a | F6 |
@@ -31,12 +31,14 @@ FastANI 1.33/1.34, ANIm (dnadiff 1-to-1) as alignment truth.
 Reading guide for the honest parts: syn2bani is the most accurate tool on
 exact-truth simulations by ~5–10× (F1), competitive on real same-species
 pairs (0.094–0.334), and its raw estimator **overestimates divergent GTDB
-pairs by +2.6 ANI points** against ANIm truth — but this bias is fully
+pairs by +2.0 ANI points** against ANIm truth (was +2.6 before the
+short-contig rescue pass, §2.4) — but this bias is fully
 predictable from Syn2bANI-internal signal-strength features, and a
-band-holdout ridge calibration removes it: calibration v4, trained on 2,520
+band-holdout ridge calibration removes it: calibration v5, trained on 2,520
 ANIm-truth pairs (the original 2,074 plus 467 new pairs targeting the
-previously underpowered 95–99.5% band), scores MAE **0.852** (bias +0.05)
-against skani's 0.906, and cuts the 95–99% band MAE from 1.33 to 0.86
+previously underpowered 95–99.5% band) re-run with the post-rescue binary,
+scores MAE **0.731** (bias +0.05, r 0.963)
+against skani's 0.906, and cuts the 95–99% band MAE from 1.33 (v3) to 0.71
 (§3.5). A
 mechanistic fix for the underlying rate-heterogeneity artifact (spatial
 rate model) was attempted and produced a rigorous negative result: the raw
@@ -161,10 +163,9 @@ control or real drafts could see it. Both are now standard controls (§3.7).
 **Status of the "robust to extreme fragmentation" claim: restored with
 bounds.** The honest statement is now "drift ≤ 0.03 down to 10 kb N50 and
 ≤ 0.20 at 5 kb N50 — tighter than skani and FastANI on the same files — with
-AF honestly reporting the unplaceable remainder." Caveat: the deployed v4
-linear calibration was trained on pre-rescue features; its feature
-distributions shift on fragmented inputs only, so `--calibrate` values on
-drafts await a recalibration (complete genomes are unaffected).
+AF honestly reporting the unplaceable remainder." Caveat: the v4
+calibration was trained on pre-rescue features; this is resolved by v5
+(§3.5), retrained on post-rescue matrices with no external version skew.
 
 ---
 
@@ -351,10 +352,11 @@ MAE vs ANIm (ANI points), by band:
 
 | Method | 80–85 | 85–90 | 90–95 | 95–99 | all | bias (all) | r (all) |
 |---|---|---|---|---|---|---|---|
-| syn2bani 4e gamma (raw) | 3.69 | 3.53 | 1.82 | 1.16 | 2.87 | +2.60 | 0.703 |
-| syn2bani 4e uniform (raw) | 4.55 | 4.27 | 2.38 | 1.57 | 3.57 | +3.56 | 0.802 |
-| **syn2bani 4e ridge-calibrated (band-holdout CV)** | **0.88** | **0.85** | 0.94 | 1.38 | **0.906** | **−0.04** | 0.913 |
-| **syn2bani 4e ridge-calibrated v4 (2,520 pairs)** | 0.95 | 0.91 | 0.71 | **0.86** | **0.852** | +0.05 | 0.949 |
+| syn2bani 4e gamma (raw, post-rescue) | 3.21 | 2.81 | 1.47 | 0.88 | 2.35 | +2.02 | 0.763 |
+| syn2bani 4e uniform (raw, post-rescue) | 4.26 | 3.81 | 2.16 | 1.43 | 3.23 | +3.23 | 0.863 |
+| syn2bani 4e gated (raw, post-rescue) | 3.24 | 2.81 | 1.47 | 0.88 | 2.35 | +2.22 | 0.789 |
+| syn2bani 4e ridge-calibrated v2 (pre-rescue CV, history) | 0.88 | 0.85 | 0.94 | 1.38 | 0.906 | **−0.04** | 0.913 |
+| **syn2bani 4e ridge-calibrated v5 (band-holdout CV, 2,520 pairs)** | 0.82 | 0.77 | 0.64 | 0.71 | **0.731** | **+0.05** | 0.963 |
 | syn2bani 11-enzyme (old run, reference) | 2.21 | 1.69 | 0.99 | 0.74 | 1.544 | +0.55 | 0.873 |
 | skani | 1.74 | 0.85 | **0.45** | **0.34** | 0.906 | −0.65 | **0.969** |
 | FastANI (363-pair subset) | 1.73 | 1.26 | 0.54 | 0.69 | 1.056 | −0.98 | 0.981 |
@@ -362,14 +364,18 @@ MAE vs ANIm (ANI points), by band:
 The 4-enzyme rows cover the 1,969 pairs with a finite estimate (105
 BELOW_DETECTION pairs excluded — they carry no point estimate; they now
 carry an `ani_upper95` bound instead, see below); the
-11-enzyme and skani rows cover all 2,074. The calibration is ridge regression
+11-enzyme and skani rows cover all 2,074. The raw rows are post-rescue
+(`results/anim_truth_2074_v9rescue.tsv`; pre-rescue they were 2.87 gamma /
+3.57 uniform / 2.82 gated — the rescue pass is worth ~0.5 raw MAE on this
+set). The calibration is ridge regression
 on Syn2bANI-internal features only (`s2b_ani`, `s2b_ani_uniform`, `s2b_af_q/r`,
 `s2b_std_err`, `s2b_retention`, `s2b_n_anchors/chains/tags`), trained under
 band-holdout cross-validation: each band is predicted by a model trained on
-the other three bands only (`scripts/anim_main_table_4e.py`). The v4 row is
+the other three bands only (`scripts/anim_main_table_4e.py`). The v5 row is
 the same protocol on an enlarged training set (2,520 pairs: the 2,053
-finite gated pairs plus 467 new 95–99.5% ANIm pairs; see the v4 paragraph
-below), so its "all" column is not directly comparable to the other rows —
+finite gated pairs plus 467 new 95–99.5% ANIm pairs; see the v4/v5
+paragraphs below), so its "all" column is not directly comparable to the
+v2 history row —
 its gain is concentrated in the 95–99 band, where n went 72 → 539.
 
 **Calibration v2 (current-binary features).** The model above was retrained
@@ -428,7 +434,7 @@ comparisons are meaningful; (2) the mid-ANI set is **not gate-independent**
 — the gate threshold was designed for that regime — so it validates the
 calibration fairly but not the gate itself.
 
-**Calibration v4 (95–99.5% band expansion) — the deployed model.** The
+**Calibration v4 (95–99.5% band expansion).** The
 95–99% band was the calibration's weakest stratum by construction (n = 72,
 the only pairs GTDB offers in that range are cross-species same-genus
 pairs). We screened all 2.26 M same-genus pairs in the GTDB-R207
@@ -446,35 +452,54 @@ overall MAE **0.852** (v3-on-same-protocol 0.937), 95–99 band **0.862**
 0.956). Costs: the 85–90 band rises 0.869 → 0.912, oral/gut external 0.424
 → 0.463 (n = 100, ~1 SE), mid-ANI external 0.739 → 0.794 (n = 15, well
 within sampling noise; both externals remain far better than raw). We
-deploy v4 on the strength of the overall and worst-band gains with the
-tradeoff disclosed; v3's JSON and script remain for reproduction. With the
-top band now powered, calibrated syn2bani is **ahead of skani overall**
-(0.852 vs 0.906) while remaining essentially unbiased (+0.05 vs −0.65).
+deployed v4 on the strength of the overall and worst-band gains with the
+tradeoff disclosed; v3's JSON and script remain for reproduction.
+**Superseded by v5 within a day** — see below.
+
+**Calibration v5 (post-rescue feature matrices) — the deployed model.** The
+short-contig rescue pass (§2.4, code repo 0aabd0c) shifts estimator
+features on fragmented genomes, so every training and external matrix was
+re-run with the post-rescue binary (068119c) on HPC — GTDB 2,074 + hi95
+467 + oral/gut 1,225 + mid-ANI pairs, ~3 min on 8 cores — and the v4
+protocol retrained (`scripts/calibration_v5.py`,
+`results/panel_by_band/CALIBRATION_V5.md`). The rescue materially improves
+the raw estimator on this set (gated MAE 2.819 → **2.323**, bias +2.68 →
++2.17, r 0.745 → 0.802; 1,497/2,074 pairs change `ani_gated` by > 0.01 —
+GTDB representatives are mostly drafts, so the rescue fires widely), and
+the better features carry into the calibration: v5 band-holdout CV overall
+MAE **0.731** (v4 on pre-rescue features 0.852; v4 protocol on the
+post-rescue 2,053-pair subset 0.772, i.e. most of the gain is the feature
+quality, not the extra pairs), 95–99 band **0.712**, bias +0.05, r 0.963,
+seed spread ≤ 0.0015. Externals on post-rescue features (no version skew):
+oral/gut 0.497 (v4: 0.463, +0.034), mid-ANI 0.806 (v4: 0.794, +0.012) —
+the same small-regression trade-off pattern as v4-vs-v3, disclosed; both
+externals remain far better than raw. Deployed as a pure JSON swap
+(`fe0f36c`); v4's JSON and script remain for reproduction.
 
 Four statements carry the weight of this section:
 
-1. **Calibrated syn2bani now beats skani overall** — v4 MAE 0.852 vs
+1. **Calibrated syn2bani now beats skani overall** — v5 MAE 0.731 vs
    0.906, using only Syn2bANI-internal features, with essentially no
    bias (+0.05 vs skani's −0.65). skani still correlates better with truth
-   (r 0.969 vs 0.949); syn2bani's advantage is calibration-driven, not
+   (r 0.969 vs 0.963); syn2bani's advantage is calibration-driven, not
    correlation-driven.
-2. **The raw +2.6-point overestimation at divergent bands is systematic and
+2. **The raw overestimation at divergent bands is systematic and
    predictable from internal features.** The dominant ridge coefficients are
-   `s2b_retention` +2.85, `s2b_ani_uniform` −1.12, `s2b_af_r` +0.97 — exactly
+   `s2b_retention` +2.6, `s2b_af_r` +0.7 — exactly
    the signal-strength quantities that the rate-heterogeneity artifact of
    §3.6 (mosaic root cause) acts through. The artifact is made correctable,
    post hoc, by quantities the tool already reports.
 3. **The calibration holds out entire ANI bands during training**, so it is
    not memorizing a regime. The former exception — the 95–99% band at
    n = 72 (MAE 1.38, r 0.13) — is closed by the v4 expansion: at n = 539
-   the band-holdout model scores MAE 0.862, r 0.42, so the high-ANI regime
+   the band-holdout model scores MAE 0.712 (v5), so the high-ANI regime
    is now validated against independent ANIm truth like every other band
    (and still rests on the simulation ladder (F1), oral/gut, and
    Enterobacteriaceae evidence, §3.7).
 4. **FastANI reads low vs ANIm (bias −0.98) while raw syn2bani reads high
-   (+2.60).** The previously reported "+3% vs FastANI" (§3.6) decomposes
-   into both tools deviating from ANIm in opposite directions; neither is
-   the truth.
+   (+2.02 post-rescue).** The previously reported "+3% vs FastANI" (§3.6)
+   decomposes into both tools deviating from ANIm in opposite directions;
+   neither is the truth.
 
 **Learning curve.** Band-holdout ridge MAE vs training-pool size: 492 pairs
 → 0.952, 984 → 0.902, 1,476 → 0.887, 1,969 → 0.893. The linear model
@@ -805,18 +830,17 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   positional evidence; rescuing them would mean guessing homology. The
   simulation/realism gap itself stands as a methodological lesson — the
   fix was validated on real drafts, not sims.
-- **Calibration demonstrated externally; v4 deployed.** The raw GTDB
-  overestimation (bias +2.60 vs ANIm) is removed by a band-holdout ridge
-  calibration on internal features (§3.5). The deployed model is **v4**:
-  the v3 9-feature ridge (primary feature `ani_gated`) retrained on 2,520
-  pairs — the 95–99.5% band was expanded with 467 new ANIm-truth pairs
-  (top-band n 72 → 539) — giving overall CV MAE **0.852** (v3: 0.937) and
-  95–99 band **0.862** (v3: 1.326), with training rows shuffled (kills the
-  RidgeCV order sensitivity; ±0.001 across 5 seeds). Tradeoffs vs v3,
-  disclosed: 85–90 band +0.043, oral/gut external 0.463 (v3: 0.424, ~1 SE
-  at n = 100), mid-ANI external 0.794 (v3: 0.739, well within noise at
-  n = 15); both externals remain far better than raw (0.552, 0.959).
-  v3 (shipped at Syn2bANI `15da386`) remains the fallback; v4 ships as a
+- **Calibration demonstrated externally; v5 deployed.** The raw GTDB
+  overestimation (bias +1.86 vs ANIm post-rescue) is removed by a band-holdout ridge
+  calibration on internal features (§3.5). The deployed model is **v5**
+  (Syn2bANI `fe0f36c`): the 9-feature ridge (primary feature `ani_gated`)
+  retrained on 2,520 pairs re-run with the post-rescue binary — overall CV
+  MAE **0.731**, 95–99 band **0.712**, bias +0.05, r 0.963, seed spread
+  ≤ 0.0015. Tradeoffs vs v4, disclosed: 85–90 band +0.034, oral/gut
+  external 0.497 (v4: 0.463), mid-ANI external 0.806 (v4: 0.794, well
+  within noise at n = 15); both externals remain far better than raw
+  (0.552, 0.959).
+  v3 (shipped at Syn2bANI `15da386`) and v4 remain as fallbacks; v5 ships as a
   `models/gtdb_r207_linear_cal.json` swap. Remaining caveats: the mid-ANI
   set is not gate-independent, and on exact-truth uniform sims the
   calibrated value underestimates slightly — the raw estimate remains the
@@ -882,7 +906,7 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   `results/panel_by_band/linear_cal_v3.json`,
   `results/panel_by_band/calibration_v3_{cv,external}.tsv`,
   `results/anim_truth_2074_gated.tsv`; spec in CALIBRATION_V2.md §6.
-- Calibration v4 (deployed): `scripts/calibration_v4.py`,
+- Calibration v4 (superseded by v5): `scripts/calibration_v4.py`,
   `results/panel_by_band/linear_cal_v4.json`,
   `results/panel_by_band/calibration_v4_{cv,external}.tsv`,
   write-up `results/panel_by_band/CALIBRATION_V4.md`; hi95 expansion —
@@ -890,6 +914,16 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   `results/anim_truth_hi95_gated.tsv`, pipeline `scripts/hi95_anim/`
   (skani screen of 2.26 M same-genus pairs → dnadiff on 650 → 467 in
   band).
+- Calibration v5 (deployed): `scripts/calibration_v5.py`,
+  `results/panel_by_band/linear_cal_v5.json`,
+  `results/panel_by_band/calibration_v5_{cv,external}.tsv`,
+  `results/panel_by_band/ridge_cv_preds_v5.tsv`,
+  write-up `results/panel_by_band/CALIBRATION_V5.md`; post-rescue feature
+  matrices `results/anim_truth_2074_v9rescue.tsv`,
+  `results/anim_truth_hi95_v9rescue.tsv`,
+  `results/oral_gut_1225_v9rescue.tsv`,
+  `results/gating_flag/midani_15_v9rescue.tsv` (HPC re-run at code repo
+  068119c).
 - Estimator gating + flag recalibration (§5 item 1, §6):
   `results/gating_flag/` — `RULES.md` (chosen rules, thresholds, and the
   three-dataset evidence tables), prototype scripts (`prep_data.py`,
