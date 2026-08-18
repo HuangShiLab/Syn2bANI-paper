@@ -360,7 +360,8 @@ MAE vs ANIm (ANI points), by band:
 | FastANI (363-pair subset) | 1.73 | 1.26 | 0.54 | 0.69 | 1.056 | −0.98 | 0.981 |
 
 The 4-enzyme rows cover the 1,969 pairs with a finite estimate (105
-BELOW_DETECTION pairs excluded — they carry no point estimate); the
+BELOW_DETECTION pairs excluded — they carry no point estimate; they now
+carry an `ani_upper95` bound instead, see below); the
 11-enzyme and skani rows cover all 2,074. The calibration is ridge regression
 on Syn2bANI-internal features only (`s2b_ani`, `s2b_ani_uniform`, `s2b_af_q/r`,
 `s2b_std_err`, `s2b_retention`, `s2b_n_anchors/chains/tags`), trained under
@@ -491,6 +492,22 @@ rescore reproduces `eval_pairs.tsv`'s `s2b_ani` to rounding (MAE 1.5437).
 Rescoring the current 4-enzyme panel from those strata gives MAE 1.847 —
 better than the v8 matrix's raw 2.874, i.e. part of the raw gap is the v8
 estimator change, not the panel; the ridge calibration recovers all of it.
+
+**The 105 BELOW_DETECTION pairs now carry an upper bound (`ani_upper95`,
+code repo 068119c).** Instead of a bare flag (or a fully NaN row for the 21
+chains-empty pairs), every pair reports a one-sided 95% upper confidence
+bound on ANI: a Clopper-Pearson upper limit on the found-tag fraction,
+inverted through the homogeneous retention curve (the conservative side —
+gamma mixing would tighten it). Coverage against ANIm truth
+(`results/gating_flag/ani_upper95_coverage_report.txt`): **83/84 = 98.8%**
+on the chained BELOW_DETECTION pairs (nominal 95%; bounds span 84.4–90.9,
+median 87.4). On the 21 chains-empty pairs the whole-genome denominator
+conflates shared fraction with identity, so the value is a heuristic, not a
+calibrated ANIm bound (documented in code and in the coverage report) — but
+it lands far below the 95% species threshold on all 21 (max 83.7 vs max
+truth 92.2), so the dereplication-actionable reading "definitely not the
+same species" survives for all 105/105 pairs. skani and FastANI report
+nothing at all here.
 
 ### 3.6 (Supplementary) Large-scale comparison against FastANI on 45,000 pairs (F5)
 
@@ -636,8 +653,8 @@ Findings:
   dist times are not strictly like-for-like; and its dist time excludes its
   (small: 0.03 s at n = 22) sketch step, while syn2bani's FASTA mode pays
   digestion on every run.
-- **Scope:** n ≤ 22 measures per-pair efficiency, not database-scale search;
-  the `dist`/`search` subcommands are out of scope here. An earlier
+- **Scope:** n ≤ 22 measures per-pair efficiency; the database-scale paths
+  are covered just below. An earlier
   measurement round on this machine found FASTA-input timings varying
   20–50× under load (V8 §3.9) — the v8 run kept 3 reps and reports min–max
   in the figure; the medians above are stable to ~2%.
@@ -645,6 +662,23 @@ Findings:
   gave syn2bani 2.97 s vs skani 3.79 s vs FastANI 326.9 s
   (`results/GTDB_R207_BENCHMARK_REPORT.md` §3.4) — cited for trend only;
   the binary, panel, and pair set all differ from the v8 run.
+
+**Database scale (dist/search/triangle, post-rewrite).** The legacy v7
+database path (GBRT debias, BcgI-only sketches) produced 100% spurious
+`triangle` hits and `search` hits 8–11 points low; it has been replaced by a
+shared two-stage pipeline (code repo e3a0e04): a recall-first screen
+(per-enzyme strand-canonical 18 bp tag-window keys; a pair passes iff
+shared ≥ 3 AND containment ≥ 0.001 — calibrated to FRR 0/500 on validated
+≥ 80% ANI GTDB pairs, ~0.1% at n = 2,000, rejecting 83–88% of random pairs)
+feeding the chain-restricted MLE estimator, so `dist` output is
+byte-identical to `ani`. Measured on the HPC (32 threads, GTDB sketches):
+`triangle` n = 500 in **8.5 s**, n = 2,000 in 86.6 s (legacy 893 s), n =
+5,000 in **406.7 s / 4.1 GB**; `search` 100 × 5,000 in **22.0 s** (legacy
+558 s), recovering 12/12 skani hits and matching independent MLE truth
+exactly on all truth-validated pairs. skani remains ~50× faster on
+triangle — its per-pair cost is lower by design; our per-pair cost buys the
+MLE diagnostics (AF, std_err, flag, upper95). Full data:
+`results/db_scale/DB_REWRITE_VALIDATION.md`.
 
 ---
 
@@ -797,8 +831,8 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   density rises once the IUPAC geometry fix enables a wider enzyme panel —
   deeper retention makes the divergent tail directly observable in-chain.
 - **Small-scale efficiency benchmark.** n ≤ 22, all-vs-all; skani's n = 22
-  time covers only 302/484 reported pairs; database-scale `search` not
-  measured (§4).
+  time covers only 302/484 reported pairs; database-scale `search`/`triangle`
+  now measured at 5,000-genome scale post-rewrite (§4 end).
 - **ANIm truth covers only ~46–72% of genome length at divergent bands**
   (§3.4) — the best available truth there is itself a partial-genome
   measurement, so the ~0.9 MAE of the calibrated and reference tools may
@@ -808,10 +842,15 @@ before being trusted on GTDB or against ANIm — the tilted-Gamma correction
   recognition sites (+31% for BslFI at 5% divergence); the loss model has a
   destruction term only. This is the standing explanation for per-enzyme
   bias (F3a) and part of the BslFI failure (§3.3).
-- **IUPAC degenerate sites break the geometry** (HaeIV/Hin4I): `site_len`
-  treats `Y` as fully specified, so transitions at degenerate positions
-  violate the assumed site/body split (§3.3b). Per-position partial
-  degeneracy modeling is the documented fix.
+- ~~**IUPAC degenerate sites break the geometry**~~ **DONE** (code repo
+  f054dbb; `results/iupac_fix/`): digestion itself was also permissive —
+  the HaeIV/Hin4I/BaeI patterns dropped the trailing fixed anchor bases —
+  and both are fixed. Geometry now carries `{exact_site, d2, d3}` parsed
+  from the IUPAC anchors, with the exact convolution (homogeneous) and
+  NB-plus-survival-factor (gamma) likelihoods; the fully-specific default
+  panel takes the bit-identical old path. HaeIV+Hin4I simindel MAE 0.273 →
+  0.242. This unblocks the wide-panel revisit and the capped-NPMLE pointer
+  above.
 - **Single-species simulation base.** All exact-truth families except the
   GC sweep evolve *E. coli* K-12; accessory blocks are shuffles (no real
   gene structure); no true MAGs (binning error, cross-species contamination)
