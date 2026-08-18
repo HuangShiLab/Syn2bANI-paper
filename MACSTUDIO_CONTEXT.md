@@ -15,12 +15,36 @@
 
 **当前分支**：`main`（两个仓库均已 push 最新）
 
-**最新提交**（2026-07-25 更新）：
-- CODE: `3048177` — feat: chain-restricted stratified MLE ANI (`syn2bani ani`)
-- paper: 见本次提交
+**最新提交**（2026-08-18 更新）：
+- CODE: `fe0f36c` — 校准 v5 部署（post-rescue 特征矩阵重训）
+- paper: `b3dc867` — 校准 v5 + 主报告/F7 更新
+
+**2026-08-17/18 一周成果**（全部已推送，详见各 VALIDATION/CALIBRATION 文档）：
+1. **db 路径两段式重写**（CODE `e3a0e04`）：`dist`/`search`/`triangle`/`db search`
+   共享 screen（18 bp tag-window containment，FRR 0/500）+ chain-MLE refine 管线，
+   `dist` 与 `ani` 逐字节一致；HPC 5,000 基因组 triangle 406.7 s/4.1 GB，
+   search 100×5,000 22.0 s。验证：`results/db_scale/DB_REWRITE_VALIDATION.md`。
+2. **IUPAC 几何 + 酶切修复**（`f054dbb`）：`geometry_from` 曾把退化位点当完全
+   特异；更深的问题是 HaeIV/Hin4I/BaeI 的静态 digest pattern 丢了右锚尾部固定
+   碱基。两者都修，默认 panel 逐字节不变。`results/iupac_fix/`。
+3. **碎片化短 contig rescue**（`0aabd0c`）：修掉了真实 Sakai N50 5 kb 的
+   +0.65 漂移（→ +0.20，优于 skani/FastANI 同文件）；8 个真实 ENA draft 最差
+   偏差 +0.91 → +0.36；完整基因组逐字节不变。"对极端碎片化鲁棒"卖点**恢复
+   （有界）**。`results/frag_rescue/VALIDATION.md`。
+4. **BELOW_DETECTION 上界**（`068119c`）：新增 `ani_upper95` 列（Clopper-Pearson
+   上限 × 存留曲线反演），chained 低存留对覆盖率 83/84 = 98.8%。
+   `results/gating_flag/ani_upper95_coverage_report.txt`。
+5. **校准 v5**（`fe0f36c`）：rescue 改变了 draft 上的特征分布，2,520 对 GTDB
+   训练集 + 外部集全部用新二进制在 HPC 重跑重训。原始 gated MAE 2.819 → 2.323；
+   CV MAE 0.852 → **0.731**（95–99 档 0.712），bias +0.05，r 0.963，仍优于
+   skani（0.906）。`results/panel_by_band/CALIBRATION_V5.md`。
+
+**准确性收敛判据已满足**：raw 估计器处于可识别性地板（空间模型阴性结果），
+所有已知失效模式（gamma 过冲、flag 倒转、碎片化、IUPAC、低存留 NaN、db 路径）
+均有修复或量化结论。剩余大项：Task 6 论文写作、Task 1 真实 MAG 验证。
 
 **当前推荐路径**：`syn2bani ani`（§4.6）。`dist` + GBRT 是旧路径，
-已知缺陷记录在 `V8_MLE_VALIDATION.md` §5。下一步首要任务是 §5 Task 0。
+已知缺陷记录在 `V8_MLE_VALIDATION.md` §5。
 
 ---
 
@@ -64,7 +88,9 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 1. **固定酶切位点锚定**（16 种 Type IIB 酶）—— 保证可重复、与组装质量无关
 2. **2bRAD-M 实验验证** —— 从湿实验角度验证 ANI 精度
 3. **结构变异（SV）检测** —— 通过单体型相位标签检测插入/缺失/重排
-   （注："对极端碎片化鲁棒"这条旧卖点已被实测推翻，见 `V8_MLE_VALIDATION.md` §3.7）
+   （注："对极端碎片化鲁棒"曾被实测推翻，2026-08-17 的短 contig rescue 修复后
+   恢复为有界卖点：≤10 kb N50 漂移 ≤0.03，5 kb N50 ≤0.20，优于 skani/FastANI，
+   见主报告 §2.4）
 4. **GBRT 偏差修正** —— 跨物种泛化误差 < 0.3% MAE
 
 ### 性能定位
@@ -189,7 +215,10 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
   (2) v8 **uniform** MAE 0.86% 是四个方法里最好的，但 **gamma 在低 retention
   + 高分歧区间向下过冲**（15/15 被 INCONSISTENT 正确标记）——gamma 自动退回
   uniform 是明确的改进方向。
-- **仍待完成**：draft assembly / MAG；高低 GC 类群；肠杆菌科用 ANIm 复核
+- **仍待完成**：真实 MAG（带 binning 错误/跨物种污染的，Task 1）
+- **已被后续工作覆盖**：draft assembly（✅ 2026-08-17 rescue 验证：8 个真实 ENA
+  draft + Sakai 碎片化梯度，主报告 §2.4/§3.7）；高低 GC（✅ ALGORITHM_MLE §4.8）；
+  ANIm 复核（✅ 2,074 + 467 对 GTDB-ANIm，主报告 §3.5）
 - **目标**：确认 `ani` 在真实数据上是否复现仿真上的精度
 - **步骤**：
   1. `git pull` 代码仓库，`cargo build --release`，`cargo test --release --lib`
@@ -264,13 +293,13 @@ git clone https://github.com/HuangShiLab/Syn2bANI-paper.git
 
 ### 🟡 中优先级
 
-#### Task 5: 数据库功能完善（`db` 子命令）
-- `db build`：已完成，支持并行 sketch
-- `db add`：已完成，但缺少 `--parallel` 支持（当前串行）
-- `db remove`：已完成
-- `db list`：已完成
-- `db merge`：已完成
-- **缺失**：`db search`（在 sketch 数据库上执行 search，不需要重新解析 FASTA）
+#### Task 5: 数据库功能完善（`db` 子命令）✅ 2026-08-17
+- `db build`/`add`/`remove`/`list`/`merge`：已完成
+- **`db search`：已完成**（2026-08-17 db 路径重写，CODE `e3a0e04`）——
+  `db add` 现在按数据库记录的 panel 消化新基因组（不再硬编码 BcgI），
+  `db search` 走共享 screen+MLE 管线；`sketch`/`db build` 默认 panel 改为
+  4 酶 `BcgI,AlfI,AloI,FalI`（breaking，v1 sketch 明确报错）。
+  验证见 `results/db_scale/DB_REWRITE_VALIDATION.md`。
 
 #### Task 6: 论文完善（Syn2bANI-paper）
 - 补充 Figure 1-4 的 Python 绘图脚本
@@ -372,9 +401,8 @@ FastANI:  ~50 MB
    - 已标记为 `_genome_path`，不影响功能
    - 保留以备将来需要输出原始路径
 
-3. **db search 尚未实现**：
-   - `search` 子命令目前从 FASTA 解析，而非 sketch 数据库
-   - 应实现 `db search` 或修改 `search` 支持 sketch 输入
+3. **~~db search 尚未实现~~**：✅ 2026-08-17 已实现（CODE `e3a0e04`），
+   `search`/`db search` 均支持 `.s2ba` sketch 输入，走 screen+MLE 管线
 
 4. **AVX2 无净增益**：
    - `is_pure_atcg_simd` 在 x86_64 上可用，但 `batch_diff_count_4` 无加速
