@@ -177,3 +177,13 @@ The pipeline does not depend on these files.
 Regenerate `lists/sample_list.tsv` (all 100), raise the array bounds in
 s1/s2/s3/s5/s7/s8 (PACK×tasks ≥ 100+10), push scripts, and re-run
 `submit_all.sh` — completed samples are skipped automatically.
+
+## Incident log
+
+- 2026-08-20: s1_assemble 3918145 failed instantly on all tasks
+  (`common.sh: No such file or directory` from the slurm spool dir) — the
+  job had been submitted BEFORE the `$0`-relative-sourcing fix landed, and
+  slurm runs the spooled copy from submit time. Lesson: after editing any
+  pipeline script, resubmit affected pending jobs. Recovered per Failure
+  recovery: resubmitted s1 (3918567) + controller after_s1 (3918568);
+  job IDs appended to jobs.tsv (`jid` takes the last matching line).
