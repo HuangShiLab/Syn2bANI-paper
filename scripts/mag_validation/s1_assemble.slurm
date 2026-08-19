@@ -30,7 +30,8 @@ for I in $(seq $((SLURM_ARRAY_TASK_ID * PACK)) $((SLURM_ARRAY_TASK_ID * PACK + P
         continue
     fi
     rm -rf "$OUT"
-    mkdir -p "$OUT"
+    # NOTE: no pre-created $OUT — MEGAHIT refuses an existing -o directory
+    # even when empty; it creates the directory itself.
     $MEGAHIT --12 "$READS" -t "$SLURM_CPUS_PER_TASK" -o "$OUT" --min-contig-len 1000
     echo "[assemble] $TAG done: $(grep -c '^>' "$OUT/final.contigs.fa") contigs"
 done

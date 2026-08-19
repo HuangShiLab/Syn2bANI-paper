@@ -187,3 +187,12 @@ s1/s2/s3/s5/s7/s8 (PACK×tasks ≥ 100+10), push scripts, and re-run
   pipeline script, resubmit affected pending jobs. Recovered per Failure
   recovery: resubmitted s1 (3918567) + controller after_s1 (3918568);
   job IDs appended to jobs.tsv (`jid` takes the last matching line).
+- 2026-08-20 (2): s1 3918567 failed again — root cause was in the stage
+  script itself: `mkdir -p "$OUT"` before MEGAHIT, and MEGAHIT refuses an
+  existing -o directory even when empty (the earlier smoke test had invoked
+  MEGAHIT directly without the pre-mkdir). Fixed in s1_assemble.slurm
+  (rm -rf only; MEGAHIT creates the dir), cancelled 3919143/3919146 before
+  they could rerun the bug, resubmitted as s1 3919304 + ctl 3919305.
+  Note: HPC ssh/lustre was intermittently very slow during recovery; one
+  combined ssh command timed out mid-sequence (push lost, cancel landed) —
+  always verify state after a timed-out remote command before retrying.
