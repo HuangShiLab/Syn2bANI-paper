@@ -196,3 +196,21 @@ s1/s2/s3/s5/s7/s8 (PACK×tasks ≥ 100+10), push scripts, and re-run
   Note: HPC ssh/lustre was intermittently very slow during recovery; one
   combined ssh command timed out mid-sequence (push lost, cancel landed) —
   always verify state after a timed-out remote command before retrying.
+- 2026-08-20 (3): s4_checkm2 failed twice (3920109, 3920568) with
+  `SystemError: initialization of _pywrap_checkpoint_reader raised unreported
+  exception` at tensorflow import. Root cause: a stray numpy in
+  `~/.local/lib/python3.12/site-packages` (user site) shadowed the conda
+  env's numpy; the tensorflow extension then initialised against the wrong
+  numpy and died with the "unreported exception" wrapper (the underlying
+  "compiled using NumPy 1.x" ImportError only shows when importing the .so
+  directly). Fix: `export PYTHONNOUSERSITE=1` in s4_checkm2.slurm (env numpy
+  also pinned back to 2.0.2 during diagnosis; TF 2.17 imports cleanly with
+  both changes). Resubmitted s4 = 3920902. Same failure mode would hit any
+  other stage that loads the checkm2 env — add the same export if so.
+- 2026-08-20 (4): controller after_s3 twice exhausted its 3 sbatch retries
+  on s5_assign/s7_repsearch (site submit quota, array elements count) and
+  exited FATAL without a retry scheduled. Recovery: submit the failed stage
+  directly (`sbatch --export=NONE scripts/s5_assign.slurm`, append
+  `s5_assign\t<id>` to jobs.tsv), then `sbatch --export=NONE
+  scripts/controller.sh after_s3` — `submit` skips stages already recorded
+  in jobs.tsv and wires the remaining ones with `jid` = last record.

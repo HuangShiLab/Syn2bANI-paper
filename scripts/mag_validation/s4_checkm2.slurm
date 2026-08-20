@@ -19,6 +19,7 @@ if [ -s "$WORK/checkm2/quality_report.tsv" ]; then
     echo "[checkm2] quality_report.tsv exists, skipping"
     exit 0
 fi
+export PYTHONNOUSERSITE=1                  # ~/.local numpy shadows the env and breaks tensorflow
 export PATH="$(dirname "$CHECKM2"):$PATH"   # diamond lives in the same env
 $CHECKM2 predict \
     --input "$WORK/bins_all" -x fa \
