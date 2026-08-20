@@ -226,3 +226,14 @@ s1/s2/s3/s5/s7/s8 (PACK×tasks ≥ 100+10), push scripts, and re-run
   s6/s7/s8/s9 directly and wiring controllers manually with
   `--dependency=afterok:<ids>` (the submit-limit seems to be site-wide and
   bursty, not a personal quota — manual sbatch succeeded minutes later).
+- 2026-08-21 (6): s9_truth "dnadiff failed" on most pairs — mummer 3.23
+  dnadiff dies on ANY whitespace in a FASTA (`ERROR: Whitespace found in
+  FastA ... aborting`), and CAMI2 source genomes have spaces in headers AND
+  inside sequence lines. Fix: run_dnadiff_chunk.sh now detects whitespace
+  and uses a cached fully-stripped copy under truth/refs_san/ (headers cut
+  at first whitespace, all [ \t] removed from sequence lines). Verified on
+  chunk 0: 14 strict + 1 verylow-AF, 0 failures. Resubmitted s9 = 3922162.
+  Also: resubmitted s8 array lost the exec bit after .new+mv replacement
+  (xargs "Permission denied") — always `chmod +x` before mv. Resubmitted
+  s8 = 3922149. The real quota error is `QOSMaxSubmitJobPerUserLimit`;
+  delayed retry controllers (--begin=now+20min) also count against it.
