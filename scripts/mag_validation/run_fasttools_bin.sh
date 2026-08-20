@@ -33,7 +33,7 @@ if [ ! -s "$PP/${BINID}.skani.tsv" ]; then
         || echo "[fasttools] $BINID: skani failed"
 fi
 if [ ! -s "$PP/${BINID}.fastani.tsv" ]; then
-    "$FASTANI" --q "$BINFA" --rl "$RLD/${BINID}.rl.txt" -t 1 \
+    "$FASTANI" -q "$BINFA" --rl "$RLD/${BINID}.rl.txt" -t 1 \
         -o "$PP/${BINID}.fastani.tsv" 2> "$PP/${BINID}.fastani.err" \
         || echo "[fasttools] $BINID: fastani failed"
 fi

@@ -214,3 +214,15 @@ s1/s2/s3/s5/s7/s8 (PACK×tasks ≥ 100+10), push scripts, and re-run
   `s5_assign\t<id>` to jobs.tsv), then `sbatch --export=NONE
   scripts/controller.sh after_s3` — `submit` skips stages already recorded
   in jobs.tsv and wires the remaining ones with `jid` = last record.
+- 2026-08-21 (5): s8_fasttools completed but fastANI failed on ALL 695 bins
+  (`Unknown option: '-'` in per-bin .fastani.err) — run_fasttools_bin.sh
+  passed `--q`, but fastANI only accepts `-q` (single dash). Fixed and
+  verified on one bin (marine__sample_0__bin.10 → 99.503% vs anchor).
+  Resubmitted s8 array (3921610); per-bin guards skip finished
+  syn2bani/skani outputs and only redo fastANI. Note: writing a pipeline
+  script while an array element may still be executing it can fail with
+  ETXTBSY on lustre — write to a .new file and `mv` instead.
+  Also: controller quota retries kept exhausting; recovered by submitting
+  s6/s7/s8/s9 directly and wiring controllers manually with
+  `--dependency=afterok:<ids>` (the submit-limit seems to be site-wide and
+  bursty, not a personal quota — manual sbatch succeeded minutes later).
