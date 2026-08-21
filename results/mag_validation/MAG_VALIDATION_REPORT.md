@@ -83,6 +83,23 @@ seen in the fragmented-genome simulations.
   with median upper95 - point estimate gap of only 0.042 pp — a tight,
   honest upper bound.
 
+## Calibration does not transfer to MAG inputs (tested)
+
+The 695 anchor pairs were re-run with `ani --calibrate` (deployed v5 model,
+binary @ fe0f36c; job s11_cal, `fast/per_pair_cal/`, merged
+`collect/ani_calibrated.tsv`). Result: the GTDB-trained calibration
+**degrades** MAG accuracy — overall MAE 1.261 (bias -1.243) vs raw 0.163,
+worst on LQ bins (2.307) and cross-species bins (2.091); 43 near-clonal
+pairs are pushed above 100. Mechanism: the v5 model learned the +2.02 bias
+of complete-genome GTDB pairs, but raw bias on MAGs is only +0.16, so the
+same correction overshoots downward; MAG feature values (low af_query,
+high fragmentation) also resemble the divergent-pair regime the model
+corrects hardest. Conclusions: (i) calibrated output must stay a separate,
+clearly-labelled column — never a silent replacement — which is the current
+design; (ii) on draft/MAG inputs the raw gated estimate is the recommended
+output; (iii) any MAG-specific recalibration would need MAG-feature
+training data, and the headroom is small (raw bias +0.16).
+
 ## Conclusions
 
 1. On realistic MAGs syn2bani's raw estimate is within 0.5 pp of ANIm truth
