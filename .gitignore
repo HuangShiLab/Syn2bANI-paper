@@ -31,3 +31,4 @@ Thumbs.db
 # Large binary files
 *.s2ba
 *.sketch
+results/synteny_bench/sim/

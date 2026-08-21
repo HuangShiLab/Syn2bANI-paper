@@ -1,0 +1,15 @@
+file	wall_s
+q_ani0.95_inv0.fasta	0.07
+q_ani0.95_inv1.fasta	0.05
+q_ani0.95_inv16.fasta	0.06
+q_ani0.95_inv2.fasta	0.05
+q_ani0.95_inv32.fasta	0.06
+q_ani0.95_inv4.fasta	0.05
+q_ani0.95_inv8.fasta	0.05
+q_ani0.98_inv0.fasta	0.05
+q_ani0.98_inv1.fasta	0.05
+q_ani0.98_inv16.fasta	0.06
+q_ani0.98_inv2.fasta	0.05
+q_ani0.98_inv32.fasta	0.07
+q_ani0.98_inv4.fasta	0.06
+q_ani0.98_inv8.fasta	0.06
