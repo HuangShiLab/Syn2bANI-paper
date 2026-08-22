@@ -14,7 +14,7 @@ WORK=/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k
 export GTDB50K_WORK=$WORK GTDB50K_SCRIPTS=$WORK/scripts NSLICES=190
 mkdir -p "$WORK/logs"
 NPAIRS=$(($(wc -l < "$WORK/pairs_50k.tsv") - 1))
-NEED=$(( (NPAIRS + 229) / 230 ))
+NEED=$(( (NPAIRS + 228) / 229 ))
 if [ "$SLURM_ARRAY_TASK_ID" -ge "$NEED" ]; then
     exit 0
 fi
