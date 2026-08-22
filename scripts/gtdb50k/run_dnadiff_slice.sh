@@ -16,8 +16,8 @@ SLICE=$1
 PAIRS=$WORK/pairs_50k.tsv
 N=$(tail -n +2 "$PAIRS" | wc -l)
 CHUNK=$(( (N + NSLICES - 1) / NSLICES ))
-START=$(( SLICE * CHUNK + 2 ))          # +2: skip header, 1-based sed
-END=$(( (SLICE + 1) * CHUNK + 1 ))
+START=$(( SLICE * CHUNK + 1 ))          # tail already stripped the header
+END=$(( (SLICE + 1) * CHUNK ))
 
 mkdir -p "$WORK/out" "$WORK/rows"
 ROWS_TMP="$WORK/rows/slice_${SLICE}.tsv.tmp"

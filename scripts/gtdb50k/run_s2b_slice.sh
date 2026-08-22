@@ -13,8 +13,8 @@ SLICE=$1
 PAIRS=$WORK/pairs_50k.tsv
 N=$(tail -n +2 "$PAIRS" | wc -l)
 CHUNK=$(( (N + NSLICES - 1) / NSLICES ))
-START=$(( SLICE * CHUNK + 2 ))
-END=$(( (SLICE + 1) * CHUNK + 1 ))
+START=$(( SLICE * CHUNK + 1 ))
+END=$(( (SLICE + 1) * CHUNK ))
 
 OUT=$WORK/s2b_out
 mkdir -p "$OUT"
