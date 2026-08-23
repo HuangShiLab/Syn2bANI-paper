@@ -26,11 +26,7 @@ synteny_score 0.9997, no spurious structural flags. Data and report:
 genomes, 74 phyla), with every genome of the 2,520-pair calibration training
 matrix excluded in both directions; dnadiff/ANIm truth for all pairs. The
 gate, consistency flag, and calibration v5 were frozen before evaluation.
-Panels show the scored subset (n = 39,903; 3,431 BELOW_DETECTION pairs
-unscored by design). (a) Calibrated Syn2bANI v5 vs ANIm (MAE 0.619, bias
--0.12, r = 0.962). (b) skani vs ANIm on the same pairs (MAE 0.957, bias
--0.80, r = 0.973). (c) Per-band MAE. (d) Signed-error distributions.
-Per-pair truth, tool output, per-band and per-phylum metrics:
+Panels (a–c) Calibrated Syn2bANI v5, skani, and FastANI vs ANIm (MAE 0.619, 0.958, 0.977 respectively). (d) Per-band MAE. (e) Signed-error distributions: skani and FastANI carry a large negative bias at divergent bands; the calibrated estimator is centered (bias −0.12). Per-pair truth, tool output, per-band and per-phylum metrics:
 `results/gtdb50k/` (report `GTDB50K_HELDOUT_REPORT.md`, metrics
 `gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
 

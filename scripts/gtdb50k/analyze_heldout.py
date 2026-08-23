@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "..", "results", "gtdb50k")
 
 BAND_ORDER = ["80-85", "85-90", "90-95", "95-100"]
-METHODS = [("syn2bani_raw", "ani_gated"), ("syn2bani_cal", "ani_cal"), ("skani", "skani_ani")]
+METHODS = [("syn2bani_raw", "ani_gated"), ("syn2bani_cal", "ani_cal"), ("skani", "skani_ani"), ("fastani", "fastani_ani")]
 
 
 def metrics(err):
@@ -43,6 +43,10 @@ def main():
                        "ani_upper95", "af_query", "synteny_score", "std_err"]],
                   on="pairid", how="inner")
     assert len(df) == len(truth), f"join dropped rows: {len(df)} vs {len(truth)}"
+
+    fast = pd.read_csv(os.path.join(RES, "fastani_50k.tsv"), sep="\t")
+    fast["fastani_ani"] = pd.to_numeric(fast["fastani_ani"], errors="coerce")
+    df = df.merge(fast[["pairid", "fastani_ani"]], on="pairid", how="inner")
 
     for name, col in METHODS:
         df["err_" + name] = df[col] - df["anim_ani"]
@@ -96,7 +100,7 @@ def main():
     L.append("43,334 same-genus pairs sampled from GTDB R207 representative genomes, "
              "disjoint from the 2,541-pair v5 calibration training set (both directions excluded). "
              "Truth: nucmer/dnadiff ANIm. Methods: syn2bani raw gated estimate, "
-             "syn2bani v5-calibrated estimate (true extrapolation), skani.\n")
+             "syn2bani v5-calibrated estimate (true extrapolation), skani, FastANI.\n")
     L.append("## Overall\n")
     L.append("| method | n | MAE | median | bias | SD | r |")
     L.append("|---|---|---|---|---|---|---|")
@@ -136,6 +140,11 @@ def main():
     L.append(f"- flag distribution: {flag_counts}")
     L.append(f"- gate distribution: {gate_counts}")
     L.append(f"- upper95 coverage (anim_ani <= ani_upper95): {100*cover:.2f}%")
+    L.append(f"- FastANI non-call rate by band (NA rows):")
+    for band in BAND_ORDER:
+        sub = df[df["band"] == band]
+        rate = sub["fastani_ani"].isna().mean() if len(sub) else np.nan
+        L.append(f"  - {band}: {100*rate:.1f}% ({sub['fastani_ani'].isna().sum()}/{len(sub)})")
     L.append(f"- AF tiers of truth set: {af_tier}")
 
     with open(os.path.join(RES, "GTDB50K_HELDOUT_REPORT.md"), "w") as fh:

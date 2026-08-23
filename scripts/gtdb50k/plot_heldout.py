@@ -2,10 +2,9 @@
 """Publication-grade figure for the GTDB 50k held-out benchmark.
 
 Panels:
-  a. syn2bani calibrated v5 vs ANIm (hexbin, common subset)
-  b. skani vs ANIm (hexbin, common subset)
-  c. per-band MAE bars (calibrated vs skani, common subset)
-  d. error-vs-truth distributions (calibrated vs skani)
+  a-c. syn2bani calibrated v5, skani, FastANI vs ANIm (hexbin, scored subset)
+  d. per-band MAE bars (three methods)
+  e. signed-error distributions (three methods)
 
 Output: figures/report/fig_gtdb50k_heldout.png
 """
@@ -32,18 +31,26 @@ plt.rcParams.update({
 def main():
     truth = pd.read_csv(os.path.join(RES, "truth_50k.tsv"), sep="\t")
     s2b = pd.read_csv(os.path.join(RES, "s2b_50k.tsv"), sep="\t")
+    fast = pd.read_csv(os.path.join(RES, "fastani_50k.tsv"), sep="\t")
+    fast["fastani_ani"] = pd.to_numeric(fast["fastani_ani"], errors="coerce")
     pairs = pd.read_csv(os.path.join(RES, "pairs_50k.tsv"), sep="\t")
     pairs["pairid"] = pairs["q_acc"] + "__" + pairs["r_acc"]
     df = truth.merge(pairs[["pairid", "skani_ani", "band"]], on="pairid")
     df = df.merge(s2b[["pairid", "ani_cal"]], on="pairid")
+    df = df.merge(fast[["pairid", "fastani_ani"]], on="pairid")
     df = df[np.isfinite(df["ani_cal"])]
 
-    fig, axes = plt.subplots(2, 2, figsize=(7.2, 6.4))
+    fig = plt.figure(figsize=(10.5, 6.2))
+    gs = fig.add_gridspec(2, 3, hspace=0.35, wspace=0.35)
+    axs = [fig.add_subplot(gs[0, i]) for i in range(3)]
+    ax_bar = fig.add_subplot(gs[1, :2])
+    ax_hist = fig.add_subplot(gs[1, 2])
     lo, hi = 79.5, 100.5
 
-    for ax, col, title, mae in (
-        (axes[0, 0], "ani_cal", "a  Syn2bANI calibrated (v5)", 0.619),
-        (axes[0, 1], "skani_ani", "b  skani", 0.957),
+    for ax, col, title in (
+        (axs[0], "ani_cal", "a  Syn2bANI calibrated (v5)"),
+        (axs[1], "skani_ani", "b  skani"),
+        (axs[2], "fastani_ani", "c  FastANI"),
     ):
         hb = ax.hexbin(df["anim_ani"], df[col], gridsize=120, extent=(lo, hi, lo, hi),
                        bins="log", mincnt=1, cmap="viridis")
@@ -51,42 +58,49 @@ def main():
         ax.set_xlim(lo, hi); ax.set_ylim(lo, hi)
         ax.set_xlabel("ANIm (dnadiff) [%]")
         ax.set_ylabel("estimated ANI [%]")
-        ax.set_title(f"{title}   MAE {mae}", loc="left", fontweight="bold")
+        mae = np.mean(np.abs(df[col] - df["anim_ani"]))
+        ax.set_title(f"{title}   MAE {mae:.3f}", loc="left", fontweight="bold")
         ax.set_aspect("equal")
         fig.colorbar(hb, ax=ax, label="pairs (log)", shrink=0.85)
 
-    # c: per-band MAE
-    ax = axes[1, 0]
+    # d: per-band MAE
     mae_cal = [np.mean(np.abs(df.loc[df.band == b, "ani_cal"] - df.loc[df.band == b, "anim_ani"])) for b in BAND_ORDER]
     mae_sk = [np.mean(np.abs(df.loc[df.band == b, "skani_ani"] - df.loc[df.band == b, "anim_ani"])) for b in BAND_ORDER]
-    x = np.arange(len(BAND_ORDER)); w = 0.36
-    ax.bar(x - w/2, mae_cal, w, label="Syn2bANI cal", color="#219ebc")
-    ax.bar(x + w/2, mae_sk, w, label="skani", color="#fb8500")
-    for xi, v in zip(x - w/2, mae_cal):
-        ax.text(xi, v + 0.03, f"{v:.2f}", ha="center", fontsize=7.5)
-    for xi, v in zip(x + w/2, mae_sk):
-        ax.text(xi, v + 0.03, f"{v:.2f}", ha="center", fontsize=7.5)
-    ax.set_xticks(x, BAND_ORDER)
-    ax.set_xlabel("ANI band [%]")
-    ax.set_ylabel("MAE vs ANIm [ANI points]")
-    ax.set_title("c  Per-band MAE (held-out)", loc="left", fontweight="bold")
-    ax.legend(frameon=False)
-    ax.set_ylim(0, max(mae_sk) * 1.18)
+    mae_fa = [np.mean(np.abs(df.loc[df.band == b, "fastani_ani"] - df.loc[df.band == b, "anim_ani"])) for b in BAND_ORDER]
+    x = np.arange(len(BAND_ORDER)); w = 0.25
+    ax_bar.bar(x - w, mae_cal, w, label="Syn2bANI cal", color="#219ebc")
+    ax_bar.bar(x, mae_sk, w, label="skani", color="#fb8500")
+    ax_bar.bar(x + w, mae_fa, w, label="FastANI", color="#8338ec")
+    for xi, v in zip(x - w, mae_cal):
+        ax_bar.text(xi, v + 0.03, f"{v:.2f}", ha="center", fontsize=7)
+    for xi, v in zip(x, mae_sk):
+        ax_bar.text(xi, v + 0.03, f"{v:.2f}", ha="center", fontsize=7)
+    for xi, v in zip(x + w, mae_fa):
+        ax_bar.text(xi, v + 0.03, f"{v:.2f}", ha="center", fontsize=7)
+    ax_bar.set_xticks(x, BAND_ORDER)
+    ax_bar.set_xlabel("ANI band [%]")
+    ax_bar.set_ylabel("MAE vs ANIm [ANI points]")
+    ax_bar.set_title("d  Per-band MAE (held-out)", loc="left", fontweight="bold")
+    ax_bar.legend(frameon=False, ncol=3)
+    ax_bar.set_ylim(0, max(max(mae_sk), max(mae_fa)) * 1.18)
 
-    # d: error distributions
-    ax = axes[1, 1]
+    # e: error distributions
     e_cal = (df["ani_cal"] - df["anim_ani"]).to_numpy()
     e_sk = (df["skani_ani"] - df["anim_ani"]).to_numpy()
+    e_fa = (df["fastani_ani"] - df["anim_ani"]).to_numpy()
     bins = np.linspace(-5, 5, 161)
-    ax.hist(e_sk, bins=bins, density=True, histtype="step", lw=1.2, color="#fb8500",
+    ax_bar_label = "estimate"
+    ax_hist.hist(e_fa, bins=bins, density=True, histtype="step", lw=1.2, color="#8338ec",
+            label=f"FastANI (bias {np.mean(e_fa):+.2f})")
+    ax_hist.hist(e_sk, bins=bins, density=True, histtype="step", lw=1.2, color="#fb8500",
             label=f"skani (bias {np.mean(e_sk):+.2f})")
-    ax.hist(e_cal, bins=bins, density=True, histtype="step", lw=1.2, color="#219ebc",
+    ax_hist.hist(e_cal, bins=bins, density=True, histtype="step", lw=1.2, color="#219ebc",
             label=f"Syn2bANI cal (bias {np.mean(e_cal):+.2f})")
-    ax.axvline(0, color="grey", lw=0.7, ls=":")
-    ax.set_xlabel("estimate − ANIm [ANI points]")
-    ax.set_ylabel("density")
-    ax.set_title("d  Signed-error distribution", loc="left", fontweight="bold")
-    ax.legend(frameon=False)
+    ax_hist.axvline(0, color="grey", lw=0.7, ls=":")
+    ax_hist.set_xlabel("estimate − ANIm [ANI points]")
+    ax_hist.set_ylabel("density")
+    ax_hist.set_title("e  Signed-error distribution", loc="left", fontweight="bold")
+    ax_hist.legend(frameon=False)
 
     fig.suptitle("Held-out GTDB-R207 benchmark: 43,334 pairs, training genomes excluded "
                  f"(scored subset n = {len(df):,})", fontsize=10)
