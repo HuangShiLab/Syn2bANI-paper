@@ -6,10 +6,12 @@ set -uo pipefail
 WORK=${SYN2BANI_WORK:-/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k}
 SCRIPTS=${SYN2BANI_SCRIPTS:-$WORK/scripts}
 GENOMES=${SYN2BANI_GENOMES:-$WORK/genomes_high_ani}
+ANVIO_BIN=${ANVIO_BIN:-/group/aos_shihuang/conda/envs/anvio/bin}
+PY=${PY:-/group/aos_shihuang/conda/bin/python3}
 NSLICES=${NSLICES:-80}
 
 SLICE=$1
-PAIRS=$WORK/high_ani_candidates.tsv
+PAIRS=$WORK/high_ani_pairs_ready.tsv
 N=$(tail -n +2 "$PAIRS" | wc -l)
 CHUNK=$(( (N + NSLICES - 1) / NSLICES ))
 START=$(( SLICE * CHUNK + 1 ))
@@ -18,7 +20,7 @@ END=$(( (SLICE + 1) * CHUNK ))
 mkdir -p "$WORK/out_high_ani" "$WORK/rows_high_ani"
 ROWS_TMP="$WORK/rows_high_ani/slice_${SLICE}.tsv.tmp"
 ROWS_OUT="$WORK/rows_high_ani/slice_${SLICE}.tsv"
-PY=${PY:-/group/aos_shihuang/conda/bin/python3}
+export PATH="$ANVIO_BIN:$PATH"
 : > "$ROWS_TMP"
 
 tail -n +2 "$PAIRS" | sed -n "${START},${END}p" | while IFS=$'\t' read -r PID QA RA _; do

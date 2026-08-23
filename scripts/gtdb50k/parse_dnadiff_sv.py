@@ -108,6 +108,8 @@ def main():
         records.append(rec)
 
     sv = pd.DataFrame(records)
+    sv = sv.rename(columns={"blocks": "dnadiff_blocks", "breakpoints": "dnadiff_breakpoints",
+                            "large_indels": "dnadiff_large_indels", "synteny_score": "dnadiff_synteny_score"})
     sv.to_csv(os.path.join(RES, "sv_truth_50k.tsv"), sep="\t", index=False)
 
     merged = s2b.merge(sv, on="pairid", how="inner")
