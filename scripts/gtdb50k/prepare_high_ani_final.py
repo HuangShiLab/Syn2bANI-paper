@@ -90,6 +90,10 @@ def main():
 
     truth["band"] = truth["anim_ani"].apply(assign_band)
     df = truth[truth["band"].notna()].copy()
+    n_before = len(df)
+    df = df.drop_duplicates(subset=["pairid"], keep="first")
+    if len(df) < n_before:
+        print(f"dropped {n_before - len(df):,} duplicate pairid rows")
 
     # attach original stratum label when available
     if os.path.exists(args.candidates):

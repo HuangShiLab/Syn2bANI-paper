@@ -18,7 +18,13 @@ import pandas as pd
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.environ.get("SYN2BANI_ROOT", os.path.join(HERE, "..", ".."))
+# In the repo the script is at scripts/gtdb50k/; on HPC it may be copied to
+# results/gtdb50k/scripts/. Infer the project root accordingly.
+if os.path.basename(os.path.dirname(HERE)) == "gtdb50k" and os.path.basename(HERE) == "scripts":
+    # HPC copy location: results/gtdb50k/scripts/<script>
+    ROOT = os.environ.get("SYN2BANI_ROOT", os.path.join(HERE, "..", "..", ".."))
+else:
+    ROOT = os.environ.get("SYN2BANI_ROOT", os.path.join(HERE, "..", ".."))
 RES = os.path.join(ROOT, "results", "gtdb50k")
 
 S2B_COLS = [
