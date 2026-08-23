@@ -8,7 +8,8 @@ set -uo pipefail
 WORK=${SYN2BANI_WORK:-/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k}
 GENOME_DIR="$WORK/genomes_high_ani"
 LIST="$WORK/high_ani_genomes.txt"
-CHUNK_SIZE=${CHUNK_SIZE:-500}
+CHUNK_SIZE=${CHUNK_SIZE:-100}
+MAX_RETRY=${MAX_RETRY:-3}
 DATASETS=${DATASETS:-/group/aos_shihuang/conda/bin/datasets}
 
 mkdir -p "$GENOME_DIR"
@@ -40,19 +41,32 @@ for i in $(seq 0 $((NCHUNKS - 1))); do
     fi
 
     echo "Chunk $i/$NCHUNKS: downloading $MISSING missing genomes..."
-    TMP=$(mktemp -d "$WORK/dl_chunk_${i}.XXXXXX")
-    ZIP="$TMP/chunk.zip"
-    if $DATASETS download genome accession --inputfile "$CHUNK_FILE" --filename "$ZIP" --include genome > "$TMP/dl.log" 2>&1; then
-        unzip -q "$ZIP" -d "$TMP/extracted" || { echo "  unzip failed chunk $i"; rm -rf "$TMP" "$CHUNK_FILE"; continue; }
-        find "$TMP/extracted/ncbi_dataset/data" -name "*.fna" | while read -r FNA; do
-            BASE=$(basename "$FNA" | sed 's/_.*$//')
-            cp "$FNA" "$GENOME_DIR/${BASE}.fna"
-        done
-        echo "  chunk $i done"
-    else
-        echo "  download failed chunk $i (see $TMP/dl.log)"
+    SUCCESS=0
+    for attempt in $(seq 1 $MAX_RETRY); do
+        TMP=$(mktemp -d "$WORK/dl_chunk_${i}.XXXXXX")
+        ZIP="$TMP/chunk.zip"
+        if $DATASETS download genome accession --inputfile "$CHUNK_FILE" --filename "$ZIP" --include genome > "$TMP/dl.log" 2>&1; then
+            if unzip -q "$ZIP" -d "$TMP/extracted" 2>/dev/null; then
+                find "$TMP/extracted/ncbi_dataset/data" -name "*.fna" | while read -r FNA; do
+                    BASE=$(basename "$FNA" | cut -d'_' -f1,2)
+                    cp "$FNA" "$GENOME_DIR/${BASE}.fna"
+                done
+                echo "  chunk $i done (attempt $attempt)"
+                SUCCESS=1
+                rm -rf "$TMP" "$CHUNK_FILE"
+                break
+            else
+                echo "  unzip failed chunk $i attempt $attempt"
+            fi
+        else
+            echo "  download failed chunk $i attempt $attempt (see $TMP/dl.log)"
+        fi
+        rm -rf "$TMP"
+        sleep 5
+    done
+    if [ "$SUCCESS" -eq 0 ]; then
+        rm -f "$CHUNK_FILE"
     fi
-    rm -rf "$TMP" "$CHUNK_FILE"
 done
 
 echo "Download complete. Present genomes: $(ls $GENOME_DIR/*.fna 2>/dev/null | wc -l) / $N"
