@@ -48,10 +48,10 @@ def load_high_ani_train():
     # band label compatible with eval_pairs
     df["band"] = df["anim_ani"].apply(
         lambda x: TOP_BAND if x >= 95.0 else "other")
-    # rename to match v5 column expectations
-    df = df.rename(columns={"q_acc": "query", "r_acc": "reference"})
-    df["query"] = df["query"].astype(str)
-    df["reference"] = df["reference"].astype(str)
+    # keep accession identifiers alongside seqids for traceability
+    df = df.rename(columns={"q_acc": "query_asm", "r_acc": "ref_asm"})
+    df["query_asm"] = df["query_asm"].astype(str)
+    df["ref_asm"] = df["ref_asm"].astype(str)
     n_drop = int(df["ani_gated"].isna().sum())
     df = df[df["ani_gated"].notna()].reset_index(drop=True)
     print(f"high-ANI train rows: {len(df)} (dropped {n_drop} non-finite)")

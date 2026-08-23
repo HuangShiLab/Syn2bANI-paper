@@ -54,15 +54,22 @@ def parse_s2b(pairid, path):
 def parse_skani(pairid, path):
     try:
         with open(path) as fh:
+            header_seen = False
             for line in fh:
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
                 parts = line.split("\t")
-                if len(parts) >= 2:
+                # skani 0.3.2 output: header line starts with Ref_file
+                if not header_seen:
+                    if parts[0].lower() in ("ref_file", "ref_name"):
+                        header_seen = True
+                        continue
+                    header_seen = True
+                if len(parts) >= 3:
                     return {"pairid": pairid,
-                            "skani_ani": float(parts[0]),
-                            "skani_align_frac": float(parts[1])}
+                            "skani_ani": float(parts[2]),
+                            "skani_align_frac": float(parts[3]) if len(parts) > 3 else np.nan}
     except Exception:
         pass
     return {"pairid": pairid, "skani_ani": np.nan, "skani_align_frac": np.nan}
