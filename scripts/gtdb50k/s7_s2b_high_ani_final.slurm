@@ -12,8 +12,7 @@ set -euo pipefail
 WORK=/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k
 export SYN2BANI_WORK=$WORK NSLICES=45
 mkdir -p "$WORK/logs"
-NPAIRS=$(($(wc -l < "$WORK/high_ani_pairs_final.tsv") - 1))
-NEED=$(( (NPAIRS + 99) / 100 ))
+NEED=${NSLICES}
 if [ "$SLURM_ARRAY_TASK_ID" -ge "$NEED" ]; then
     exit 0
 fi
