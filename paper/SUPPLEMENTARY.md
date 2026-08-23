@@ -18,6 +18,22 @@ real MAG pairs (dnadiff-derived truth, median 0 breaks): median
 synteny_score 0.9997, no spurious structural flags. Data and report:
 `results/synteny_bench/`.
 
+## Supplementary Figure S2 — Held-out GTDB-R207 benchmark
+
+(`figures/report/fig_gtdb50k_heldout.png`)
+
+43,334 same-genus pairs sampled from GTDB R207 representatives (24,831
+genomes, 74 phyla), with every genome of the 2,520-pair calibration training
+matrix excluded in both directions; dnadiff/ANIm truth for all pairs. The
+gate, consistency flag, and calibration v5 were frozen before evaluation.
+Panels show the scored subset (n = 39,903; 3,431 BELOW_DETECTION pairs
+unscored by design). (a) Calibrated Syn2bANI v5 vs ANIm (MAE 0.619, bias
+-0.12, r = 0.962). (b) skani vs ANIm on the same pairs (MAE 0.957, bias
+-0.80, r = 0.973). (c) Per-band MAE. (d) Signed-error distributions.
+Per-pair truth, tool output, per-band and per-phylum metrics:
+`results/gtdb50k/` (report `GTDB50K_HELDOUT_REPORT.md`, metrics
+`gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
+
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 
 695 CAMI2 bins vs dnadiff ANIm truth (raw gated syn2bani; skani; FastANI).
