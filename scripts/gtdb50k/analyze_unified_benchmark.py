@@ -21,9 +21,12 @@ RES = os.path.join(ROOT, "results", "gtdb50k")
 FIG = os.path.join(ROOT, "figures")
 
 BAND_ORDER = ["80-85", "85-90", "90-95", "95-97", "97-100"]
-# Hybrid: use calibrated below 97% ANI (where calibration improves over raw)
-# and raw gated at/above 97% (where calibration over-corrects the already-accurate MLE).
-HYBRID_THRESHOLD = 97.0
+# Hybrid: use calibrated below 98% ANI (where calibration improves over raw)
+# and raw gated at/above 98% (where calibration over-corrects the already-accurate MLE).
+# 98% is the operational estimate-based threshold; the true-ANI optimum is ~97%,
+# but raw gated is itself biased high in the 95-97% band, so a higher threshold
+# on the estimate reduces misclassification and gives the best overall MAE.
+HYBRID_THRESHOLD = 98.0
 METHODS = {
     "syn2bani_raw": "ani_gated",
     "syn2bani_v6": "ani_cal",

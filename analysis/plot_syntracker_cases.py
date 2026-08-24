@@ -130,60 +130,52 @@ def main():
     cases_df = pd.concat(all_cases, ignore_index=True)
     cases_df.to_csv(OUT_RES / "top_discordant_cases.tsv", sep="\t", index=False, float_format="%.4f")
 
-    # --- Figure 1: main two-species panel ---
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=False)
+    # --- Figure 1: main 2x2 panel (Syn2bANI and skani ANI vs synteny) ---
+    fig, axes = plt.subplots(2, 2, figsize=(14, 11))
 
-    # E. coli hypermutator
-    ax = axes[0]
+    def plot_one_panel(ax, df, x_col, title, ylim, color_by, annotate_n=2):
+        if color_by == "time":
+            sc = ax.scatter(df[x_col], df["synteny_score"], c=df["time_delta"].astype(float),
+                            cmap="viridis_r", s=35, alpha=0.75, edgecolors="none")
+            plt.colorbar(sc, ax=ax, label="Days between isolates")
+        elif color_by == "host":
+            colors = df["same_host"].map({True: "#1f77b4", False: "#ff7f0e"})
+            ax.scatter(df[x_col], df["synteny_score"], c=colors, s=35, alpha=0.75, edgecolors="none")
+            ax.scatter([], [], c="#1f77b4", s=30, label="Same host")
+            ax.scatter([], [], c="#ff7f0e", s=30, label="Different host")
+            ax.legend(loc="lower left", fontsize=8)
+        xlabel = "Syn2bANI ANI (%)" if x_col == "ani" else "skani ANI (%)"
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel("Synteny score")
+        ax.set_title(title)
+        ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7, label="SynTracker cutoff")
+        ax.set_xlim(99.0, 100.01)
+        ax.set_ylim(ylim)
+        # annotate top 1-2 discordant cases (defined by Syn2bANI discordance)
+        top = cases_df[cases_df["species"] == df.name].head(annotate_n)
+        offsets = [(25, 15), (-25, -15)]
+        for i, (_, r) in enumerate(top.iterrows()):
+            ox, oy = offsets[i]
+            if "q_host" in r and pd.notna(r["q_host"]):
+                label = f"{r['pair'][0]}({r['q_host']})\nvs {r['pair'][1]}({r['r_host']})"
+            else:
+                label = f"{r['pair'][0]}\nvs {r['pair'][1]}"
+            ax.annotate(label, xy=(r[x_col], r["synteny_score"]),
+                        xytext=(ox, oy), textcoords="offset points",
+                        fontsize=6, ha="center", va="center",
+                        arrowprops=dict(arrowstyle="-", color="gray", lw=0.4,
+                                       connectionstyle="arc3,rad=0.1"),
+                        bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="gray", alpha=0.85))
+
     eco = species_frames["Escherichia_coli_hypermutator"]
-    sc = ax.scatter(eco["ani"], eco["synteny_score"], c=eco["time_delta"].astype(float),
-                    cmap="viridis_r", s=30, alpha=0.7, edgecolors="none")
-    cbar = plt.colorbar(sc, ax=ax, label="Days between isolates")
-    # annotate top discordant pairs with manual offsets to avoid overlap
-    top_eco = cases_df[cases_df["species"] == "Escherichia_coli_hypermutator"].head(4)
-    offsets = [(0, -18), (0, 18), (35, 0), (-35, 0)]
-    for i, (_, r) in enumerate(top_eco.iterrows()):
-        ox, oy = offsets[i]
-        label = f"{r['pair'][0]} vs {r['pair'][1]}"
-        ax.annotate(label, xy=(r["ani"], r["synteny_score"]),
-                    xytext=(ox, oy), textcoords="offset points",
-                    fontsize=7, ha="center", va="center",
-                    arrowprops=dict(arrowstyle="-", color="gray", lw=0.5,
-                                   connectionstyle="arc3,rad=0.1"),
-                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="gray", alpha=0.85))
-    ax.set_xlabel("Syn2bANI ANI (%)")
-    ax.set_ylabel("Synteny score")
-    ax.set_title("E. coli hypermutator\n(near-clonal isolates from long-term colonization)")
-    ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7, label="SynTracker cutoff")
-    ax.set_xlim(99.0, 100.01)
-    ax.set_ylim(0.70, 1.0)
-    ax.legend(loc="lower left", fontsize=8)
+    eco.name = "Escherichia_coli_hypermutator"
+    plot_one_panel(axes[0, 0], eco, "ani", "E. coli hypermutator — Syn2bANI", (0.70, 1.0), "time")
+    plot_one_panel(axes[0, 1], eco, "ani_skani", "E. coli hypermutator — skani", (0.70, 1.0), "time")
 
-    # H. pylori
-    ax = axes[1]
     hp = species_frames["Helicobacter_pylori"]
-    colors = hp["same_host"].map({True: "#1f77b4", False: "#ff7f0e"})
-    ax.scatter(hp["ani"], hp["synteny_score"], c=colors, s=30, alpha=0.7, edgecolors="none")
-    ax.scatter([], [], c="#1f77b4", s=30, label="Same host")
-    ax.scatter([], [], c="#ff7f0e", s=30, label="Different host")
-    top_hp = cases_df[cases_df["species"] == "Helicobacter_pylori"].head(4)
-    offsets = [(-40, -15), (-40, 15), (40, -15), (40, 15)]
-    for i, (_, r) in enumerate(top_hp.iterrows()):
-        ox, oy = offsets[i]
-        label = f"{r['pair'][0]}({r['q_host']}) vs {r['pair'][1]}({r['r_host']})"
-        ax.annotate(label, xy=(r["ani"], r["synteny_score"]),
-                    xytext=(ox, oy), textcoords="offset points",
-                    fontsize=7, ha="center", va="center",
-                    arrowprops=dict(arrowstyle="-", color="gray", lw=0.5,
-                                   connectionstyle="arc3,rad=0.1"),
-                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="gray", alpha=0.85))
-    ax.set_xlabel("Syn2bANI ANI (%)")
-    ax.set_ylabel("Synteny score")
-    ax.set_title("H. pylori\n(longitudinal isolates from multiple hosts)")
-    ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7, label="SynTracker cutoff")
-    ax.set_xlim(99.0, 100.01)
-    ax.set_ylim(0.88, 0.985)
-    ax.legend(loc="lower left", fontsize=8)
+    hp.name = "Helicobacter_pylori"
+    plot_one_panel(axes[1, 0], hp, "ani", "H. pylori — Syn2bANI", (0.88, 0.985), "host")
+    plot_one_panel(axes[1, 1], hp, "ani_skani", "H. pylori — skani", (0.88, 0.985), "host")
 
     plt.tight_layout()
     fig.savefig(OUT_FIG / "syntracker_high_ani_low_synteny.png", dpi=300)
