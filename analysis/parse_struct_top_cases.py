@@ -8,13 +8,14 @@ Produces a summary TSV of chain-level structural variation statistics:
 - indel count and total indel bases (gaps between collinear chains)
 """
 
+import argparse
 from pathlib import Path
 import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parent.parent
-STRUCT_DIR = ROOT / "results" / "syntracker_validation" / "struct_top_cases"
-OUT_TSV = ROOT / "results" / "syntracker_validation" / "struct_top_cases_summary.tsv"
+DEFAULT_STRUCT_DIR = ROOT / "results" / "syntracker_validation" / "struct_top_cases"
+DEFAULT_OUT_TSV = ROOT / "results" / "syntracker_validation" / "struct_top_cases_summary.tsv"
 
 
 def parse_paf(path):
@@ -128,8 +129,15 @@ def parse_ani(path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Parse syn2bani struct PAF outputs and summarize SV statistics.")
+    parser.add_argument("--input-dir", type=Path, default=DEFAULT_STRUCT_DIR,
+                        help="Directory containing struct .tsv PAF outputs.")
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUT_TSV,
+                        help="Output summary TSV path.")
+    args = parser.parse_args()
+
     rows = []
-    for paf_path in sorted(STRUCT_DIR.glob("*.tsv")):
+    for paf_path in sorted(args.input_dir.glob("*.tsv")):
         if paf_path.name.endswith("_ani.tsv"):
             continue
         case = paf_path.stem
@@ -170,8 +178,9 @@ def main():
         "n_anchors",
         "n_tags",
     ]]
-    summary.to_csv(OUT_TSV, sep="\t", index=False)
-    print(f"Wrote summary for {len(summary)} cases to {OUT_TSV}")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    summary.to_csv(args.output, sep="\t", index=False)
+    print(f"Wrote summary for {len(summary)} cases to {args.output}")
     print(summary.to_string(index=False))
 
 
