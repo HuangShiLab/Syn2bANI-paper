@@ -21,9 +21,13 @@ RES = os.path.join(ROOT, "results", "gtdb50k")
 FIG = os.path.join(ROOT, "figures")
 
 BAND_ORDER = ["80-85", "85-90", "90-95", "95-97", "97-100"]
+# Hybrid: use calibrated below 97% ANI (where calibration improves over raw)
+# and raw gated at/above 97% (where calibration over-corrects the already-accurate MLE).
+HYBRID_THRESHOLD = 97.0
 METHODS = {
     "syn2bani_raw": "ani_gated",
     "syn2bani_v6": "ani_cal",
+    "syn2bani_hybrid": "ani_hybrid",
     "skani": "skani_ani",
     "fastani": "fastani_ani",
 }
@@ -76,6 +80,18 @@ def main():
 
     all_cols = set(hld.columns) & set(hai.columns)
     unified = pd.concat([hld[list(all_cols)], hai[list(all_cols)]], ignore_index=True)
+
+    # Build hybrid estimate: calibrated for divergent pairs, raw gated for near-clonal.
+    # Use ani_gated when it is finite and >= threshold; otherwise fall back to ani_cal.
+    # Pairs where ani_cal is NaN (BELOW_DETECTION) remain unscored by design.
+    gated = unified["ani_gated"].to_numpy(dtype=float)
+    cal = unified["ani_cal"].to_numpy(dtype=float)
+    hybrid = np.where(
+        np.isfinite(gated) & (gated >= HYBRID_THRESHOLD),
+        gated,
+        cal,
+    )
+    unified["ani_hybrid"] = hybrid
 
     rows = []
     def block(sub, label, group):
@@ -133,6 +149,7 @@ def main():
     L.append("\n## Notes\n")
     L.append("- syn2bani_v6 is the ridge calibration trained on 2,520 v5 pairs + 1,614 high-ANI train pairs.\n")
     L.append("- syn2bani_raw is the gated MLE without calibration.\n")
+    L.append(f"- syn2bani_hybrid uses ani_cal for ani_gated < {HYBRID_THRESHOLD}% and ani_gated otherwise.\n")
     L.append("- skani/FastANI are shown where they returned a value.\n")
     with open(os.path.join(RES, "UNIFIED_BENCHMARK_REPORT.md"), "w") as fh:
         fh.write("\n".join(L))
@@ -140,7 +157,8 @@ def main():
     # plots
     os.makedirs(FIG, exist_ok=True)
     fig, axes = plt.subplots(2, 2, figsize=(10, 10))
-    colors = {"syn2bani_raw": "C0", "syn2bani_v6": "C1", "skani": "C2", "fastani": "C3"}
+    colors = {"syn2bani_raw": "C0", "syn2bani_v6": "C1", "syn2bani_hybrid": "C4",
+              "skani": "C2", "fastani": "C3"}
     # scatter
     ax = axes[0, 0]
     for name, col in METHODS.items():
@@ -156,14 +174,14 @@ def main():
     # error by band
     ax = axes[0, 1]
     x = np.arange(len(BAND_ORDER))
-    width = 0.2
+    width = 0.15
     for i, name in enumerate(METHODS):
         vals = []
         for band in BAND_ORDER:
             m = g("band", band, name)
             vals.append(m.mae if m is not None else np.nan)
         ax.bar(x + i * width, vals, width, label=name, color=colors[name])
-    ax.set_xticks(x + width * 1.5)
+    ax.set_xticks(x + width * ((len(METHODS) - 1) / 2))
     ax.set_xticklabels(BAND_ORDER)
     ax.set_ylabel("MAE (ANI points)")
     ax.set_xlabel("ANI band")

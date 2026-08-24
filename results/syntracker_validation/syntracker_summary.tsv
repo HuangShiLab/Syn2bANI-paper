@@ -1,0 +1,3 @@
+species	n_pairs	n_high_ani	mean_ani_high	mean_synteny_high	min_synteny_high	mean_breakpoints_high	max_breakpoints_high	rho_ani_synteny
+Escherichia_coli_hypermutator	253	253	99.9896	0.7595	0.6950	905.6957	1128.0000	0.0621
+Helicobacter_pylori	672	672	99.9941	0.9595	0.9131	28.1116	63.0000	0.0635
