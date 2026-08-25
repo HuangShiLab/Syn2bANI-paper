@@ -264,6 +264,16 @@ Syn2bANI is implemented in Rust (edition 2021) with needletail [13] for FASTA pa
 
 **Supplementary Figure S4 — Genome quality does not drive ANI error on GTDB-R207** (`figures/report/gtdb_quality_vs_mae_combined.png`). 39,903 held-out same-genus pairs with GTDB R207 metadata (completeness, contamination, contig count, mean contig length) and dnadiff/ANIm truth. Calibrated Syn2bANI v5 overall MAE = 0.619, Pearson r = 0.962. (a) MAE by minimum pair completeness (n = 3,972 below 70%, MAE 0.82; n = 22,259 at 95–100%, MAE 0.59). (b) MAE by maximum pair contamination. (c) MAE by maximum contig count. (d) MAE by minimum mean contig length (<5 kb: MAE 0.81; ≥10 kb: MAE 0.59–0.66). Error bars are 95% confidence intervals by bootstrap. Only the most fragmented genomes (<5 kb mean contig length) show a modest accuracy degradation; typical MAG-level completeness/contamination variation has little effect on ANI accuracy.
 
+**Supplementary Figure S5 — Exact-truth indel ladder and indel sweep** (`figures/report/fig_s5_simulation_indel.png`). (a) ANI ladder evolved from *E. coli* K-12 MG1655 at 85.0–99.9% true ANI with a 400 kb inversion plus ~1 deletion per 100 kb; Syn2bANI (4-enzyme panel) MAE = 0.073 ANI points. (b) Indel sweep at fixed true ANI 95.000 with 0–4 deletions per 100 kb; error stays between +0.032 and +0.184 (MAE 0.081). Gamma and uniform estimates are identical on uniform-rate data. Rerun with the current release binary (`fe0f36c`, v5 calibration, rescue pass).
+
+**Supplementary Figure S6 — GC coverage ladder** (`figures/report/fig_s6_simulation_gc.png`). Substitution ladders evolved on five real template genomes spanning GC 27.2–72.1%. Syn2bANI error is 0.074–0.356 ANI points and is *not* monotone in GC; the worst genome (*B. longum*, GC 60.1%) sits mid-range. The GC sweep source genomes are not present in the repository, so this panel reproduces the historical 4-enzyme sweep reported in `ALGORITHM_MLE.md` §4.8.
+
+**Supplementary Figure S7 — Simulated fragmentation** (`figures/report/fig_s7_simulation_fragment.png`). A 95% ANI *E. coli* query was fragmented into 20–201 contigs (~50% reverse-complemented, order shuffled, no sequence lost). Syn2bANI error is 0.018–0.179 (MAE 0.070), confirming that random fragmentation per se does not bias the chain-restricted MLE. Real assemblies below ~20 kb N50 behave differently because they lose sequence at repeat boundaries; see Results 2.3 and Fig. 10c.
+
+**Supplementary Figure S8 — Accessory-content confound** (`figures/report/fig_s8_simulation_accessory.png`). Core ANI fixed at 95.000 with 0–50% of the genome replaced by composition-preserving, homology-destroying shuffled blocks. (a) ANI estimate remains flat across accessory fractions (+0.044 to +0.250, MAE 0.112) because only tags inside chains contribute to the likelihood. (b) `af_query` tracks the true shared fraction (1 − F) to within 0.004, demonstrating the decoupling of divergence and shared-content estimates.
+
+**Supplementary Figure S9 — Mosaic/rate-heterogeneity family** (`figures/report/fig_s9_simulation_mosaic.png`). Per-block divergence rates sampled from Gamma(α, α) with α = 0.5/1/2 (mean ANI 90–98) and deliberately misspecified bimodal 50/70%-core cases. The gamma estimator reduces error relative to the uniform estimator (e.g., gamma MAE 1.35 vs uniform 2.75 on gamma regimes), but residual bias remains on bimodal misspecification (gamma MAE 2.43 vs uniform 3.42), motivating the real-genome ridge calibration of Results 2.5.
+
 ---
 
 ## Tables
@@ -304,12 +314,12 @@ Syn2bANI is implemented in Rust (edition 2021) with needletail [13] for FASTA pa
 
 | # | Dataset | Type | Composition | Ground truth | Used in |
 |---|---|---|---|---|---|
-| 1 | ANI ladder | simulated | 12 levels, 85–99.9% ANI; 400 kb inversion; ± ~46 deletions | exact | Fig. 2 |
-| 2 | Indel sweep | simulated | ANI 95.000; 0–4 deletions/100 kb | exact | Fig. 3a |
-| 3 | Fragmentation ladder | simulated | 20–201 contigs; ~50% reverse-complemented | exact | Fig. 3b |
-| 4 | GC ladders | simulated | 5 real templates, GC 27.2–72.1% | exact | Fig. 3c |
-| 5 | Accessory sweep | simulated | core ANI 95.000; 0–50% shuffled accessory | exact | Fig. 3d |
-| 6 | Mosaic / rate-heterogeneity | simulated | Gamma(α,α), α = 0.5/1/2, ANI 90–98 + bimodal | exact | Results 2.5, Methods 4.7 |
+| 1 | ANI ladder | simulated | 12 levels, 85–99.9% ANI; 400 kb inversion; ± ~46 deletions | exact | Fig. 2; Fig. S5 |
+| 2 | Indel sweep | simulated | ANI 95.000; 0–4 deletions/100 kb | exact | Fig. 3a; Fig. S5 |
+| 3 | Fragmentation ladder | simulated | 20–201 contigs; ~50% reverse-complemented | exact | Fig. 3b; Fig. S7 |
+| 4 | GC ladders | simulated | 5 real templates, GC 27.2–72.1% | exact | Fig. 3c; Fig. S6 |
+| 5 | Accessory sweep | simulated | core ANI 95.000; 0–50% shuffled accessory | exact | Fig. 3d; Fig. S8 |
+| 6 | Mosaic / rate-heterogeneity | simulated | Gamma(α,α), α = 0.5/1/2, ANI 90–98 + bimodal | exact | Results 2.5, Methods 4.7; Fig. S9 |
 | 7 | Inversion ladder | simulated | ANI 95/98; 0–32 inversions (2 breakpoints each) | exact | Fig. S1 |
 | 8 | GTDB-ANIm benchmark | real | 2,074 GTDB-R207 pairs, 4 bands (475/837/690/72) | dnadiff ANIm | Fig. 8, Table 1 |
 | 9 | 95–99.5% expansion | real | 467 pairs; 607 species, 26 phyla | dnadiff ANIm | calibration training |
