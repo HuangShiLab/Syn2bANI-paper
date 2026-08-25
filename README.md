@@ -1,6 +1,6 @@
 # Syn2bANI-paper
 
-> Paper repository for **"Syn2b-ANI: Strain-level ANI estimation via fixed restriction-site anchors for fragmented metagenome-assembled genomes"**
+> Paper repository for **"Syn2b-ANI: Strain-level ANI estimation and structural comparison via fixed restriction-site anchors"**
 
 This repository contains the manuscript, analysis code, benchmark data, and figures for the Syn2bANI paper.
 
@@ -10,123 +10,101 @@ This repository contains the manuscript, analysis code, benchmark data, and figu
 
 ```
 Syn2bANI-paper/
-├── paper/              # Manuscript drafts, outlines, and methods documentation
-│   ├── MANUSCRIPT_OUTLINE.md
-│   ├── GBRT_DEBIAS_EXPLANATION.md
-│   ├── GBRT_METHODS_FOR_MANUSCRIPT.md
-│   └── GBRT_V2_TRAINING_REPORT.md
-├── analysis/           # Python scripts for analysis and figure generation
-│   ├── benchmark_pipeline.py
-│   ├── performance_benchmark.py
-│   ├── plot_comparison.py
-│   ├── plot_final.py
-│   ├── plot_multispecies.py
-│   ├── plot_performance.py
-│   ├── train_gbrt_v2.py
-│   ├── validate_gbrt_v2.py
+├── paper/              # Manuscript drafts and methods documentation
+│   ├── manuscript.md
+│   ├── manuscript.docx
+│   ├── SUPPLEMENTARY.md
+│   ├── SIMULATION_AND_PERFORMANCE_REPORT.md
 │   └── ...
-├── data/               # Benchmark data and intermediate results
-│   ├── benchmarks/     # CSV tables: accuracy, performance, multi-species, SV validation
-│   ├── genomes/        # Key reference genomes (E. coli K-12, simulated MAGs)
-│   └── models/         # GBRT model files (JSON decision trees, Python pickles)
-├── figures/            # All publication-ready figures
-│   ├── benchmark_*.png         # Enzyme extraction performance
-│   ├── debiasing_*.png         # GBRT debiasing validation
-│   ├── performance_*.png       # Runtime vs skani/FastANI
-│   ├── multispecies_validation.png
-│   ├── realistic_mag_results.png
-│   └── skani_figure2_style.png
-└── results/            # Detailed benchmark reports and summaries
-    ├── BENCHMARK_REPORT.md
-    ├── COMPREHENSIVE_BENCHMARK.md
-    ├── FINAL_BENCHMARK_REPORT.md
-    ├── FINAL_REPORT_v0.1.1.md
-    └── HEAD_TO_HEAD_REPORT.md
+├── analysis/           # Python scripts for analysis and figure generation
+│   ├── analyze_gtdb_quality_vs_mae.py
+│   ├── plot_supplementary_simulations.py
+│   ├── plot_gtdb_quality_combined.py
+│   └── ...
+├── data/               # Benchmark metadata and intermediate inputs
+│   ├── benchmarks/
+│   ├── gtdb_metadata/
+│   └── ...
+├── figures/            # Publication-ready figures
+│   ├── report/         # Main-text and supplementary figures
+│   ├── gtdb50k/
+│   └── syntracker_validation/
+├── results/            # Benchmark reports and per-pair data
+│   ├── gtdb50k/
+│   ├── mag_validation/
+│   ├── sv_validation/
+│   ├── synteny_bench/
+│   └── ...
+└── scripts/            # Analysis pipelines and HPC submission scripts
+    ├── gtdb50k/
+    ├── mag_validation/
+    ├── syntracker_validation/
+    └── ...
 ```
 
 ---
 
 ## Key Figures
 
-| Figure | Description | Script |
-|--------|-------------|--------|
-| `benchmark_16enzymes.png` | 16-enzyme panel extraction speed | `benches/benchmark.rs` |
-| `benchmark_new_vs_old.png` | Fast2bRAD-M vs legacy margin-based | `benches/benchmark.rs` |
-| `debiasing_comparison.png` | GBRT vs simple debias across divergence | `plot_final.py` |
-| `performance_comparison_corrected.png` | Runtime vs skani/FastANI (log scale) | `performance_benchmark.py` |
-| `multispecies_validation.png` | Cross-species GBRT generalization | `plot_multispecies.py` |
-| `realistic_mag_results.png` | Chimera, contamination, duplication robustness | `task3_realistic_mag.py` |
+Main-text figures are in `figures/report/` and supplementary figures in `figures/report/` and selected subdirectories.
+
+| Figure | Description | Script / Source |
+|--------|-------------|-----------------|
+| Fig. 1 | Syn2bANI algorithm schematic | `figures/report/fig1_algorithm_schematic.png` |
+| Fig. 2 | Exact-truth ANI ladder accuracy | `figures/report/fig1_simulation_ladder.png` |
+| Fig. 3 | Robustness under indels, fragmentation, GC, accessory content | `figures/report/fig2_robustness.png` |
+| Fig. 4 | Enzyme-panel optimization | `figures/report/fig3_enzyme_panel.png` |
+| Fig. 5 | Mid-ANI validation against ANIm | `figures/report/fig4_midani_anim_validation.png` |
+| Fig. 6 | Large-scale comparison against FastANI (45,000 GTDB pairs) | `figures/report/fig5_gtdb_r207_benchmark.png` |
+| Fig. 7 | Computational efficiency | `figures/report/fig6_efficiency.png` |
+| Fig. 8 | ANIm-truth benchmark by ANI band | `figures/report/fig7_anim_by_band.png` |
+| Fig. 9 | Structural-variant detection on real genomes | `figures/report/fig8_sv_detection.png` |
+| Fig. 10 | Accuracy on binned CAMI2 MAGs | `figures/report/mag_validation.png` |
+| Fig. 11 | Near-clonal ANI masks extensive rearrangements | `figures/syntracker_validation/syntracker_high_ani_low_synteny.png` |
+| Fig. 12 | Database-scale structurally divergent top hits | `figures/gtdb50k/gtdb_discordant_high_ani.png` |
+
+Supplementary figures S1–S9 include the inversion-ladder truth benchmark, GTDB held-out and unified benchmarks, genome-quality robustness, and the exact-truth simulation families (indel, GC, fragmentation, accessory, mosaic).
 
 ---
 
-## Data Files
+## Data and Results
 
-### Benchmark CSVs
+Per-pair benchmark data, ground-truth files, and summary reports are in `results/`:
 
-| File | Description | Rows |
-|------|-------------|------|
-| `comparison_results.csv` | Accuracy vs FastANI (completeness + N50) | ~20 |
-| `performance_results.csv` | Runtime benchmark (Syn2bANI vs skani) | ~50 |
-| `multispecies_results.csv` | Cross-species validation (5 species) | 5 |
-| `sv_validation_results.csv` | Structural variation detection accuracy | 4 |
-| `multienzyme_consensus.csv` | Multi-enzyme ANI consensus | 10 |
-| `training_data_v2.csv` | GBRT v2 training data (49 species) | 1,260 |
-| `genome_metadata.json` | 49-species metadata for GBRT training | 49 entries |
-
-### Models
-
-| File | Description | Size |
-|------|-------------|------|
-| `gbrt_model_v2.json` | Embedded GBRT model (300 trees, depth 5) | 1.08 MB |
-| `gbrt_model_runtime.json` | Runtime-optimized GBRT (200 trees, depth 4) | 0.64 MB |
-| `syn2bani_gbrt_debias_model.pkl` | Python sklearn model (for retraining) | 0.36 MB |
+| Dataset | Location | Ground truth |
+|---------|----------|--------------|
+| GTDB-R207 2,074-pair benchmark | `results/panel_by_band/` | dnadiff/ANIm |
+| GTDB-R207 43,334 held-out pairs | `results/gtdb50k/` | dnadiff/ANIm |
+| Unified 80–100% benchmark | `results/gtdb50k/high_ani_results.tsv` | dnadiff/ANIm |
+| Mid-ANI / oral/gut validation | `results/validation/` | dnadiff/ANIm / FastANI/skani |
+| CAMI2 MAG benchmark | `results/mag_validation/` | dnadiff/ANIm + CAMI2 assignment |
+| SV validation | `results/sv_validation/` | dnadiff structural |
+| Synteny benchmark | `results/synteny_bench/` | Exact-truth inversion ladder |
 
 ---
 
-## Reproducing Figures
+## Reproducing Figures and Analyses
 
-Most figures can be regenerated from the provided CSV data using the scripts in `analysis/`:
+Most figures can be regenerated from the provided data using scripts in `analysis/`:
 
 ```bash
 cd analysis
-python3 plot_final.py          # Figure 1: Accuracy comparison
-python3 plot_performance.py    # Figure 2: Performance benchmark
-python3 plot_multispecies.py   # Figure 3: Cross-species validation
-python3 task3_realistic_mag.py # Figure 4: Realistic MAG robustness
-python3 sv_simulation.py       # Figure 5: SV detection validation
+python3 analyze_gtdb_quality_vs_mae.py      # Fig. S4: genome quality vs ANI accuracy
+python3 plot_supplementary_simulations.py   # Figs. S5–S9: simulation families
+python3 plot_gtdb_quality_combined.py       # combined quality figure (Fig. S4)
 ```
 
-> **Note**: The Rust benchmark in `benches/benchmark.rs` (from the [Syn2bANI](https://github.com/HuangShiLab/Syn2bANI) code repo) generates the enzyme extraction speed figures. Run `cargo bench` in the code repo to regenerate.
+The main Syn2bANI tool (Rust) lives in the [Syn2bANI code repository](https://github.com/HuangShiLab/Syn2bANI); the simulation harness is in its `prototype/` directory.
 
 ---
 
 ## Manuscript Status
 
-| Section | Status | Notes |
-|---------|--------|-------|
-| Abstract | 📝 Draft | Needs final polish |
-| Introduction | 📝 Draft | 2bRAD-M + skani context |
-| Methods | ✅ Complete | All algorithms documented |
-| Results — Accuracy | ✅ Complete | Benchmarked vs FastANI |
-| Results — Performance | ✅ Complete | vs skani & FastANI |
-| Results — Fragmentation | ✅ Complete | N50 500 bp–100 kb |
-| Results — SV Detection | ✅ Complete | 4 SV types validated |
-| Results — Multi-species | ✅ Complete | 5 species, GBRT v2 |
-| Discussion | 📝 Draft | Needs final synthesis |
-| Figures | ✅ Complete | 13 figures generated |
-
----
-
-## Citation
-
-```bibtex
-@article{syn2bani2025,
-  title={Syn2b-ANI: Strain-level ANI estimation via fixed restriction-site anchors for fragmented metagenome-assembled genomes},
-  author={HuangShiLab},
-  journal={In preparation},
-  year={2025}
-}
-```
+The manuscript draft is `paper/manuscript.md` (and `.docx`). Key results are frozen for the current submission version:
+- Default enzyme panel: BcgI, AlfI, AloI, FalI
+- Calibration model: v5 (ridge regression on internal features)
+- Main accuracy claim: MAE 0.619 on 39,903 held-out GTDB-R207 pairs
+- Synteny/structural outputs validated against dnadiff and an exact-truth inversion ladder
 
 ---
 
@@ -141,4 +119,3 @@ python3 sv_simulation.py       # Figure 5: SV detection validation
 ## License
 
 Analysis scripts and data are released under the MIT License. The manuscript text is © 2025 HuangShiLab.
-# Syn2bANI-paper

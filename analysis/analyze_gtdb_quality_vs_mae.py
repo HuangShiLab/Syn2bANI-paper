@@ -10,16 +10,11 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 RES = ROOT / "results" / "gtdb50k"
-OUT_FIG = ROOT / "figures" / "report"
-OUT_FIG.mkdir(parents=True, exist_ok=True)
 
 
 def load_metadata():
@@ -53,30 +48,6 @@ def summarize(df, col):
         "bias": err.mean(),
         "r": df[col].corr(df["anim_ani"]),
     })
-
-
-def plot_quality_bins(summary_list, ylabel, out_path):
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4))
-    titles = ["MAE", "Bias", "Pearson r"]
-    keys = ["MAE", "bias", "r"]
-    for ax, title, key in zip(axes, titles, keys):
-        x = np.arange(len(summary_list))
-        vals = summary_list[key].values
-        ax.bar(x, vals, color="steelblue")
-        ax.set_xticks(x)
-        ax.set_xticklabels(summary_list.index, rotation=30, ha="right", fontsize=8)
-        ax.set_title(title)
-        ax.axhline(0, color="black", lw=0.5)
-        if key == "MAE":
-            ax.set_ylabel("ANI error (percentage points)")
-        # annotate n on top
-        for i, (v, n) in enumerate(zip(vals, summary_list["n"].values)):
-            if not np.isnan(v):
-                ax.text(i, v, f"n={n}", ha="center", va="bottom", fontsize=6)
-    plt.suptitle(ylabel)
-    plt.tight_layout()
-    fig.savefig(out_path, dpi=300)
-    plt.close(fig)
 
 
 def main():
@@ -113,7 +84,6 @@ def main():
     comp_summary = df.groupby("comp_bin", observed=False).apply(lambda g: summarize(g, est_col), include_groups=False)
     comp_summary.index = [f"[{int(interval.left)},{int(interval.right)})" for interval in comp_summary.index]
     reports.append(("Completeness (min of pair)", comp_summary))
-    plot_quality_bins(comp_summary, "ANI error by CheckM completeness", OUT_FIG / "gtdb_mae_by_completeness.png")
 
     # Contamination bins
     cont_bins = [0, 1, 2, 5, 10, 100]
@@ -121,7 +91,6 @@ def main():
     cont_summary = df.groupby("cont_bin", observed=False).apply(lambda g: summarize(g, est_col), include_groups=False)
     cont_summary.index = [f"[{interval.left},{interval.right})" for interval in cont_summary.index]
     reports.append(("Contamination (max of pair)", cont_summary))
-    plot_quality_bins(cont_summary, "ANI error by CheckM contamination", OUT_FIG / "gtdb_mae_by_contamination.png")
 
     # Contig count bins (log)
     cc_bins = [0, 50, 100, 200, 500, 10000]
@@ -129,7 +98,6 @@ def main():
     cc_summary = df.groupby("cc_bin", observed=False).apply(lambda g: summarize(g, est_col), include_groups=False)
     cc_summary.index = [f"[{int(interval.left)},{int(interval.right)})" for interval in cc_summary.index]
     reports.append(("Contig count (max of pair)", cc_summary))
-    plot_quality_bins(cc_summary, "ANI error by contig count", OUT_FIG / "gtdb_mae_by_contig_count.png")
 
     # Mean contig length bins
     cl_bins = [0, 5e3, 1e4, 5e4, 1e5, 1e9]
@@ -137,7 +105,6 @@ def main():
     cl_summary = df.groupby("cl_bin", observed=False).apply(lambda g: summarize(g, est_col), include_groups=False)
     cl_summary.index = [f"[{int(interval.left/1000)},{int(interval.right/1000)}) kb" for interval in cl_summary.index]
     reports.append(("Mean contig length (min of pair)", cl_summary))
-    plot_quality_bins(cl_summary, "ANI error by mean contig length", OUT_FIG / "gtdb_mae_by_contig_length.png")
 
     # Overall
     overall = summarize(df, est_col)
@@ -153,11 +120,8 @@ def main():
             fh.write(f"## {title}\n\n")
             fh.write(summ.round(4).to_string())
             fh.write("\n\n")
-        fh.write("Figures:\n")
-        fh.write("- `figures/report/gtdb_mae_by_completeness.png`\n")
-        fh.write("- `figures/report/gtdb_mae_by_contamination.png`\n")
-        fh.write("- `figures/report/gtdb_mae_by_contig_count.png`\n")
-        fh.write("- `figures/report/gtdb_mae_by_contig_length.png`\n")
+        fh.write("Figure:\n")
+        fh.write("- `figures/report/gtdb_quality_vs_mae_combined.png` (publication panel, Fig. S4)\n")
 
     print(f"Wrote {report_path}")
     print("\nOverall:", overall.to_dict())

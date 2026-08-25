@@ -40,8 +40,5 @@ Overall: n = 39903, MAE = 0.6194, bias = -0.1223, r = 0.9620
 [50,100) kb        7027.0  0.5896          0.5115 -0.2862  0.9743
 [100,1000000) kb   8090.0  0.6361          0.5465 -0.2767  0.9664
 
-Figures:
-- `figures/report/gtdb_mae_by_completeness.png`
-- `figures/report/gtdb_mae_by_contamination.png`
-- `figures/report/gtdb_mae_by_contig_count.png`
-- `figures/report/gtdb_mae_by_contig_length.png`
+Figure:
+- `figures/report/gtdb_quality_vs_mae_combined.png` (publication panel, Fig. S4)
