@@ -133,6 +133,21 @@ The second collection is 77 *Helicobacter pylori* isolates from five human hosts
 
 The same phenomenon is common at database scale. Among 336 GTDB-R207 representative pairs with Syn2bANI ANI ≥ 99.0% and aligned fraction ≥ 0.9 in both directions — i.e. pairs that an ANI-based genome search would confidently return as near-clonal — **7.4% have a synteny score < 0.99 and 2.4% fall below 0.98** (Fig. 12a). `syn2bani struct` on the 20 most discordant pairs confirms that the low synteny reflects real structural divergence, not fragmentation. The most extreme case is *Streptomyces* sp. SID8366 versus *Streptomyces* sp. SID69 (ANI 99.9995%, synteny score 0.925, **989 breakpoints**), which resolves into 507 chains with 243 inversions and 263 translocations (Fig. 12b). Other same-species pairs with ANI >99.9% but hundreds of breakpoints include two *Dickeya dianthicola* strains (ANI 99.9995%, 352 breakpoints, 104 inversions, 85 translocations), two *Serratia marcescens* strains (ANI 99.986%, 319 breakpoints, 108 inversions, 99 translocations), and two *Burkholderia thailandensis* strains (ANI 99.917%, 611 breakpoints, 123 inversions, 106 translocations). Even obligate intracellular pathogens with compact genomes show the pattern: two *Rickettsia bellii* strains at 99.66–99.67% ANI carry ~200 breakpoints driven almost entirely by large indels (>2.7 Mbp total indel span). These are not edge cases; they are the kind of top hits an ANI-only search would return, and synteny score is the only free statistic that flags them.
 
+**Table 4 — Structural readout of representative high-ANI, low-synteny pairs.** Breakpoints, chains, inversions, translocations, and indels are from `syn2bani struct` with the default four-enzyme panel (BcgI, AlfI, AloI, FalI). The Syntracker-derived collections and the GTDB-R207 discordant pairs show the same pattern: ANI >99.9% masks extensive rearrangements.
+
+| Pair | ANI (%) | synteny_score | breakpoints | chains | inversions | translocations | indels | total indel bp |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| *E. coli* hypermutator M1_d148_cloneCL1 vs M1_d190_cloneL1 | 99.9999 | 0.885 | 770 | 62 | 32 | 29 | 0 | 0 |
+| *E. coli* hypermutator M1_d148_cloneCL1 vs M3_d190_clone15 | 99.9995 | 0.887 | 749 | 59 | 27 | 31 | 0 | 0 |
+| *H. pylori* isolate 15 vs 16 | 99.9999 | 0.928 | 103 | 33 | 14 | 18 | 0 | 0 |
+| *H. pylori* isolate 1 vs 10 | 99.9999 | 0.953 | 68 | 36 | 17 | 18 | 0 | 0 |
+| *Streptomyces* sp. SID8366 vs SID69 | 99.9995 | 0.925 | 989 | 507 | 243 | 263 | 0 | 0 |
+| *Dickeya dianthicola* | 99.9995 | 0.948 | 352 | 190 | 104 | 85 | 0 | 0 |
+| *Serratia marcescens* | 99.9860 | 0.967 | 319 | 212 | 108 | 99 | 4 | 118,093 |
+| *Burkholderia thailandensis* | 99.9172 | 0.966 | 611 | 240 | 123 | 106 | 4 | 63,393 |
+| *Rickettsia bellii* OSU 85-389 vs *R. bellii* | 99.6659 | 0.828 | 197 | 18 | 8 | 0 | 9 | 2,730,883 |
+| *Rickettsia bellii* RML An4 vs RML Mogi | 99.6646 | 0.826 | 195 | 27 | 16 | 0 | 10 | 2,784,371 |
+
 These cases are the reason Syn2bANI reports a synteny score and SV calls in the same pass as ANI. For applications where genome architecture matters — phenotype prediction, transmission tracing, or assessing whether a newly sequenced isolate is truly clonal with a reference — ANI should be read alongside the structural output, not instead of it.
 
 ---
@@ -301,11 +316,13 @@ Syn2bANI is implemented in Rust (edition 2021) with needletail [13] for FASTA pa
 | 10 | GTDB scale set | real | 45,000 pairs, taxonomic-level stratified | FastANI (672 pairs) | Fig. 6 |
 | 11 | Unified high-ANI set | real | 2,342 GTDB-R207 pairs (95–97 / 97–100), genome-level train/test | dnadiff ANIm | Table 1, Fig. S3 |
 | 12 | Mid-ANI set | real | 15 pairs, ANIm 87.6–90.2 | dnadiff ANIm | Fig. 5 |
-| 12 | Oral/gut set | real | 50 genomes, 10 species (5 oral + 5 gut); 1,225 pairs | FastANI/skani (100 same-species) | Results 2.6 |
-| 13 | Enterobacteriaceae completes | real | 13 chromosomes vs MG1655, ANI ~81–99.99 | dnadiff structural | Fig. 9 |
-| 14 | Real drafts | real | 8 E. coli assemblies, 88–8,025 contigs; RC controls | complete-genome reference | Results 2.3, Fig. 7 |
-| 15 | CAMI2 MAG benchmark | real metagenomes | 35 samples → 695 bins ≥ 100 kbp | dnadiff ANIm + CAMI2 assignment | Fig. 10 |
-| 16 | GTDB 50k held-out benchmark | real | 43,334 same-genus pairs, 24,831 genomes, 74 phyla; training genomes excluded | dnadiff ANIm | Results 2.5, Table 1 |
+| 13 | Oral/gut set | real | 50 genomes, 10 species (5 oral + 5 gut); 1,225 pairs | FastANI/skani (100 same-species) | Results 2.6 |
+| 14 | Enterobacteriaceae completes | real | 13 chromosomes vs MG1655, ANI ~81–99.99 | dnadiff structural | Fig. 9 |
+| 15 | Real drafts | real | 8 E. coli assemblies, 88–8,025 contigs; RC controls | complete-genome reference | Results 2.3, Fig. 7 |
+| 16 | CAMI2 MAG benchmark | real metagenomes | 35 samples → 695 bins ≥ 100 kbp | dnadiff ANIm + CAMI2 assignment | Fig. 10 |
+| 17 | GTDB 50k held-out benchmark | real | 43,334 same-genus pairs, 24,831 genomes, 74 phyla; training genomes excluded | dnadiff ANIm | Results 2.5, Table 1 |
+
+**Table 4 — Structural readout of representative high-ANI, low-synteny pairs.** SV counts are from `syn2bani struct` with the default four-enzyme panel (BcgI, AlfI, AloI, FalI). Breakpoints are chain junctions; inversions, translocations, and indels are classified from chain geometry. The Syntracker-derived isolate collections and GTDB-R207 discordant pairs show the same pattern: ANI >99.9% masks extensive rearrangement. Full GTDB discordant list: `results/gtdb50k/struct_top_discordant_summary.tsv`; Syntracker case summaries: `results/syntracker_validation/struct_top_cases_summary.tsv`.
 
 ---
 
