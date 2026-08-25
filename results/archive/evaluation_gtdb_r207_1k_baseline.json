@@ -1,0 +1,3825 @@
+{
+  "total_pairs": 1000,
+  "global": {
+    "Syn2bANI raw": {
+      "n": 1000,
+      "mae": 0.07156727899999998,
+      "rmse": 0.21264668914054366,
+      "pearson": 0.8990450775144305,
+      "mean_error": 0.0007689030000000012
+    },
+    "Syn2bANI GBRT": {
+      "n": 1000,
+      "mae": 0.065593846,
+      "rmse": 0.20649178613995767,
+      "pearson": 0.9025172117943073,
+      "mean_error": -0.006348681999999999
+    },
+    "skani": {
+      "n": 1000,
+      "mae": 0.10354526300000001,
+      "rmse": 0.28646580443885616,
+      "pearson": 0.8252410604438086,
+      "mean_error": -0.102365855
+    }
+  },
+  "by_label": {
+    "high": {
+      "s2b_raw_ani": {
+        "n": 250,
+        "mae": 0.012681924,
+        "rmse": 0.06244635203388585,
+        "pearson": 0.1495782632109555,
+        "mean_error": 0.004905188
+      },
+      "s2b_gbrt_ani": {
+        "n": 250,
+        "mae": 0.008114988000000004,
+        "rmse": 0.06172419306984903,
+        "pearson": 0.18751773059270543,
+        "mean_error": -0.0042383559999999995
+      },
+      "skani_ani": {
+        "n": 250,
+        "mae": 0.0012321920000000052,
+        "rmse": 0.0016585164937377047,
+        "pearson": 0.992630553750093,
+        "mean_error": 0.000910960000000006
+      }
+    },
+    "low": {
+      "s2b_raw_ani": {
+        "n": 250,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 250,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 250,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "mid": {
+      "s2b_raw_ani": {
+        "n": 250,
+        "mae": 0.038286624000000005,
+        "rmse": 0.17898728808567382,
+        "pearson": 0.42516392783323065,
+        "mean_error": 0.013549199999999999
+      },
+      "s2b_gbrt_ani": {
+        "n": 250,
+        "mae": 0.03597868,
+        "rmse": 0.1708193240546982,
+        "pearson": 0.4251471897437841,
+        "mean_error": 0.011241256
+      },
+      "skani_ani": {
+        "n": 250,
+        "mae": 0.02466184,
+        "rmse": 0.1378787607308972,
+        "pearson": NaN,
+        "mean_error": -0.02466184
+      }
+    },
+    "mid_high": {
+      "s2b_raw_ani": {
+        "n": 250,
+        "mae": 0.235300568,
+        "rmse": 0.3807078426183732,
+        "pearson": 0.6135794562281244,
+        "mean_error": -0.015378776
+      },
+      "s2b_gbrt_ani": {
+        "n": 250,
+        "mae": 0.218281716,
+        "rmse": 0.37089933067134534,
+        "pearson": 0.6188451520818785,
+        "mean_error": -0.032397628
+      },
+      "skani_ani": {
+        "n": 250,
+        "mae": 0.38828702,
+        "rmse": 0.5560911122411112,
+        "pearson": 0.4229054672140266,
+        "mean_error": -0.38571254
+      }
+    }
+  },
+  "by_phylum": {
+    "p__AABM5-125-24": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__ARS69": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Acidobacteriota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.14871299999999998,
+        "rmse": 0.14871299999999998,
+        "pearson": 0.0,
+        "mean_error": 0.14871299999999998
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.13561099999999993,
+        "rmse": 0.13561099999999993,
+        "pearson": 0.0,
+        "mean_error": 0.13561099999999993
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.80776,
+        "rmse": 0.80776,
+        "pearson": 0.0,
+        "mean_error": -0.80776
+      }
+    },
+    "p__Actinobacteriota": {
+      "s2b_raw_ani": {
+        "n": 61,
+        "mae": 0.10141250819672132,
+        "rmse": 0.19993412864778126,
+        "pearson": 0.8762615482365398,
+        "mean_error": 0.06956267213114754
+      },
+      "s2b_gbrt_ani": {
+        "n": 61,
+        "mae": 0.08891380327868853,
+        "rmse": 0.18930804290059222,
+        "pearson": 0.8815454411943919,
+        "mean_error": 0.05531072131147543
+      },
+      "skani_ani": {
+        "n": 61,
+        "mae": 0.3235488852459017,
+        "rmse": 0.5143074307526675,
+        "pearson": 0.5579684541282048,
+        "mean_error": -0.3217627868852459
+      }
+    },
+    "p__Aenigmatarchaeota": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Aerophobota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Altiarchaeota": {
+      "s2b_raw_ani": {
+        "n": 11,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 11,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 11,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Aquificota": {
+      "s2b_raw_ani": {
+        "n": 10,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 10,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 10,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Armatimonadota": {
+      "s2b_raw_ani": {
+        "n": 8,
+        "mae": 0.007013875000000003,
+        "rmse": 0.01983823429957919,
+        "pearson": 1.0,
+        "mean_error": 0.007013875000000003
+      },
+      "s2b_gbrt_ani": {
+        "n": 8,
+        "mae": 0.003482625000000003,
+        "rmse": 0.009850351015319208,
+        "pearson": 1.0,
+        "mean_error": 0.003482625000000003
+      },
+      "skani_ani": {
+        "n": 8,
+        "mae": 0.000960500000000003,
+        "rmse": 0.002716704253318724,
+        "pearson": 1.0,
+        "mean_error": 0.000960500000000003
+      }
+    },
+    "p__Atribacterota": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Aureabacteria": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__B1Sed10-29": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__BMS3Abin14": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__BS750m-G25": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__BS750m-G34": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Bacteroidota": {
+      "s2b_raw_ani": {
+        "n": 36,
+        "mae": 0.19566477777777777,
+        "rmse": 0.38884346993452545,
+        "pearson": 0.6421059283880892,
+        "mean_error": 0.019678999999999995
+      },
+      "s2b_gbrt_ani": {
+        "n": 36,
+        "mae": 0.1848273888888889,
+        "rmse": 0.37766940682192174,
+        "pearson": 0.6503836183689939,
+        "mean_error": 0.008841611111111116
+      },
+      "skani_ani": {
+        "n": 36,
+        "mae": 0.13349975,
+        "rmse": 0.3238004043436927,
+        "pearson": 0.7553694047182997,
+        "mean_error": -0.13080647222222222
+      }
+    },
+    "p__Bdellovibrionota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Bdellovibrionota_C": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Bdellovibrionota_E": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Bipolaricaulota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.27503520000000004,
+        "rmse": 0.37798442311714375,
+        "pearson": 0.6319553274167109,
+        "mean_error": -0.042325999999999975
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.2554674,
+        "rmse": 0.37097642158794947,
+        "pearson": 0.6480678289867047,
+        "mean_error": -0.06189379999999998
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.49215739999999997,
+        "rmse": 0.6197649132035469,
+        "pearson": 0.8862729571971204,
+        "mean_error": -0.46745939999999997
+      }
+    },
+    "p__CAIJMQ01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__CG03": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__CG2-30-53-67": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__CG2-30-70-394": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__CLD3": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__CSP1-3": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__CSSED10-310": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Caldisericota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Calditrichota": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Calescibacterota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Campylobacterota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Chlamydiota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Chloroflexota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.18637257142857142,
+        "rmse": 0.3703815687118199,
+        "pearson": 0.7335027726680382,
+        "mean_error": 0.18637257142857142
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.1638257142857143,
+        "rmse": 0.34627788105549817,
+        "pearson": 0.7300299834680917,
+        "mean_error": 0.1638257142857143
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.22140300000000002,
+        "rmse": 0.41420895196662,
+        "pearson": NaN,
+        "mean_error": -0.22140300000000002
+      }
+    },
+    "p__Chrysiogenota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.970588,
+        "rmse": 0.970588,
+        "pearson": 0.0,
+        "mean_error": 0.970588
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.893194,
+        "rmse": 0.893194,
+        "pearson": 0.0,
+        "mean_error": 0.893194
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Cloacimonadota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Coprothermobacterota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Cyanobacteria": {
+      "s2b_raw_ani": {
+        "n": 13,
+        "mae": 0.1115559230769231,
+        "rmse": 0.12659385761043981,
+        "pearson": 0.9925616602203609,
+        "mean_error": 0.1115559230769231
+      },
+      "s2b_gbrt_ani": {
+        "n": 13,
+        "mae": 0.09955384615384616,
+        "rmse": 0.11589554302772952,
+        "pearson": 0.990663533471072,
+        "mean_error": 0.09955384615384616
+      },
+      "skani_ani": {
+        "n": 13,
+        "mae": 0.5622588461538461,
+        "rmse": 0.6753334995606587,
+        "pearson": 0.30749228331341805,
+        "mean_error": -0.5620011538461538
+      }
+    },
+    "p__DTU030": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__DUMJ01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Deferribacterota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.111313,
+        "rmse": 0.29450651568853276,
+        "pearson": NaN,
+        "mean_error": -0.111313
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.111313,
+        "rmse": 0.29450651568853276,
+        "pearson": NaN,
+        "mean_error": -0.111313
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.111313,
+        "rmse": 0.29450651568853276,
+        "pearson": NaN,
+        "mean_error": -0.111313
+      }
+    },
+    "p__Deinococcota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Delongbacteria": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Dependentiae": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Desantisbacteria": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Desulfobacterota": {
+      "s2b_raw_ani": {
+        "n": 9,
+        "mae": 0.03595322222222223,
+        "rmse": 0.07637456485055161,
+        "pearson": 0.9999321819093152,
+        "mean_error": 0.03595322222222223
+      },
+      "s2b_gbrt_ani": {
+        "n": 9,
+        "mae": 0.03164111111111112,
+        "rmse": 0.06712584690796171,
+        "pearson": 0.9999997191623131,
+        "mean_error": 0.03164111111111112
+      },
+      "skani_ani": {
+        "n": 9,
+        "mae": 0.17605677777777778,
+        "rmse": 0.3734840748145911,
+        "pearson": NaN,
+        "mean_error": -0.17605677777777778
+      }
+    },
+    "p__Desulfobacterota_B": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.3160878333333333,
+        "rmse": 0.5474846280985126,
+        "pearson": NaN,
+        "mean_error": 0.3160878333333333
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.29851516666666666,
+        "rmse": 0.517046622801239,
+        "pearson": NaN,
+        "mean_error": 0.29851516666666666
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Desulfobacterota_C": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.025854714285714286,
+        "rmse": 0.06840514421862898,
+        "pearson": 1.0,
+        "mean_error": 0.025854714285714286
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.01756214285714286,
+        "rmse": 0.04646506248938935,
+        "pearson": 1.0,
+        "mean_error": 0.01756214285714286
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.11105,
+        "rmse": 0.29381068309372277,
+        "pearson": NaN,
+        "mean_error": -0.11105
+      }
+    },
+    "p__Desulfobacterota_D": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Desulfobacterota_G": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.1923076,
+        "rmse": 0.4300128661898386,
+        "pearson": NaN,
+        "mean_error": 0.1923076
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.178406,
+        "rmse": 0.3989279435938275,
+        "pearson": NaN,
+        "mean_error": 0.178406
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Desulfobacterota_I": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Dictyoglomota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.17266199999999998,
+        "rmse": 0.17266199999999998,
+        "pearson": 0.0,
+        "mean_error": 0.17266199999999998
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.12401600000000002,
+        "rmse": 0.12401600000000002,
+        "pearson": 0.0,
+        "mean_error": 0.12401600000000002
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.00832899999999992,
+        "rmse": 0.00832899999999992,
+        "pearson": 0.0,
+        "mean_error": 0.00832899999999992
+      }
+    },
+    "p__Dormibacterota": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Edwardsbacteria": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Eisenbacteria": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Elusimicrobiota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.1125964,
+        "rmse": 0.13203949126530293,
+        "pearson": 0.9923741068513903,
+        "mean_error": 0.1125964
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.09213560000000001,
+        "rmse": 0.11157783833898201,
+        "pearson": 0.9915309931202725,
+        "mean_error": 0.09213560000000001
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.47341160000000004,
+        "rmse": 0.6109230243184488,
+        "pearson": 0.3811554749308359,
+        "mean_error": -0.47341160000000004
+      }
+    },
+    "p__Eremiobacterota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.22710679999999997,
+        "rmse": 0.43054789129805293,
+        "pearson": 0.6171246848194408,
+        "mean_error": 0.22710679999999997
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.205621,
+        "rmse": 0.40812541694753585,
+        "pearson": 0.6008146988653421,
+        "mean_error": 0.205621
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.1520062,
+        "rmse": 0.3398961962014285,
+        "pearson": NaN,
+        "mean_error": -0.1520062
+      }
+    },
+    "p__FCPU426": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__FEN-1099": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Fermentibacterota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Fibrobacterota": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Firestonebacteria": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Firmicutes": {
+      "s2b_raw_ani": {
+        "n": 79,
+        "mae": 0.09672506329113922,
+        "rmse": 0.26736175162634773,
+        "pearson": 0.7762162138084112,
+        "mean_error": -0.08360713924050632
+      },
+      "s2b_gbrt_ani": {
+        "n": 79,
+        "mae": 0.09443878481012659,
+        "rmse": 0.2672320419452026,
+        "pearson": 0.7763691616361674,
+        "mean_error": -0.0907053924050633
+      },
+      "skani_ani": {
+        "n": 79,
+        "mae": 0.09113967088607594,
+        "rmse": 0.2671541297985685,
+        "pearson": 0.7767062930237562,
+        "mean_error": -0.08939868354430379
+      }
+    },
+    "p__Firmicutes_A": {
+      "s2b_raw_ani": {
+        "n": 46,
+        "mae": 0.18937871739130435,
+        "rmse": 0.35251050832973946,
+        "pearson": 0.7363681055675864,
+        "mean_error": -0.11645706521739133
+      },
+      "s2b_gbrt_ani": {
+        "n": 46,
+        "mae": 0.17802023913043474,
+        "rmse": 0.34938004475091616,
+        "pearson": 0.7390095088689982,
+        "mean_error": -0.1287286304347826
+      },
+      "skani_ani": {
+        "n": 46,
+        "mae": 0.29454254347826087,
+        "rmse": 0.4830705517514564,
+        "pearson": 0.6133234533524763,
+        "mean_error": -0.29306441304347824
+      }
+    },
+    "p__Firmicutes_B": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.025455333333333347,
+        "rmse": 0.044089930656934985,
+        "pearson": 1.0,
+        "mean_error": 0.025455333333333347
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.006728666666666679,
+        "rmse": 0.011654392533861807,
+        "pearson": 1.0,
+        "mean_error": 0.006728666666666679
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0026680000000000037,
+        "rmse": 0.004621111554593771,
+        "pearson": 1.0,
+        "mean_error": -0.0026680000000000037
+      }
+    },
+    "p__Firmicutes_C": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Firmicutes_E": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Firmicutes_F": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Firmicutes_G": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Fusobacteriota": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.12684900000000002,
+        "rmse": 0.31071532438230337,
+        "pearson": NaN,
+        "mean_error": -0.12684900000000002
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.12684900000000002,
+        "rmse": 0.31071532438230337,
+        "pearson": NaN,
+        "mean_error": -0.12684900000000002
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.12684900000000002,
+        "rmse": 0.31071532438230337,
+        "pearson": NaN,
+        "mean_error": -0.12684900000000002
+      }
+    },
+    "p__GCA-001730085": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Gemmatimonadota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Gemmatimonadota_A": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Goldbacteria": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Hadarchaeota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Halobacteriota": {
+      "s2b_raw_ani": {
+        "n": 17,
+        "mae": 0.10568029411764707,
+        "rmse": 0.27013182483906323,
+        "pearson": 0.6901074918714344,
+        "mean_error": -0.07708205882352939
+      },
+      "s2b_gbrt_ani": {
+        "n": 17,
+        "mae": 0.10045105882352941,
+        "rmse": 0.2680809830377205,
+        "pearson": 0.6904914386528047,
+        "mean_error": -0.08231129411764705
+      },
+      "skani_ani": {
+        "n": 17,
+        "mae": 0.13765452941176473,
+        "rmse": 0.32646942072393786,
+        "pearson": 0.5159414258474195,
+        "mean_error": -0.13662770588235296
+      }
+    },
+    "p__Huberarchaeota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Hydrogenedentota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Iainarchaeota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAAXHH01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JABDJQ01": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.32031266666666663,
+        "rmse": 0.5547978129745406,
+        "pearson": NaN,
+        "mean_error": 0.32031266666666663
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.30223266666666665,
+        "rmse": 0.5234823343736953,
+        "pearson": NaN,
+        "mean_error": 0.30223266666666665
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JACPQY01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JACPSX01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JACPUC01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JACQOV01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JACRDZ01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JADJOY01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAFGBW01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAFGND01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAFGOL01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAGOBX01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAGOEH01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JAHJDO01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__JdFR-76": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__KSB1": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Krumholzibacteriota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Latescibacterota": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0899915,
+        "rmse": 0.10458843600035331,
+        "pearson": 0.9994810215103962,
+        "mean_error": 0.0899915
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0821605,
+        "rmse": 0.09717481141478998,
+        "pearson": 0.9985205166557959,
+        "mean_error": 0.0821605
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.002561249999999987,
+        "rmse": 0.003243345841873788,
+        "pearson": 0.9999784082027092,
+        "mean_error": -0.0018772500000000247
+      }
+    },
+    "p__Lindowbacteria": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Margulisbacteria": {
+      "s2b_raw_ani": {
+        "n": 9,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 9,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 9,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Marinisomatota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Methanobacteriota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Methanobacteriota_A": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Methanobacteriota_B": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Methylomirabilota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Micrarchaeota": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Muirbacteria": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Myxococcota_A": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__NPL-UPA2": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Nanoarchaeota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.11281214285714285,
+        "rmse": 0.2984728748682916,
+        "pearson": NaN,
+        "mean_error": -0.11281214285714285
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.11281214285714285,
+        "rmse": 0.2984728748682916,
+        "pearson": NaN,
+        "mean_error": -0.11281214285714285
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.11281214285714285,
+        "rmse": 0.2984728748682916,
+        "pearson": NaN,
+        "mean_error": -0.11281214285714285
+      }
+    },
+    "p__Nanohaloarchaeota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Nitrospinota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Nitrospirota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Nitrospirota_A": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__OLB16": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Omnitrophota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Patescibacteria": {
+      "s2b_raw_ani": {
+        "n": 9,
+        "mae": 0.27318122222222224,
+        "rmse": 0.446512313829579,
+        "pearson": 0.42691235718596793,
+        "mean_error": -0.23898388888888888
+      },
+      "s2b_gbrt_ani": {
+        "n": 9,
+        "mae": 0.2683207777777778,
+        "rmse": 0.445072953046901,
+        "pearson": 0.42691235718596793,
+        "mean_error": -0.24384433333333336
+      },
+      "skani_ani": {
+        "n": 9,
+        "mae": 0.3466227777777778,
+        "rmse": 0.5201151347018166,
+        "pearson": NaN,
+        "mean_error": -0.3466227777777778
+      }
+    },
+    "p__Planctomycetota": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.13150850000000008,
+        "rmse": 0.132488841901875,
+        "pearson": 1.0,
+        "mean_error": 0.13150850000000008
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.11207150000000005,
+        "rmse": 0.11854776705826225,
+        "pearson": -1.0,
+        "mean_error": 0.11207150000000005
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.40710349999999995,
+        "rmse": 0.5711627086780964,
+        "pearson": 0.9999999999999998,
+        "mean_error": -0.40710349999999995
+      }
+    },
+    "p__Poribacteria": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Proteobacteria": {
+      "s2b_raw_ani": {
+        "n": 204,
+        "mae": 0.060037328431372564,
+        "rmse": 0.17003770131671836,
+        "pearson": 0.7946690753350045,
+        "mean_error": 0.02936525980392157
+      },
+      "s2b_gbrt_ani": {
+        "n": 204,
+        "mae": 0.049201294117647065,
+        "rmse": 0.15994087964953996,
+        "pearson": 0.8121239515037734,
+        "mean_error": 0.015662166666666668
+      },
+      "skani_ani": {
+        "n": 204,
+        "mae": 0.09484645588235295,
+        "rmse": 0.27338515596657337,
+        "pearson": 0.7469962486222188,
+        "mean_error": -0.09310777941176471
+      }
+    },
+    "p__QNDG01": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__RBG-13-61-14": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__RBG-13-66-14": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__RUG730": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Ratteibacteria": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Riflebacteria": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__SAR324": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__SLNR01": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__SM23-31": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__SZUA-182": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__SZUA-79": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Schekmanbacteria": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__SpSt-1190": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Spirochaetota": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.27638566666666664,
+        "rmse": 0.44890188087301813,
+        "pearson": 0.9100250429992407,
+        "mean_error": -0.24005900000000002
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.26880000000000004,
+        "rmse": 0.44782432136348593,
+        "pearson": 0.9197159346438756,
+        "mean_error": -0.250495
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.25863733333333333,
+        "rmse": 0.4472571874347019,
+        "pearson": 0.9368347595761781,
+        "mean_error": -0.257894
+      }
+    },
+    "p__Sumerlaeota": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Synergistota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__T1SED10-198M": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__TA06": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Tectomicrobia": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Thermodesulfobiota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__Thermoplasmatota": {
+      "s2b_raw_ani": {
+        "n": 8,
+        "mae": 0.134506375,
+        "rmse": 0.2828245559973974,
+        "pearson": 0.760193794420384,
+        "mean_error": -0.058027375000000006
+      },
+      "s2b_gbrt_ani": {
+        "n": 8,
+        "mae": 0.12826424999999997,
+        "rmse": 0.27983126618062176,
+        "pearson": 0.7601265044694505,
+        "mean_error": -0.06426950000000002
+      },
+      "skani_ani": {
+        "n": 8,
+        "mae": 0.296257125,
+        "rmse": 0.48389135951639495,
+        "pearson": NaN,
+        "mean_error": -0.296257125
+      }
+    },
+    "p__Thermoproteota": {
+      "s2b_raw_ani": {
+        "n": 11,
+        "mae": 0.23446772727272727,
+        "rmse": 0.4097809216667986,
+        "pearson": 0.6698386966921288,
+        "mean_error": -0.19134663636363636
+      },
+      "s2b_gbrt_ani": {
+        "n": 11,
+        "mae": 0.2281479090909091,
+        "rmse": 0.4093190053585678,
+        "pearson": 0.6691455755994915,
+        "mean_error": -0.19766645454545453
+      },
+      "skani_ani": {
+        "n": 11,
+        "mae": 0.2185017272727273,
+        "rmse": 0.4078141356769148,
+        "pearson": 0.671510945663813,
+        "mean_error": -0.2073126363636364
+      }
+    },
+    "p__Thermosulfidibacterota": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.1270655,
+        "rmse": 0.31124563891161594,
+        "pearson": NaN,
+        "mean_error": -0.1270655
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.1270655,
+        "rmse": 0.31124563891161594,
+        "pearson": NaN,
+        "mean_error": -0.1270655
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.1270655,
+        "rmse": 0.31124563891161594,
+        "pearson": NaN,
+        "mean_error": -0.1270655
+      }
+    },
+    "p__Thermotogota": {
+      "s2b_raw_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 5,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA10199": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA1439": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA2233": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA3054": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA6262": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA6266": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.05865900000000002,
+        "rmse": 0.0829563533552434,
+        "pearson": 1.0,
+        "mean_error": 0.05865900000000002
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.06283650000000002,
+        "rmse": 0.08886423051205701,
+        "pearson": 1.0,
+        "mean_error": 0.06283650000000002
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.004515500000000006,
+        "rmse": 0.006385881340895719,
+        "pearson": 0.9999999999999998,
+        "mean_error": 0.004515500000000006
+      }
+    },
+    "p__UBA8248": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBA8481": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBP13": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBP14": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBP17": {
+      "s2b_raw_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 3,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBP18": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.13253083333333335,
+        "rmse": 0.3246329168525069,
+        "pearson": NaN,
+        "mean_error": -0.13253083333333335
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.13253083333333335,
+        "rmse": 0.3246329168525069,
+        "pearson": NaN,
+        "mean_error": -0.13253083333333335
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.13253083333333335,
+        "rmse": 0.3246329168525069,
+        "pearson": NaN,
+        "mean_error": -0.13253083333333335
+      }
+    },
+    "p__UBP4": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__UBP7": {
+      "s2b_raw_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 2,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Undinarchaeota": {
+      "s2b_raw_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 1,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": 0.0,
+        "mean_error": 0.0
+      }
+    },
+    "p__VGIX01": {
+      "s2b_raw_ani": {
+        "n": 4,
+        "mae": 0.237397,
+        "rmse": 0.3966473253281812,
+        "pearson": 0.5780460371512669,
+        "mean_error": -0.14935600000000002
+      },
+      "s2b_gbrt_ani": {
+        "n": 4,
+        "mae": 0.228305,
+        "rmse": 0.3930113019469033,
+        "pearson": 0.578046037151267,
+        "mean_error": -0.158448
+      },
+      "skani_ani": {
+        "n": 4,
+        "mae": 0.38698625,
+        "rmse": 0.547281302612514,
+        "pearson": NaN,
+        "mean_error": -0.38698625
+      }
+    },
+    "p__Verrucomicrobiota": {
+      "s2b_raw_ani": {
+        "n": 26,
+        "mae": 0.11593049999999999,
+        "rmse": 0.2750876245073838,
+        "pearson": 0.8572583084764006,
+        "mean_error": 0.11593049999999999
+      },
+      "s2b_gbrt_ani": {
+        "n": 26,
+        "mae": 0.10284019230769231,
+        "rmse": 0.2583212707714205,
+        "pearson": 0.86589781429498,
+        "mean_error": 0.10233734615384615
+      },
+      "skani_ani": {
+        "n": 26,
+        "mae": 0.1234736153846154,
+        "rmse": 0.31027391078306177,
+        "pearson": 0.7825548940272861,
+        "mean_error": -0.12006530769230771
+      }
+    },
+    "p__WOR-3": {
+      "s2b_raw_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 7,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    },
+    "p__Zixibacteria": {
+      "s2b_raw_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "s2b_gbrt_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      },
+      "skani_ani": {
+        "n": 6,
+        "mae": 0.0,
+        "rmse": 0.0,
+        "pearson": NaN,
+        "mean_error": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+Loaded 100 pairs from results/pairs_gtdb_r207_100.tsv
+Remaining pairs to run: 100
+
+[3/3] Running Syn2bANI on 100 pairs...
+  Syn2bANI completed. Missing raw: 0
+
+============================================================
+Results saved: results/matrix_gtdb_r207_100_baseline.tsv
+Total rows: 100
+Columns: ['query', 'reference', 'label', 'q_domain', 'r_domain', 'q_phylum', 'r_phylum', 'q_genus', 'r_genus', 'q_species', 'r_species', 's2b_raw_ani', 's2b_gbrt_ani', 's2b_shared_tags']
+============================================================
+Benchmark complete

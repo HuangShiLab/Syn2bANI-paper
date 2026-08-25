@@ -83,15 +83,18 @@ Supplementary figures S1–S9 include the inversion-ladder truth benchmark, GTDB
 
 Per-pair benchmark data, ground-truth files, and summary reports are in `results/`:
 
-| Dataset | Location | Ground truth |
-|---------|----------|--------------|
-| GTDB-R207 2,074-pair benchmark | `results/panel_by_band/` | dnadiff/ANIm |
-| GTDB-R207 43,334 held-out pairs | `results/gtdb50k/` | dnadiff/ANIm |
-| Unified 80–100% benchmark | `results/gtdb50k/high_ani_results.tsv` | dnadiff/ANIm |
-| Mid-ANI / oral/gut validation | `results/validation/` | dnadiff/ANIm / FastANI/skani |
-| CAMI2 MAG benchmark | `results/mag_validation/` | dnadiff/ANIm + CAMI2 assignment |
-| SV validation | `results/sv_validation/` | dnadiff structural |
-| Synteny benchmark | `results/synteny_bench/` | Exact-truth inversion ladder |
+| Dataset | Location | Ground truth | Notes |
+|---------|----------|--------------|-------|
+| GTDB-R207 calibration/training set (2,520 pairs) | `results/panel_by_band/` | dnadiff/ANIm | 2,074 band-stratified + 467 targeted 95–99.5% pairs |
+| GTDB-R207 43,334 held-out pairs | `results/gtdb50k/` | dnadiff/ANIm | Strict genome-level holdout from calibration set |
+| GTDB-R207 high-ANI test set (727 pairs) | `results/gtdb50k/high_ani_results.tsv` | dnadiff/ANIm | Non-representative genomes, 95–100% |
+| Unified 80–100% benchmark | `results/gtdb50k/` | dnadiff/ANIm | 43,334 held-out + 727 high-ANI test |
+| Mid-ANI validation | `results/validation/` | dnadiff/ANIm | 15 pairs, low alignment coverage |
+| Oral/gut validation | `results/validation/` | dnadiff/ANIm / FastANI/skani | 50 isolates, 1,225 pairs |
+| CAMI2 MAG benchmark | `results/mag_validation/` | dnadiff/ANIm + CAMI2 assignment | 695 bins |
+| SV validation | `results/sv_validation/` | dnadiff structural | Enterobacteriaceae pairs |
+| Synteny benchmark | `results/synteny_bench/` | Exact-truth inversion ladder | 0–32 inversions |
+| Syntracker validation | `results/syntracker_validation/` | Structural re-analysis | *E. coli*, *H. pylori*, *N. gonorrhoeae*, *S. rimosus* |
 
 ---
 

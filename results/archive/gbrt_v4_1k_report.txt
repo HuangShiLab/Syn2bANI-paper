@@ -1,0 +1,37 @@
+
+GBRT v3 Training Report
+=======================
+Training samples: 1000
+Features: ['raw_ani', 'shared_log', 'af_q', 'af_r']
+Reference: fastani_ani
+Best params: {'n_estimators': 1000, 'max_depth': 5, 'learning_rate': 0.02, 'subsample': 0.8}
+
+MAE (raw Syn2bANI vs FastANI):     0.0716
+MAE (GBRT corrected vs FastANI):   0.0113
+Improvement:                          0.0603 (84.2%)
+
+RMSE (raw):                           0.2126
+RMSE (GBRT):                          0.0600
+
+By relatedness label:
+  high                : raw=0.0127, gbrt=0.0018 (n=250)
+  low                 : raw=0.0000, gbrt=0.0102 (n=250)
+  mid                 : raw=0.0383, gbrt=0.0119 (n=250)
+  mid_high            : raw=0.2353, gbrt=0.0212 (n=250)
+
+Per-phylum error (GBRT corrected vs FastANI, top 15 by count):
+  Proteobacteria                : raw=0.0600, gbrt=0.0064 (n=204)
+  Firmicutes                    : raw=0.0967, gbrt=0.0137 (n=79)
+  Actinobacteriota              : raw=0.1014, gbrt=0.0039 (n=61)
+  Firmicutes_A                  : raw=0.1894, gbrt=0.0217 (n=46)
+  Bacteroidota                  : raw=0.1957, gbrt=0.0067 (n=36)
+  Verrucomicrobiota             : raw=0.1159, gbrt=0.0039 (n=26)
+  Halobacteriota                : raw=0.1057, gbrt=0.0093 (n=17)
+  Cyanobacteria                 : raw=0.1116, gbrt=0.0050 (n=13)
+  Altiarchaeota                 : raw=0.0000, gbrt=0.0113 (n=11)
+  Thermoproteota                : raw=0.2345, gbrt=0.0765 (n=11)
+  Aquificota                    : raw=0.0000, gbrt=0.0113 (n=10)
+  Desulfobacterota              : raw=0.0360, gbrt=0.0092 (n=9)
+  Margulisbacteria              : raw=0.0000, gbrt=0.0105 (n=9)
+  Patescibacteria               : raw=0.2732, gbrt=0.0962 (n=9)
+  Armatimonadota                : raw=0.0070, gbrt=0.0111 (n=8)

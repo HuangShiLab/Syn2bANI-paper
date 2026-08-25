@@ -1,0 +1,18 @@
+Loaded 1000 pairs from results/pairs_gtdb_r207_1k.tsv
+Remaining pairs to run: 1000
+
+[1/3] Running FastANI on 1000 pairs...
+  FastANI completed. Missing: 0
+
+[2/3] Running skani on 1000 pairs...
+  skani completed. Missing: 0
+
+[3/3] Running Syn2bANI on 1000 pairs...
+  Syn2bANI completed. Missing raw: 0
+
+============================================================
+Results saved: results/matrix_gtdb_r207_1k_baseline.tsv
+Total rows: 1000
+Columns: ['query', 'reference', 'label', 'q_domain', 'r_domain', 'q_phylum', 'r_phylum', 'q_genus', 'r_genus', 'q_species', 'r_species', 'fastani_ani', 'skani_ani', 'skani_align_frac', 's2b_raw_ani', 's2b_gbrt_ani', 's2b_shared_tags']
+============================================================
+Benchmark complete

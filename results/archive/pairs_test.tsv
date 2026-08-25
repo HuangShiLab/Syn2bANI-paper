@@ -1,0 +1,21 @@
+query	reference	label	q_domain	r_domain	q_phylum	r_phylum	q_genus	r_genus	q_species	r_species
+GCF_000020225.1	GCF_002161325.1	high	d__Bacteria	d__Bacteria	p__Verrucomicrobiota	p__Verrucomicrobiota	g__Akkermansia	g__Akkermansia	s__Akkermansia muciniphila	s__Akkermansia muciniphila
+GCF_000020225.1	GCA_014871965.1	high	d__Bacteria	d__Bacteria	p__Verrucomicrobiota	p__Verrucomicrobiota	g__Akkermansia	g__Akkermansia	s__Akkermansia muciniphila	s__Akkermansia muciniphila
+GCF_002161325.1	GCA_014871965.1	high	d__Bacteria	d__Bacteria	p__Verrucomicrobiota	p__Verrucomicrobiota	g__Akkermansia	g__Akkermansia	s__Akkermansia muciniphila	s__Akkermansia muciniphila
+GCF_016890425.1	GCF_002901825.1	high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Mammaliicoccus	g__Mammaliicoccus	s__Mammaliicoccus sciuri	s__Mammaliicoccus sciuri
+GCF_016890425.1	GCF_016067395.1	high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Mammaliicoccus	g__Mammaliicoccus	s__Mammaliicoccus sciuri	s__Mammaliicoccus sciuri
+GCA_904374795.1	GCA_900549625.1	mid_high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Ventrenecus	g__Ventrenecus	s__Ventrenecus sp904374795	s__Ventrenecus sp900549625
+GCA_904374795.1	GCA_902766135.1	mid_high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Ventrenecus	g__Ventrenecus	s__Ventrenecus sp904374795	s__Ventrenecus sp902766135
+GCA_018712835.1	GCA_904374795.1	mid_high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Ventrenecus	g__Ventrenecus	s__Ventrenecus stercoripullorum	s__Ventrenecus sp904374795
+GCA_017476885.1	GCA_018711945.1	mid_high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Ventrenecus	g__Ventrenecus	s__Ventrenecus sp017476885	s__Ventrenecus avicola
+GCA_900549625.1	GCA_017476885.1	mid_high	d__Bacteria	d__Bacteria	p__Firmicutes	p__Firmicutes	g__Ventrenecus	g__Ventrenecus	s__Ventrenecus sp900549625	s__Ventrenecus sp017476885
+GCA_013204025.1	GCA_001577055.1	mid	d__Bacteria	d__Bacteria	p__Marinisomatota	p__Marinisomatota	g__JABMOW01	g__TCS56	s__JABMOW01 sp013204025	s__TCS56 sp001577055
+GCA_017656425.1	GCA_016934035.1	mid	d__Bacteria	d__Bacteria	p__Marinisomatota	p__Marinisomatota	g__JACDNV01	g__JAFGTP01	s__JACDNV01 sp017656425	s__JAFGTP01 sp016934035
+GCA_016934035.1	GCA_002715465.1	mid	d__Bacteria	d__Bacteria	p__Marinisomatota	p__Marinisomatota	g__JAFGTP01	g__GCA-2715465	s__JAFGTP01 sp016934035	s__GCA-2715465 sp002715465
+GCA_000405805.1	GCA_013204025.1	mid	d__Bacteria	d__Bacteria	p__Marinisomatota	p__Marinisomatota	g__SCGC-AAA003-L08	g__JABMOW01	s__SCGC-AAA003-L08 sp000405805	s__JABMOW01 sp013204025
+GCA_001509335.1	GCA_002725545.1	mid	d__Bacteria	d__Bacteria	p__Marinisomatota	p__Marinisomatota	g__46-47	g__TMED108	s__46-47 sp001509335	s__TMED108 sp002725545
+GCA_011040895.1	GCA_002869225.1	low	d__Bacteria	d__Bacteria	p__JdFR-76	p__Muirbacteria	g__DREG01	g__Muirbacterium	s__DREG01 sp011040895	s__Muirbacterium halophilum
+GCA_011388275.1	GCA_016783345.1	low	d__Bacteria	d__Bacteria	p__QNDG01	p__BS750m-G34	g__DSAB01	g__BS750m-G34	s__DSAB01 sp011388275	s__BS750m-G34 sp016783345
+GCA_016213065.1	GCA_001873295.1	low	d__Bacteria	d__Bacteria	p__UBA10199	p__CG2-30-70-394	g__JACRBV01	g__CG2-30-70-394	s__JACRBV01 sp016213065	s__CG2-30-70-394 sp001873295
+GCA_003553445.1	GCA_014804915.1	low	d__Bacteria	d__Bacteria	p__CG03	p__Desulfobacterota_I	g__PWEK01	g__Desulfovibrio	s__PWEK01 sp003553445	s__Desulfovibrio sp014804915
+GCA_904395845.1	GCA_003554345.1	low	d__Bacteria	d__Bacteria	p__Firmicutes_A	p__T1SED10-198M	g__Fimimorpha	g__T1SED10-198M	s__Fimimorpha sp904395845	s__T1SED10-198M sp003554345
