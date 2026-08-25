@@ -88,7 +88,8 @@ def main():
     OUT_FIG.mkdir(parents=True, exist_ok=True)
     OUT_RES.mkdir(parents=True, exist_ok=True)
 
-    species_list = ["Escherichia_coli_hypermutator", "Helicobacter_pylori"]
+    species_list = ["Escherichia_coli_hypermutator", "Helicobacter_pylori",
+                    "Neisseria_gonorrhoeae", "Streptomyces_rimosus"]
 
     all_cases = []
     species_frames = {}
@@ -226,8 +227,32 @@ def main():
     summary = pd.DataFrame(summary_rows)
     summary.to_csv(OUT_RES / "syntracker_summary.tsv", sep="\t", index=False, float_format="%.4f")
 
+    # --- Supplementary figure: N. gonorrhoeae and S. rimosus ---
+    fig, axes = plt.subplots(2, 2, figsize=(14, 11))
+    extra_species = ["Neisseria_gonorrhoeae", "Streptomyces_rimosus"]
+    ylims = {"Neisseria_gonorrhoeae": (0.87, 0.91), "Streptomyces_rimosus": (0.90, 0.965)}
+    for row, species in enumerate(extra_species):
+        df = species_frames[species]
+        for col, x_col in enumerate(["ani", "ani_skani"]):
+            ax = axes[row, col]
+            ax.scatter(df[x_col], df["synteny_score"], s=35, alpha=0.75,
+                       edgecolors="none", c="#2ca02c")
+            xlabel = "Syn2bANI ANI (%)" if x_col == "ani" else "skani ANI (%)"
+            ax.set_xlabel(xlabel)
+            ax.set_ylabel("Synteny score")
+            title = f"{species.replace('_', ' ')} — {'Syn2bANI' if x_col == 'ani' else 'skani'}"
+            ax.set_title(title)
+            ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7)
+            ax.set_xlim(99.0, 100.01)
+            ax.set_ylim(ylims[species])
+    plt.tight_layout()
+    fig.savefig(OUT_FIG / "syntracker_supp_ngonorrhoeae_srimosus.png", dpi=300)
+    fig.savefig(OUT_FIG / "syntracker_supp_ngonorrhoeae_srimosus.pdf")
+    plt.close(fig)
+
     print(f"Wrote {OUT_FIG / 'syntracker_high_ani_low_synteny.png'}")
     print(f"Wrote {OUT_FIG / 'syntracker_breakpoints_vs_ani.png'}")
+    print(f"Wrote {OUT_FIG / 'syntracker_supp_ngonorrhoeae_srimosus.png'}")
     print(f"Wrote {OUT_RES / 'top_discordant_cases.tsv'}")
     print(f"Wrote {OUT_RES / 'syntracker_summary.tsv'}")
     print("\nTop 5 discordant cases overall:")
