@@ -10,12 +10,24 @@ This repository contains the manuscript, analysis code, benchmark data, and figu
 
 ```
 Syn2bANI-paper/
-├── paper/              # Manuscript drafts and methods documentation
-│   ├── manuscript.md
-│   ├── manuscript.docx
-│   ├── SUPPLEMENTARY.md
-│   ├── SIMULATION_AND_PERFORMANCE_REPORT.md
-│   └── ...
+├── paper/              # Manuscript, supplementary, and project indices
+│   ├── manuscript/     # Current manuscript and supplementary files
+│   │   ├── manuscript.md
+│   │   ├── manuscript.docx
+│   │   ├── SUPPLEMENTARY.md
+│   │   └── SUPPLEMENTARY.docx
+│   ├── figures/        # Figure index (source files in figures/)
+│   │   └── FIGURES.md
+│   ├── data/           # Data index and simulation/performance report
+│   │   ├── DATA.md
+│   │   └── SIMULATION_AND_PERFORMANCE_REPORT.md
+│   ├── scripts/        # Script index (source files in scripts/ and analysis/)
+│   │   └── SCRIPTS.md
+│   └── others/         # Legacy/exploratory drafts and notes
+│       ├── MANUSCRIPT_OUTLINE.md
+│       ├── GBRT_DEBIAS_EXPLANATION.md
+│       ├── GBRT_METHODS_FOR_MANUSCRIPT.md
+│       └── GBRT_V2_TRAINING_REPORT.md
 ├── analysis/           # Python scripts for analysis and figure generation
 │   ├── analyze_gtdb_quality_vs_mae.py
 │   ├── plot_supplementary_simulations.py
