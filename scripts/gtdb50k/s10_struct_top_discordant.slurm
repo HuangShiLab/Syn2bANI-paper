@@ -10,7 +10,8 @@
 set -euo pipefail
 
 WORK=/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k
+REPO=/lustre1/g/aos_shihuang/Syn2bANI-paper
 export SYN2BANI_WORK=$WORK
 mkdir -p "$WORK/logs"
 
-"$WORK/scripts/run_struct_top_discordant.sh" "$WORK/top_discordant_high_ani_pairs.tsv"
+"$REPO/scripts/gtdb50k/run_struct_top_discordant.sh" "$WORK/top_discordant_high_ani_pairs.tsv"

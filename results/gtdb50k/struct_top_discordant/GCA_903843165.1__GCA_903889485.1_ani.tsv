@@ -1,0 +1,2 @@
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+CAIMOO010000001.1	CAISXK010000001.1	99.9982	99.9982	0.9319	0.9257	0.00105	115	0.9769	121	inf	0.9999	99.9969	99.9985	0.0023	0.01	AlfI:100.00,AloI:100.00,BcgI:100.00,FalI:100.00	5269	115	5227	268	45.426086956521736	ok	99.9982	uniform
