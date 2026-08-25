@@ -1,0 +1,47 @@
+# GTDB-R207 genome quality vs Syn2bANI ANI accuracy
+
+Estimator: `ani_cal`
+
+Overall: n = 39903, MAE = 0.6194, bias = -0.1223, r = 0.9620
+
+## Completeness (min of pair)
+
+                n     MAE  median_abs_err    bias       r
+[0,70)     3972.0  0.8180          0.6605 -0.2305  0.9382
+[70,80)    2781.0  0.6917          0.5156  0.0499  0.9520
+[80,90)    4132.0  0.6282          0.4504  0.2126  0.9556
+[90,95)    2945.0  0.6110          0.4613  0.1801  0.9626
+[95,100)  22259.0  0.5876          0.4946 -0.2183  0.9710
+
+## Contamination (max of pair)
+
+                n     MAE  median_abs_err    bias       r
+[0,1)     20689.0  0.6368          0.5063 -0.1451  0.9605
+[1,2)     10082.0  0.5823          0.4807 -0.1619  0.9690
+[2,5)      7945.0  0.6079          0.4888 -0.0379  0.9613
+[5,10)     1122.0  0.7117          0.5496  0.0762  0.9444
+[10,100)     65.0  0.6348          0.5794 -0.4645  0.9743
+
+## Contig count (max of pair)
+
+                   n     MAE  median_abs_err    bias       r
+[0,50)       11514.0  0.6541          0.5164 -0.1368  0.9576
+[50,100)      9784.0  0.6163          0.5084 -0.2490  0.9674
+[100,200)     8597.0  0.5702          0.4713 -0.1452  0.9708
+[200,500)     7870.0  0.6177          0.4801 -0.0021  0.9594
+[500,10000)   2138.0  0.6509          0.5262  0.1846  0.9440
+
+## Mean contig length (min of pair)
+
+                        n     MAE  median_abs_err    bias       r
+[0,5) kb            948.0  0.8068          0.6245  0.2536  0.9224
+[5,10) kb          4251.0  0.6601          0.4791  0.2422  0.9548
+[10,50) kb        19587.0  0.6053          0.4729 -0.0971  0.9626
+[50,100) kb        7027.0  0.5896          0.5115 -0.2862  0.9743
+[100,1000000) kb   8090.0  0.6361          0.5465 -0.2767  0.9664
+
+Figures:
+- `figures/report/gtdb_mae_by_completeness.png`
+- `figures/report/gtdb_mae_by_contamination.png`
+- `figures/report/gtdb_mae_by_contig_count.png`
+- `figures/report/gtdb_mae_by_contig_length.png`
