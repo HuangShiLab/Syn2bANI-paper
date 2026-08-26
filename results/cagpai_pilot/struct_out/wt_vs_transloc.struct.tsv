@@ -1,6 +1,4 @@
-wt	transloc	5 chains	4 SVs reported	ani 99.9999
+wt	transloc	5 chains	2 SVs reported	ani 99.9999
 query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
-wt	transloc	Inversion	wt	438016	448884	transloc	1473226	1484102	10868	456	35
 wt	transloc	Translocation	wt	583350	583917	transloc	547763	1199869	567	35	925
 wt	transloc	Deletion	wt	1199505	1200205	transloc	1163351	1200205	36154	518	407
-wt	transloc	Inversion	wt	1473226	1484102	transloc	438016	448884	10876	925	0

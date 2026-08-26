@@ -1,7 +1,8 @@
 # cagPAI pilot: sensitivity of Syn2bANI to island-scale structural variation
 
-Date: 2026-08-26
-Tool: syn2bani 0.1.0 (commit fe0f36c, v5 calibration), enzyme panel BcgI,AlfI,AloI,FalI
+Date: 2026-08-26 (updated after the struct shadow-chain fix)
+Tool: syn2bani 0.1.0 (commit 4d679cf, v5 calibration + struct shadow filter),
+enzyme panel BcgI,AlfI,AloI,FalI
 Reference genome: H. pylori 26695 (NC_000915.1 / GCF_000008525.1, 1,667,867 bp)
 cagPAI coordinates (from GFF annotation, cag1..cagA): 547,328–583,481 (36,154 bp)
 
@@ -35,19 +36,29 @@ Runs: `syn2bani dist --verbose` (8×8, `dist_all.tsv`) and `syn2bani struct --re
 | mut1 × mut1_inv | 97.87 | 0.998 | 0.9968 | 5 | 4 |
 | mut1 × mut1_transloc | 97.97 | 0.997 | 0.9968 | 5 | 4 |
 
-### SV event calls (struct)
+### SV event calls (struct, after shadow-chain fix)
 
-| Pair | Events beyond self-baseline | Called size / coordinates |
+| Pair | SVs | Call |
 |---|---|---|
-| wt × del | **none** | (chain count 3→4 only) |
-| wt × inv | Inversion | 35,133 bp at 548,447–583,580 — exact cagPAI boundaries |
-| wt × transloc | Translocation + Deletion | cagPAI correctly located at new 1.2 Mb locus |
-| mut1 × mut1_inv | Inversion | 35,157 bp — robust at ANI ≈ 98 |
-| mut1 × mut1_transloc | Translocation + Deletion | robust at ANI ≈ 98 |
+| wt × wt (self-baseline) | **0** | clean — rRNA repeat artifacts removed |
+| wt × del | 1 | **Insertion 36,154 bp at 546,687–583,917 — exact cagPAI** |
+| wt × inv | 1 | Inversion 35,133 bp at 548,447–583,580 — exact cagPAI |
+| wt × transloc | 2 | Translocation + Deletion 36,154 bp, cagPAI located at new 1.2 Mb locus |
+| mut1 × mut1 (self) | 0 | clean |
+| mut1 × mut1_del | 1 | Insertion 36,154 bp — robust at ANI ≈ 98 |
+| mut1 × mut1_inv | 1 | Inversion 35,157 bp — robust at ANI ≈ 98 |
+| mut1 × mut1_transloc | 2 | Translocation + Deletion 36,154 bp — robust at ANI ≈ 98 |
 
-Self-baseline (wt × wt): 2 spurious ~10 kb "Inversion" calls at 438 kb ↔ 1,473 kb,
-caused by the duplicated rRNA operon repeats. Repeat-masked filtering or a
-self-baseline subtraction is required before interpreting struct output.
+## The struct shadow-chain fix (syn2bani 4d679cf)
+
+Before the fix, self × self reported 2 spurious ~10 kb "Inversions"
+(438 kb ↔ 1,473 kb): secondary mappings of the duplicated rRNA operons.
+Worse, those sparse nested chains sat between the two backbone chains in
+query order and broke their adjacency, so the 36 kb cagPAI deletion was
+**never called**. The fix marks any chain fully contained in a denser
+chain's query span as a repeat shadow and excludes it from all SV rules
+(`src/core/sv.rs::shadowed_mask`). Unit tests (11/11) and the full suite
+(106/106) pass, including the K-12 vs Sakai relocation-guard regression.
 
 ## Conclusions
 
@@ -58,20 +69,23 @@ self-baseline subtraction is required before interpreting struct output.
    GTDB analysis therefore captures multi-event / large-scale rearrangement only,
    not cagPAI-scale (2% of genome) events. This limitation must be stated in the
    manuscript, and cagPAI-case analysis must not rely on synteny_score alone.
-3. **Inversions and translocations at island scale ARE robustly detected by
-   `struct`**, with near-exact breakpoints, even at ANI ≈ 98 (2% divergence).
-4. **Pure deletion/insertion is currently NOT emitted as a struct event**; it
-   surfaces only as (a) chain count +1 and (b) af asymmetry
-   (af_query 0.977 vs af_ref 0.999 ≈ the 2.2% cagPAI genome fraction).
-   A deletion/insertion reporter (offset-jump within chains, or AF-asymmetry flag)
-   would close this gap — candidate small feature for the Syn2bANI CLI.
-5. **Repeat-induced false positives** (rRNA operons) appear even in self × self;
-   downstream analyses need repeat masking or a size/consistency filter.
+3. **`struct` now detects all three island-scale event classes** — deletion/
+   insertion, inversion, translocation — with near-exact boundaries (±1–2 kb of
+   the true cagPAI edges), robustly at ANI ≈ 98 (2% divergence). Self-baselines
+   are clean (0 calls).
+4. **Repeat-induced false positives are gone** after the shadow filter; no
+   repeat masking or baseline subtraction is needed downstream.
+5. The `dist`-level `breakpoint_count`/`synteny_blocks` still count the shadow
+   chains (wt × wt reports 2 breakpoints) — cosmetic only, but worth a note if
+   these columns are compared against struct event counts.
 
 ## Implications for the H. pylori cagPAI case study
 
-- Detection of cagPAI presence/absence between high-ANI strains should use
-  **af asymmetry (|af_query − af_reference|)** plus chain-count delta, not
-  synteny_score; cagPAI inversion/translocation uses struct event calls.
-- The struct output must be baseline-filtered (self × self events subtracted or
-  repeats masked) before counting events for the 528-genome cohort.
+- cagPAI presence/absence, inversion, and translocation between high-ANI
+  strains can all be read directly from `syn2bani struct` event calls;
+  af asymmetry (|af_query − af_reference| ≈ the island's genome fraction)
+  serves as a cheap screen before running struct.
+- The 528-genome cohort analysis can proceed without a repeat-masking
+  pre-processing step.
+- HPC struct jobs (top-discordant GTDB pairs, B. longum) should be run with
+  the rebuilt binary (≥ 4d679cf).

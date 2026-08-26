@@ -1,6 +1,4 @@
-mut1	mut1_transloc	5 chains	4 SVs reported	ani 97.9692
+mut1	mut1_transloc	5 chains	2 SVs reported	ani 97.9692
 query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
-mut1	mut1_transloc	Inversion	mut1	439856	448327	mut1_transloc	1473778	1482262	8471	400	29
 mut1	mut1_transloc	Translocation	mut1	583350	583917	mut1_transloc	547763	1199869	567	29	811
 mut1	mut1_transloc	Deletion	mut1	1199505	1200205	mut1_transloc	1163351	1200205	36154	455	356
-mut1	mut1_transloc	Inversion	mut1	1473656	1482005	mut1_transloc	440105	448457	8349	811	0
