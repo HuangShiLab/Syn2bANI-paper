@@ -21,7 +21,21 @@ This directory lists the figures used in the current manuscript. The actual figu
 
 ## Supplementary Figures
 
-Supplementary figures S1–S9 include the inversion-ladder truth benchmark, GTDB held-out and unified benchmarks, genome-quality robustness, and the exact-truth simulation families (indel, GC, fragmentation, accessory, mosaic). They are located in `figures/report/` and selected subdirectories.
+Supplementary figures S1–S11 include the inversion-ladder truth benchmark, GTDB held-out and unified benchmarks, genome-quality robustness, exact-truth simulation families (indel, GC, fragmentation, accessory, mosaic), and the Syntracker isolate-collection extensions. They are located in `figures/report/` and `figures/syntracker_validation/`.
+
+| Figure | Description | Source file |
+|--------|-------------|-------------|
+| Fig. S1 | Exact-truth inversion-ladder synteny benchmark | `figures/report/fig_synteny_ladder.png` |
+| Fig. S2 | Held-out GTDB-R207 benchmark | `figures/report/fig_gtdb50k_heldout.png` |
+| Fig. S3 | Unified GTDB-R207 80–100% benchmark | `figures/gtdb_r207_unified_benchmark.png` |
+| Fig. S4 | Genome quality vs. ANI accuracy | `figures/report/gtdb_quality_vs_mae_combined.png` |
+| Fig. S5 | Exact-truth indel ladder and indel sweep | `figures/report/fig_s5_simulation_indel.png` |
+| Fig. S6 | GC coverage ladder | `figures/report/fig_s6_simulation_gc.png` |
+| Fig. S7 | Simulated fragmentation | `figures/report/fig_s7_simulation_fragment.png` |
+| Fig. S8 | Accessory-content confound | `figures/report/fig_s8_simulation_accessory.png` |
+| Fig. S9 | Mosaic/rate-heterogeneity family | `figures/report/fig_s9_simulation_mosaic.png` |
+| Fig. S10 | Breakpoints vs. ANI in Syntracker isolate collections | `figures/syntracker_validation/syntracker_breakpoints_vs_ani.png` |
+| Fig. S11 | *N. gonorrhoeae* and *S. rimosus* ANI–synteny decoupling | `figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png` |
 
 ## Regenerating Figures
 
