@@ -1,0 +1,16 @@
+query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig1	100	678025	FSHHK16M1_ctg_contig1	216975	895261	677925	0	225
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Insertion	FSHHK22M1_ctg_contig1	302596	305413	FSHHK16M1_ctg_contig1	590111	591914	1014	604	817
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Insertion	FSHHK22M1_ctg_contig1	677866	726642	FSHHK16M1_ctg_contig1	215105	217135	46746	1421	225
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig1	726456	841183	FSHHK16M1_ctg_contig1	100564	215291	114727	1421	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig2	0	120399	FSHHK16M1_ctg_contig3	267	123984	120399	0	454
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Deletion	FSHHK22M1_ctg_contig2	53934	55673	FSHHK16M1_ctg_contig3	65141	69987	3107	106	139
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Translocation	FSHHK22M1_ctg_contig2	120231	120784	FSHHK16M1_ctg_contig2	233027	233027	553	245	454
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig2	120610	344406	FSHHK16M1_ctg_contig2	9372	233175	223796	245	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Translocation	FSHHK22M1_ctg_contig3	75567	76643	FSHHK16M1_ctg_contig9	365	365	1076	156	107
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig7	448	185931	FSHHK16M1_ctg_contig6	0	185491	185483	0	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig10	500	100337	FSHHK16M1_ctg_contig1	184	100019	99837	0	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig11	163	89107	FSHHK16M1_ctg_contig1	896784	985846	88944	0	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig16	448	31787	FSHHK16M1_ctg_contig13	1310	32649	31339	0	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig17	537	7426	FSHHK16M1_ctg_contig2	105	7000	6889	0	0
+FSHHK22M1_ctg_contig1	FSHHK16M1_ctg_contig1	Inversion	FSHHK22M1_ctg_contig19	1426	4133	FSHHK16M1_ctg_contig14	646	3353	2707	0	0
