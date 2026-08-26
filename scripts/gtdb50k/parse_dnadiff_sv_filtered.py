@@ -53,17 +53,19 @@ def parse_one(pairid, min_gap):
         strand2 = 1 if re2 >= rs2 else -1
         if strand1 != strand2:
             breakpoints += 1
+            # rgap is ill-defined across an inversion junction; only the
+            # query-side gap can host an indel here.
+            if qgap >= min_gap:
+                large_indels += 1
         else:
             if strand1 == 1:
                 rgap = rs2 - re1 - 1
-                if rgap < -min_gap:
-                    breakpoints += 1
             else:
                 rgap = rs1 - re2 - 1
-                if rgap < -min_gap:
-                    breakpoints += 1
-        if qgap >= min_gap or abs(rgap) >= min_gap:
-            large_indels += 1
+            if rgap < -min_gap:
+                breakpoints += 1
+            if qgap >= min_gap or abs(rgap) >= min_gap:
+                large_indels += 1
     return dict(blocks=len(rows), breakpoints=breakpoints, large_indels=large_indels)
 
 
