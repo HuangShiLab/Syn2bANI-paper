@@ -20,6 +20,8 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+~$*.docx
+~$*.doc
 
 # IDE
 .vscode/
