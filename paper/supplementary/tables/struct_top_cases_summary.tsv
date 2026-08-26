@@ -1,0 +1,7 @@
+case	ani	synteny_score	breakpoint_count	n_chains	n_query_contigs	n_ref_contigs	query_len	ref_len	aligned_query_bp	aligned_ref_bp	n_inversions	n_translocations	n_indels	total_indel_bp	mean_indel_bp	max_indel_bp	af_query	af_reference	n_anchors	n_tags
+Escherichia_coli_hypermutator_M1_d148_cloneCL1_vs_M1_d190_cloneL1	99.9999	0.8852	770	62	50	54	4524828	4516884	4430224	4428491	32	29	0	0	0.0	0	0.9339	0.9684	6780.0	6057.0
+Escherichia_coli_hypermutator_M1_d148_cloneCL1_vs_M3_d190_clone15	99.9995	0.8874	749	59	50	50	4514482	4489078	4404105	4403591	27	31	0	0	0.0	0	0.9287	0.9718	6720.0	6019.0
+Helicobacter_pylori_15_vs_16	99.9999	0.9279	103	33	22	30	1604301	1585877	1514035	1514141	14	18	0	0	0.0	0	0.9284	0.928	1457.0	1349.0
+Helicobacter_pylori_1_vs_10	99.9999	0.9526	68	36	26	34	1636114	1626680	1563711	1561910	17	18	0	0	0.0	0	0.9264	0.8939	1468.0	1403.0
+Neisseria_gonorrhoeae_NG_05_vs_NG_10	99.9837	0.8701	319	80	74	71	2128699	2109227	2019951	2019212	42	37	0	0	0.0	0	0.879	0.8546		
+Streptomyces_rimosus_SR_06_vs_SR_10	99.9945	0.9012	2957	866	143	830	9506604	8791350	8068829	8004610	429	436	0	0	0.0	0	0.4318	0.6914		
