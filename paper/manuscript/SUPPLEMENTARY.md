@@ -135,6 +135,12 @@ discordant cases (NG_05 vs NG_10 and SR_06 vs SR_10) were re-analyzed with
 `syn2bani struct`; counts are in Table 4 and
 `results/syntracker_validation/struct_top_cases_summary.tsv`.
 
+## Supplementary Figure S12 — Engineered *H. pylori* cagPAI deletion is recovered at exact size
+
+(`figures/report/fig_s12_cagpai_pilot.png`)
+
+Eight *H. pylori* 26695-derived genomes: wild-type (WT), a 36,154 bp cagPAI deletion (ΔcagPAI), cagPAI inversion, cagPAI translocation, and the same four structures on a mut1 background carrying ~1% substitutions. All pairwise comparisons were run with `syn2bani ani` and `syn2bani struct`. (a) ANI is ~100% for same-background pairs and ~99% across backgrounds, independent of the 36 kb rearrangement. (b) `breakpoint_count` increases for inversion and translocation pairs. (c) `synteny_score` (chain coverage) drops only modestly with the deletion and is insensitive to inversion/translocation, confirming that it measures coverage rather than rearrangement burden. The WT vs ΔcagPAI comparison returns a single insertion call of exactly 36,154 bp.
+
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 
 695 CAMI2 bins vs dnadiff ANIm truth (raw gated syn2bani; skani; FastANI).
