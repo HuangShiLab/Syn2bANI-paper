@@ -12,6 +12,7 @@ GENOMES=${GTDB50K_GENOMES:-/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all}
 TOOLS=${TOOLS:-/lustre1/g/aos_shihuang/tools}
 MM2=${MM2:-$TOOLS/minimap2/minimap2}
 PY=${PY:-$TOOLS/python3/bin/python3}
+[ -x "$PY" ] || PY=$TOOLS/anaconda3/bin/python3
 NSLICES=${NSLICES:-190}
 
 SLICE=$1
