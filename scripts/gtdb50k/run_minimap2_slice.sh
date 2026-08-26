@@ -44,7 +44,9 @@ tail -n +2 "$PAIRS" | sed -n "${START},${END}p" | while IFS=$'\t' read -r QA RA 
         continue
     fi
     TMP=$(mktemp -d "$WORK/tmp.mm2.${PID}.XXXXXX")
-    if "$MM2" -x asm5 -c --eqx "$RF" "$QF" > "$TMP/mm2.paf" 2> /dev/null; then
+    # No -c/--eqx: parse_minimap2_sv.py only needs standard PAF columns,
+    # and -c/--eqx slows minimap2 ~70× without changing the metrics we report.
+    if "$MM2" -x asm5 "$RF" "$QF" > "$TMP/mm2.paf" 2> /dev/null; then
         $PY "$SCRIPTS/parse_minimap2_sv.py" "$PID" "$TMP/mm2.paf" >> "$ROWS_TMP"
     else
         echo -e "${PID}\tNA\tNA\tNA\tminimap2_failed" >> "$ROWS_TMP"
