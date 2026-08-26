@@ -1,0 +1,8 @@
+wt.fna
+del.fna
+inv.fna
+transloc.fna
+mut1.fna
+mut1_del.fna
+mut1_inv.fna
+mut1_transloc.fna

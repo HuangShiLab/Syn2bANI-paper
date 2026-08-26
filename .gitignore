@@ -32,3 +32,6 @@ Thumbs.db
 *.s2ba
 *.sketch
 results/synteny_bench/sim/
+# large pilot genome files
+data/cagpai_pilot/*.fna
+data/cagpai_pilot/*.gb*
