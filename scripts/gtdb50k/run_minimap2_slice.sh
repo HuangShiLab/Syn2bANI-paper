@@ -25,11 +25,16 @@ END=$(( (SLICE + 1) * CHUNK ))
 mkdir -p "$WORK/minimap2_rows" "$WORK/logs"
 ROWS_TMP="$WORK/minimap2_rows/slice_${SLICE}.tsv.tmp"
 ROWS_OUT="$WORK/minimap2_rows/slice_${SLICE}.tsv"
-: > "$ROWS_TMP"
+# Append to tmp so a killed job can resume; final sort/de-dupe happens at the end.
+[ -f "$ROWS_TMP" ] || : > "$ROWS_TMP"
 
 tail -n +2 "$PAIRS" | sed -n "${START},${END}p" | while IFS=$'\t' read -r QA RA _; do
     PID="${QA}__${RA}"
+    # Skip if already finalized or already in the current tmp (resume-friendly).
     if [ -s "$ROWS_OUT" ] && grep -qm1 "^${PID}" "$ROWS_OUT"; then
+        continue
+    fi
+    if grep -qm1 "^${PID}" "$ROWS_TMP" 2>/dev/null; then
         continue
     fi
     QF=$GENOMES/${QA}.fna
@@ -47,10 +52,11 @@ tail -n +2 "$PAIRS" | sed -n "${START},${END}p" | while IFS=$'\t' read -r QA RA 
     rm -rf "$TMP"
 done
 
-# merge with existing output if present (idempotent)
+# merge with existing output if present (idempotent) and de-duplicate
+cat "$ROWS_TMP" > "$WORK/minimap2_rows/slice_${SLICE}.tsv.all"
 if [ -s "$ROWS_OUT" ]; then
-    cat "$ROWS_OUT" >> "$ROWS_TMP"
+    cat "$ROWS_OUT" >> "$WORK/minimap2_rows/slice_${SLICE}.tsv.all"
 fi
-sort -u "$ROWS_TMP" > "$ROWS_OUT"
-rm -f "$ROWS_TMP"
+sort -u "$WORK/minimap2_rows/slice_${SLICE}.tsv.all" > "$ROWS_OUT"
+rm -f "$ROWS_TMP" "$WORK/minimap2_rows/slice_${SLICE}.tsv.all"
 echo "[minimap2] slice $SLICE done: $(wc -l < "$ROWS_OUT") pairs"
