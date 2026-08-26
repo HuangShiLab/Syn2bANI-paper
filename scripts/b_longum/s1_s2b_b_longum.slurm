@@ -12,9 +12,9 @@ set -euo pipefail
 WORK=/lustre1/g/aos_shihuang/Syn2bANI-paper/results/b_longum_abfA
 export B_LONGUM_WORK=$WORK NSLICES=20
 mkdir -p "$WORK/logs"
-NPAIRS=$(wc -l < "$WORK/pairs_all_vs_all.tsv")
-NEED=$(( (NPAIRS + 999) / 1000 ))
-if [ "$SLURM_ARRAY_TASK_ID" -ge "$NEED" ]; then
+# run_s2b_b_longum_slice.sh partitions the pair file into NSLICES equal
+# chunks, so every task id below NSLICES has work; tasks above it exit.
+if [ "$SLURM_ARRAY_TASK_ID" -ge "$NSLICES" ]; then
     exit 0
 fi
 "$WORK/scripts/run_s2b_b_longum_slice.sh" "$SLURM_ARRAY_TASK_ID"
