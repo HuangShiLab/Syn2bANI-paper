@@ -46,6 +46,7 @@ def metrics(rows):
         qs1, qe1, rs1, re1, st1 = rows[i]
         qs2, qe2, rs2, re2, st2 = rows[i + 1]
         qgap = qs2 - qe1 - 1
+        rgap = 0
         if st1 != st2:
             breakpoints += 1
         else:
