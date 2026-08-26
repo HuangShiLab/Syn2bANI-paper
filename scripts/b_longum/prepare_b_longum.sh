@@ -14,7 +14,10 @@ echo "Found $N genome files in $GENOMES"
 # Create manifest: accession, file_path
 awk '{n=$0; sub(/.*\//,"",n); sub(/\.(fna|fa|fasta)$/,"",n); print n"\t"$0}' "$WORK/genome_files.txt" > "$WORK/manifest.tsv"
 
-# Create all-vs-all pair list (n*(n-1)/2)
-awk 'NR==FNR{a[FNR]=$1;next}{for(i=1;i<FNR;i++)print a[i]"\t"$1}' "$WORK/genome_files.txt" "$WORK/genome_files.txt" > "$WORK/pairs_all_vs_all.tsv"
+# Create all-vs-all pair list (n*(n-1)/2) over accessions, with header.
+# The slice script looks up FASTA paths from manifest.tsv by accession.
+{ echo -e "query\treference"
+  awk '{a[NR]=$1} END{for(j=2;j<=NR;j++)for(i=1;i<j;i++)print a[i]"\t"a[j]}' "$WORK/manifest.tsv"
+} > "$WORK/pairs_all_vs_all.tsv"
 NPAIRS=$(wc -l < "$WORK/pairs_all_vs_all.tsv")
 echo "Created $NPAIRS all-vs-all pairs"
