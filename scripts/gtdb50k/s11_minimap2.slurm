@@ -11,11 +11,14 @@
 #      ~230 pairs each; idempotent, safe to resubmit.
 set -euo pipefail
 WORK=/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k
-export GTDB50K_WORK=$WORK NSLICES=190
+# NSLICES is overridable at submit time (sbatch --export=ALL,NSLICES=50
+# --array=0-49) to fit account submit-slot limits.
+NSLICES=${NSLICES:-190}
+export GTDB50K_WORK=$WORK NSLICES
 mkdir -p "$WORK/logs"
-NPAIRS=$(($(wc -l < "$WORK/pairs_50k.tsv") - 1))
-NEED=$(( (NPAIRS + 228) / 229 ))
-if [ "$SLURM_ARRAY_TASK_ID" -ge "$NEED" ]; then
+# The slice script partitions pairs into NSLICES equal chunks; every task
+# id below NSLICES has work.
+if [ "$SLURM_ARRAY_TASK_ID" -ge "$NSLICES" ]; then
     exit 0
 fi
 "$WORK/scripts/run_minimap2_slice.sh" "$SLURM_ARRAY_TASK_ID"
