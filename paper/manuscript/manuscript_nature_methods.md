@@ -2,14 +2,13 @@
 
 ## Authors
 
-[To be determined]
+Yufeng Zhang^1^, Shi Huang^2^
 
 **Affiliations**
-1. State Key Laboratory of Crop Genetics and Germplasm Enhancement, Nanjing Agricultural University, Nanjing, China
-2. [Additional affiliations as needed]
+1,2 Faculty of Dentistry, the University of Hong Kong, Hong Kong SAR, China
 
 **Corresponding author**
-Shi Huang — huangshi@njau.edu.cn
+Shi Huang — shihuang@hku.hk
 
 ---
 
@@ -89,13 +88,9 @@ The structural outputs are not an afterthought: they are a direct consequence of
 
 ### In-silico digestion and IUPAC-aware tag geometry
 
-### In-silico digestion and IUPAC-aware tag geometry
-
 Each genome is digested in silico with every enzyme in the panel (default BcgI, AlfI, AloI, FalI; all 16 Type IIB enzymes of the 2bRAD-M panel are supported [8,19]). Recognition patterns are decomposed into fixed anchor bases and IUPAC degenerate positions; matching uses precomputed 4-bit base masks so each degenerate check is one load and one bitwise AND. The digestion enforces the *complete* biological site on both strands — during validation we found that the patterns for HaeIV, Hin4I, and BaeI had silently dropped the trailing fixed anchor bases of the degenerate-containing right anchor (~16× excess tag density for HaeIV), and this was fixed alongside the likelihood geometry. Tags longer than 32 bp (CspCI, 33 bp) exceed the 2-bit packing width and are refused with a warning rather than silently mismatched — a policy instituted after a truncation asymmetry was found to destroy 91% of reverse-strand anchors for such enzymes.
 
 For the likelihood, each enzyme carries a site geometry `{tag_len, exact_site, d2, d3}` parsed from its IUPAC anchor string: `exact_site` fully specified positions (a mutation deletes the tag), `d2` two-of-four degenerate positions (survive a mutation with probability a + (1−a)/3), `d3` three-of-four positions. The homogeneous likelihood uses the exact convolution over degenerate classes; the heterogeneous likelihood uses a negative binomial with effective body b + d2/3 + 2·d3/3 plus a closed-form survival factor. With the fully specific default panel (d2 = d3 = 0) both paths are bit-identical to the pre-fix code. Tags are stored strand-canonically (the lexicographically smaller of a tag and its reverse complement), so contig orientation is immaterial; reverse-complement self-controls on real drafts return 99.9999.
-
-### Anchoring, chaining, and the adaptive chain-break test
 
 ### Anchoring, chaining, and the adaptive chain-break test
 
@@ -105,13 +100,9 @@ Anchors are grouped by (query contig, reference contig, orientation) — never a
 
 ### Chain-restricted stratified MLE, gating, and flags
 
-### Chain-restricted stratified MLE, gating, and flags
-
 For a query tag inside a chained region, with tag length k, recognition-site length s, mutable body b = k − s, and mismatch budget tol, the outcome probabilities under per-base identity a are: found with m body mismatches, P_m(a) = C(b, m)·(1−a)^m·a^(k−m) for m ≤ tol; not found, P_miss(a) = 1 − Σ P_m(a). Mismatches are observable only in the body — a site mutation deletes the tag — so the site contributes a^s but never appears in the histogram; this also sets a hard retention ceiling (~0.72 at 95% ANI, ~0.50 at 90%). The log-likelihood is summed over per-enzyme strata (each with its own k and b) and maximized over the scalar a by golden-section search. Two partial estimators — `ani_from_loss` (miss rate only) and `ani_from_hist` (histogram only, renormalized by P(found)) — are independent estimates of the same quantity and power the diagnostics.
 
 The heterogeneous model gives each region a rate multiplier r ~ Gamma(α, α); because rate variation acts at kilobase scale while a tag is ~30 bp, all sites in a tag share one r, and integrating r out turns the mismatch count negative binomial with two parameters (mean divergence d, shape α) identifiable from the three histogram degrees of freedom plus the miss count. Guardrails: the second parameter is spent only when the likelihood-ratio statistic exceeds 3.841, and α is clamped to [0.1, 200]. Because the gamma shape and mean couple at the identifiability boundary when few tags survive (overshoots of 4–10 ANI points at mid-ANI), the shipped point estimate is **gated**: report the homogeneous fit when |ani_from_loss − ani_from_hist| > 5 ANI points, else the gamma fit. The threshold is an effect size, not a significance level — significance-scaled variants invert their error ranking on GTDB — and was chosen at the flat optimum (4.5–6 points) of a threshold sweep on the GTDB-ANIm matrix. It fires on 5.5% of GTDB pairs (MAE 2.819 vs 2.881 always-gamma; per-pair oracle bound 2.788), 12/15 mid-ANI pairs (4.482 → 0.959), and never on uniform-rate sims, mosaic sims, or oral/gut same-species pairs, preserving gamma's advantage exactly where it is real. The `flag` column reports `BELOW_DETECTION` (expected retention < 0.20; precedence), `INCONSISTENT` (the gate fell back, or the chains carry > 0.5 rearrangement breakpoints per anchor — a structural statistic that does not share the chain-restricted likelihood denominator), else `ok`. The recalibrated flag never inverts its error ranking on any validation set (kept vs flagged MAE: GTDB-ANIm 2.415 vs 4.153; oral/gut 0.514 vs 4.269; mid-ANI 0.343 vs 1.113), at a disclosed cost in near-clonal sensitivity.
-
-### Short-contig rescue pass
 
 ### Short-contig rescue pass
 
@@ -119,11 +110,7 @@ A query contig with < 8 × `min_chain_anchors` in-panel tags (~25 kb with the de
 
 ### Database-scale screen
 
-### Database-scale screen
-
 Batch subcommands (`dist`, `search`, `triangle`, `db search`) run a two-stage pipeline. Stage 1 reduces each tag to one strand-canonical key — its centered 18 bp packed window — per enzyme; a pair passes iff shared keys ≥ 3 AND shared/min(smaller key set) ≥ 0.001. At 18 bp, generic background homology (shared genes at 65–75% identity) no longer saturates key containment, and the gate was calibrated on GTDB-R207 to false-reject 0/500 validated ≥ 80% ANI pairs while rejecting ~83% of random pairs (measured false-reject rate on estimator-reportable pairs at n = 2,000: 1/844). In the FRR-critical 80–85% band the weakest validated true pair clears the floors by 10×/6×. Stage 2 refines survivors with the identical `chain_ani` code path and row formatter as the pairwise `ani` command, so database output is byte-identical to pairwise output on the same pairs. Screen thresholds are panel-specific and exposed as flags.
-
-### Ridge calibration protocol
 
 ### Ridge calibration protocol
 
@@ -131,11 +118,7 @@ The calibration model is ridge regression on nine Syn2bANI-internal features —
 
 ### The spatial-model negative result (identifiability analysis)
 
-### The spatial-model negative result (identifiability analysis)
-
 The mechanistic alternative to calibration was evaluated in full (prototype in Python against 19 exact-truth mosaic simulations, then the GTDB-ANIm matrix). The bias decomposes into an in-chain distribution-family term — asymptotic in-chain MAE 2.25 for gamma, 1.25 for a capped grid NPMLE, so a nonparametric fit fixes at most ~0.1–0.2 GTDB MAE — and a coverage term: the divergence of the unchained fraction is not identifiable from tag data, since the out-of-chain anchor residual is ≈ 0 within multi-match noise whether the unchained mass is saturated-divergent or accessory, and an oracle given the exact identity of the chained sample still errs by MAE 1.36 against whole-genome truth. No candidate (AF-weighted mixtures, discrete mixtures, ascertainment-aware tilts, capped NPMLE with and without LRT gating, model averaging) beats the gated baseline while holding all simulation gates. The raw estimator is therefore at its identifiability floor at 4-enzyme tag density; this analysis is why calibration, not a new likelihood, is the deployed correction layer.
-
-### Structural-variant calling
 
 ### Structural-variant calling
 
@@ -143,11 +126,7 @@ The `struct` subcommand consumes the chains and anchors of a pairwise comparison
 
 ### Simulation framework with exact truth
 
-### Simulation framework with exact truth
-
 All exact-truth simulators evolve sequence from a public reference (*E. coli* K-12 MG1655, ENA U00096.3, 4,641,652 bp) by applying a counted number of substitutions, so true ANI = 1 − n_subs/L exactly. Families: an ANI ladder (12 levels, 85–99.9%, each with a 400 kb inversion, with and without ~46 deletions of 200–2,000 bp); an indel sweep (true ANI 95.000; 0–4 deletions/100 kb); fragmentation (20–201 contigs, no sequence lost, ~50% reverse-complemented, order shuffled); accessory confounds (core ANI 95.000; 0–50% of the genome replaced by composition-preserving shuffled blocks, plus a block-count control at fixed total fraction); mosaic/rate-heterogeneity cases (per-block rates ~ Gamma(α, α), α = 0.5/1/2, mean ANI 90–98, plus deliberately misspecified bimodal cases); and GC coverage (ladders on five real template genomes, GC 27.2–72.1%). Deletions do not change true ANI (counted substitutions over reference length), so the deleted fraction doubles as AF ground truth. Substitutions are uniform over the three alternative bases with no GC-biased mutation model, transition/transversion ratio, codon structure, or selection — a deliberate simplification justified by the finding that GC does not explain the real-data degradation and that site turnover emerges from uniform substitution on a real genome without any special mechanism. Enzyme digestion is never simulated; the released binary extracts tags itself.
-
-### Benchmark datasets, truth, and tools
 
 ### Benchmark datasets, truth, and tools
 
@@ -175,8 +154,6 @@ All datasets, their ground truth, and the analyses they support are summarized i
 - **Syntracker validation isolates.** Four published isolate collections were used to test whether high ANI guarantees conserved genome architecture: *Escherichia coli* hypermutator (23 isolates, 253 pairs), *Helicobacter pylori* (77 isolates, 2,926 pairs), *Neisseria gonorrhoeae* (66 pairs), and *Streptomyces rimosus* (190 pairs). SRA accessions and references are in `data/syntracker/`; all isolates were compared all-vs-all with `syn2bani ani`, and `synteny_score` and `breakpoint_count` were taken from the same pass. Top-discordant cases were re-analyzed with `syn2bani struct` (Fig. 11, Fig. 12; `results/syntracker_validation/`).
 
 **Tools and versions.** Syn2bANI 0.1.0 (default panel BcgI,AlfI,AloI,FalI; deployed calibration v5), skani 0.1.0 (0.3.2 for the HPC database-scale runs), FastANI 1.33/1.34, MUMmer/dnadiff 3.23. Per-pair efficiency was measured on a Mac Studio (Apple M4 Max, 16 cores, 128 GB RAM; 3 repetitions, medians reported); database-scale runs used a 32-thread HPC node. skani's n = 22 `dist` time covers only 302/484 reported pairs (minimum-AF filter) and excludes sketching; we note this wherever the comparison appears.
-
-### Implementation
 
 ### Implementation
 
@@ -239,4 +216,3 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 **Figure 5 | Accuracy on 695 CAMI2 MAGs.** (a) Syn2bANI raw gated estimate vs dnadiff ANIm truth, colored by contamination class. (b) Absolute-error distributions by tool. (c) Syn2bANI error by CheckM2 quality tier. Source: `figures/report/mag_validation.png`.
 
 **Figure 6 | High-ANI pairs hide extensive rearrangements.** (a) *E. coli* hypermutator and *H. pylori* isolates: ANI vs synteny score (Syn2bANI left, skani right); highlighted pairs were re-analyzed with `syn2bani struct`. (b) *N. gonorrhoeae* and *S. rimosus* isolates show the same ANI–synteny decoupling. Source: `figures/syntracker_validation/syntracker_high_ani_low_synteny.png` and `figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png`.
-
