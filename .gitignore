@@ -37,3 +37,7 @@ results/synteny_bench/sim/
 # large pilot genome files
 data/cagpai_pilot/*.fna
 data/cagpai_pilot/*.gb*
+
+# GTDB metadata is too large for GitHub (>100 MB); keep local copies only
+data/gtdb_metadata/*.tsv
+data/gtdb_metadata/*.tar.gz
