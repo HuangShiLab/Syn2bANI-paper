@@ -1,2 +1,2 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
 NZ_CP019721.1	NZ_CACRUF010000001.1	87.3072	90.1338	0.6505	0.6469	0.21787	22	0.7726	103	2.781	0.3142	89.5418	93.6354	1.0957	0.94	AlfI:90.58,AloI:89.48,BcgI:89.72,FalI:90.34	454	22	1338	49	16.90909090909091	ok	87.3072	gamma

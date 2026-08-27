@@ -13,7 +13,7 @@ construction (`simulate_inversion_ladder.py`, seed-fixed).
 
 Result (`synteny_ladder_results.tsv`): **breakpoint_count equals the truth on
 all 14 rungs** (0–64 breakpoints, zero misses, zero false positives);
-synteny_blocks = 2·n_inv + 1; synteny_score decreases monotonically from
+synteny_blocks = 2·n_inv + 1; anchor_adjacency decreases monotonically from
 1.0000 to 0.9835 (ANI 95, 32 inversions). The ANI estimate is invariant to
 rearrangement load: 94.95–95.00 at true 95.00 and 98.00–98.01 at true 98.00
 across 0–32 inversions — the chain-restricted likelihood denominator is
@@ -32,7 +32,7 @@ violating collinearity; contig switches ignored — `parse_synteny_truth.py`,
 These MAG–anchor pairs are nearly collinear by construction (a bin comes
 from its anchor strain): dnadiff finds 0 breaks for 432/695 pairs, median 0,
 max 5. syn2bani agrees exactly on 233/432 zero-break pairs and reports a
-median breakpoint_count of 1 (max 34) overall; its synteny_score stays high
+median breakpoint_count of 1 (max 34) overall; its anchor_adjacency stays high
 (median 0.9997). The residual syn2bani-only breaks concentrate on
 fragmented, low-N50 bins — chain fragmentation across assembly gaps, not
 called rearrangements. Interpretation: on real data essentially free of
@@ -49,7 +49,7 @@ ladder (section 1) and the three real rearranged Enterobacteriaceae pairs
   coverage of dnadiff ≥ 1 kb events, indel size ratio median 1.000
   (Fig. 8).
 - *Specificity at scale*: 695 real pairs, no spurious structural flags,
-  synteny_score median 0.9997 on collinear data.
+  anchor_adjacency median 0.9997 on collinear data.
 - *Speed*: synteny statistics are a by-product of the ANI pass (50–70 ms
   per pair total); dnadiff costs 8–10 s per pair and nucmer-based synteny
   pipelines more.
@@ -58,7 +58,7 @@ ladder (section 1) and the three real rearranged Enterobacteriaceae pairs
 
 - breakpoint_count on heavily fragmented draft queries includes chain
   fragmentation across assembly gaps; for draft-vs-draft comparisons it is
-  an upper bound on true rearrangement breaks. synteny_score is the more
+  an upper bound on true rearrangement breaks. anchor_adjacency is the more
   robust of the two statistics on drafts.
 - The MAG check measures specificity only; same-strain pairs carry almost
   no true rearrangements to recall.

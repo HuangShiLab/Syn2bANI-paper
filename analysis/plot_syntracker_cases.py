@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Publication-quality analysis of Syntracker validation cases.
 
-Focus: pairs with near-clonal ANI (>99%) but low synteny score, showing that
+Focus: pairs with near-clonal ANI (>99%) but low anchor adjacency, showing that
 high ANI does not imply conserved genome architecture. Outputs figures to
 figures/syntracker_validation/ and a case table to results/syntracker_validation/.
 """
@@ -36,7 +36,7 @@ def load_syn2bani(species):
     df["pair"] = [norm_pair(q, r) for q, r in zip(df["query"], df["reference"])]
     # Keep one row per unordered pair; use the row with the lower query name for determinism.
     df = df.sort_values(["pair", "query"]).drop_duplicates(subset="pair", keep="first")
-    return df[["pair", "ani", "synteny_score", "breakpoint_count", "af_query", "af_reference"]].copy()
+    return df[["pair", "ani", "anchor_adjacency", "breakpoint_count", "af_query", "af_reference"]].copy()
 
 
 def load_skani(species):
@@ -120,7 +120,7 @@ def main():
         if len(high) == 0:
             continue
         high["ani_rank"] = high["ani"].rank(pct=True)
-        high["syn_rank"] = high["synteny_score"].rank(pct=True)
+        high["syn_rank"] = high["anchor_adjacency"].rank(pct=True)
         high["discordance"] = high["ani_rank"] - high["syn_rank"]
 
         top = high.nlargest(20, "discordance").copy()
@@ -136,18 +136,18 @@ def main():
 
     def plot_one_panel(ax, df, x_col, title, ylim, color_by, annotate_n=2):
         if color_by == "time":
-            sc = ax.scatter(df[x_col], df["synteny_score"], c=df["time_delta"].astype(float),
+            sc = ax.scatter(df[x_col], df["anchor_adjacency"], c=df["time_delta"].astype(float),
                             cmap="viridis_r", s=35, alpha=0.75, edgecolors="none")
             plt.colorbar(sc, ax=ax, label="Days between isolates")
         elif color_by == "host":
             colors = df["same_host"].map({True: "#1f77b4", False: "#ff7f0e"})
-            ax.scatter(df[x_col], df["synteny_score"], c=colors, s=35, alpha=0.75, edgecolors="none")
+            ax.scatter(df[x_col], df["anchor_adjacency"], c=colors, s=35, alpha=0.75, edgecolors="none")
             ax.scatter([], [], c="#1f77b4", s=30, label="Same host")
             ax.scatter([], [], c="#ff7f0e", s=30, label="Different host")
             ax.legend(loc="lower left", fontsize=8)
         xlabel = "Syn2bANI ANI (%)" if x_col == "ani" else "skani ANI (%)"
         ax.set_xlabel(xlabel)
-        ax.set_ylabel("Synteny score")
+        ax.set_ylabel("Anchor adjacency")
         ax.set_title(title)
         ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7, label="SynTracker cutoff")
         ax.set_xlim(99.0, 100.01)
@@ -161,7 +161,7 @@ def main():
                 label = f"{r['pair'][0]}({r['q_host']})\nvs {r['pair'][1]}({r['r_host']})"
             else:
                 label = f"{r['pair'][0]}\nvs {r['pair'][1]}"
-            ax.annotate(label, xy=(r[x_col], r["synteny_score"]),
+            ax.annotate(label, xy=(r[x_col], r["anchor_adjacency"]),
                         xytext=(ox, oy), textcoords="offset points",
                         fontsize=6, ha="center", va="center",
                         arrowprops=dict(arrowstyle="-", color="gray", lw=0.4,
@@ -218,11 +218,11 @@ def main():
             "n_pairs": len(df),
             "n_high_ani": len(high),
             "mean_ani_high": high["ani"].mean(),
-            "mean_synteny_high": high["synteny_score"].mean(),
-            "min_synteny_high": high["synteny_score"].min(),
+            "mean_synteny_high": high["anchor_adjacency"].mean(),
+            "min_synteny_high": high["anchor_adjacency"].min(),
             "mean_breakpoints_high": high["breakpoint_count"].mean(),
             "max_breakpoints_high": high["breakpoint_count"].max(),
-            "rho_ani_synteny": df["ani"].corr(df["synteny_score"], method="spearman"),
+            "rho_ani_synteny": df["ani"].corr(df["anchor_adjacency"], method="spearman"),
         })
     summary = pd.DataFrame(summary_rows)
     summary.to_csv(OUT_RES / "syntracker_summary.tsv", sep="\t", index=False, float_format="%.4f")
@@ -235,11 +235,11 @@ def main():
         df = species_frames[species]
         for col, x_col in enumerate(["ani", "ani_skani"]):
             ax = axes[row, col]
-            ax.scatter(df[x_col], df["synteny_score"], s=35, alpha=0.75,
+            ax.scatter(df[x_col], df["anchor_adjacency"], s=35, alpha=0.75,
                        edgecolors="none", c="#2ca02c")
             xlabel = "Syn2bANI ANI (%)" if x_col == "ani" else "skani ANI (%)"
             ax.set_xlabel(xlabel)
-            ax.set_ylabel("Synteny score")
+            ax.set_ylabel("Anchor adjacency")
             title = f"{species.replace('_', ' ')} — {'Syn2bANI' if x_col == 'ani' else 'skani'}"
             ax.set_title(title)
             ax.axhline(0.955, color="red", ls="--", lw=0.8, alpha=0.7)
@@ -256,7 +256,7 @@ def main():
     print(f"Wrote {OUT_RES / 'top_discordant_cases.tsv'}")
     print(f"Wrote {OUT_RES / 'syntracker_summary.tsv'}")
     print("\nTop 5 discordant cases overall:")
-    print(cases_df.head(5)[["species", "pair", "ani", "synteny_score", "breakpoint_count"]].to_string(index=False))
+    print(cases_df.head(5)[["species", "pair", "ani", "anchor_adjacency", "breakpoint_count"]].to_string(index=False))
 
 
 if __name__ == "__main__":

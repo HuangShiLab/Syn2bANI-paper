@@ -29,7 +29,7 @@ RES = os.path.join(ROOT, "results", "gtdb50k")
 
 S2B_COLS = [
     "query", "reference", "ani", "ani_uniform", "af_query", "af_reference",
-    "std_err", "ani_cal", "synteny_blocks", "synteny_score", "breakpoint_count",
+    "std_err", "ani_cal", "synteny_blocks", "anchor_adjacency", "breakpoint_count",
     "het_shape", "retention", "ani_from_loss", "ani_from_hist",
     "enzyme_spread", "enzyme_chi2", "per_enzyme", "n_anchors", "n_chains",
     "n_tags", "max_block_anchors", "mean_block_anchors", "flag", "ani_gated",

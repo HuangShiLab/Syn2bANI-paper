@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	ani_gated	gate	flag
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	ani_gated	gate	flag
 DFDY01000113.1	ONIP01000060.1	93.5947	93.5947	0.0010	0.0009	1.65711	1	1.0000	0	93.5947	uniform	ok
 DFDY01000113.1	DGIA01000010.1	99.5364	99.5364	0.0053	0.0067	0.26823	3	1.0000	0	99.5364	uniform	ok
 DHNI01000101.1	JAAZLQ010000358.1	99.9999	99.9999	0.0013	0.0011	8.30454	1	1.0000	0	99.9999	uniform	ok

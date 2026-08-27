@@ -35,7 +35,7 @@ Supplementary figures S1–S11 include the inversion-ladder truth benchmark, GTD
 | Fig. S8 | Accessory-content confound | `figures/report/fig_s8_simulation_accessory.png` |
 | Fig. S9 | Mosaic/rate-heterogeneity family | `figures/report/fig_s9_simulation_mosaic.png` |
 | Fig. S10 | Breakpoints vs. ANI in Syntracker isolate collections | `figures/syntracker_validation/syntracker_breakpoints_vs_ani.png` |
-| Fig. S11 | *N. gonorrhoeae* and *S. rimosus* ANI–synteny decoupling | `figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png` |
+| Fig. S11 | *N. gonorrhoeae* and *S. rimosus* ANI–anchor-adjacency decoupling | `figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png` |
 
 ## Regenerating Figures
 

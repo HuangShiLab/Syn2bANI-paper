@@ -1,0 +1,4 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+NZ_CP023173.1	NZ_JNJC01000001.1	AlfI	32	26	0	0,0,1
+NZ_CP023173.1	NZ_JNJC01000001.1	BcgI	32	26	1	0,2,0
+NZ_CP023173.1	NZ_JNJC01000001.1	FalI	27	21	1	8,1,0

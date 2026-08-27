@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
 GCA_000011445.1	GCF_900489555.1	92.5884	96.0254	0.5804	0.6812	0.27998	8	0.9620	7	0.538	0.7407	94.2961	97.8825	2.9951	2.58	AlfI:94.74,AloI:97.74,BcgI:96.60,FalI:95.90	249	8	283	86	23.125	ok	92.5884	gamma
 GCA_000012145.1	GCF_000825685.1	93.5020	95.9439	0.8399	0.8985	0.14379	13	0.9807	12	0.739	0.7281	94.4504	97.6657	1.4208	2.73	AlfI:94.91,AloI:95.75,BcgI:96.33,FalI:96.01	967	13	1029	129	48	ok	93.5020	gamma
 GCA_000012145.1	GCF_000828125.2	95.4800	96.7055	0.5305	0.6124	0.14765	40	0.9256	39	0.918	0.7847	95.5643	97.7299	0.9191	1.95	AlfI:96.32,AloI:96.10,BcgI:96.31,FalI:97.02	857	40	734	44	13.125	ok	95.4800	gamma

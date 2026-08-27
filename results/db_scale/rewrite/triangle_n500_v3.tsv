@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	ani_gated	gate	flag
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	ani_gated	gate	flag
 DHNI01000101.1	JAAZLQ010000358.1	99.9999	99.9999	0.0013	0.0011	8.30454	1	1.0000	0	99.9999	uniform	ok
 NZ_CP043641.1	WHST01000131.1	87.9578	87.9578	0.0022	0.0017	1.70515	1	1.0000	0	87.9578	uniform	BELOW_DETECTION
 NZ_CP043641.1	JADJVX010000001.1	88.0315	88.0315	0.0016	0.0021	1.81513	1	1.0000	0	88.0315	uniform_fallback	INCONSISTENT

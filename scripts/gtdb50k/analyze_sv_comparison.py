@@ -32,7 +32,7 @@ def load_minimap2():
     for f in files:
         df = pd.read_csv(f, sep="\t", header=None,
                          names=["pairid", "mm2_blocks", "mm2_breakpoints",
-                                "mm2_large_indels", "mm2_synteny_score", "mm2_status"])
+                                "mm2_large_indels", "mm2_anchor_adjacency", "mm2_status"])
         dfs.append(df)
     return pd.concat(dfs, ignore_index=True)
 
@@ -48,7 +48,7 @@ def safe_corr(x, y, method="pearson"):
 
 def main():
     s2b = pd.read_csv(RES / "s2b_50k.tsv", sep="\t")
-    s2b = s2b[["pairid", "ani_gated", "af_query", "synteny_score", "synteny_blocks", "breakpoint_count"]].copy()
+    s2b = s2b[["pairid", "ani_gated", "af_query", "anchor_adjacency", "synteny_blocks", "breakpoint_count"]].copy()
 
     dnadiff = pd.read_csv(RES / "sv_truth_50k.tsv", sep="\t")
     merged = s2b.merge(dnadiff, on="pairid", how="left")
@@ -69,9 +69,9 @@ def main():
          ""]
     cols = {
         "dnadiff_breakpoints": "dnadiff (all gaps)",
-        "dnadiff_synteny_score": "dnadiff synteny (all gaps)",
+        "dnadiff_anchor_adjacency": "dnadiff synteny (all gaps)",
         "mm2_breakpoints": "minimap2",
-        "mm2_synteny_score": "minimap2 synteny",
+        "mm2_anchor_adjacency": "minimap2 synteny",
     }
     # add filtered dnadiff columns if present
     for c in merged.columns:
@@ -94,7 +94,7 @@ def main():
     L.append("")
     L.append("## Correlations with alignment-based synteny/coverage scores")
     syn_metrics = {
-        "synteny_score": "Syn2bANI synteny_score (anchor-adjacency conservation)",
+        "anchor_adjacency": "Syn2bANI anchor_adjacency (anchor-adjacency conservation)",
         "af_query": "Syn2bANI af_query (base-pair chain coverage)",
         "synteny_blocks": "Syn2bANI synteny_blocks",
     }

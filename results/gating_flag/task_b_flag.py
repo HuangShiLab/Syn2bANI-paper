@@ -44,7 +44,7 @@ def add_derived(df, ani_col="ani"):
     return d
 
 
-STATS = ["enzyme_chi2", "enzyme_spread", "synteny_score", "breakpoint_count",
+STATS = ["enzyme_chi2", "enzyme_spread", "anchor_adjacency", "breakpoint_count",
          "std_err", "retention", "af_query", "af_reference", "het_shape",
          "inv_shape", "n_anchors", "n_chains", "gap_lh", "gap_lh_se",
          "gap_gu", "gap_gu_se", "bp_per_anchor", "anchors_per_tag", "af_min",
@@ -72,7 +72,7 @@ def load_all():
     v["query_acc"] = v["query"].map(s2a)
     v["reference_acc"] = v["reference"].map(s2a)
     keep = ["query_acc", "reference_acc", "het_shape", "enzyme_spread",
-            "enzyme_chi2", "breakpoint_count", "synteny_score",
+            "enzyme_chi2", "breakpoint_count", "anchor_adjacency",
             "max_block_anchors", "mean_block_anchors"]
     m = m.merge(v[keep], left_on=["query", "reference"],
                 right_on=["query_acc", "reference_acc"], how="left")

@@ -1,4 +1,4 @@
-file	ani_est	synteny_score	breakpoint_count	synteny_blocks	n_anchors	n_chains	flag	ani	n_inv	true_breakpoints
+file	ani_est	anchor_adjacency	breakpoint_count	synteny_blocks	n_anchors	n_chains	flag	ani	n_inv	true_breakpoints
 q_ani0.95_inv0.fasta	94.94860	1.00000	0	1	4605	1	ok	0.95000	0	0
 q_ani0.95_inv1.fasta	94.94900	0.99950	2	3	4605	3	ok	0.95000	1	2
 q_ani0.95_inv2.fasta	94.95340	0.99900	4	5	4606	5	ok	0.95000	2	4

@@ -18,9 +18,9 @@ unknown    185
 ## ANI and synteny by phenotype concordance
 - same phenotype: n=17020, ANI mean=99.210, synteny mean=0.9924, breakpoint median=27
 
-## High-ANI (>=98%) low-synteny (<0.98) pairs with different abfA status
+## High-ANI (>=98%) low-anchor-adjacency (<0.98) pairs with different abfA status
 n = 130
-             query    reference     ani  synteny_score  breakpoint_count   q_abfA   r_abfA q_pheno r_pheno
+             query    reference     ani  anchor_adjacency  breakpoint_count   q_abfA   r_abfA q_pheno r_pheno
      FGSYC85M1_ctg FHNBA3M1_ctg 99.4475         0.9443               214  deleted complete unknown unknown
        FBJ15M2_ctg FHNBA3M1_ctg 99.4305         0.9449               207  deleted complete unknown unknown
        FBJ11M1_ctg FSDJN6M3_ctg 99.4514         0.9455               208 complete  deleted unknown unknown

@@ -48,11 +48,11 @@ axes[1].set_xticklabels(sub["label"], rotation=45, ha="right")
 axes[1].set_ylabel("Breakpoint count")
 axes[1].set_title("Rearrangements increase breakpoint count")
 
-# Panel C: synteny_score (coverage) - drops modestly with deletion
-axes[2].bar(range(len(sub)), sub["synteny_score"], color="seagreen")
+# Panel C: anchor_adjacency (coverage) - drops modestly with deletion
+axes[2].bar(range(len(sub)), sub["anchor_adjacency"], color="seagreen")
 axes[2].set_xticks(range(len(sub)))
 axes[2].set_xticklabels(sub["label"], rotation=45, ha="right")
-axes[2].set_ylabel("Synteny score (chain coverage)")
+axes[2].set_ylabel("Anchor adjacency (chain coverage)")
 axes[2].set_ylim(0.99, 1.001)
 axes[2].set_title("Coverage metric is insensitive to rearrangement count")
 

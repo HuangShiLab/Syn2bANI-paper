@@ -5,7 +5,7 @@ Usage:
     python3 parse_minimap2_sv.py <pairid> <mm2.paf>
 
 Output: one TSV line
-    pairid, mm2_blocks, mm2_breakpoints, mm2_large_indels, mm2_synteny_score, status
+    pairid, mm2_blocks, mm2_breakpoints, mm2_large_indels, mm2_anchor_adjacency, status
 """
 import sys
 from pathlib import Path
@@ -35,11 +35,11 @@ def parse_paf(path):
 
 def metrics(rows):
     if not rows:
-        return dict(blocks=0, breakpoints=0, large_indels=0, synteny_score=1.0)
+        return dict(blocks=0, breakpoints=0, large_indels=0, anchor_adjacency=1.0)
     rows = sorted(rows, key=lambda x: x[0])
     n = len(rows)
     if n == 1:
-        return dict(blocks=1, breakpoints=0, large_indels=0, synteny_score=1.0)
+        return dict(blocks=1, breakpoints=0, large_indels=0, anchor_adjacency=1.0)
     breakpoints = 0
     large_indels = 0
     for i in range(n - 1):
@@ -62,7 +62,7 @@ def metrics(rows):
             large_indels += 1
     score = max(0.0, 1.0 - breakpoints / (n - 1)) if n > 1 else 1.0
     return dict(blocks=n, breakpoints=breakpoints, large_indels=large_indels,
-                synteny_score=score)
+                anchor_adjacency=score)
 
 
 def main():
@@ -75,7 +75,7 @@ def main():
         return 0
     rows = parse_paf(path)
     m = metrics(rows)
-    print(f"{pairid}\t{m['blocks']}\t{m['breakpoints']}\t{m['large_indels']}\t{m['synteny_score']:.6f}\tok")
+    print(f"{pairid}\t{m['blocks']}\t{m['breakpoints']}\t{m['large_indels']}\t{m['anchor_adjacency']:.6f}\tok")
     return 0
 
 

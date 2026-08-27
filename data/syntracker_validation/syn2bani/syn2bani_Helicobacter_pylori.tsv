@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	anchor_adjacency	breakpoint_count
 1	1	99.9999	99.9999	0.9133	0.9133	0.81871	98.2992	24	0.9454	39
 1	2	99.9999	99.9999	0.9052	0.9268	0.82119	98.3391	26	0.9531	33
 1	3	99.9999	99.9999	0.9006	0.9236	0.82044	98.3283	27	0.9517	34

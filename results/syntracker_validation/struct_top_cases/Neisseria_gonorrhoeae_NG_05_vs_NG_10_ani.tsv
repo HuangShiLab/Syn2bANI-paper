@@ -1,2 +1,2 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	anchor_adjacency	breakpoint_count
 NG_05	NG_10	99.9837	99.9837	0.8790	0.8546	0.00576	98.8789	79	0.8701	319

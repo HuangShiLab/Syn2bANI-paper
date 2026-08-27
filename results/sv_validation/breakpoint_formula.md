@@ -33,7 +33,7 @@ and the second term dominated by two orders of magnitude: an E. coli pair at
 **After the fix**, `possible` ranges over chained anchors only, so
 `breakpoint_count = n_chains − n_chained_contigs` exactly — the number of
 chain-to-chain transitions along the query. A clean inversion (+/−/+ chain
-structure on one contig) gives exactly 2. `synteny_score` uses the same
+structure on one contig) gives exactly 2. `anchor_adjacency` uses the same
 chained-only denominator and is now ~1.0 for collinear pairs.
 
 The INCONSISTENT flag is untouched: `unreliable()` still receives the old
@@ -120,9 +120,9 @@ Fix (working tree, uncommitted):
   (`breakpoint_count = n_chains − n_chained_contigs`); the old all-anchor
   difference is kept as `SyntenyStats::unconserved` and is still what
   `unreliable()` thresholds, preserving the calibrated INCONSISTENT flag
-  exactly. `synteny_score` denominator likewise chained-only.
+  exactly. `anchor_adjacency` denominator likewise chained-only.
   Doc comments updated (`SyntenyStats`, `FLAG_MAX_BP_PER_ANCHOR`,
-  `unreliable`, `ChainAniResult::{breakpoint_count,synteny_score,unreliable}`,
+  `unreliable`, `ChainAniResult::{breakpoint_count,anchor_adjacency,unreliable}`,
   `src/cli/ani.rs` header).
 - Unit tests: strengthened `synteny_stats_single_inversion` (exact count),
   added `synteny_stats_inversion_two_breakpoints` (+/−/+ = 2),

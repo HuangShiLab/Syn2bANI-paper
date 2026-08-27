@@ -1,4 +1,4 @@
-pair	ani	synteny_score	breakpoint_count	af_query	af_reference	ani_skani	species	q_info	r_info	same_mouse	time_delta	ani_rank	syn_rank	discordance	rank	q_host	r_host	same_host
+pair	ani	anchor_adjacency	breakpoint_count	af_query	af_reference	ani_skani	species	q_info	r_info	same_mouse	time_delta	ani_rank	syn_rank	discordance	rank	q_host	r_host	same_host
 ('M1_d148_cloneCL1', 'M1_d190_cloneL1')	99.9999	0.7565	930.0000	0.9274	0.9620	99.9900	Escherichia_coli_hypermutator	M1_148	M1_190	True	42.0000	0.9664	0.2055	0.7609	1			
 ('M2_d190_clone30', 'M3_d190_clone15')	99.9999	0.7571	920.0000	0.9574	0.9712	99.9900	Escherichia_coli_hypermutator	M2_190	M3_190	False	0.0000	0.9664	0.2154	0.7510	2			
 ('M1_d190_cloneM1', 'M3_d190_clone15')	99.9999	0.7578	916.0000	0.9493	0.9671	99.9900	Escherichia_coli_hypermutator	M1_190	M3_190	False	0.0000	0.9664	0.2431	0.7233	3			

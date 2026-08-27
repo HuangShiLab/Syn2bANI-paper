@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count
 Ecoli_K12_MG1655	Ecoli_K12_MG1655	99.9999	99.9999	0.9996	0.9996	0.22785	1	0.8871	774
 Ecoli_K12_MG1655	Ecoli_O157H7_Sakai	98.1285	98.5163	0.9106	0.8435	0.03121	32	0.8468	881
 Ecoli_O157H7_Sakai	Ecoli_K12_MG1655	98.0535	98.4973	0.7688	0.9117	0.03147	46	0.8440	897

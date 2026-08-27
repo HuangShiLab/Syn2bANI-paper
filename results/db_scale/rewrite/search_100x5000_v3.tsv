@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	ani_gated	gate	flag
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	ani_gated	gate	flag
 JACESW010000001.1	GCA_011525035.1	93.7324	93.7324	0.4531	0.2401	0.20505	54	0.9913	3	93.7324	uniform	ok
 JACESW010000001.1	GCA_012269745.1	93.0904	93.0904	0.0772	0.0352	0.51859	11	1.0000	0	93.0904	uniform	ok
 JABWAU010000027.1	GCA_002343775.1	98.4375	98.4375	0.0004	0.0003	1.09619	1	1.0000	0	98.4375	uniform	ok

@@ -19,7 +19,7 @@ Rust `predict()` non-finite → imputer-median path.
 
 Set A (base 9): `ani, ani_uniform, af_query, af_reference, std_err,
 retention, n_anchors, n_chains, n_tags`.
-Set B (expanded 18): A + `synteny_score, breakpoint_count, enzyme_spread,
+Set B (expanded 18): A + `anchor_adjacency, breakpoint_count, enzyme_spread,
 enzyme_chi2, het_shape, ani_from_loss, ani_from_hist, max_block_anchors,
 mean_block_anchors`.
 Set C: Set B features with GradientBoostingRegressor (sklearn defaults).
@@ -39,7 +39,7 @@ Answers:
   but modestly: B beats A in all four bands, overall MAE 0.963 vs 0.988
   (−2.5% relative). Largest Set-B coefficients: `retention` +2.81,
   `ani_uniform` −1.67, `ani_from_loss` +1.11, `af_reference` +0.99,
-  `synteny_score` +0.49.
+  `anchor_adjacency` +0.49.
 - **Nonlinearity buys nothing at n ≈ 2k**: GBRT is worse than ridge overall
   (1.224 vs 0.963) and in every band. Consistent with the learning-curve
   plateau (~1,500 pairs) found earlier — the residual error is not
@@ -82,7 +82,7 @@ reverses out-of-distribution — MAE 0.636 vs Set A's 0.460, and r drops from
 0.995 to 0.927. The degradation is concentrated on the cleanest pairs
 (ok-flag: MAE 0.577 for B vs 0.274 for A; INCONSISTENT: 0.750 vs 0.820) —
 the near-clonal oral/gut pairs sit far outside the GTDB training feature
-distribution (synteny_score ~0.94 vs ~0.33, retention ~0.96 vs ~0.3), and
+distribution (anchor_adjacency ~0.94 vs ~0.33, retention ~0.96 vs ~0.3), and
 the 18-feature linear model extrapolates worse there than the 9-feature one.
 Caveat: the reference is FastANI, which reads ~1 point low vs ANIm at
 divergent bands; on these same-species pairs (ANI ≈ 97–99.5) that offset is
@@ -173,7 +173,7 @@ TSV ↔ `ChainAniResult` mapping (from `src/cli/ani.rs:347-396`), confirmed:
 | `enzyme_spread` | `res.agreement.spread * 100.0` | percent |
 | `enzyme_chi2` | `res.agreement.reduced_chi2` | direct |
 | `n_anchors` / `n_chains` / `n_tags` | direct / direct / `res.n_tags_in_chains` | counts |
-| `synteny_blocks` / `synteny_score` / `breakpoint_count` | direct | |
+| `synteny_blocks` / `anchor_adjacency` / `breakpoint_count` | direct | |
 | `max_block_anchors` / `mean_block_anchors` | direct | |
 
 **Recommended path (Set A, per §4): zero code changes.** Replace
@@ -194,7 +194,7 @@ recommended per §4):
    `linear_cal_v2.json::feature_names`):
    `[res.ani_het*100.0, res.ani*100.0, res.af_query, res.af_reference,
    res.std_err*100.0, res.retention, res.n_anchors as f64, res.n_chains as
-   f64, res.n_tags_in_chains as f64, res.synteny_score,
+   f64, res.n_tags_in_chains as f64, res.anchor_adjacency,
    res.breakpoint_count as f64, res.agreement.spread*100.0,
    res.agreement.reduced_chi2, res.het_shape, res.ani_from_loss*100.0,
    res.ani_from_hist*100.0, res.max_block_anchors as f64,

@@ -4,7 +4,7 @@
 Panels:
   a) syn2bani breakpoint_count vs true breakpoints (2 per inversion) —
      exact recall at both ANI backgrounds.
-  b) synteny_score vs number of inversions (monotone decrease).
+  b) anchor_adjacency vs number of inversions (monotone decrease).
   c) ANI estimate invariance to rearrangement count (truth lines at 95/98).
 
 Input: results/synteny_bench/synteny_ladder_results.tsv
@@ -41,12 +41,12 @@ ax.set_xlim(lim); ax.set_ylim(lim)
 ax = axes[1]
 for ani, sub in df.groupby("ani"):
     sub = sub.sort_values("n_inv")
-    ax.plot(sub.n_inv, sub.synteny_score, "o-", color=colors[ani],
+    ax.plot(sub.n_inv, sub.anchor_adjacency, "o-", color=colors[ani],
             label=f"ANI {ani:.2f}")
 ax.set_xscale("symlog", linthresh=1)
 ax.set_xlabel("number of inversions")
-ax.set_ylabel("synteny_score")
-ax.set_title("b  synteny score vs rearrangement load")
+ax.set_ylabel("anchor_adjacency")
+ax.set_title("b  anchor adjacency vs rearrangement load")
 ax.set_ylim(0.975, 1.001)
 
 ax = axes[2]

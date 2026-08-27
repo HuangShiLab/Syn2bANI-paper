@@ -38,7 +38,7 @@ def load_all():
     v["query_acc"] = v["query"].map(s2a)
     v["reference_acc"] = v["reference"].map(s2a)
     keep = ["query_acc", "reference_acc", "het_shape", "enzyme_spread",
-            "enzyme_chi2", "breakpoint_count", "synteny_score",
+            "enzyme_chi2", "breakpoint_count", "anchor_adjacency",
             "max_block_anchors", "mean_block_anchors"]
     m = m.merge(v[keep], left_on=["query", "reference"],
                 right_on=["query_acc", "reference_acc"], how="left")

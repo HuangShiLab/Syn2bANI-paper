@@ -49,7 +49,7 @@ a bit-identical path:
   within `(max_skip+1) × mean tag spacing` bp along the reference. That is
   exactly "would a chain have spanned this locus on the intact genome".
 - Rescued contigs contribute AF spans with the same half-median-gap extension
-  rule as chains; `synteny_score`/`breakpoint_count`/`n_chains`/SV `chains`
+  rule as chains; `anchor_adjacency`/`breakpoint_count`/`n_chains`/SV `chains`
   output are untouched (rescue creates no chains).
 - `ChainAniConfig::short_contig_rescue` (default true) disables it for A/B.
 

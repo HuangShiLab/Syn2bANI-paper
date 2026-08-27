@@ -9,18 +9,18 @@ dd.1coords with min-gap 5k/10k; HPC job dd_filter 3945832),
 
 | dnadiff truth | Syn2bANI metric | min 5k: pearson / spearman | min 10k: pearson / spearman |
 |---|---|---|---|
-| breakpoints | synteny_score | −0.04 / −0.26 | −0.05 / −0.27 |
+| breakpoints | anchor_adjacency | −0.04 / −0.26 | −0.05 / −0.27 |
 | breakpoints | breakpoint_count | +0.48 / +0.54 | +0.49 / +0.56 |
 | breakpoints | synteny_blocks | +0.50 / +0.61 | +0.49 / +0.61 |
 | blocks | breakpoint_count | +0.44 / +0.60 | +0.44 / +0.60 |
 | blocks | synteny_blocks | +0.49 / +0.62 | +0.49 / +0.62 |
 | large_indels | breakpoint_count | +0.51 / +0.66 | **+0.55 / +0.70** |
-| large_indels | synteny_score | +0.00 / −0.17 | −0.04 / −0.27 |
+| large_indels | anchor_adjacency | +0.00 / −0.17 | −0.04 / −0.27 |
 | large_indels | af_query | +0.08 / +0.11 | +0.04 / +0.09 |
 
 ## Conclusions
 
-1. **Gap-filtering dnadiff does not rescue synteny_score.** synteny_score is
+1. **Gap-filtering dnadiff does not rescue anchor_adjacency.** anchor_adjacency is
    AF-like (fraction of genome covered by chains) and is insensitive to
    rearrangement count — consistent with the cagPAI pilot (36 kb deletion
    moved it only 0.9986 → 0.9979). It should be repositioned in the

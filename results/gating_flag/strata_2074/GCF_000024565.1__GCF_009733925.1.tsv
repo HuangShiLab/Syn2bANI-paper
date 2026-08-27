@@ -1,0 +1,4 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+NC_013515.1	NZ_WOEI01000010.1	AlfI	32	26	0	10,5,0
+NC_013515.1	NZ_WOEI01000010.1	BcgI	32	26	0	5,0,0
+NC_013515.1	NZ_WOEI01000010.1	FalI	27	21	3	5,0,0

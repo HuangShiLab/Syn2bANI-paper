@@ -12,11 +12,11 @@ and `parse_dnadiff_sv.py` has been run. Aggregated results are in
 |---|---|---|
 | mean breakpoint_count | 30.9 | 455.7 |
 | median breakpoint_count | 20 | 333 |
-| mean synteny_score | 0.971 | 0.449 |
+| mean anchor_adjacency | 0.971 | 0.449 |
 
 **Correlations across 43,334 pairs:**
 - breakpoint_count Pearson r = 0.465 (Spearman 0.527)
-- synteny_score Pearson r = 0.119 (Spearman 0.329)
+- anchor_adjacency Pearson r = 0.119 (Spearman 0.329)
 
 **Rearrangement detection (any breakpoint):**
 - precision = 0.999, recall = 0.931, F1 = 0.964
@@ -25,7 +25,7 @@ and `parse_dnadiff_sv.py` has been run. Aggregated results are in
 ## Interpretation
 
 dnadiff produces many more breakpoints because it fragments alignments at
-small indels, repeats, and low-identity regions. Its "synteny score"
+small indels, repeats, and low-identity regions. Its "anchor adjacency"
 (1 − breakpoints / (blocks − 1)) is dominated by alignment fragmentation,
 not large-scale rearrangements. Syn2bANI's sparse tags and chain-restricted
 likelihood bridge small variations and report fewer, larger breakpoints.
@@ -35,7 +35,7 @@ small dnadiff-detected breaks, as expected by design.
 
 ## Consequence for the manuscript
 
-The current draft claims that synteny_score "carries biologically meaningful
+The current draft claims that anchor_adjacency "carries biologically meaningful
 signal orthogonal to ANI" but does not benchmark it against an independent
 structural truth at scale. A reviewer will likely run the same comparison and
 find r ≈ 0.12 against dnadiff-derived synteny. We must address this before
@@ -52,8 +52,8 @@ Options:
    produces fewer, larger alignment blocks than dnadiff; its breakpoint
    calls may correlate better with Syn2bANI's chain geometry.
 
-3. **Reframe the synteny score definition.** Instead of comparing absolute
-   values, show that Syn2bANI's synteny_score predicts *functional* or
+3. **Reframe the anchor adjacency definition.** Instead of comparing absolute
+   values, show that Syn2bANI's anchor_adjacency predicts *functional* or
    *evolutionary* discordance (e.g., the B. longum abfA case), which is the
    biologically relevant claim.
 
@@ -65,5 +65,5 @@ Options:
 - [ ] Compare Syn2bANI struct output against both dnadiff-large and minimap2
       truth.
 - [ ] Update manuscript: add large-scale SV validation paragraph, clarify
-      that synteny_score measures large-scale rearrangement burden, and
+      that anchor_adjacency measures large-scale rearrangement burden, and
       report the resolution difference between tools.

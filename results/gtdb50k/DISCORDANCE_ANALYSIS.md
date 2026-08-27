@@ -7,7 +7,7 @@
 
 ## Discordance definition
 
-Pairs with ANIm truth ≥ threshold but Syn2bANI synteny_score < 0.98 (i.e.
+Pairs with ANIm truth ≥ threshold but Syn2bANI anchor_adjacency < 0.98 (i.e.
 near-clonal ANI but detectable structural divergence).
 
 ## Counts

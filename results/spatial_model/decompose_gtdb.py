@@ -54,7 +54,7 @@ def main():
                          band=d["band"],
                          het_shape=d["het_shape"], n_anchors=float(d["n_anchors"]),
                          n_tags=float(d["n_tags"]), n_chains=float(d["n_chains"]),
-                         synteny=float(d["synteny_score"]),
+                         synteny=float(d["anchor_adjacency"]),
                          bp=float(d["breakpoint_count"]),
                          npmle=sp[key]["npmle"], spatial=sp[key]["spatial"]))
 
@@ -65,7 +65,7 @@ def main():
         "gap_lh": np.array([d["gap"] for d in data]),
         "log_n_anchors_per_tag": np.log10(np.array([d["n_anchors"] for d in data])
                                           / np.array([d["n_tags"] for d in data])),
-        "synteny_score": np.array([d["synteny"] for d in data]),
+        "anchor_adjacency": np.array([d["synteny"] for d in data]),
         "bp_per_chain": np.array([d["bp"] for d in data]) / np.maximum([d["n_chains"] for d in data], 1),
     }
     print("correlation of gated error with features (all pairs, n=%d):" % len(data))

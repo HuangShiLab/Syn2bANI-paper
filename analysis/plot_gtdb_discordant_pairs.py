@@ -33,20 +33,20 @@ def main():
 
     # Top discordant pairs with struct-level SV counts
     struct = pd.read_csv(DATA / "struct_top_discordant_summary.tsv", sep="\t")
-    struct["discordance"] = struct["ani"] - 100 * struct["synteny_score"]
+    struct["discordance"] = struct["ani"] - 100 * struct["anchor_adjacency"]
     struct = struct.sort_values("discordance", ascending=False)
 
     fig, axes = plt.subplots(1, 2, figsize=(13, 5.5))
 
-    # --- Panel (a): ANI vs synteny_score scatter ---
+    # --- Panel (a): ANI vs anchor_adjacency scatter ---
     ax = axes[0]
-    ax.scatter(all_pairs["ani"], all_pairs["synteny_score"],
+    ax.scatter(all_pairs["ani"], all_pairs["anchor_adjacency"],
                c="#cccccc", s=25, alpha=0.6, edgecolors="none", label="GTDB high-AF pairs (n=336)")
-    ax.scatter(struct["ani"], struct["synteny_score"],
+    ax.scatter(struct["ani"], struct["anchor_adjacency"],
                c="#d62728", s=60, alpha=0.85, edgecolors="black", linewidths=0.5,
                label=f"Top discordant pairs (n={len(struct)})")
     ax.set_xlabel("Syn2bANI ANI (%)", fontsize=11)
-    ax.set_ylabel("Synteny score", fontsize=11)
+    ax.set_ylabel("Anchor adjacency", fontsize=11)
     ax.set_title("(a) Near-clonal ANI can coexist with low synteny", fontsize=12)
     ax.set_xlim(98.95, 100.005)
     ax.set_ylim(0.815, 1.005)
@@ -60,7 +60,7 @@ def main():
     for i, (_, r) in enumerate(top2.iterrows()):
         ox, oy = offsets[i]
         label = f"{r['query_species'][:22]}\nvs {r['reference_species'][:22]}"
-        ax.annotate(label, xy=(r["ani"], r["synteny_score"]),
+        ax.annotate(label, xy=(r["ani"], r["anchor_adjacency"]),
                     xytext=(ox, oy), textcoords="offset points",
                     fontsize=6, ha="center", va="center",
                     arrowprops=dict(arrowstyle="-", color="black", lw=0.4),
@@ -111,7 +111,7 @@ def main():
     print(f"Wrote {OUT_FIG / 'gtdb_discordant_high_ani.png'}")
     print("Top 5 discordant GTDB pairs:")
     print(top10.head(5)[["case", "query_species", "reference_species", "ani",
-                         "synteny_score", "breakpoint_count", "n_inversions",
+                         "anchor_adjacency", "breakpoint_count", "n_inversions",
                          "n_translocations", "n_indels"]].to_string(index=False))
 
 

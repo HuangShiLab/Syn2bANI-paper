@@ -8,9 +8,9 @@ count:
     query-ordered blocks (strand inversion or non-collinear reference jump)
   - dnadiff_large_indels: gaps between consecutive query-ordered blocks
     >= 1000 bp on either genome
-  - dnadiff_synteny_score: 1 - breakpoints/(blocks-1) when blocks>1, else 1.0
+  - dnadiff_anchor_adjacency: 1 - breakpoints/(blocks-1) when blocks>1, else 1.0
 
-Compares these to syn2bani's breakpoint_count and synteny_score.
+Compares these to syn2bani's breakpoint_count and anchor_adjacency.
 
 Inputs:
   results/gtdb50k/out/{pairid}/dd.1coords
@@ -58,7 +58,7 @@ def parse_one(pairid):
     rows.sort(key=lambda x: x[0])
     n = len(rows)
     if n == 1:
-        return dict(blocks=1, breakpoints=0, large_indels=0, synteny_score=1.0)
+        return dict(blocks=1, breakpoints=0, large_indels=0, anchor_adjacency=1.0)
 
     breakpoints = 0
     large_indels = 0
@@ -85,14 +85,14 @@ def parse_one(pairid):
 
     score = max(0.0, 1.0 - breakpoints / (n - 1))
     return dict(blocks=n, breakpoints=breakpoints, large_indels=large_indels,
-                synteny_score=score)
+                anchor_adjacency=score)
 
 
 def main():
     s2b = pd.read_csv(os.path.join(RES, "s2b_50k.tsv"), sep="\t")
     s2b["pairid"] = s2b["pairid"] if "pairid" in s2b.columns else None
     # s2b_50k has pairid column from merge
-    s2b = s2b[["pairid", "breakpoint_count", "synteny_score"]].copy()
+    s2b = s2b[["pairid", "breakpoint_count", "anchor_adjacency"]].copy()
 
     pair_dirs = [d for d in os.listdir(OUTDIR) if os.path.isdir(os.path.join(OUTDIR, d))]
     print(f"found {len(pair_dirs)} pair directories")
@@ -109,7 +109,7 @@ def main():
 
     sv = pd.DataFrame(records)
     sv = sv.rename(columns={"blocks": "dnadiff_blocks", "breakpoints": "dnadiff_breakpoints",
-                            "large_indels": "dnadiff_large_indels", "synteny_score": "dnadiff_synteny_score"})
+                            "large_indels": "dnadiff_large_indels", "anchor_adjacency": "dnadiff_anchor_adjacency"})
     sv.to_csv(os.path.join(RES, "sv_truth_50k.tsv"), sep="\t", index=False)
 
     merged = s2b.merge(sv, on="pairid", how="inner")
@@ -118,7 +118,7 @@ def main():
     # metrics
     bp_mae = np.mean(np.abs(merged["breakpoint_count"] - merged["dnadiff_breakpoints"]))
     bp_r = float(np.corrcoef(merged["breakpoint_count"], merged["dnadiff_breakpoints"])[0, 1])
-    syn_r = float(np.corrcoef(merged["synteny_score"], merged["dnadiff_synteny_score"])[0, 1])
+    syn_r = float(np.corrcoef(merged["anchor_adjacency"], merged["dnadiff_anchor_adjacency"])[0, 1])
     # classification: any rearrangement
     truth_has = (merged["dnadiff_breakpoints"] > 0).astype(int)
     pred_has = (merged["breakpoint_count"] > 0).astype(int)
@@ -143,7 +143,7 @@ def main():
          "## Overall metrics",
          f"- breakpoint_count MAE vs dnadiff: {bp_mae:.3f}",
          f"- breakpoint_count Pearson r: {bp_r:.3f}",
-         f"- synteny_score Pearson r: {syn_r:.3f}",
+         f"- anchor_adjacency Pearson r: {syn_r:.3f}",
          f"- Rearrangement detection (truth > 0 vs pred > 0): precision={precision:.3f}, recall={recall:.3f}, F1={f1:.3f}, specificity={specificity:.3f}",
          f"  TP={tp}, FP={fp}, FN={fn}, TN={tn}",
          "",

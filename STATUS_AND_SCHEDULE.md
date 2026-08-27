@@ -212,7 +212,7 @@ Prior work at `~/data/gtdb-r207/analysis/` already produced:
 
 ## 6. SynTracker Fig. 3 Independent Validation — IN PROGRESS
 
-Goal: validate that Syn2bANI's `synteny_score` can reproduce the four-species
+Goal: validate that Syn2bANI's `anchor_adjacency` can reproduce the four-species
 evolutionary patterns from Enav et al. 2024 (Fig. 3).
 
 | Task | Output | Status |
@@ -224,9 +224,9 @@ evolutionary patterns from Enav et al. 2024 (Fig. 3).
 | Download references & reads on HPC | `/lustre1/g/aos_shihuang/data/syntracker_validation/` | ✅ Done (132 isolates, 75 GB) |
 | Assemble isolates (SLURM array) | `assemblies/*.fna` | ✅ Done 2026-08-09 (132/132; 补跑 45 个时序错位样本，S. rimosus 需 6h+/断点续跑 `03b_resume_one.sh`) |
 | Run Syn2bANI + skani per species | `syn2bani/syn2bani_*.tsv`, `skani/skani_*.tsv` | ✅ Done 2026-08-10 |
-| Plot ANI vs synteny_score | `figures/syntracker_validation/ani_vs_synteny_syntracker_species.png` | ✅ Done 2026-08-10 |
+| Plot ANI vs anchor_adjacency | `figures/syntracker_validation/ani_vs_synteny_syntracker_species.png` | ✅ Done 2026-08-10 |
 
-**结果（Spearman ρ，ANI vs synteny_score）**：四个物种全部重现预期进化模式——
+**结果（Spearman ρ，ANI vs anchor_adjacency）**：四个物种全部重现预期进化模式——
 E. coli hypermutator ρ=0.06（ANI 99.96–100，synteny 平稳 ~0.76，SNP 主导）；
 H. pylori ρ=0.81（混合模式）；N. gonorrhoeae ρ=0.59（混合 SNP+SV）；
 S. rimosus ANI 钉在 99.98–100（克隆）而 synteny 0.89–0.955 大幅变化（SV 主导）。
@@ -238,10 +238,10 @@ ANI>100% 的外推，N. gonorrhoeae 被拉低约 1.2 个百分点），绘图与
 
 ### Expected evolutionary signatures
 
-- *N. gonorrhoeae* — ANI and synteny_score correlated (mixed SNP + SV evolution).
-- hypermutator *E. coli* — wide ANI range, synteny_score stays high (SNP-driven).
+- *N. gonorrhoeae* — ANI and anchor_adjacency correlated (mixed SNP + SV evolution).
+- hypermutator *E. coli* — wide ANI range, anchor_adjacency stays high (SNP-driven).
 - *H. pylori* — mixed modes within/between hosts.
-- *S. rimosus* — ANI high/clonal, synteny_score variable (SV-driven).
+- *S. rimosus* — ANI high/clonal, anchor_adjacency variable (SV-driven).
 
 ### How to run on HPC2021
 

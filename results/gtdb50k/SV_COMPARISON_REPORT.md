@@ -13,7 +13,7 @@ Pairs with Syn2bANI output: 43,334
 
 ## Correlations with alignment-based synteny/coverage scores
 
-### Syn2bANI synteny_score (anchor-adjacency conservation)
+### Syn2bANI anchor_adjacency (anchor-adjacency conservation)
 - dnadiff synteny (all gaps): Pearson r=0.1193, Spearman r=0.3292
 - minimap2 synteny: Pearson r=0.0181, Spearman r=-0.0129
 

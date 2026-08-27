@@ -1,0 +1,3 @@
+wt	del	4 chains	1 SVs reported	ani 99.9999
+query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
+wt	del	Insertion	wt	546687	583917	del	546687	547763	36154	456	925

@@ -1,0 +1,5 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+NC_011297.1	NC_011661.1	AlfI	32	26	51	1,1,6
+NC_011297.1	NC_011661.1	AloI	27	20	93	0,2,7
+NC_011297.1	NC_011661.1	BcgI	32	26	79	9,3,2
+NC_011297.1	NC_011661.1	FalI	27	21	833	11,30,78

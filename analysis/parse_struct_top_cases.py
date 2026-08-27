@@ -119,7 +119,7 @@ def parse_ani(path):
     row = df.iloc[0]
     return {
         "ani": row.get("ani", row.get("ani_uniform", None)),
-        "synteny_score": row.get("synteny_score", None),
+        "anchor_adjacency": row.get("anchor_adjacency", None),
         "breakpoint_count": row.get("breakpoint_count", None),
         "af_query": row.get("af_query", None),
         "af_reference": row.get("af_reference", None),
@@ -158,7 +158,7 @@ def main():
     summary = summary[[
         "case",
         "ani",
-        "synteny_score",
+        "anchor_adjacency",
         "breakpoint_count",
         "n_chains",
         "n_query_contigs",

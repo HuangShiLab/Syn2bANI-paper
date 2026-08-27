@@ -11,11 +11,11 @@ https://github.com/HuangShiLab/Syn2bANI-paper.
 E. coli MG1655 evolved to ANI 95.00/98.00 (counted substitutions) with 0–32
 non-overlapping inversions (100–400 kb; 2 true breakpoints each).
 (a) syn2bani breakpoint_count vs truth: exact on all 14 rungs (0–64).
-(b) synteny_score vs inversion count: monotone decline 1.0000 → 0.9835.
+(b) anchor_adjacency vs inversion count: monotone decline 1.0000 → 0.9835.
 (c) ANI estimate vs inversion count: invariant (94.95–95.00 at true 95.00;
 98.00–98.01 at true 98.00). Wall time 50–70 ms per pair. Specificity on 695
 real MAG pairs (dnadiff-derived truth, median 0 breaks): median
-synteny_score 0.9997, no spurious structural flags. Data and report:
+anchor_adjacency 0.9997, no spurious structural flags. Data and report:
 `results/synteny_bench/`.
 
 ## Supplementary Figure S2 — Held-out GTDB-R207 benchmark
@@ -122,15 +122,15 @@ than an order of magnitude, illustrating that rearrangement burden is not
 captured by the divergence scalar. Annotated points are the top discordant
 cases by ANI–synteny rank difference.
 
-## Supplementary Figure S11 — Near-clonal *Neisseria gonorrhoeae* and *Streptomyces rimosus* isolates also show ANI–synteny decoupling
+## Supplementary Figure S11 — Near-clonal *Neisseria gonorrhoeae* and *Streptomyces rimosus* isolates also show ANI–anchor-adjacency decoupling
 
 (`figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png`)
 
-Left column: Syn2bANI ANI vs synteny score; right column: skani ANI vs the
-same synteny score. (a,b) 12 *N. gonorrhoeae* isolates (66 pairs); pairs with
-ANI >99.9% have synteny scores 0.85–0.89 and up to 376 breakpoints. (c,d) 20
+Left column: Syn2bANI ANI vs anchor adjacency; right column: skani ANI vs the
+same anchor adjacency. (a,b) 12 *N. gonorrhoeae* isolates (66 pairs); pairs with
+ANI >99.9% have anchor adjacencies 0.85–0.89 and up to 376 breakpoints. (c,d) 20
 *S. rimosus* isolates (190 pairs); near-clonal pairs (ANI 99.99–100%) have
-synteny scores 0.89–0.96 and an average of ~1,980 breakpoints. The most
+anchor adjacencies 0.89–0.96 and an average of ~1,980 breakpoints. The most
 discordant cases (NG_05 vs NG_10 and SR_06 vs SR_10) were re-analyzed with
 `syn2bani struct`; counts are in Table 4 and
 `results/syntracker_validation/struct_top_cases_summary.tsv`.
@@ -139,7 +139,7 @@ discordant cases (NG_05 vs NG_10 and SR_06 vs SR_10) were re-analyzed with
 
 (`figures/report/fig_s12_cagpai_pilot.png`)
 
-Eight *H. pylori* 26695-derived genomes: wild-type (WT), a 36,154 bp cagPAI deletion (ΔcagPAI), cagPAI inversion, cagPAI translocation, and the same four structures on a mut1 background carrying ~1% substitutions. All pairwise comparisons were run with `syn2bani ani` and `syn2bani struct`. (a) ANI is ~100% for same-background pairs and ~99% across backgrounds, independent of the 36 kb rearrangement. (b) `breakpoint_count` increases for inversion and translocation pairs. (c) `synteny_score` (chain coverage) drops only modestly with the deletion and is insensitive to inversion/translocation, confirming that it measures coverage rather than rearrangement burden. The WT vs ΔcagPAI comparison returns a single insertion call of exactly 36,154 bp.
+Eight *H. pylori* 26695-derived genomes: wild-type (WT), a 36,154 bp cagPAI deletion (ΔcagPAI), cagPAI inversion, cagPAI translocation, and the same four structures on a mut1 background carrying ~1% substitutions. All pairwise comparisons were run with `syn2bani ani` and `syn2bani struct`. (a) ANI is ~100% for same-background pairs and ~99% across backgrounds, independent of the 36 kb rearrangement. (b) `breakpoint_count` increases for inversion and translocation pairs. (c) `anchor_adjacency` (chain coverage) drops only modestly with the deletion and is insensitive to inversion/translocation, confirming that it measures coverage rather than rearrangement burden. The WT vs ΔcagPAI comparison returns a single insertion call of exactly 36,154 bp.
 
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 

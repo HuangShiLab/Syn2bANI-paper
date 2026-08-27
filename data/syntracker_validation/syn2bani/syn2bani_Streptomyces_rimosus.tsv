@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	anchor_adjacency	breakpoint_count
 SR_01	SR_01	99.9999	99.9999	0.7460	0.7460	0.12966	98.9602	443	0.9388	1324
 SR_01	SR_02	99.9935	99.9935	0.7684	0.4196	0.00101	99.5418	510	0.9509	1463
 SR_01	SR_03	99.9947	99.9947	0.7658	0.4218	0.00092	99.6021	537	0.9504	1475

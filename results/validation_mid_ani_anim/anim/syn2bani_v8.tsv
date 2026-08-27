@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag
 NZ_CP019721.1	NZ_CP019721.1	99.9999	99.9999	0.9998	0.9998	0.60027	13	0.9835	24	inf	1.0000	99.9999	99.9999	0.0000	0.00	AloI:100.00,BslFI:100.00	1452	13	1281	1280	110.76923076923077	ok
 NZ_CP019721.1	NZ_CP021390.1	NaN	NaN	0.0000	0.0000	NaN	0	0.0000	0	NaN	NaN	NaN	NaN	0.0000	NaN	-	36	0	0	0	0	BELOW_DETECTION
 NZ_CP019721.1	NZ_CP084012.1	NaN	NaN	0.0000	0.0000	NaN	0	0.0000	0	NaN	NaN	NaN	NaN	0.0000	NaN	-	81	0	0	0	0	BELOW_DETECTION

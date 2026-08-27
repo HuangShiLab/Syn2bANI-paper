@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	ani_cal	synteny_blocks	anchor_adjacency	breakpoint_count
 M1_d136_cloneE10	M1_d136_cloneE10	99.9999	99.9999	0.9418	0.9418	0.38687	99.0351	49	0.7555	939
 M1_d136_cloneE10	M1_d136_cloneG2	99.9910	99.9910	0.9424	0.9510	0.00366	99.3183	53	0.7644	898
 M1_d136_cloneE10	M1_d148_cloneCL1	99.9910	99.9910	0.9399	0.9353	0.00367	99.2801	57	0.7572	932

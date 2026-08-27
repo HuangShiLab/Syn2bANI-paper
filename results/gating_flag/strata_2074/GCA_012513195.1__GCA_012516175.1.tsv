@@ -1,0 +1,3 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+JAAZCR010000146.1	JAAYWZ010000039.1	BcgI	32	26	0	4,0,0
+JAAZCR010000146.1	JAAYWZ010000039.1	FalI	27	21	0	22,1,1

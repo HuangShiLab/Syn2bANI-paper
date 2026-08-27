@@ -390,8 +390,8 @@ SDI = 1 - (conserved_tags / total_matched_tags)
 ```
 或更精细：
 ```
-SDI = weighted_mean(1 - synteny_score_i)
-其中 synteny_score_i = (邻居匹配数) / (邻居总数)
+SDI = weighted_mean(1 - anchor_adjacency_i)
+其中 anchor_adjacency_i = (邻居匹配数) / (邻居总数)
 ```
 
 ---
@@ -443,8 +443,8 @@ Phase 4: 计算 SDI
     
     // 或用更精细的邻居得分
     for each pair in total_matched_pairs:
-        synteny_score = count_neighbor_matches(pair) / neighbor_window_size
-    SDI = mean(1 - synteny_score)
+        anchor_adjacency = count_neighbor_matches(pair) / neighbor_window_size
+    SDI = mean(1 - anchor_adjacency)
 
 Phase 5: 输出
     TSV: query, ref, ani_seq, ani_seq_corrected, sdi, af_q, af_r, ...

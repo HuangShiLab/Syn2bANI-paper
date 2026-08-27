@@ -1,0 +1,3 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+AE009951.2	NZ_GG770404.1	AloI	27	20	0	2,0,0
+AE009951.2	NZ_GG770404.1	FalI	27	21	2	7,5,2

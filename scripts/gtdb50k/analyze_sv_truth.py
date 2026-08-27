@@ -9,14 +9,14 @@ ROOT = os.environ.get("SYN2BANI_ROOT", os.path.join(HERE, "..", ".."))
 RES = os.path.join(ROOT, "results", "gtdb50k")
 
 def main():
-    s2b = pd.read_csv(os.path.join(RES, "s2b_50k.tsv"), sep="\t")[["pairid", "breakpoint_count", "synteny_score"]].copy()
+    s2b = pd.read_csv(os.path.join(RES, "s2b_50k.tsv"), sep="\t")[["pairid", "breakpoint_count", "anchor_adjacency"]].copy()
     sv = pd.read_csv(os.path.join(RES, "sv_truth_50k.tsv"), sep="\t")
     merged = s2b.merge(sv, on="pairid", how="inner")
     print(f"merged pairs: {len(merged):,}")
 
     bp_mae = np.mean(np.abs(merged["breakpoint_count"] - merged["dnadiff_breakpoints"]))
     bp_r = float(np.corrcoef(merged["breakpoint_count"], merged["dnadiff_breakpoints"])[0, 1])
-    syn_r = float(np.corrcoef(merged["synteny_score"], merged["dnadiff_synteny_score"])[0, 1])
+    syn_r = float(np.corrcoef(merged["anchor_adjacency"], merged["dnadiff_anchor_adjacency"])[0, 1])
 
     truth_has = (merged["dnadiff_breakpoints"] > 0).astype(int)
     pred_has = (merged["breakpoint_count"] > 0).astype(int)
@@ -40,7 +40,7 @@ def main():
          "## Overall metrics",
          f"- breakpoint_count MAE vs dnadiff: {bp_mae:.3f}",
          f"- breakpoint_count Pearson r: {bp_r:.3f}",
-         f"- synteny_score Pearson r: {syn_r:.3f}",
+         f"- anchor_adjacency Pearson r: {syn_r:.3f}",
          f"- Rearrangement detection (truth > 0 vs pred > 0): precision={precision:.3f}, recall={recall:.3f}, F1={f1:.3f}, specificity={specificity:.3f}",
          f"  TP={tp}, FP={fp}, FN={fn}, TN={tn}",
          "",

@@ -1,2 +1,2 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag	ani_gated	gate
 x1008_gamma1.0_ani0.9_b20k	ref	94.1136	95.6024	0.7630	0.7630	0.06695	39	0.9864	38	1.224	0.6889	94.6095	96.9587	1.1376	10.49	AlfI:95.94,AloI:94.83,BcgI:95.66,FalI:94.81	3357	39	4681	184	71.71794871794872	ok	94.1136	gamma

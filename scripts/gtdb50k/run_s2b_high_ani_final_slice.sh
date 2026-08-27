@@ -28,7 +28,7 @@ tail -n +2 "$PAIRS" | sed -n "${START},${END}p" | while IFS=$'\t' read -r PID QA
     "$S2B" ani "$QF" "$RF" --verbose --calibrate > "$OUT" 2>/dev/null || true
     # ensure at least a header exists on failure
     if [ ! -s "$OUT" ]; then
-        echo -e "query\treference\tani\tani_uniform\taf_query\taf_reference\tstd_err\tani_cal\tsynteny_blocks\tsynteny_score\tbreakpoint_count\thet_shape\tretention\tani_from_loss\tani_from_hist\tenzyme_spread\tenzyme_chi2\tper_enzyme\tn_anchors\tn_chains\tn_tags\tmax_block_anchors\tmean_block_anchors\tflag\tani_gated\tgate\tani_upper95" > "$OUT"
+        echo -e "query\treference\tani\tani_uniform\taf_query\taf_reference\tstd_err\tani_cal\tsynteny_blocks\tanchor_adjacency\tbreakpoint_count\thet_shape\tretention\tani_from_loss\tani_from_hist\tenzyme_spread\tenzyme_chi2\tper_enzyme\tn_anchors\tn_chains\tn_tags\tmax_block_anchors\tmean_block_anchors\tflag\tani_gated\tgate\tani_upper95" > "$OUT"
     fi
 done
 

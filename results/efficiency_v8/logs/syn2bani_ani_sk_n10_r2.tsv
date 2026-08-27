@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count
 Ecoli_BL21_DE3	Ecoli_BL21_DE3	99.9999	99.9999	0.9993	0.9993	0.22972	3	0.8939	715
 Ecoli_BL21_DE3	Ecoli_CFT073	96.8852	97.5456	0.9221	0.8250	0.04257	34	0.8849	560
 Ecoli_BL21_DE3	Ecoli_K12_MG1655	99.0990	99.3733	0.9489	0.9744	0.01928	17	0.8754	761

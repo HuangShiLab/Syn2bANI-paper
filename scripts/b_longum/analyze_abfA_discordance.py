@@ -63,18 +63,18 @@ def main():
                 continue
             L.append(f"- same {group_col}: n={len(sub)}, "
                      f"ANI mean={sub['ani'].mean():.3f}, "
-                     f"synteny mean={sub['synteny_score'].mean():.4f}, "
+                     f"synteny mean={sub['anchor_adjacency'].mean():.4f}, "
                      f"breakpoint median={sub['breakpoint_count'].median():.0f}")
         L.append("")
 
     # Identify high-ANI low-synteny pairs with different abfA status
-    disc = s2b[(s2b["ani"] >= 98.0) & (s2b["synteny_score"] < 0.98) &
+    disc = s2b[(s2b["ani"] >= 98.0) & (s2b["anchor_adjacency"] < 0.98) &
                (s2b["same_abfA"] == False)].copy()
-    disc = disc.sort_values("synteny_score")
+    disc = disc.sort_values("anchor_adjacency")
     L.append(f"## High-ANI (>=98%) low-synteny (<0.98) pairs with different abfA status")
     L.append(f"n = {len(disc)}")
     if len(disc):
-        L.append(disc[["query", "reference", "ani", "synteny_score",
+        L.append(disc[["query", "reference", "ani", "anchor_adjacency",
                        "breakpoint_count", "q_abfA", "r_abfA", "q_pheno", "r_pheno"]]
                  .head(20).to_string(index=False))
     L.append("")

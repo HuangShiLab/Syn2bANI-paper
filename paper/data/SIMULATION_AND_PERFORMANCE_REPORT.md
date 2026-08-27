@@ -383,7 +383,7 @@ on the current-binary feature matrix (`results/anim_truth_2074_v8current.tsv`,
 2,053 finite pairs; `scripts/calibration_v2.py`, full write-up
 `results/panel_by_band/CALIBRATION_V2.md`). A feature-set comparison under
 the same band-holdout CV: the base 9 features give MAE 0.988; an expanded
-18-feature set (adding `synteny_score`, `breakpoint_count`, `enzyme_spread`,
+18-feature set (adding `anchor_adjacency`, `breakpoint_count`, `enzyme_spread`,
 `enzyme_chi2`, `het_shape`, `ani_from_loss/hist`, block-anchor stats) gives
 **MAE 0.963, winning every band**; a gradient-boosted model on the same
 features scores 1.224 — nonlinearity buys nothing at n ≈ 2k, consistent
@@ -611,7 +611,7 @@ the diagnostic as designed.
   sensitive here, but the ranking no longer inverts on GTDB.
 - **SynTracker Fig-3 replication** (Enav et al. 2024; 132 isolates, 4
   species; STATUS_AND_SCHEDULE.md §6, `scripts/syntracker_validation/`):
-  Spearman ρ of ANI vs `synteny_score` reproduces the expected evolutionary
+  Spearman ρ of ANI vs `anchor_adjacency` reproduces the expected evolutionary
   modes — *E. coli* hypermutator ρ = 0.062 (syn2bani) vs 0.182 (skani)
   (SNP-driven: ANI 99.96–100, synteny flat ~0.76 — lower ρ is the expected
   signature); *H. pylori* 0.813 vs 0.872; *N. gonorrhoeae* 0.593 vs 0.634;

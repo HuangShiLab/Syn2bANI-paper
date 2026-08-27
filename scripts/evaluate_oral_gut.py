@@ -45,7 +45,7 @@ def read_s2b(path, seqid_to_asm):
     cols = ["query_asm", "ref_asm", "ani"]
     if "ani_cal" in df.columns:
         cols.append("ani_cal")
-    for c in ["synteny_blocks", "synteny_score", "breakpoint_count",
+    for c in ["synteny_blocks", "anchor_adjacency", "breakpoint_count",
               "max_block_anchors", "mean_block_anchors"]:
         if c in df.columns:
             cols.append(c)

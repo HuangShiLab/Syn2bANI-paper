@@ -5,7 +5,7 @@ Pairs with syn2bani output: 43,334
 ## Overall metrics
 - breakpoint_count MAE vs dnadiff: 424.927
 - breakpoint_count Pearson r: 0.465
-- synteny_score Pearson r: 0.119
+- anchor_adjacency Pearson r: 0.119
 - Rearrangement detection (truth > 0 vs pred > 0): precision=0.999, recall=0.931, F1=0.964, specificity=0.608
   TP=40269, FP=40, FN=2963, TN=62
 

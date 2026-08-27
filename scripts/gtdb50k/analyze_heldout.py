@@ -40,7 +40,7 @@ def main():
 
     df = truth.merge(pairs[["pairid", "skani_ani", "band", "phylum"]], on="pairid", how="inner")
     df = df.merge(s2b[["pairid", "ani_gated", "ani_cal", "ani", "gate", "flag",
-                       "ani_upper95", "af_query", "synteny_score", "std_err"]],
+                       "ani_upper95", "af_query", "anchor_adjacency", "std_err"]],
                   on="pairid", how="inner")
     assert len(df) == len(truth), f"join dropped rows: {len(df)} vs {len(truth)}"
 

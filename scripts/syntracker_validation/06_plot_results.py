@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Merge Syn2bANI + skani outputs and plot ANI vs synteny_score per species."""
+"""Merge Syn2bANI + skani outputs and plot ANI vs anchor_adjacency per species."""
 import argparse, sys
 from pathlib import Path
 import pandas as pd
@@ -20,7 +20,7 @@ def load_syn2bani(path):
     df = df.rename(columns={'ani': 'ani_syn2bani'})
     # Syn2bANI output uses the first contig ID; after our normalisation this equals the isolate
     df['pair'] = [norm_pair(q, r) for q, r in zip(df['query'], df['reference'])]
-    df = df[['pair', 'ani_syn2bani', 'synteny_score', 'breakpoint_count']].copy()
+    df = df[['pair', 'ani_syn2bani', 'anchor_adjacency', 'breakpoint_count']].copy()
     # Drop self-comparisons
     df = df[df['pair'].apply(lambda x: x[0] != x[1])]
     return df
@@ -108,13 +108,13 @@ def main():
     df['reference'] = df['pair'].apply(lambda x: x[1])
     df.drop(columns=['pair']).to_csv(outdir / 'merged_ani_synteny.tsv', sep='\t', index=False)
 
-    # Scatter: ANI (Syn2bANI calibrated) vs synteny_score, faceted by species
+    # Scatter: ANI (Syn2bANI calibrated) vs anchor_adjacency, faceted by species
     sns.set_theme(style='whitegrid')
     g = sns.FacetGrid(df, col='species', col_wrap=2, sharex=False, sharey=False,
                       height=4, aspect=1.1)
-    g.map_dataframe(sns.scatterplot, x='ani_syn2bani', y='synteny_score',
+    g.map_dataframe(sns.scatterplot, x='ani_syn2bani', y='anchor_adjacency',
                     alpha=0.6, edgecolor=None, s=40)
-    g.set_axis_labels('Syn2bANI ANI (%)', 'Syn2bANI synteny score')
+    g.set_axis_labels('Syn2bANI ANI (%)', 'Syn2bANI anchor adjacency')
     g.set_titles(col_template='{col_name}')
     for ax in g.axes.flat:
         ax.axhline(0.955, color='red', ls='--', lw=0.8, label='SynTracker cutoff')
@@ -128,10 +128,10 @@ def main():
     corr = df.groupby('species').apply(
         lambda g: pd.Series({
             'n_pairs': len(g),
-            'rho_ani_synteny': g['ani_syn2bani'].corr(g['synteny_score'], method='spearman'),
-            'rho_skani_synteny': g['ani_skani'].corr(g['synteny_score'], method='spearman') if g['ani_skani'].notna().sum() > 2 else float('nan'),
-            'mean_synteny': g['synteny_score'].mean(),
-            'std_synteny': g['synteny_score'].std(),
+            'rho_ani_synteny': g['ani_syn2bani'].corr(g['anchor_adjacency'], method='spearman'),
+            'rho_skani_synteny': g['ani_skani'].corr(g['anchor_adjacency'], method='spearman') if g['ani_skani'].notna().sum() > 2 else float('nan'),
+            'mean_synteny': g['anchor_adjacency'].mean(),
+            'std_synteny': g['anchor_adjacency'].std(),
             'mean_ani': g['ani_syn2bani'].mean(),
         })
     ).reset_index()

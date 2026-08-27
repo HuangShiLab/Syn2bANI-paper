@@ -1,4 +1,4 @@
-ani_syn2bani	synteny_score	breakpoint_count	ani_skani	species	host	query	reference
+ani_syn2bani	anchor_adjacency	breakpoint_count	ani_skani	species	host	query	reference
 99.9959	0.8856	277	100.0	Neisseria_gonorrhoeae		NG_01	NG_02
 99.9939	0.8947	253	99.99	Neisseria_gonorrhoeae		NG_01	NG_03
 99.9727	0.889	266	99.97	Neisseria_gonorrhoeae		NG_01	NG_04

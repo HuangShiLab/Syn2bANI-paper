@@ -128,8 +128,8 @@ pub struct MatchedPair {
     pub n_mismatches: u32,           // 明确的 mismatch 数
     
     // 维度 B：结构层面
-    pub synteny_score: f64,          // [0, 1], 邻居匹配比例
-    pub is_conserved_block: bool,    // synteny_score > threshold
+    pub anchor_adjacency: f64,          // [0, 1], 邻居匹配比例
+    pub is_conserved_block: bool,    // anchor_adjacency > threshold
     pub block_size: usize,           // 连续保守标签数
 }
 
@@ -185,15 +185,15 @@ impl TagMatcher {
                 }
             }
             
-            let synteny_score = synteny_matches as f64 / neighbors_q.len().max(1) as f64;
+            let anchor_adjacency = synteny_matches as f64 / neighbors_q.len().max(1) as f64;
             
             enriched_pairs.push(MatchedPair {
                 q_tag: *q_tag,
                 r_tag: *r_tag,
                 sequence_identity: *seq_id,
                 n_mismatches: count_mismatches(q_tag, r_tag),
-                synteny_score,
-                is_conserved_block: synteny_score > 0.6,
+                anchor_adjacency,
+                is_conserved_block: anchor_adjacency > 0.6,
                 block_size: estimate_block_size(q_tag, &pairs),
             });
         }
@@ -357,7 +357,7 @@ syn2bani struct magA.fna refB.fna --paf --rearrangement
 ## 六、代码实现优先级
 
 ### Phase A（立即）：数据结构改造
-1. 修改 `MatchedPair`，增加 `synteny_score` 和 `is_conserved_block`
+1. 修改 `MatchedPair`，增加 `anchor_adjacency` 和 `is_conserved_block`
 2. 修改 `MatchResult`，增加结构分析阶段
 3. 修改 `AniResult`，改为三部分输出
 4. 更新 TSV 输出格式（增加列）

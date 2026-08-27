@@ -13,7 +13,7 @@ imputer-median path.
 Feature sets:
   A (base 9):  ani, ani_uniform, af_query, af_reference, std_err, retention,
                n_anchors, n_chains, n_tags
-  B (expanded): A + synteny_score, breakpoint_count, enzyme_spread,
+  B (expanded): A + anchor_adjacency, breakpoint_count, enzyme_spread,
                enzyme_chi2, het_shape, ani_from_loss, ani_from_hist,
                max_block_anchors, mean_block_anchors
   C: set B with GradientBoostingRegressor (sklearn defaults) instead of ridge.
@@ -49,7 +49,7 @@ BAND_ORDER = ["0.8-0.85", "0.85-0.9", "0.9-0.95", "0.95-0.99"]
 
 SET_A = ["ani", "ani_uniform", "af_query", "af_reference", "std_err",
          "retention", "n_anchors", "n_chains", "n_tags"]
-SET_B_EXTRA = ["synteny_score", "breakpoint_count", "enzyme_spread",
+SET_B_EXTRA = ["anchor_adjacency", "breakpoint_count", "enzyme_spread",
                "enzyme_chi2", "het_shape", "ani_from_loss", "ani_from_hist",
                "max_block_anchors", "mean_block_anchors"]
 SET_B = SET_A + SET_B_EXTRA
@@ -60,7 +60,7 @@ SET_B = SET_A + SET_B_EXTRA
 # TSV ani_from_loss/hist <- fields *100; all others direct).
 RUST_NAMES = ["ani_het", "ani_uniform", "af_query", "af_reference", "std_err",
               "retention", "n_anchors", "n_chains", "n_tags_in_chains",
-              "synteny_score", "breakpoint_count", "enzyme_spread",
+              "anchor_adjacency", "breakpoint_count", "enzyme_spread",
               "enzyme_chi2", "het_shape", "ani_from_loss", "ani_from_hist",
               "max_block_anchors", "mean_block_anchors"]
 

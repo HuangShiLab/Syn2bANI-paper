@@ -138,7 +138,7 @@ axo.add_patch(Rectangle((0.03, 0.12), 0.60, 0.80, fc="#f4f4f4", ec="k",
 outputs = [
     "ANI ± standard error (gated gamma / uniform MLE)",
     "aligned fraction af_query / af_reference",
-    "synteny_score, synteny_blocks, breakpoint_count",
+    "anchor_adjacency, synteny_blocks, breakpoint_count",
     "SV calls: inversions, indels ≥ 1 kb, translocations",
     "reliability flag: ok / INCONSISTENT / BELOW_DETECTION",
     "ani_upper95 when no point estimate is responsible",

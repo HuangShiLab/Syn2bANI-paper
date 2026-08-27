@@ -1,0 +1,3 @@
+mut1	mut1_inv	5 chains	1 SVs reported	ani 97.8733
+query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
+mut1	mut1_inv	Inversion	mut1	548435	583592	mut1_inv	547189	582341	35157	395	803

@@ -1,0 +1,3 @@
+wt	inv	5 chains	1 SVs reported	ani 99.9999
+query	reference	sv_type	q_contig	q_start	q_end	r_contig	r_start	r_end	size	support_left	support_right
+wt	inv	Inversion	wt	548447	583580	inv	547204	582326	35133	456	925

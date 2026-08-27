@@ -23,9 +23,9 @@ Runs: `syn2bani dist --verbose` (8×8, `dist_all.tsv`) and `syn2bani struct --re
 
 ## Results
 
-### ANI and synteny score (dist)
+### ANI and anchor adjacency (dist)
 
-| Pair | ANI (%) | af_query | synteny_score | blocks | breakpoints |
+| Pair | ANI (%) | af_query | anchor_adjacency | blocks | breakpoints |
 |---|---|---|---|---|---|
 | wt × wt | 100.00 | 0.999 | 0.9986 | 3 | 2 |
 | wt × del | 100.00 | **0.977** | 0.9979 | 4 | 3 |
@@ -64,11 +64,11 @@ chain's query span as a repeat shadow and excludes it from all SV rules
 
 1. **ANI estimate is orthogonal to SVs, as designed**: structural variants do not
    perturb the ANI estimate (100.0 vs 100.0); only real nucleotide divergence moves it.
-2. **synteny_score is NOT sensitive to a single island-scale event**: 36 kb deletion
+2. **anchor_adjacency is NOT sensitive to a single island-scale event**: 36 kb deletion
    moves it only 0.9986 → 0.9979. The synteny < 0.98 discordance screen used in the
    GTDB analysis therefore captures multi-event / large-scale rearrangement only,
    not cagPAI-scale (2% of genome) events. This limitation must be stated in the
-   manuscript, and cagPAI-case analysis must not rely on synteny_score alone.
+   manuscript, and cagPAI-case analysis must not rely on anchor_adjacency alone.
 3. **`struct` now detects all three island-scale event classes** — deletion/
    insertion, inversion, translocation — with near-exact boundaries (±1–2 kb of
    the true cagPAI edges), robustly at ANI ≈ 98 (2% divergence). Self-baselines

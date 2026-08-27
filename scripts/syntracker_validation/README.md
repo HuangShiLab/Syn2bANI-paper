@@ -2,12 +2,12 @@
 
 This workflow reproduces the four-species comparison from
 [Enav et al., Nature Biotechnology 2024](https://doi.org/10.1038/s41587-024-02276-2)
-(Fig. 3) using Syn2bANI's new `synteny_score` output.
+(Fig. 3) using Syn2bANI's new `anchor_adjacency` output.
 
 The isolates are taken from the paper's Supplementary Tables 2–5 and assembled
 from raw SRA reads. We then compare all within-species pairs (and, for
 _H. pylori_, within-host pairs) with Syn2bANI and skani, and plot
-ANI vs synteny_score.
+ANI vs anchor_adjacency.
 
 ## Expected evolutionary patterns
 
@@ -15,7 +15,7 @@ ANI vs synteny_score.
 |---|---|
 | _Neisseria gonorrhoeae_ | ANI and synteny correlated (both SNPs and SVs) |
 | hypermutator _E. coli_ | ANI varies widely, synteny stays high (SNP-driven) |
-| _Helicobacter pylori_ | Mixed: some pairs high-ANI/high-synteny, others high-ANI/low-synteny |
+| _Helicobacter pylori_ | Mixed: some pairs high-ANI/high-synteny, others high-ANI/low-anchor-adjacency |
 | _Streptomyces rimosus_ | ANI high/clonal, synteny varies widely (SV-driven) |
 
 ## Files produced so far (local/MacStudio)

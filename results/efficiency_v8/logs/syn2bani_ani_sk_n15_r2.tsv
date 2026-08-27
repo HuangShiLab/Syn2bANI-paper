@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count
 Citrobacter_rodentium	Citrobacter_rodentium	99.9999	99.9999	0.9979	0.9979	0.20803	14	0.9506	381
 Citrobacter_rodentium	Ecoli_BL21_DE3	77.9088	86.7649	0.2822	0.3304	0.22795	22	0.4756	269
 Citrobacter_rodentium	Ecoli_CFT073	81.5237	87.8830	0.2052	0.2080	0.24238	24	0.4137	309

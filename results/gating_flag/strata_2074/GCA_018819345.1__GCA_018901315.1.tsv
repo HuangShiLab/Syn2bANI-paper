@@ -1,0 +1,3 @@
+query	reference	enzyme	tag_len	body_len	n_miss	hist
+JAHJQG010000015.1	JAHIFA010000120.1	AlfI	32	26	1	1,1,0
+JAHJQG010000015.1	JAHIFA010000120.1	FalI	27	21	0	0,1,1

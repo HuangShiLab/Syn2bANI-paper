@@ -1,4 +1,4 @@
-query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	synteny_score	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag
+query	reference	ani	ani_uniform	af_query	af_reference	std_err	synteny_blocks	anchor_adjacency	breakpoint_count	het_shape	retention	ani_from_loss	ani_from_hist	enzyme_spread	enzyme_chi2	per_enzyme	n_anchors	n_chains	n_tags	max_block_anchors	mean_block_anchors	flag
 AE009951.2	NZ_GG770404.1	97.4338	97.4338	0.0076	0.0066	0.76496	3	0.0463	268	inf	0.8397	98.1891	97.0176	2.9367	0.05	AloI:100.00,FalI:97.06	282	3	18	7	5.333333333333333	ok
 CP000875.1	NZ_PUBZ01000001.1	87.9930	89.6293	0.3273	0.3651	0.12791	94	0.5481	737	5.089	0.2620	89.3158	92.1383	1.0523	3.04	AlfI:90.14,AloI:90.33,BcgI:89.37,FalI:89.27	1634	94	4035	49	10.51063829787234	INCONSISTENT
 CT978603.1	JAAXIH010000097.1	93.0156	93.3036	0.5012	0.6087	0.12229	103	0.7401	335	8.932	0.5021	93.0229	94.1319	1.1045	4.05	AlfI:93.76,AloI:92.66,BcgI:92.99,FalI:92.75	1290	103	2201	53	10.262135922330097	INCONSISTENT
