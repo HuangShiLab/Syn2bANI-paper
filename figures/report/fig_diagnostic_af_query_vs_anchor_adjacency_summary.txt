@@ -1,0 +1,13 @@
+# af_query vs anchor_adjacency diagnostic summary
+
+Total pairs: 43,334
+
+Failure modes:
+- A. high anchor_adjacency (>0.99) but low dnadiff synteny (<0.5): 6,764
+- B. high af_query (>0.8) but low dnadiff synteny (<0.5): 2,242
+- C. low af_query (<0.3) but high anchor_adjacency (>0.99): 2,281
+- D. low anchor_adjacency (<0.95) but high dnadiff synteny (>0.8): 470
+
+Correlations with dnadiff synteny:
+- af_query: Pearson 0.354
+- anchor_adjacency: Pearson 0.119

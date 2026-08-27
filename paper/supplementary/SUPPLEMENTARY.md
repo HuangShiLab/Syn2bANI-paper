@@ -135,6 +135,24 @@ discordant cases (NG_05 vs NG_10 and SR_06 vs SR_10) were re-analyzed with
 `syn2bani struct`; counts are in Table 4 and
 `results/syntracker_validation/struct_top_cases_summary.tsv`.
 
+## Supplementary Figure S13 — Diagnostic plot of `af_query` vs `anchor_adjacency` on GTDB-R207 held-out pairs
+
+(`figures/report/fig_diagnostic_af_query_vs_anchor_adjacency.png`)
+
+43,334 held-out same-genus representative pairs from GTDB-R207, coloured by
+dnadiff alignment-based synteny score. (a) `af_query` (base-pair chain
+coverage) and `anchor_adjacency` (ordered-anchor conservation) are only weakly
+correlated (Pearson r = 0.29) and are best understood as two independent
+structural axes. The colour gradient shows that `af_query` is the output that
+tracks alignment-based synteny/coverage. (b) Four interpretable quadrants:
+6,764 pairs have high `anchor_adjacency` (>0.99) but low dnadiff synteny
+(<0.5), because sparse surviving anchors are locally collinear while most of
+the genome is unchained; 2,242 pairs have high `af_query` (>0.8) but low
+dnadiff synteny, the signature of extensive rearrangement within an
+alignable genome; 2,281 pairs have low `af_query` but locally collinear
+anchors; and 470 pairs show the reverse mismatch. Source data and script:
+`results/gtdb50k/` and `analysis/plot_anchor_adjacency_vs_af_query.py`.
+
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 
 695 CAMI2 bins vs dnadiff ANIm truth (raw gated syn2bani; skani; FastANI).
