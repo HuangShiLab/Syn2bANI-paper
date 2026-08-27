@@ -48,7 +48,7 @@ def safe_corr(x, y, method="pearson"):
 
 def main():
     s2b = pd.read_csv(RES / "s2b_50k.tsv", sep="\t")
-    s2b = s2b[["pairid", "ani_gated", "breakpoint_count", "synteny_score"]].copy()
+    s2b = s2b[["pairid", "ani_gated", "af_query", "synteny_score", "synteny_blocks", "breakpoint_count"]].copy()
 
     dnadiff = pd.read_csv(RES / "sv_truth_50k.tsv", sep="\t")
     merged = s2b.merge(dnadiff, on="pairid", how="left")
@@ -92,15 +92,24 @@ def main():
         L.append(f"- {label}: Pearson r={r:.4f}, Spearman r={rs:.4f}, MAE={mae:.1f}")
 
     L.append("")
-    L.append("## Synteny score correlations with Syn2bANI synteny_score")
-    for col, label in cols.items():
-        if "synteny" not in col or col not in merged.columns or merged[col].isna().all():
-            continue
-        r = safe_corr(merged["synteny_score"].to_numpy(float),
-                      merged[col].to_numpy(float), "pearson")
-        rs = safe_corr(merged["synteny_score"].to_numpy(float),
-                       merged[col].to_numpy(float), "spearman")
-        L.append(f"- {label}: Pearson r={r:.4f}, Spearman r={rs:.4f}")
+    L.append("## Correlations with alignment-based synteny/coverage scores")
+    syn_metrics = {
+        "synteny_score": "Syn2bANI synteny_score (anchor-adjacency conservation)",
+        "af_query": "Syn2bANI af_query (base-pair chain coverage)",
+        "synteny_blocks": "Syn2bANI synteny_blocks",
+    }
+    syn_cols = [c for c, _ in cols.items() if "synteny" in c]
+    for s2b_col, s2b_label in syn_metrics.items():
+        L.append(f"\n### {s2b_label}")
+        for col in syn_cols:
+            if col not in merged.columns or merged[col].isna().all():
+                continue
+            label = cols[col]
+            r = safe_corr(merged[s2b_col].to_numpy(float),
+                          merged[col].to_numpy(float), "pearson")
+            rs = safe_corr(merged[s2b_col].to_numpy(float),
+                           merged[col].to_numpy(float), "spearman")
+            L.append(f"- {label}: Pearson r={r:.4f}, Spearman r={rs:.4f}")
 
     L.append("")
     L.append("## Summary statistics")

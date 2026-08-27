@@ -11,9 +11,19 @@ Pairs with Syn2bANI output: 43,334
 - dnadiff min-gap 5000 bp: Pearson r=0.4793, Spearman r=0.5438, MAE=412.1
 - dnadiff large indels min-gap 5000 bp: Pearson r=0.5087, Spearman r=0.6588, MAE=326.6
 
-## Synteny score correlations with Syn2bANI synteny_score
+## Correlations with alignment-based synteny/coverage scores
+
+### Syn2bANI synteny_score (anchor-adjacency conservation)
 - dnadiff synteny (all gaps): Pearson r=0.1193, Spearman r=0.3292
 - minimap2 synteny: Pearson r=0.0181, Spearman r=-0.0129
+
+### Syn2bANI af_query (base-pair chain coverage)
+- dnadiff synteny (all gaps): Pearson r=0.3539, Spearman r=0.3939
+- minimap2 synteny: Pearson r=0.2305, Spearman r=0.2627
+
+### Syn2bANI synteny_blocks
+- dnadiff synteny (all gaps): Pearson r=-0.1680, Spearman r=-0.2133
+- minimap2 synteny: Pearson r=-0.1674, Spearman r=-0.0530
 
 ## Summary statistics
 - breakpoint_count: mean=30.9, median=20.0
