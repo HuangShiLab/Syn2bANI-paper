@@ -1,5 +1,15 @@
 # dnadiff gap-filtered SV truth vs Syn2bANI metrics (43,334 GTDB held-out pairs)
 
+> **Correction (2026-08-30).** The correlations below are **raw**, and conclusion
+> 2 does not survive controlling for assembly fragmentation. Contig count is
+> recoverable as `synteny_blocks − breakpoint_count`; on that axis
+> `synteny_blocks` correlates at **r = 0.767** (0.717 even within the ≥95% ANIm
+> subset) while `breakpoint_count` correlates at only **0.046**. Half of
+> `synteny_blocks` is contig starts by construction. `breakpoint_count` remains
+> validated — its agreement *strengthens* under every control — but
+> **`synteny_blocks` should not be presented as a rearrangement metric.** See
+> [SV_REANALYSIS.md](SV_REANALYSIS.md).
+
 Date: 2026-08-26
 Inputs: `sv_truth_50k_min5000.tsv`, `sv_truth_50k_min10000.tsv` (re-parsed
 dd.1coords with min-gap 5k/10k; HPC job dd_filter 3945832),
