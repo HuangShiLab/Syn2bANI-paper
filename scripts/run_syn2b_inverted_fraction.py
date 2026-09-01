@@ -62,12 +62,16 @@ def run_pair(args):
 
     tmpdir = tgt_dir / "tmp_pairs" / pairid
     tmpdir.mkdir(parents=True, exist_ok=True)
-    q_link = tmpdir / f"{q_acc}.tgt"
-    r_link = tmpdir / f"{r_acc}.tgt"
-    if not q_link.is_symlink():
-        q_link.symlink_to(q_tgt.resolve())
-    if not r_link.is_symlink():
-        r_link.symlink_to(r_tgt.resolve())
+    # Remove stale symlinks from previous naming conventions so only the two
+    # current TGTs are present per pair.
+    for existing in tmpdir.glob("*.tgt"):
+        existing.unlink()
+    # Name files so r_acc (reference, matching dnadiff) sorts first and becomes
+    # genome_A. q_acc (query) sorts second and becomes genome_B.
+    r_link = tmpdir / f"a_ref_{r_acc}.tgt"
+    q_link = tmpdir / f"b_qry_{q_acc}.tgt"
+    r_link.symlink_to(r_tgt.resolve())
+    q_link.symlink_to(q_tgt.resolve())
 
     out_csv = tmpdir / "synteny.csv"
     try:
@@ -92,7 +96,9 @@ def run_pair(args):
                 "syn2b_scj_distance": row["scj_distance"],
                 "syn2b_breakpoint_density": row["breakpoint_density"],
                 "syn2b_inverted_fraction": row["inverted_fraction"],
+                "syn2b_raw_inverted_fraction": row.get("raw_inverted_fraction", "NA"),
                 "syn2b_orientation_mismatches": row["orientation_mismatches"],
+                "syn2b_orientation_mismatches_raw": row.get("orientation_mismatches_raw", "NA"),
                 "syn2b_orientation_uninformative": row["orientation_uninformative"],
                 "syn2b_observable_fraction": row["observable_fraction"],
                 "syn2b_observable_adjacencies": row["observable_adjacencies"],
