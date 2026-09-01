@@ -2,7 +2,7 @@
 """Compute Syn2b inverted_fraction for a list of genome pairs.
 
 Workflow:
-  1. Digest every unique genome with the 4-enzyme panel (BcgI,AlfI,AloI,FalI).
+  1. Digest every unique genome with --enzymes (default: BcgI,AlfI,AloI,FalI).
   2. For each pair, run syn2b synteny on the two TGTs and parse inverted_fraction.
 
 Inputs:
@@ -27,7 +27,7 @@ from multiprocessing import Pool, cpu_count
 import pandas as pd
 
 
-ENZYMES = "BcgI,AlfI,AloI,FalI"
+DEFAULT_ENZYMES = "BcgI,AlfI,AloI,FalI"
 
 
 def run(cmd, **kw):
@@ -41,13 +41,13 @@ def run(cmd, **kw):
 
 
 def digest_genome(args):
-    acc, genome_path, tgt_dir, syn2b = args
+    acc, genome_path, tgt_dir, syn2b, enzymes = args
     out_tgt = tgt_dir / f"{acc}.tgt"
     if out_tgt.exists() and out_tgt.stat().st_size > 0:
         return acc, str(out_tgt)
     try:
         run([syn2b, "digest", "-i", str(genome_path), "-o", str(out_tgt),
-             "-e", ENZYMES, "-f", "text"], timeout=120)
+             "-e", enzymes, "-f", "text"], timeout=120)
         return acc, str(out_tgt)
     except Exception as e:
         return acc, f"ERROR: {e}"
@@ -120,6 +120,10 @@ def main():
     p.add_argument("--tgt-dir", default=None, help="cache directory for .tgt files")
     p.add_argument("--out", required=True)
     p.add_argument("--workers", type=int, default=min(16, cpu_count() or 1))
+    p.add_argument("--enzymes", default=DEFAULT_ENZYMES,
+                   help="comma-separated enzyme panel passed to `syn2b digest`. "
+                        "Use a --tgt-dir per panel: the cache keys on accession "
+                        "only, so reusing one across panels silently mixes them.")
     args = p.parse_args()
 
     pairs = pd.read_csv(args.pairs, sep="\t")
@@ -150,7 +154,7 @@ def main():
         if not gp.exists():
             missing.append(acc)
             continue
-        digest_tasks.append((acc, str(gp), tgt_dir, args.syn2b))
+        digest_tasks.append((acc, str(gp), tgt_dir, args.syn2b, args.enzymes))
 
     if missing:
         print(f"WARNING: {len(missing)} genomes missing, e.g. {missing[:5]}", flush=True)
