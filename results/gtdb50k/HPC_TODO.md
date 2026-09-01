@@ -174,6 +174,139 @@ asks.
 
 ---
 
+## 6. Which taxa actually carry large inversions — annotate what we already have
+
+**Cost: minutes.** No new alignment, no new digestion, no downloads.
+
+The inverted-fraction channel is only interpretable on near-closed assemblies.
+Contigs are deposited in arbitrary orientation, so a fragmented pair drifts to
+`min(f, 1-f) ~ 0.5` carrying no biology. Measured on the >=97% ANIm pairs, with
+contig count recovered from `observable_fraction ~ 1 - (K-1)/S`:
+
+| K (estimated) | n | median min(f,1-f) | fraction < 0.05 |
+|---|---|---|---|
+| 1-2 (closed) | 371 | 0.2880 | 0.332 |
+| 3-5 | 250 | 0.3776 | 0.100 |
+| 6-10 | 257 | 0.3991 | 0.035 |
+| 11-25 | 691 | 0.4281 | 0.023 |
+| 26-100 | 1255 | 0.4548 | 0.007 |
+| >100 | 1002 | 0.4726 | 0.004 |
+
+The 0.5 plateau is contig-orientation randomness and it disappears exactly as the
+assemblies close up. So the 371 near-closed pairs are the only ones in hand where
+the number means something — 96 are collinear (< 0.01) and 183 sit at 0.30-0.51.
+
+What is missing is which species they are; only phylum is in the pair tables. This
+joins GTDB taxonomy and ranks species by how often their near-closed pairs disagree
+in orientation, so the target organism for the inversion case study is chosen from
+data rather than guessed.
+
+```bash
+$PY $ROOT/scripts/annotate_closed_inversion_pairs.py \
+    --results  $WORK \
+    --metadata /lustre1/g/aos_shihuang/data/gtdb-r207/metadata/bac120_metadata_r207.tsv \
+    --out      $WORK/closed_inversion_pairs.tsv
+```
+
+It also re-checks `K_est` against the metadata's real `contig_count` and
+`ncbi_assembly_level`, which is the honest version of the table above. Send back
+`closed_inversion_pairs.tsv` and the printed species ranking.
+
+---
+
+## 7. Closed-genome cohorts for the inversion channel
+
+**Cost: selection is instant; the digestion + all-vs-all scales with cohort size.**
+
+Two constraints decide which organisms are usable, and together they rule out most
+of the textbook inversion systems:
+
+- **Size.** Phase 2 measured L50 at 2,611 bp (BcgI) and 1,242 bp (four-enzyme). And
+  `inverted_fraction` is length-weighted over the whole genome, so a 1 kb switch in
+  a 5 Mb genome moves it by 0.02% — invisible in this channel even when its
+  junctions are detected. Phase-variation invertons (Bacteroides CPS promoters
+  ~200-300 bp; the Salmonella `hin`/`fljBA` flagellar switch ~1 kb, four-enzyme
+  power ~0.375) are **out of scope for this channel** and belong to the junction
+  channel instead.
+- **Contiguity.** Per task 6, draft assemblies carry no usable orientation signal.
+  Cohorts must be closed or near-closed.
+
+Selection runs off GTDB metadata, so the accessions come out verified rather than
+recalled. Check the names first — GTDB splits some NCBI species into `_A`/`_B`:
+
+```bash
+$PY $ROOT/scripts/select_closed_genomes.py \
+    --metadata /lustre1/g/aos_shihuang/data/gtdb-r207/metadata/bac120_metadata_r207.tsv \
+    --list-species Streptococcus
+```
+
+Then select, which also reports what is already in `genomes_all`:
+
+```bash
+$PY $ROOT/scripts/select_closed_genomes.py \
+    --metadata   /lustre1/g/aos_shihuang/data/gtdb-r207/metadata/bac120_metadata_r207.tsv \
+    --genome-dir /lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all \
+    --species "Streptococcus pneumoniae" "Salmonella enterica" \
+              "Bordetella pertussis" "Pseudomonas aeruginosa" \
+    --max-contigs 3 --max-per-species 200 \
+    --outdir $WORK/../closed_inversions
+```
+
+Anything not already local:
+
+```bash
+bash $ROOT/scripts/fetch_genomes_by_accession.sh \
+    $WORK/../closed_inversions/accessions_to_download.txt \
+    /lustre1/g/aos_shihuang/data/closed_inversions
+```
+
+Then the existing runner does the rest, on the pair file the selector wrote:
+
+```bash
+$PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
+    --pairs      $WORK/../closed_inversions/pairs_all_vs_all.tsv \
+    --genome-dir /lustre1/g/aos_shihuang/data/closed_inversions \
+    --syn2b      /lustre1/g/aos_shihuang/Syn2b/target/release/syn2b \
+    --tgt-dir    $WORK/../closed_inversions/tgts \
+    --out        $WORK/../closed_inversions/syn2b_inverted_fraction.tsv \
+    --workers    4
+```
+
+### Target species, and why each one
+
+GTDB names are what the selector needs. Reference strains are given only as
+anchors for the locus-level work — **verify each accession before a bulk fetch**;
+the selector's output is the authoritative list.
+
+| Priority | GTDB species | Why | Event size | Reference strain |
+|---|---|---|---|---|
+| 1 | `Streptococcus pneumoniae` | `hsdS`/`ivr` (SpnD39III) phase-variable type I R-M system: inversions produce six alleles, changing the methylome and thus global expression and virulence | ~5-7 kb, above the BcgI floor | D39, TIGR4 |
+| 1 | `Salmonella enterica` | rrn-mediated large chromosomal inversions, strongest in Typhi/Paratyphi; associated with host restriction | 10^5-10^6 bp, ideal for this channel | Typhi CT18, Typhimurium LT2 |
+| 1 | `Bordetella pertussis` | >200 copies of IS481 drive large lineage-associated rearrangements; long-read structural surveys exist to check against | 10^4-10^6 bp | Tohama I |
+| 2 | `Pseudomonas aeruginosa` | large inversions accumulate in cystic-fibrosis chronic infection; adaptation phenotypes (mucoidy, resistance, motility loss) are measured, and longitudinal series give a time axis | 10^4-10^6 bp | PAO1, PA14 |
+| 2 | any of the above | replichore balance: inversions spanning the terminus asymmetrically reduce growth rate — a mechanism testable directly on the task-6 pairs without new phenotype data | genome-scale | — |
+
+Filter Salmonella to Typhi/Paratyphi after selection if the full-species cohort is
+too large; `ncbi_strain_identifiers` is carried through to `genomes.tsv` for that.
+
+Two notes on scope. `Mycobacterium tuberculosis` is a poor choice despite the
+phenotype data — it is structurally near-invariant. And if the 528-genome H. pylori
+cagPAI cohort is Illumina drafts, the inversion channel cannot be run on it; the
+cagPAI deletion analysis is unaffected, since that works from locus coordinates and
+`af`, both of which survive fragmentation.
+
+### A power-validation set that needs no phenotype
+
+The published inverton catalogues (invertible regions called from read orientation
+across human gut metagenomes) give coordinates and, more usefully, a size
+distribution. Most entries fall below our floor — which is the point: the Poisson
+model predicts *which* ones are detectable with no free parameters, and that
+prediction can be checked against the catalogue. It converts the detection floor
+from a caveat into a quantitative result. Worth doing before the phenotype cohorts,
+since it needs no new genomes.
+
+---
+
 ## Not needed any more
 
 **Resampling pairs at >=97% ANIm.** This was on the list because held_out_50k has
