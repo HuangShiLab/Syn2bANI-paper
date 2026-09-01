@@ -145,10 +145,12 @@ neighbours along its reference contig. A reference contig break therefore produc
 no breakpoint, because a break is an absence of evidence. Unit tests added for
 reference-fragmentation invariance and inversion counting.
 
-**Re-run in progress.** The fixed release binary was copied to HPC and the s2b
-array (`s3_s2b.slurm`) was resubmitted after clearing `s2b_out/*.tsv` so that the
-new `breakpoint_count` is written for all 43,334 held-out pairs. After it
-finishes, regenerate:
+**Re-run in progress.** The fixed release binary was copied to HPC and
+`s2b_out/*.tsv` was cleared so the new `breakpoint_count` is written for all
+43,334 held-out pairs. The original 190-task array hit the account
+`MaxSubmitJobsPerAccount` limit, so a single-job wrapper
+(`scripts/gtdb50k/s14_s2b_single_wrapper.slurm`, job `3974197`) is running the
+190 slices locally in parallel with 8 workers. After it finishes, regenerate:
 
 ```bash
 $PY $ROOT/scripts/gtdb50k/analyze_sv_comparison.py   # or whatever merges s2b_out
