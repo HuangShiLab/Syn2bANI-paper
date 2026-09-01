@@ -11,7 +11,17 @@ PY=/group/aos_shihuang/conda/bin/python3
 ROOT=/lustre1/g/aos_shihuang/Syn2bANI-paper
 ```
 
-Pull first — the scripts below were added in this commit.
+---
+
+## Status overview
+
+| Task | Status | Notes |
+|---|---|---|
+| 1. Classified dnadiff events | **done** | `dnadiff_events_50k.tsv` and `dnadiff_events_high_ani_all.tsv` written. |
+| 2. Deduplicate high-ANI outputs | **done** | Cause: duplicate rows in `high_ani_pairs_ready.tsv` (pairs sampled into both 95–97 and 97–100 strata), not append mode. Files deduped and stratum corrected. |
+| 3. Single-enzyme BcgI pass | **running** | SLURM job `3974133` (`g50k_bcgI_invfrac`) on `amd`, 16 CPUs, 4 h. |
+| 4. `breakpoint_count` reference-side inflation | **code done, re-run in progress** | Fix pushed to Syn2bANI `main` (`c974f5f`). New binary copied to HPC; s2b array resubmitted to regenerate `s2b_50k.tsv`. |
+| 5. Closed-genome control | **not started** | Low priority; kept for reviewer response. |
 
 ---
 
@@ -39,11 +49,7 @@ $PY $ROOT/scripts/compute_dnadiff_events.py \
     --outdir  $WORK/out \
     --outfile $WORK/dnadiff_events_50k.tsv \
     --workers 32
-```
 
-Then the same over the high-ANI set:
-
-```bash
 $PY $ROOT/scripts/compute_dnadiff_events.py \
     --pairs   $WORK/high_ani_pairs_ready.tsv \
     --outdir  $WORK/out_high_ani \
@@ -51,27 +57,38 @@ $PY $ROOT/scripts/compute_dnadiff_events.py \
     --workers 32
 ```
 
+**Done.** 50k: 43,334 pairs, all complete. High-ANI: 7,710 pairs, 7,710 complete
+(after deduplication; see Task 2).
+
 ---
 
 ## 2. Deduplicate the high-ANI outputs
 
-**Cost: minutes.** `syn2b_inverted_fraction_high_ani_all.tsv` and
-`dnadiff_inverted_fraction_high_ani_all.tsv` each carry **195 repeated pairids**;
-`high_ani_truth.tsv` carries 65. Merging two tables on a repeated key multiplies
-rows, so every count derived from those files without deduplication is inflated —
-the >=97% ANIm subset reads 5,655 pairs where 3,826 exist.
+**Cost: minutes.** Done.
 
-`analyze_invfrac_error_model.py` deduplicates defensively at load, so the numbers in
-`inverted_fraction_comparison_report.md` are correct. But the cause should be found
-rather than papered over — most likely an interrupted run appending to an existing
-output instead of rewriting it. Check whether the runner opens its output in append
-mode on resume, then regenerate.
+The original `high_ani_pairs_ready.tsv` contained 65 duplicate `pairid`s because
+the same pairs were sampled into both the 95–97 and 97–100 strata. This propagated
+into `syn2b_inverted_fraction_high_ani_all.tsv`,
+`dnadiff_inverted_fraction_high_ani_all.tsv`, `high_ani_truth.tsv`, and
+`dnadiff_events_high_ani_all.tsv`. The runners do **not** open outputs in append
+mode; the duplication was in the input pair list.
+
+Fix applied on HPC:
+
+- Deduplicated `high_ani_pairs_ready.tsv`, keeping the stratum that matches the
+  measured ANIm (`<97` → 95–97, `>=97` → 97–100).
+- Re-added the `pairid` column to the cleaned pair list.
+- Deduplicated the four output tables by `pairid` and filtered to the cleaned pair
+  list.
+
+Current duplicate counts:
 
 ```bash
-for f in syn2b_inverted_fraction_high_ani_all dnadiff_inverted_fraction_high_ani_all high_ani_truth; do
+for f in syn2b_inverted_fraction_high_ani_all dnadiff_inverted_fraction_high_ani_all high_ani_truth dnadiff_events_high_ani_all high_ani_pairs_ready; do
     echo -n "$f: "
     tail -n +2 $WORK/$f.tsv | cut -f1 | sort | uniq -d | wc -l
 done
+# all report 0
 ```
 
 ---
@@ -98,6 +115,8 @@ detection floor, which would be worth knowing before the paper claims a design r
 keys on accession alone and would otherwise silently reuse four-enzyme TGTs.
 
 ```bash
+# Submitted as scripts/gtdb50k/s12_syn2b_bcgI_invfrac.slurm
+# Job: 3974133, partition amd, 16 CPUs, 4 h.
 $PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
     --pairs      $WORK/pairs_50k.tsv \
     --genome-dir /lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all \
@@ -105,7 +124,7 @@ $PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
     --enzymes    BcgI \
     --tgt-dir    $WORK/syn2b_tgts_cache_bcgI \
     --out        $WORK/syn2b_inverted_fraction_50k_bcgI.tsv \
-    --workers    4
+    --workers    16
 ```
 
 ---
@@ -114,18 +133,29 @@ $PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
 
 **Cost: a code change, then a re-run of the SV comparison.**
 
-`breakpoint_count = n_chains - n_chained_contigs` subtracts the *query's* contig
-term but not the reference's, so a fragmented reference adds exactly `n_ref - 1`
-(measured: 10 -> 29 -> 207 junctions at `n_ref` = 1, 20, 200 on an unrearranged
-genome). The fix is the positive-contradiction rule already in Syn2b — count a
-broken adjacency only when the other genome positively contradicts it, i.e. when an
-endpoint already has degree >= 2 there, rather than merely failing to confirm it
-(`Syn2b/src/synteny/scoring.rs`). Under that rule a contig break produces no
-junction, because a break is an absence of evidence.
+`breakpoint_count = n_chains - n_chained_contigs` subtracted the *query's* contig
+term but not the reference's, so a fragmented reference added exactly `n_ref - 1`
+(measured: 10 → 29 → 207 junctions at `n_ref` = 1, 20, 200 on an unrearranged
+genome).
 
-Until this lands, `breakpoint_count` correlations against dnadiff carry a
-fragmentation term on both sides and `SV_REANALYSIS.md` should be read with that in
-mind.
+**Fix applied in `Syn2bANI/src/core/chain_ani.rs` (`c974f5f`).** A transition
+between two chains along the query is now counted only when the reference genome
+positively contradicts the query adjacency — at least one endpoint has two
+neighbours along its reference contig. A reference contig break therefore produces
+no breakpoint, because a break is an absence of evidence. Unit tests added for
+reference-fragmentation invariance and inversion counting.
+
+**Re-run in progress.** The fixed release binary was copied to HPC and the s2b
+array (`s3_s2b.slurm`) was resubmitted after clearing `s2b_out/*.tsv` so that the
+new `breakpoint_count` is written for all 43,334 held-out pairs. After it
+finishes, regenerate:
+
+```bash
+$PY $ROOT/scripts/gtdb50k/analyze_sv_comparison.py   # or whatever merges s2b_out
+```
+
+and update `SV_REANALYSIS.md` / `SV_COMPARISON_REPORT.md` with the corrected
+correlations.
 
 ---
 
