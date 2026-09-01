@@ -214,7 +214,84 @@ It also re-checks `K_est` against the metadata's real `contig_count` and
 
 ---
 
-## 7. Closed-genome cohorts for the inversion channel
+## 7. The SynTracker isolate cohorts — a controlled test with published answers
+
+**Run this before task 7b.** Task 7b picks organisms from GTDB on structural
+grounds; this one uses cohorts whose answer is already published.
+
+Enav, Paz & Ley, *Nat Biotechnol* 43:773-783 (2024),
+doi:10.1038/s41587-024-02276-2, pairs SynTracker (synteny) with inStrain (SNPs)
+on four isolate collections and reports which mode dominates in each. That gives
+a design our own data cannot: **cohorts where the expected answer is already
+published, including a positive and a negative control.**
+
+| Cohort | n | Published result | What our `inverted_fraction` must do |
+|---|---|---|---|
+| *Streptomyces rimosus* M527, different fermentations | 20 isolates, 185 pairs | popANI spans only 0.99990-1.0 (clonal) while APSS spans ~0.90-1.0 — variation is **structural, not SNP** | **positive control**: must show signal where SNP-based tools see nothing |
+| hypermutator *E. coli*, 4 mice colonised with 2 ancestral substrains | 185 pairs | inStrain calls *none* the same strain; SynTracker calls *all* the same strain — variation is **SNP, not structural** | **negative control**: must stay near 0 |
+| *Neisseria gonorrhoeae* clinical isolates, antibiotic resistant | 12 isolates, 66 pairs | Spearman rho = 0.985 between the two scores — **both modes** | both channels should move together |
+| *Helicobacter pylori* clinical isolates, 6 participants | 77 isolates, 21-91 pairs each | mixed; participants 322, 326, 439 carry subpopulations that only one tool calls same-strain | the interesting case, and it connects to the cagPAI cohort |
+
+A negative control is the part we have never had. Everything measured so far shows
+the estimator tracks dnadiff; nothing shows it stays quiet when there is nothing to
+find. The hypermutator *E. coli* set is exactly that test, and it is a hard one —
+those genomes carry a heavy SNP load, which is what strips landmarks.
+
+### Reference genomes (taken from the paper's Methods, not recalled)
+
+| Species | Accession |
+|---|---|
+| *H. pylori* | GenBank `CP032479.1` |
+| *S. rimosus* M527 | `GCF_000331185.2` (ASM33118v2) |
+| *N. gonorrhoeae* | `GCF_900087635.2` |
+
+### Getting the reads
+
+The per-isolate SRA accessions are in the paper's Supplementary Tables 2-5, which
+are **not in the main PDF** — download the Supplementary Information from the
+article page first. Source studies, if the SI is awkward to parse:
+
+- *H. pylori* — Wilkinson, Dickins, Robinson & Winter, *Gut Microbes* 14, 2152306 (2022)
+- hypermutator *E. coli* — Ramiro, Durão, Bank & Gordo, *PLoS Biol* 18, e3000617 (2020)
+- gut metagenomes (the 1,133-individual analysis) — Suzuki et al., *Science* 377, 1328-1332 (2022)
+
+`scripts/syntracker_validation/02_download_reads.sh` and `03_assemble_array.sh`
+already do read download and SPAdes assembly, so the pipeline exists.
+
+### The methodological catch, and how the paper solves it
+
+These are **SPAdes assemblies from short reads**, and task 6 shows the
+inverted-fraction channel is uninterpretable on fragmented input. The paper hits
+the same wall and works around it:
+
+> the contigs of each assembly were ordered using the reference genomes described
+> above and then aligned against each other
+
+Mauve's contig mover orients every contig against the reference, which removes the
+arbitrary-orientation artifact. **We need the same preprocessing step**, and it has
+a consequence worth stating in the paper rather than discovering in review:
+reference-guided orientation biases each contig toward collinearity with the
+reference, so inversions whose breakpoints fall on contig boundaries are absorbed
+rather than detected. The bias is toward the null — it costs sensitivity, not
+specificity — which is acceptable for a positive/negative control design but must
+be declared.
+
+Run each cohort both ways (raw contigs, and reference-ordered) and report both. The
+gap between them is itself a measurement of how much the orientation artifact costs.
+
+### A claim of ours that this cohort decides
+
+`MATH_REVIEW.md` section 6 records our measurement that APSS responds to
+divergence rather than order (delta -0.00016 structure / -0.08751 divergence),
+and concludes agreement with APSS is not a goal. The *S. rimosus* cohort is a
+direct test of that: popANI is pinned at ~1.0 there, so if APSS tracked only
+divergence it would be flat, and the paper reports it spanning 0.90-1.0. Either
+our measurement generalises less far than stated, or something else separates the
+two settings. Run it and find out before the Syn2b paper repeats the claim.
+
+---
+
+## 7b. Closed-genome cohorts for the inversion channel
 
 **Cost: selection is instant; the digestion + all-vs-all scales with cohort size.**
 
