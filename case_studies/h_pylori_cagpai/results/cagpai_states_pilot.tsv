@@ -1,0 +1,10 @@
+genome	n_markers	n_present	fraction_present	status	missing_markers
+del	28	0	0.0	empty	HP0520|cag1,HP0521,HP0522|cag3,HP0523|cag4,HP0524|cag5,HP0525|virB11,HP0526|cagZ,HP0527|cagY,HP0528|cagX,HP0529|cagW,HP0530|cagV,HP0531|cagU,HP0532|cagT,HP0534|cagS,HP0535|cagQ,HP0536|cagP,HP0537|cagM,HP0538|cagN,HP0539|cagL,HP0540|cagI,HP0541,HP0542|cagG,HP0543|cagF,HP0544|cagE,HP0545|cagD,HP0546|cagC,HP0546|cagB,HP0547|cagA
+hp26695	28	28	1.0	complete	
+inv	28	28	1.0	complete	
+mut1	28	28	1.0	complete	
+mut1_del	28	0	0.0	empty	HP0520|cag1,HP0521,HP0522|cag3,HP0523|cag4,HP0524|cag5,HP0525|virB11,HP0526|cagZ,HP0527|cagY,HP0528|cagX,HP0529|cagW,HP0530|cagV,HP0531|cagU,HP0532|cagT,HP0534|cagS,HP0535|cagQ,HP0536|cagP,HP0537|cagM,HP0538|cagN,HP0539|cagL,HP0540|cagI,HP0541,HP0542|cagG,HP0543|cagF,HP0544|cagE,HP0545|cagD,HP0546|cagC,HP0546|cagB,HP0547|cagA
+mut1_inv	28	28	1.0	complete	
+mut1_transloc	28	28	1.0	complete	
+transloc	28	28	1.0	complete	
+wt	28	28	1.0	complete	
