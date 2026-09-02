@@ -65,10 +65,10 @@ Test_cohort                         4       0.0       0.0    1.0000        1  PA
 A `FAIL` stops the run before any cohort statistic is written. `--allow-failed-controls`
 overrides it for inspection, and stamps the failure into `self_control_<label>.tsv`.
 
-**The existing `results/syntracker_validation/syntracker_summary.tsv`,
-`figures/syntracker_validation/correlation_summary.tsv` and the two supplementary
-figures (Fig_S10, Fig_S11) are derived from the pre-fix numbers and should not be
-cited until regenerated.**
+**The old `results/syntracker_validation/syntracker_summary.tsv` and the old
+`figures/syntracker_validation/` figures were derived from the pre-fix numbers and
+have been replaced.** Updated summary, correlations and figures are now in place;
+see `results/syntracker_validation/SYNTRACKER_STRUCTURAL_REANALYSIS.md`.
 
 ---
 

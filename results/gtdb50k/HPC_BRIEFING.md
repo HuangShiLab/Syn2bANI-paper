@@ -269,19 +269,14 @@ say `dd.rdiff` was not retained.
 
 ### Fourth: task 7 — SynTracker cohorts
 
-Read `scripts/syntracker_validation/README_syn2b_structural.md` first. **The step-4
-and step-6 outputs currently in the repo are not usable for a structural claim**:
-every genome was also compared against itself, and those self-comparisons return
-904 / 25 / 327 / 1415 breakpoints (E. coli / H. pylori / N. gonorrhoeae /
-S. rimosus) where the only correct answer is 0 — which is, to within a few percent,
-the entire per-cohort mean in `syntracker_summary.tsv` (905.7 / 28.1 / 305.3 /
-1980.2). The cross-species ordering in that table ranks assembly fragmentation, not
-biology. Cause: the reference-side inflation fixed in Syn2bANI `c974f5f`.
+**Done.** The structural channel was re-run with the fixed Syn2b/Syn2bANI binary.
+Self-comparison controls read zero breakpoints for all four cohorts, and the
+post-fix summary/figures have replaced the stale pre-fix ones. See
+`results/syntracker_validation/SYNTRACKER_STRUCTURAL_REANALYSIS.md` for the
+cohort-level comparison against the published controls.
 
-So: re-run steps 4 and 6 with the fixed Syn2bANI binary, regenerate
-`syntracker_summary.tsv`, `correlation_summary.tsv` and figures S10/S11, and do not
-cite the current ones. Then run `08_syn2b_structural.py`, which gates on the
-self-comparison control and exits 2 if it fails.
+The pre-fix `syn2bani/` outputs and the old `syntracker_summary.tsv` are kept
+for comparison only (`syntracker_summary_pre_fix.tsv`) and should not be cited.
 
 ### Fifth: task 7b — closed-genome cohort selection
 

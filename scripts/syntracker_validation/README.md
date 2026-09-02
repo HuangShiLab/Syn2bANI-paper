@@ -79,16 +79,17 @@ Step 8 runs the **Syn2b** structural channel (`breakpoints`, `scj_distance`,
 `inverted_fraction`, `observable_fraction`), which has never been run on these
 cohorts, and scores it against the paper's published positive/negative controls.
 
-> **The step-4/6 outputs currently in the repo are not usable for a structural
-> claim.** Every genome was also compared against itself, and those self-comparisons
-> return 904 / 25 / 327 / 1415 breakpoints (*E. coli* / *H. pylori* /
-> *N. gonorrhoeae* / *S. rimosus*) where the only correct answer is 0 — which is,
-> to within a few percent, the entire per-cohort mean reported in
-> `results/syntracker_validation/syntracker_summary.tsv`. The cross-species ordering
-> in that table ranks assembly fragmentation, not biology. Cause: the reference-side
-> inflation fixed in Syn2bANI `c974f5f`. **Re-run steps 4 and 6 with the fixed
-> binary, then regenerate `syntracker_summary.tsv`, `correlation_summary.tsv` and
-> supplementary figures S10/S11 before citing any of them.**
+> **The step-4/6 `syn2bani/` outputs in this directory are pre-fix and are not
+> usable for a structural claim.** Every genome was also compared against itself,
+> and those self-comparisons return 904 / 25 / 327 / 1415 breakpoints (*E. coli* /
+> *H. pylori* / *N. gonorrhoeae* / *S. rimosus*) where the only correct answer is 0.
+> The old `results/syntracker_validation/syntracker_summary.tsv` has been renamed to
+> `syntracker_summary_pre_fix.tsv` and the old figures have been removed.
+>
+> **The structural channel has been re-run with the fixed binary.** Updated summary,
+> correlations and figures are in `results/syntracker_validation/` and
+> `figures/syntracker_validation/`; see
+> `results/syntracker_validation/SYNTRACKER_STRUCTURAL_REANALYSIS.md`.
 
 ```bash
 BASE=/lustre1/g/aos_shihuang/data/syntracker_validation
