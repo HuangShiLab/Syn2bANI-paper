@@ -232,7 +232,10 @@ $PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
     --workers    16
 ```
 
-Then `--scale 750` (four-enzyme-matched), then the sweep in task 8.
+Then `--scale 750` (four-enzyme-matched). The sweep in task 8 is **no longer needed**:
+scale 750 gives r = 0.9305 and z SD = 1.10, statistically equivalent to the
+four-enzyme panel (r = 0.9355, z SD = 1.08), confirming that uniform landmarks at
+matching density reproduce four-enzyme accuracy without per-panel recalibration.
 
 **Use a separate `--tgt-dir` per mode and per scale.** The cache keys on accession
 alone. Syn2b refuses a *mixed* comparison, but a cache hit is not a mixed comparison —
@@ -282,7 +285,10 @@ self-comparison control and exits 2 if it fails.
 
 ### Fifth: task 7b — closed-genome cohort selection
 
-Selection is instant; the all-vs-all scales with cohort size.
+Done. 701 genomes were chosen, 680 downloaded (19 NCBI paths absent), and the
+all-vs-all Syn2b run completed (Slurm job 3979002). Output:
+`results/gtdb50k/syn2b_inverted_fraction_closed.tsv` (64,750 pairs, 61,537 OK).
+Summary report: `results/gtdb50k/CLOSED_GENOME_INVERSION_REPORT.md`.
 
 ---
 

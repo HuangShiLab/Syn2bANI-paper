@@ -1,0 +1,702 @@
+acc	species	genus	contig_count	n50_contigs	genome_size	checkm_completeness	checkm_contamination	ncbi_assembly_level	ncbi_genbank_assembly_accession	ncbi_strain_identifiers
+GCF_001605035.1	Bordetella pertussis	Bordetella	1	4107437	4107437	100.0	0.47	Complete Genome	GCA_001605035.1	H374
+GCF_001605445.1	Bordetella pertussis	Bordetella	1	4105331	4105331	100.0	0.47	Complete Genome	GCA_001605445.1	I476
+GCF_001831435.1	Bordetella pertussis	Bordetella	1	4257407	4257407	100.0	0.0	Complete Genome	GCA_001831435.1	6229;J447
+GCF_001985425.1	Bordetella pertussis	Bordetella	1	4103252	4103252	100.0	0.47	Complete Genome	GCA_001985425.1	H765
+GCF_001985545.1	Bordetella pertussis	Bordetella	1	4111652	4111652	100.0	0.47	Complete Genome	GCA_001985545.1	I228
+GCF_001986025.1	Bordetella pertussis	Bordetella	1	4088698	4088698	100.0	0.47	Complete Genome	GCA_001986025.1	H639
+GCF_001986295.1	Bordetella pertussis	Bordetella	1	4106385	4106385	100.0	0.47	Complete Genome	GCA_001986295.1	I112
+GCF_001987355.1	Bordetella pertussis	Bordetella	1	4104294	4104294	100.0	0.47	Complete Genome	GCA_001987355.1	I379
+GCF_001988095.1	Bordetella pertussis	Bordetella	1	4102201	4102201	100.0	0.47	Complete Genome	GCA_001988095.1	C734
+GCF_001988315.1	Bordetella pertussis	Bordetella	1	4113730	4113730	100.0	0.47	Complete Genome	GCA_001988315.1	J179
+GCF_001988435.1	Bordetella pertussis	Bordetella	1	4103283	4103283	100.0	0.47	Complete Genome	GCA_001988435.1	J201
+GCF_001989075.1	Bordetella pertussis	Bordetella	1	4107596	4107596	100.0	0.47	Complete Genome	GCA_001989075.1	J122
+GCF_001989175.1	Bordetella pertussis	Bordetella	1	4106377	4106377	100.0	0.47	Complete Genome	GCA_001989175.1	J161
+GCF_001989295.1	Bordetella pertussis	Bordetella	1	4110596	4110596	100.0	0.47	Complete Genome	GCA_001989295.1	J210
+GCF_002286075.1	Bordetella pertussis	Bordetella	1	4103239	4103239	100.0	0.47	Complete Genome	GCA_002286075.1	E898
+GCF_002286155.1	Bordetella pertussis	Bordetella	1	4101132	4101132	100.0	0.47	Complete Genome	GCA_002286155.1	E025
+GCF_002442775.1	Bordetella pertussis	Bordetella	1	4105315	4105315	100.0	0.47	Complete Genome	GCA_002442775.1	J170
+GCF_002859685.1	Bordetella pertussis	Bordetella	1	4104273	4104273	100.0	0.47	Complete Genome	GCA_002859685.1	J203
+GCF_002859705.1	Bordetella pertussis	Bordetella	1	4106384	4106384	100.0	0.47	Complete Genome	GCA_002859705.1	J230
+GCF_002859725.1	Bordetella pertussis	Bordetella	1	4105292	4105292	100.0	0.47	Complete Genome	GCA_002859725.1	J295
+GCF_003991035.1	Bordetella pertussis	Bordetella	1	4110595	4110595	100.0	0.47	Complete Genome	GCA_003991035.1	J358
+GCF_004008655.1	Bordetella pertussis	Bordetella	1	4097016	4097016	100.0	0.47	Complete Genome	GCA_004008655.1	F578
+GCF_004009215.1	Bordetella pertussis	Bordetella	1	4106670	4106670	100.0	0.47	Complete Genome	GCA_004009215.1	H920
+GCF_004634925.1	Bordetella pertussis	Bordetella	1	4110548	4110548	100.0	0.47	Complete Genome	GCA_004634925.1	J274
+GCF_004635185.1	Bordetella pertussis	Bordetella	1	4110577	4110577	100.0	0.47	Complete Genome	GCA_004635185.1	J260
+GCF_004635285.1	Bordetella pertussis	Bordetella	1	4110577	4110577	100.0	0.47	Complete Genome	GCA_004635285.1	J254
+GCF_004635705.1	Bordetella pertussis	Bordetella	1	4105341	4105341	100.0	0.47	Complete Genome	GCA_004635705.1	J695
+GCF_004635945.1	Bordetella pertussis	Bordetella	1	4104267	4104267	100.0	0.47	Complete Genome	GCA_004635945.1	J616
+GCF_004636165.1	Bordetella pertussis	Bordetella	1	4111643	4111643	100.0	0.47	Complete Genome	GCA_004636165.1	J374
+GCF_004636245.1	Bordetella pertussis	Bordetella	1	4109501	4109501	100.0	0.47	Complete Genome	GCA_004636245.1	J424
+GCF_004636325.1	Bordetella pertussis	Bordetella	1	4106379	4106379	100.0	0.47	Complete Genome	GCA_004636325.1	J390
+GCF_004636925.1	Bordetella pertussis	Bordetella	1	4106572	4106572	100.0	0.47	Complete Genome	GCA_004636925.1	J549
+GCF_004637045.1	Bordetella pertussis	Bordetella	1	4104389	4104389	100.0	0.47	Complete Genome	GCA_004637045.1	J233
+GCF_009625935.1	Bordetella pertussis	Bordetella	1	4773877	4773877	100.0	0.0	Complete Genome	GCA_009625935.1	J599
+GCF_001307525.1	Bordetella pertussis	Bordetella	1	4101147	4101147	100.0	0.47	Complete Genome	GCA_001307525.1	B3629
+GCF_001307705.1	Bordetella pertussis	Bordetella	1	4103254	4103254	100.0	0.47	Complete Genome	GCA_001307705.1	B3658
+GCF_001605365.1	Bordetella pertussis	Bordetella	1	4106823	4106823	100.0	0.0	Complete Genome	GCA_001605365.1	H788
+GCF_001985465.1	Bordetella pertussis	Bordetella	1	4102311	4102311	100.0	0.47	Complete Genome	GCA_001985465.1	H800
+GCF_001985485.1	Bordetella pertussis	Bordetella	1	4103534	4103534	100.0	0.47	Complete Genome	GCA_001985485.1	H806
+GCF_001985625.1	Bordetella pertussis	Bordetella	1	4108484	4108484	100.0	0.47	Complete Genome	GCA_001985625.1	I602
+GCF_001985645.1	Bordetella pertussis	Bordetella	1	4106407	4106407	100.0	0.47	Complete Genome	GCA_001985645.1	I730
+GCF_001985725.1	Bordetella pertussis	Bordetella	1	4112738	4112738	100.0	0.47	Complete Genome	GCA_001985725.1	I944
+GCF_001985825.1	Bordetella pertussis	Bordetella	1	4108752	4108752	100.0	0.47	Complete Genome	GCA_001985825.1	I351
+GCF_001985945.1	Bordetella pertussis	Bordetella	1	4107443	4107443	100.0	0.47	Complete Genome	GCA_001985945.1	J038
+GCF_001986105.1	Bordetella pertussis	Bordetella	1	4107433	4107433	100.0	0.47	Complete Genome	GCA_001986105.1	I464
+GCF_001986515.1	Bordetella pertussis	Bordetella	1	4106392	4106392	100.0	0.47	Complete Genome	GCA_001986515.1	E530
+GCF_001986695.1	Bordetella pertussis	Bordetella	1	4106491	4106491	100.0	0.47	Complete Genome	GCA_001986695.1	H775
+GCF_001986975.1	Bordetella pertussis	Bordetella	1	4112692	4112692	100.0	0.47	Complete Genome	GCA_001986975.1	I088
+GCF_001987095.1	Bordetella pertussis	Bordetella	1	4109544	4109544	100.0	0.47	Complete Genome	GCA_001987095.1	I135
+GCF_001988075.1	Bordetella pertussis	Bordetella	1	4106401	4106401	100.0	0.47	Complete Genome	GCA_001988075.1	C549
+GCF_001988355.1	Bordetella pertussis	Bordetella	1	4112694	4112694	100.0	0.47	Complete Genome	GCA_001988355.1	J192
+GCF_001988475.1	Bordetella pertussis	Bordetella	1	4107428	4107428	100.0	0.47	Complete Genome	GCA_001988475.1	J296
+GCF_001989035.1	Bordetella pertussis	Bordetella	1	4109522	4109522	100.0	0.47	Complete Genome	GCA_001989035.1	J120
+GCF_002285955.1	Bordetella pertussis	Bordetella	1	4127835	4127835	100.0	0.47	Complete Genome	GCA_002285955.1	E945
+GCF_002286035.1	Bordetella pertussis	Bordetella	1	4106298	4106298	100.0	0.47	Complete Genome	GCA_002286035.1	D735
+GCF_002286115.1	Bordetella pertussis	Bordetella	1	4102255	4102255	100.0	0.47	Complete Genome	GCA_002286115.1	D717
+GCF_002442795.1	Bordetella pertussis	Bordetella	1	4103236	4103236	100.0	0.47	Complete Genome	GCA_002442795.1	J308
+GCF_002859825.1	Bordetella pertussis	Bordetella	1	4109385	4109385	100.0	0.47	Complete Genome	GCA_002859825.1	J313
+GCF_003186595.1	Bordetella pertussis	Bordetella	1	5242373	5242373	100.0	0.12	Complete Genome	GCA_003186595.1	I943
+GCF_004008215.1	Bordetella pertussis	Bordetella	1	4775493	4775493	100.0	0.0	Complete Genome	GCA_004008215.1	B160
+GCF_004008295.1	Bordetella pertussis	Bordetella	1	4773835	4773835	100.0	0.0	Complete Genome	GCA_004008295.1	A005
+GCF_004008475.1	Bordetella pertussis	Bordetella	1	4106548	4106548	100.0	0.47	Complete Genome	GCA_004008475.1	J024
+GCF_004009135.1	Bordetella pertussis	Bordetella	1	4105345	4105345	100.0	0.47	Complete Genome	GCA_004009135.1	H877
+GCF_004009775.1	Bordetella pertussis	Bordetella	1	4111618	4111618	100.0	0.47	Complete Genome	GCA_004009775.1	I420
+GCF_004635465.1	Bordetella pertussis	Bordetella	1	4107550	4107550	100.0	0.47	Complete Genome	GCA_004635465.1	J402
+GCF_004635585.1	Bordetella pertussis	Bordetella	1	4108483	4108483	100.0	0.47	Complete Genome	GCA_004635585.1	J367
+GCF_004636005.1	Bordetella pertussis	Bordetella	1	4107723	4107723	100.0	0.47	Complete Genome	GCA_004636005.1	J632
+GCF_004637025.1	Bordetella pertussis	Bordetella	1	4106373	4106373	100.0	0.47	Complete Genome	GCA_004637025.1	J586
+GCF_009625775.1	Bordetella pertussis	Bordetella	1	4773959	4773959	100.0	0.0	Complete Genome	GCA_009625775.1	J792
+GCF_009626595.1	Bordetella pertussis	Bordetella	1	4773916	4773916	100.0	0.0	Complete Genome	GCA_009626595.1	J069
+GCF_009626635.1	Bordetella pertussis	Bordetella	1	4773834	4773834	100.0	0.0	Complete Genome	GCA_009626635.1	I768
+GCF_009627255.1	Bordetella pertussis	Bordetella	1	4773924	4773924	100.0	0.0	Complete Genome	GCA_009627255.1	H580
+GCF_017357125.1	Bordetella pertussis	Bordetella	1	4093865	4093865	100.0	0.47	Complete Genome	GCA_017357125.1	CIDM-BP3
+GCF_017357205.1	Bordetella pertussis	Bordetella	1	4109518	4109518	100.0	0.47	Complete Genome	GCA_017357205.1	CIDM-BP2
+GCF_900327845.1	Bordetella pertussis	Bordetella	1	4160081	4160081	100.0	0.0	Complete Genome	GCA_900327845.1	VS393;Bordetella pertussis
+GCF_001307745.1	Bordetella pertussis	Bordetella	1	4111557	4111557	100.0	0.47	Complete Genome	GCA_001307745.1	B3921
+GCF_001509915.1	Bordetella pertussis	Bordetella	1	4082551	4082551	100.0	0.47	Complete Genome	GCA_001509915.1	I979
+GCF_001605175.1	Bordetella pertussis	Bordetella	1	4106364	4106364	100.0	0.47	Complete Genome	GCA_001605175.1	H489
+GCF_001605505.1	Bordetella pertussis	Bordetella	1	4096713	4096713	100.0	0.47	Complete Genome	GCA_001605505.1	I496
+GCF_001686505.1	Bordetella pertussis	Bordetella	1	4113052	4113052	100.0	0.47	Complete Genome	GCA_001686505.1	VA-09
+GCF_001686625.1	Bordetella pertussis	Bordetella	1	4124767	4124767	100.0	0.47	Complete Genome	GCA_001686625.1	UT25Sm1
+GCF_001985165.1	Bordetella pertussis	Bordetella	1	4103215	4103215	100.0	0.47	Complete Genome	GCA_001985165.1	F670
+GCF_001985245.1	Bordetella pertussis	Bordetella	1	4102661	4102661	100.0	0.0	Complete Genome	GCA_001985245.1	H520
+GCF_001985365.1	Bordetella pertussis	Bordetella	1	4108484	4108484	100.0	0.47	Complete Genome	GCA_001985365.1	H729
+GCF_001986255.1	Bordetella pertussis	Bordetella	1	4104277	4104277	100.0	0.47	Complete Genome	GCA_001986255.1	H915
+GCF_001986315.1	Bordetella pertussis	Bordetella	1	4106497	4106497	100.0	0.47	Complete Genome	GCA_001986315.1	I975
+GCF_001986355.1	Bordetella pertussis	Bordetella	1	4106504	4106504	100.0	0.47	Complete Genome	GCA_001986355.1	J022
+GCF_001986535.1	Bordetella pertussis	Bordetella	1	4110608	4110608	100.0	0.47	Complete Genome	GCA_001986535.1	H346
+GCF_001987215.1	Bordetella pertussis	Bordetella	1	4110433	4110433	100.0	0.47	Complete Genome	GCA_001987215.1	I273
+GCF_001987375.1	Bordetella pertussis	Bordetella	1	4091930	4091930	100.0	0.47	Complete Genome	GCA_001987375.1	I380
+GCF_001987675.1	Bordetella pertussis	Bordetella	1	4110595	4110595	100.0	0.47	Complete Genome	GCA_001987675.1	J012
+GCF_001988495.1	Bordetella pertussis	Bordetella	1	4105330	4105330	100.0	0.47	Complete Genome	GCA_001988495.1	J300
+GCF_001989235.1	Bordetella pertussis	Bordetella	1	4113756	4113756	100.0	0.47	Complete Genome	GCA_001989235.1	J198
+GCF_001989275.1	Bordetella pertussis	Bordetella	1	4108471	4108471	100.0	0.47	Complete Genome	GCA_001989275.1	J208
+GCF_002018515.1	Bordetella pertussis	Bordetella	1	4106364	4106364	100.0	0.47	Complete Genome	GCA_002018515.1	J105
+GCF_002240515.1	Bordetella pertussis	Bordetella	1	4110338	4110338	100.0	0.47	Complete Genome	GCA_002240515.1	J625
+GCF_002286015.1	Bordetella pertussis	Bordetella	1	4107441	4107441	100.0	0.47	Complete Genome	GCA_002286015.1	D422
+GCF_004006815.1	Bordetella pertussis	Bordetella	1	5303666	5303666	100.0	0.12	Complete Genome	GCA_004006815.1	A345
+GCF_004008155.1	Bordetella pertussis	Bordetella	1	4773899	4773899	100.0	0.0	Complete Genome	GCA_004008155.1	B144
+GCF_004009015.1	Bordetella pertussis	Bordetella	1	4105351	4105351	100.0	0.47	Complete Genome	GCA_004009015.1	H814
+GCF_004009235.1	Bordetella pertussis	Bordetella	1	4106497	4106497	100.0	0.47	Complete Genome	GCA_004009235.1	H813
+GCF_004009415.1	Bordetella pertussis	Bordetella	1	4104306	4104306	100.0	0.47	Complete Genome	GCA_004009415.1	H541
+GCF_004635525.1	Bordetella pertussis	Bordetella	1	4107431	4107431	100.0	0.47	Complete Genome	GCA_004635525.1	J391
+GCF_004635905.1	Bordetella pertussis	Bordetella	1	4112699	4112699	100.0	0.47	Complete Genome	GCA_004635905.1	J603
+GCF_004636285.1	Bordetella pertussis	Bordetella	1	4131102	4131102	100.0	0.47	Complete Genome	GCA_004636285.1	A339
+GCF_009626075.1	Bordetella pertussis	Bordetella	1	4773886	4773886	100.0	0.0	Complete Genome	GCA_009626075.1	J324
+GCF_009626115.1	Bordetella pertussis	Bordetella	1	4773851	4773851	100.0	0.0	Complete Genome	GCA_009626115.1	J307
+GCF_009626195.1	Bordetella pertussis	Bordetella	1	4773925	4773925	100.0	0.0	Complete Genome	GCA_009626195.1	J291
+GCF_016903095.1	Bordetella pertussis	Bordetella	1	4105067	4105067	100.0	0.0	Complete Genome	GCA_016903095.1	FDAARGOS_1368
+GCF_017357185.1	Bordetella pertussis	Bordetella	1	4775256	4775256	100.0	0.0	Complete Genome	GCA_017357185.1	CIDM-BPP2
+GCF_001307725.1	Bordetella pertussis	Bordetella	1	4109548	4109548	100.0	0.47	Complete Genome	GCA_001307725.1	B3913
+GCF_001605155.1	Bordetella pertussis	Bordetella	1	4107408	4107408	100.0	0.47	Complete Genome	GCA_001605155.1	H627
+GCF_001605345.1	Bordetella pertussis	Bordetella	1	4109554	4109554	100.0	0.47	Complete Genome	GCA_001605345.1	H564
+GCF_001605665.1	Bordetella pertussis	Bordetella	1	4103417	4103417	100.0	0.47	Complete Genome	GCA_001605665.1	I669
+GCF_001985005.1	Bordetella pertussis	Bordetella	1	4104313	4104313	100.0	0.47	Complete Genome	GCA_001985005.1	E150
+GCF_001985065.1	Bordetella pertussis	Bordetella	1	4103251	4103251	100.0	0.47	Complete Genome	GCA_001985065.1	E809
+GCF_001985105.1	Bordetella pertussis	Bordetella	1	4102201	4102201	100.0	0.47	Complete Genome	GCA_001985105.1	F011
+GCF_001985705.1	Bordetella pertussis	Bordetella	1	4106386	4106386	100.0	0.47	Complete Genome	GCA_001985705.1	I915
+GCF_001985805.1	Bordetella pertussis	Bordetella	1	4102205	4102205	100.0	0.47	Complete Genome	GCA_001985805.1	I106
+GCF_001985925.1	Bordetella pertussis	Bordetella	1	4105333	4105333	100.0	0.47	Complete Genome	GCA_001985925.1	J013
+GCF_001985985.1	Bordetella pertussis	Bordetella	1	4102567	4102567	100.0	0.0	Complete Genome	GCA_001985985.1	J169
+GCF_001986085.1	Bordetella pertussis	Bordetella	1	4105353	4105353	100.0	0.47	Complete Genome	GCA_001986085.1	I259
+GCF_001986375.1	Bordetella pertussis	Bordetella	1	4103277	4103277	100.0	0.47	Complete Genome	GCA_001986375.1	C505
+GCF_001986475.1	Bordetella pertussis	Bordetella	1	4101167	4101167	100.0	0.47	Complete Genome	GCA_001986475.1	D502
+GCF_001986875.1	Bordetella pertussis	Bordetella	1	4106327	4106327	100.0	0.47	Complete Genome	GCA_001986875.1	H878
+GCF_001987035.1	Bordetella pertussis	Bordetella	1	4106381	4106381	100.0	0.47	Complete Genome	GCA_001987035.1	I111
+GCF_001987495.1	Bordetella pertussis	Bordetella	1	4105343	4105343	100.0	0.47	Complete Genome	GCA_001987495.1	I735
+GCF_001987575.1	Bordetella pertussis	Bordetella	1	4104353	4104353	100.0	0.47	Complete Genome	GCA_001987575.1	I959
+GCF_001987815.1	Bordetella pertussis	Bordetella	1	4107448	4107448	100.0	0.47	Complete Genome	GCA_001987815.1	J039
+GCF_001988015.1	Bordetella pertussis	Bordetella	1	4106397	4106397	100.0	0.47	Complete Genome	GCA_001988015.1	J115
+GCF_001988175.1	Bordetella pertussis	Bordetella	1	4106392	4106392	100.0	0.47	Complete Genome	GCA_001988175.1	H382
+GCF_001988215.1	Bordetella pertussis	Bordetella	1	4104135	4104135	100.0	0.47	Complete Genome	GCA_001988215.1	H698
+GCF_001988635.1	Bordetella pertussis	Bordetella	1	4090785	4090785	100.0	0.47	Complete Genome	GCA_001988635.1	F778
+GCF_001989255.1	Bordetella pertussis	Bordetella	1	4110604	4110604	100.0	0.47	Complete Genome	GCA_001989255.1	J206
+GCF_001989315.1	Bordetella pertussis	Bordetella	1	4108658	4108658	100.0	0.47	Complete Genome	GCA_001989315.1	J277
+GCF_002068675.1	Bordetella pertussis	Bordetella	1	4110587	4110587	100.0	0.47	Complete Genome	GCA_002068675.1	J152
+GCF_002068975.1	Bordetella pertussis	Bordetella	1	4106390	4106390	100.0	0.47	Complete Genome	GCA_002068975.1	J175
+GCF_002286135.1	Bordetella pertussis	Bordetella	1	4105336	4105336	100.0	0.47	Complete Genome	GCA_002286135.1	E541
+GCF_002859625.1	Bordetella pertussis	Bordetella	1	4107548	4107548	100.0	0.47	Complete Genome	GCA_002859625.1	J081
+GCF_002859765.1	Bordetella pertussis	Bordetella	1	4108318	4108318	100.0	0.47	Complete Genome	GCA_002859765.1	J207
+GCF_003186305.1	Bordetella pertussis	Bordetella	1	4773977	4773977	100.0	0.0	Complete Genome	GCA_003186305.1	E738
+GCF_003355065.1	Bordetella pertussis	Bordetella	1	4108152	4108152	100.0	0.47	Complete Genome	GCA_003355065.1	UK39
+GCF_003991095.1	Bordetella pertussis	Bordetella	1	4095467	4095467	100.0	0.0	Complete Genome	GCA_003991095.1	C927
+GCF_004008035.1	Bordetella pertussis	Bordetella	1	4773897	4773897	100.0	0.0	Complete Genome	GCA_004008035.1	B271
+GCF_004008595.1	Bordetella pertussis	Bordetella	1	4106395	4106395	100.0	0.47	Complete Genome	GCA_004008595.1	D919
+GCF_004009355.1	Bordetella pertussis	Bordetella	1	4103241	4103241	100.0	0.47	Complete Genome	GCA_004009355.1	H709
+GCF_004009675.1	Bordetella pertussis	Bordetella	1	4103262	4103262	100.0	0.47	Complete Genome	GCA_004009675.1	F569
+GCF_004634685.1	Bordetella pertussis	Bordetella	1	4106370	4106370	100.0	0.47	Complete Genome	GCA_004634685.1	J354
+GCF_004634725.1	Bordetella pertussis	Bordetella	1	4110578	4110578	100.0	0.47	Complete Genome	GCA_004634725.1	J334
+GCF_004635805.1	Bordetella pertussis	Bordetella	1	4104279	4104279	100.0	0.47	Complete Genome	GCA_004635805.1	J617
+GCF_004635925.1	Bordetella pertussis	Bordetella	1	4108772	4108772	100.0	0.47	Complete Genome	GCA_004635925.1	J656
+GCF_004636045.1	Bordetella pertussis	Bordetella	1	4104297	4104297	100.0	0.47	Complete Genome	GCA_004636045.1	J528
+GCF_004636145.1	Bordetella pertussis	Bordetella	1	4106635	4106635	100.0	0.47	Complete Genome	GCA_004636145.1	J378
+GCF_004637065.1	Bordetella pertussis	Bordetella	1	4107579	4107579	100.0	0.47	Complete Genome	GCA_004637065.1	J129
+GCF_004637205.1	Bordetella pertussis	Bordetella	1	4104386	4104386	100.0	0.47	Complete Genome	GCA_004637205.1	J171
+GCF_009626155.1	Bordetella pertussis	Bordetella	1	4773805	4773805	100.0	0.0	Complete Genome	GCA_009626155.1	J293
+GCF_009626235.1	Bordetella pertussis	Bordetella	1	4773902	4773902	100.0	0.0	Complete Genome	GCA_009626235.1	J289
+GCF_009626455.1	Bordetella pertussis	Bordetella	1	4773518	4773518	100.0	0.0	Complete Genome	GCA_009626455.1	J217
+GCF_009626495.1	Bordetella pertussis	Bordetella	1	4773877	4773877	100.0	0.0	Complete Genome	GCA_009626495.1	J166
+GCF_009626655.1	Bordetella pertussis	Bordetella	1	4773807	4773807	100.0	0.0	Complete Genome	GCA_009626655.1	I458
+GCF_009626855.1	Bordetella pertussis	Bordetella	1	4773878	4773878	100.0	0.0	Complete Genome	GCA_009626855.1	I139
+GCF_009627735.1	Bordetella pertussis	Bordetella	1	4773865	4773865	100.0	0.0	Complete Genome	GCA_009627735.1	H101
+GCF_001307585.1	Bordetella pertussis	Bordetella	1	4108472	4108472	100.0	0.47	Complete Genome	GCA_001307585.1	B1838
+GCF_001605585.1	Bordetella pertussis	Bordetella	1	4107716	4107716	100.0	0.47	Complete Genome	GCA_001605585.1	I538
+GCF_001605605.1	Bordetella pertussis	Bordetella	1	4106666	4106666	100.0	0.47	Complete Genome	GCA_001605605.1	I539
+GCF_001984965.1	Bordetella pertussis	Bordetella	1	4101097	4101097	100.0	0.47	Complete Genome	GCA_001984965.1	D521
+GCF_001985085.1	Bordetella pertussis	Bordetella	1	4116415	4116415	100.0	0.47	Complete Genome	GCA_001985085.1	E976
+GCF_001985325.1	Bordetella pertussis	Bordetella	1	4107439	4107439	100.0	0.47	Complete Genome	GCA_001985325.1	H703
+GCF_001985505.1	Bordetella pertussis	Bordetella	1	4106384	4106384	100.0	0.47	Complete Genome	GCA_001985505.1	H810
+GCF_001985845.1	Bordetella pertussis	Bordetella	1	4107480	4107480	100.0	0.47	Complete Genome	GCA_001985845.1	I743
+GCF_001986065.1	Bordetella pertussis	Bordetella	1	4106507	4106507	100.0	0.47	Complete Genome	GCA_001986065.1	I187
+GCF_001986275.1	Bordetella pertussis	Bordetella	1	4106355	4106355	100.0	0.47	Complete Genome	GCA_001986275.1	I075
+GCF_001986335.1	Bordetella pertussis	Bordetella	1	4109711	4109711	100.0	0.47	Complete Genome	GCA_001986335.1	I998
+GCF_001986495.1	Bordetella pertussis	Bordetella	1	4101131	4101131	100.0	0.47	Complete Genome	GCA_001986495.1	E024
+GCF_001986795.1	Bordetella pertussis	Bordetella	1	4103204	4103204	100.0	0.47	Complete Genome	GCA_001986795.1	H849
+GCF_001987135.1	Bordetella pertussis	Bordetella	1	4104251	4104251	100.0	0.47	Complete Genome	GCA_001987135.1	I257
+GCF_001987395.1	Bordetella pertussis	Bordetella	1	4110505	4110505	100.0	0.47	Complete Genome	GCA_001987395.1	I382
+GCF_001987415.1	Bordetella pertussis	Bordetella	1	4104275	4104275	100.0	0.47	Complete Genome	GCA_001987415.1	I386
+GCF_001987775.1	Bordetella pertussis	Bordetella	1	4109543	4109543	100.0	0.47	Complete Genome	GCA_001987775.1	J027
+GCF_001987835.1	Bordetella pertussis	Bordetella	1	4107434	4107434	100.0	0.47	Complete Genome	GCA_001987835.1	J068
+GCF_001987935.1	Bordetella pertussis	Bordetella	1	4106381	4106381	100.0	0.47	Complete Genome	GCA_001987935.1	J091
+GCF_001988835.1	Bordetella pertussis	Bordetella	1	4105347	4105347	100.0	0.47	Complete Genome	GCA_001988835.1	H876
+GCF_002286055.1	Bordetella pertussis	Bordetella	1	4104297	4104297	100.0	0.47	Complete Genome	GCA_002286055.1	C934
+GCF_002442715.1	Bordetella pertussis	Bordetella	1	4106326	4106326	100.0	0.47	Complete Genome	GCA_002442715.1	J108
+GCF_002859225.1	Bordetella pertussis	Bordetella	1	5109505	5109505	100.0	0.12	Complete Genome	GCA_002859225.1	A310
+GCF_002859565.1	Bordetella pertussis	Bordetella	1	4108491	4108491	100.0	0.47	Complete Genome	GCA_002859565.1	I384
+GCF_002892665.1	Bordetella pertussis	Bordetella	1	4109686	4109686	100.0	0.47	Complete Genome	GCA_002892665.1	J199
+GCF_002892685.1	Bordetella pertussis	Bordetella	1	4107409	4107409	100.0	0.47	Complete Genome	GCA_002892685.1	J014
+GCF_003991055.1	Bordetella pertussis	Bordetella	1	4106512	4106512	100.0	0.47	Complete Genome	GCA_003991055.1	J377
+GCF_004008415.1	Bordetella pertussis	Bordetella	1	4110543	4110543	100.0	0.47	Complete Genome	GCA_004008415.1	J384
+GCF_004008795.1	Bordetella pertussis	Bordetella	1	4085512	4085512	100.0	0.47	Complete Genome	GCA_004008795.1	H642
+GCF_004009575.1	Bordetella pertussis	Bordetella	1	4107433	4107433	100.0	0.47	Complete Genome	GCA_004009575.1	I859
+GCF_004634665.1	Bordetella pertussis	Bordetella	1	4107267	4107267	100.0	0.47	Complete Genome	GCA_004634665.1	J359
+GCF_004634765.1	Bordetella pertussis	Bordetella	1	4106368	4106368	100.0	0.47	Complete Genome	GCA_004634765.1	J322
+GCF_004634885.1	Bordetella pertussis	Bordetella	1	4109535	4109535	100.0	0.47	Complete Genome	GCA_004634885.1	J332
+GCF_004635105.1	Bordetella pertussis	Bordetella	1	4110579	4110579	100.0	0.47	Complete Genome	GCA_004635105.1	J267
+GCF_004635125.1	Bordetella pertussis	Bordetella	1	4110579	4110579	100.0	0.47	Complete Genome	GCA_004635125.1	J266
+GCF_004635365.1	Bordetella pertussis	Bordetella	1	4110576	4110576	100.0	0.47	Complete Genome	GCA_004635365.1	J249
+GCF_004635385.1	Bordetella pertussis	Bordetella	1	4133306	4133306	100.0	0.47	Complete Genome	GCA_004635385.1	B228
+GCF_004635445.1	Bordetella pertussis	Bordetella	1	4110579	4110579	100.0	0.47	Complete Genome	GCA_004635445.1	J250
+GCF_013343355.1	Pseudomonas aeruginosa	Pseudomonas	1	6414921	6414921	100.0	0.11	Complete Genome	GCA_013343355.1	DVT427
+GCF_003193645.1	Pseudomonas aeruginosa	Pseudomonas	1	6475581	6475581	100.0	0.35	Complete Genome	GCA_003193645.1	AR_0446
+GCF_001516265.1	Pseudomonas aeruginosa	Pseudomonas	1	7273258	7273258	99.8	0.43	Complete Genome	GCA_001516265.1	F30658
+GCF_001077475.1	Pseudomonas aeruginosa	Pseudomonas	1	6368008	6368008	99.68	0.32	Complete Genome	GCA_001077475.1	F9676
+GCF_003369775.1	Pseudomonas aeruginosa	Pseudomonas	1	6831076	6831076	99.68	0.19	Complete Genome	GCA_003369775.1	Y31
+GCF_003812905.1	Pseudomonas aeruginosa	Pseudomonas	1	6865838	6865838	99.68	0.58	Complete Genome	GCA_003812905.1	FDAARGOS_501
+GCF_007559105.1	Pseudomonas aeruginosa	Pseudomonas	1	6714255	6714255	99.68	0.25	Complete Genome	GCA_007559105.1	519119
+GCF_012935295.1	Pseudomonas aeruginosa	Pseudomonas	1	6288195	6288195	99.68	0.11	Complete Genome	GCA_012935295.1	AA2
+GCF_013201015.1	Pseudomonas aeruginosa	Pseudomonas	1	6815677	6815777	99.68	0.24	Chromosome	GCA_013201015.1	K19PSE24
+GCF_013343395.1	Pseudomonas aeruginosa	Pseudomonas	1	6716245	6716245	99.68	0.11	Complete Genome	GCA_013343395.1	DVT423
+GCF_013467585.1	Pseudomonas aeruginosa	Pseudomonas	1	6490020	6490020	99.68	0.14	Complete Genome	GCA_013467585.1	ACR20
+GCF_016105505.1	Pseudomonas aeruginosa	Pseudomonas	1	7157191	7157191	99.68	1.46	Complete Genome	GCA_016105505.1	TJ2019-022
+GCF_018141625.1	Pseudomonas aeruginosa	Pseudomonas	1	6742928	6742928	99.68	0.43	Complete Genome	GCA_018141625.1	PAS6
+GCF_018409365.1	Pseudomonas aeruginosa	Pseudomonas	1	6411763	6411763	99.68	0.11	Complete Genome	GCA_018409365.1	Pa12
+GCF_902703215.1	Pseudomonas aeruginosa	Pseudomonas	1	6479881	6479881	99.68	0.11	Complete Genome	GCA_902703215.1	C7-25
+GCF_000271985.2	Pseudomonas aeruginosa	Pseudomonas	1	6243825	6243825	99.68	0.22	Complete Genome	GCA_000271985.2	SJTD-1
+GCF_000359505.1	Pseudomonas aeruginosa	Pseudomonas	1	6421010	6421010	99.68	0.11	Complete Genome	GCA_000359505.1	B136-33
+GCF_000508765.1	Pseudomonas aeruginosa	Pseudomonas	1	6550070	6550070	99.68	0.45	Complete Genome	GCA_000508765.1	LES431
+GCF_001086805.1	Pseudomonas aeruginosa	Pseudomonas	1	6879005	6879005	99.68	0.49	Contig	GCA_001086805.1	BTP036
+GCF_001457615.1	Pseudomonas aeruginosa	Pseudomonas	1	6316979	6316979	99.68	0.11	Complete Genome	GCA_001457615.1	NCTC10332
+GCF_001515845.2	Pseudomonas aeruginosa	Pseudomonas	1	6934277	6934277	99.68	0.11	Complete Genome	GCA_001515845.2	S86968
+GCF_001518975.1	Pseudomonas aeruginosa	Pseudomonas	1	6364583	6364583	99.68	0.11	Complete Genome	GCA_001518975.1	USDA-ARS-USMARC-41639
+GCF_003060845.1	Pseudomonas aeruginosa	Pseudomonas	1	6867314	6867314	99.68	0.27	Complete Genome	GCA_003060845.1	JB2
+GCF_003319235.1	Pseudomonas aeruginosa	Pseudomonas	1	6876988	6876988	99.68	0.15	Complete Genome	GCA_003319235.1	HS9
+GCF_003641125.1	Pseudomonas aeruginosa	Pseudomonas	1	7030474	7030474	99.68	0.84	Complete Genome	GCA_003641125.1	268
+GCF_003798105.1	Pseudomonas aeruginosa	Pseudomonas	1	7079598	7079598	99.68	0.85	Complete Genome	GCA_003798105.1	H26027
+GCF_009648875.1	Pseudomonas aeruginosa	Pseudomonas	1	6441924	6441924	99.68	0.11	Complete Genome	GCA_009648875.1	CFSAN084950
+GCF_009664165.1	Pseudomonas aeruginosa	Pseudomonas	1	6835731	6835731	99.68	0.16	Complete Genome	GCA_009664165.1	ST773
+GCF_009911735.1	Pseudomonas aeruginosa	Pseudomonas	1	6397159	6397159	99.68	0.14	Complete Genome	GCA_009911735.1	RD1-3
+GCF_013343575.1	Pseudomonas aeruginosa	Pseudomonas	1	6557595	6557595	99.68	0.11	Complete Genome	GCA_013343575.1	DVT401
+GCF_013375855.1	Pseudomonas aeruginosa	Pseudomonas	1	7122984	7123084	99.68	0.38	Chromosome	GCA_013375855.1	PABCH14
+GCF_013467605.1	Pseudomonas aeruginosa	Pseudomonas	1	6490021	6490021	99.68	0.14	Complete Genome	GCA_013467605.1	ACR22
+GCF_014854655.1	Pseudomonas aeruginosa	Pseudomonas	1	6520277	6520277	99.68	0.22	Complete Genome	GCA_014854655.1	JT86
+GCF_016745135.1	Pseudomonas aeruginosa	Pseudomonas	1	6904218	6904218	99.68	0.11	Complete Genome	GCA_016745135.1	SE5352
+GCF_000168335.1	Pseudomonas aeruginosa	Pseudomonas	1	6492423	6492423	99.68	0.49	Chromosome	GCA_000168335.1	PACS2
+GCF_001482325.1	Pseudomonas aeruginosa	Pseudomonas	1	6431911	6431911	99.68	0.11	Complete Genome	GCA_001482325.1	12-4-4(59)
+GCF_001516325.2	Pseudomonas aeruginosa	Pseudomonas	1	6568228	6568228	99.68	0.14	Complete Genome	GCA_001516325.2	H27930
+GCF_001542795.2	Pseudomonas aeruginosa	Pseudomonas	1	6348761	6348761	99.68	0.11	Complete Genome	GCA_001542795.2	X78812
+GCF_003000655.1	Pseudomonas aeruginosa	Pseudomonas	1	7172470	7172470	99.68	1.03	Contig	GCA_003000655.1	AR_0355
+GCF_003957825.1	Pseudomonas aeruginosa	Pseudomonas	1	6258491	6258491	99.68	0.11	Complete Genome	GCA_003957825.1	GIMC5015:PAKB6
+GCF_004355125.1	Pseudomonas aeruginosa	Pseudomonas	1	6373139	6373139	99.68	0.11	Complete Genome	GCA_004355125.1	AES1M
+GCF_007559085.1	Pseudomonas aeruginosa	Pseudomonas	1	6616247	6616247	99.68	0.16	Complete Genome	GCA_007559085.1	A681
+GCF_016064595.1	Pseudomonas aeruginosa	Pseudomonas	1	7044064	7044064	99.68	0.43	Complete Genome	GCA_016064595.1	CMC-097
+GCF_018279265.1	Pseudomonas aeruginosa	Pseudomonas	1	6878937	6878937	99.68	0.55	Complete Genome	GCA_018279265.1	ZBX-P13
+GCF_900618325.1	Pseudomonas aeruginosa	Pseudomonas	1	6434133	6434133	99.68	0.11	Complete Genome	GCA_900618325.1	paerg011
+GCF_902703185.1	Pseudomonas aeruginosa	Pseudomonas	1	6621209	6621209	99.68	0.14	Complete Genome	GCA_902703185.1	PcyII-29
+GCF_902703195.1	Pseudomonas aeruginosa	Pseudomonas	1	6831274	6831274	99.68	0.19	Complete Genome	GCA_902703195.1	PcyII-40
+GCF_001548135.1	Pseudomonas aeruginosa	Pseudomonas	1	6613260	6613260	99.68	0.22	Complete Genome	GCA_001548135.1	8380
+GCF_001721745.1	Pseudomonas aeruginosa	Pseudomonas	1	6643823	6643823	99.68	0.43	Complete Genome	GCA_001721745.1	PA_D1
+GCF_001874465.1	Pseudomonas aeruginosa	Pseudomonas	1	6723378	6723378	99.68	0.54	Complete Genome	GCA_001874465.1	B10W
+GCF_002968955.1	Pseudomonas aeruginosa	Pseudomonas	1	7162784	7162784	99.68	0.53	Complete Genome	GCA_002968955.1	AR_0357
+GCF_003052005.2	Pseudomonas aeruginosa	Pseudomonas	1	6886080	6886080	99.68	0.5	Complete Genome	GCA_003052005.2	WCHPA075019
+GCF_008033745.1	Pseudomonas aeruginosa	Pseudomonas	1	6481697	6481697	99.68	0.11	Complete Genome	GCA_008033745.1	IMP68
+GCF_008033765.1	Pseudomonas aeruginosa	Pseudomonas	1	6486336	6486336	99.68	0.67	Complete Genome	GCA_008033765.1	IMP66
+GCF_013375795.1	Pseudomonas aeruginosa	Pseudomonas	1	6496101	6496201	99.68	0.11	Chromosome	GCA_013375795.1	PABCH13
+GCF_013414965.1	Pseudomonas aeruginosa	Pseudomonas	1	6264475	6264575	99.68	0.11	Chromosome	GCA_013414965.1	PAO1CT
+GCF_013414985.1	Pseudomonas aeruginosa	Pseudomonas	1	6264475	6264575	99.68	0.11	Chromosome	GCA_013414985.1	P4PBS
+GCF_015697605.1	Pseudomonas aeruginosa	Pseudomonas	1	6325392	6325392	99.68	0.11	Complete Genome	GCA_015697605.1	C-I-1
+GCF_015697645.1	Pseudomonas aeruginosa	Pseudomonas	1	6935851	6935851	99.68	0.49	Complete Genome	GCA_015697645.1	B-I-1
+GCF_900095805.1	Pseudomonas aeruginosa	Pseudomonas	1	6541482	6541482	99.68	0.11	Complete Genome	GCA_900095805.1	PA14Or_reads
+GCF_900636735.1	Pseudomonas aeruginosa	Pseudomonas	1	6766292	6766292	99.68	0.21	Complete Genome	GCA_900636735.1	NCTC11445
+GCF_000510305.1	Pseudomonas aeruginosa	Pseudomonas	1	6725183	6725183	99.68	0.27	Complete Genome	GCA_000510305.1	SCV20265
+GCF_001516305.2	Pseudomonas aeruginosa	Pseudomonas	1	6334378	6334378	99.68	0.14	Complete Genome	GCA_001516305.2	H5708
+GCF_001548335.1	Pseudomonas aeruginosa	Pseudomonas	1	6897018	6897018	99.68	0.43	Complete Genome	GCA_001548335.1	IOMTU 133
+GCF_001687285.1	Pseudomonas aeruginosa	Pseudomonas	1	6833187	6833187	99.68	0.11	Complete Genome	GCA_001687285.1	ATCC 27853
+GCF_002075065.1	Pseudomonas aeruginosa	Pseudomonas	1	6445239	6445239	99.68	0.11	Complete Genome	GCA_002075065.1	PA_154197
+GCF_002411865.3	Pseudomonas aeruginosa	Pseudomonas	1	6925889	6925889	99.68	0.25	Complete Genome	GCA_002411865.3	97
+GCF_002812905.2	Pseudomonas aeruginosa	Pseudomonas	1	6752906	6752906	99.68	0.11	Complete Genome	GCA_002812905.2	PB350
+GCF_013001005.1	Pseudomonas aeruginosa	Pseudomonas	1	6217899	6217899	99.68	0.11	Complete Genome	GCA_013001005.1	PAO1
+GCF_013260445.1	Pseudomonas aeruginosa	Pseudomonas	1	6496756	6496756	99.68	0.16	Complete Genome	GCA_013260445.1	YD001
+GCF_013393665.2	Pseudomonas aeruginosa	Pseudomonas	1	7056430	7056430	99.68	0.11	Complete Genome	GCA_013393665.2	SE5331
+GCF_013393705.1	Pseudomonas aeruginosa	Pseudomonas	1	6874270	6874270	99.68	0.47	Complete Genome	GCA_013393705.1	SE5416
+GCF_013414905.1	Pseudomonas aeruginosa	Pseudomonas	1	6264419	6264519	99.68	0.11	Chromosome	GCA_013414905.1	UAB2PBS
+GCF_013414925.1	Pseudomonas aeruginosa	Pseudomonas	1	6264382	6264482	99.68	0.11	Chromosome	GCA_013414925.1	UAB2CT
+GCF_016107485.1	Pseudomonas aeruginosa	Pseudomonas	1	6275467	6275467	99.68	0.11	Complete Genome	GCA_016107485.1	MPAO1
+GCF_016745175.1	Pseudomonas aeruginosa	Pseudomonas	1	7103853	7103853	99.68	0.46	Complete Genome	GCA_016745175.1	SE5429
+GCF_018448985.1	Pseudomonas aeruginosa	Pseudomonas	1	6932250	6932250	99.68	0.16	Complete Genome	GCA_018448985.1	PA790
+GCF_900618265.1	Pseudomonas aeruginosa	Pseudomonas	1	6452809	6452809	99.68	0.11	Complete Genome	GCA_900618265.1	paerg004
+GCF_900618285.1	Pseudomonas aeruginosa	Pseudomonas	1	6931425	6931425	99.68	0.57	Complete Genome	GCA_900618285.1	paerg005
+GCF_900618335.1	Pseudomonas aeruginosa	Pseudomonas	1	6434020	6434020	99.68	0.11	Complete Genome	GCA_900618335.1	paerg012
+GCF_000284555.1	Pseudomonas aeruginosa	Pseudomonas	1	6764661	6764661	99.68	0.43	Complete Genome	GCA_000284555.1	NCGM2.S1
+GCF_001722045.1	Pseudomonas aeruginosa	Pseudomonas	1	6639108	6639108	99.68	0.43	Complete Genome	GCA_001722045.1	PA_D21
+GCF_007559065.1	Pseudomonas aeruginosa	Pseudomonas	1	6809062	6809062	99.68	0.45	Complete Genome	GCA_007559065.1	60503
+GCF_013376775.1	Pseudomonas aeruginosa	Pseudomonas	1	6770626	6770626	99.68	0.11	Complete Genome	GCA_013376775.1	CDN129
+GCF_013415025.1	Pseudomonas aeruginosa	Pseudomonas	1	6264423	6264523	99.68	0.11	Chromosome	GCA_013415025.1	P16PBS
+GCF_015697465.1	Pseudomonas aeruginosa	Pseudomonas	1	6480192	6480192	99.68	0.14	Complete Genome	GCA_015697465.1	G-I-1
+GCF_001516105.1	Pseudomonas aeruginosa	Pseudomonas	1	6456866	6456866	99.68	0.14	Complete Genome	GCA_001516105.1	T63266
+GCF_001547955.1	Pseudomonas aeruginosa	Pseudomonas	1	7090694	7090694	99.68	0.95	Complete Genome	GCA_001547955.1	NCGM257
+GCF_001606045.1	Pseudomonas aeruginosa	Pseudomonas	1	6370730	6370730	99.68	0.11	Complete Genome	GCA_001606045.1	N17-1
+GCF_001792855.1	Pseudomonas aeruginosa	Pseudomonas	1	6928736	6928736	99.68	0.84	Complete Genome	GCA_001792855.1	PA8281
+GCF_001879525.1	Pseudomonas aeruginosa	Pseudomonas	1	6504659	6504659	99.68	0.11	Complete Genome	GCA_001879525.1	PAER4_119;Paer4_119
+GCF_002237425.1	Pseudomonas aeruginosa	Pseudomonas	1	6943220	6943220	99.68	0.14	Complete Genome	GCA_002237425.1	Ocean-1175
+GCF_003324255.1	Pseudomonas aeruginosa	Pseudomonas	1	6752712	6752712	99.68	0.14	Contig	GCA_003324255.1	AR_0459
+GCF_003429205.1	Pseudomonas aeruginosa	Pseudomonas	1	6503460	6503460	99.68	0.11	Complete Genome	GCA_003429205.1	PABL017
+GCF_004102665.1	Pseudomonas aeruginosa	Pseudomonas	1	6383803	6383803	99.68	0.11	Complete Genome	GCA_004102665.1	PAO1161
+GCF_004193735.1	Pseudomonas aeruginosa	Pseudomonas	1	6902135	6902135	99.68	0.84	Complete Genome	GCA_004193735.1	14;1334/14;1334
+GCF_009867055.1	Pseudomonas aeruginosa	Pseudomonas	1	6299465	6299465	99.68	0.43	Complete Genome	GCA_009867055.1	YB01
+GCF_013414945.1	Pseudomonas aeruginosa	Pseudomonas	1	6264434	6264534	99.68	0.11	Chromosome	GCA_013414945.1	PAO1PBS
+GCF_016105885.1	Pseudomonas aeruginosa	Pseudomonas	1	6660255	6660255	99.68	0.15	Complete Genome	GCA_016105885.1	TJ2014-049
+GCF_018141565.1	Pseudomonas aeruginosa	Pseudomonas	1	6715242	6715242	99.68	0.43	Complete Genome	GCA_018141565.1	PAG7
+GCF_902172305.2	Pseudomonas aeruginosa	Pseudomonas	1	6395872	6395872	99.68	0.11	Complete Genome	GCA_902172305.2	PAK
+GCF_000026645.1	Pseudomonas aeruginosa	Pseudomonas	1	6601757	6601757	99.68	0.45	Complete Genome	GCA_000026645.1	LESB58
+GCF_001721845.1	Pseudomonas aeruginosa	Pseudomonas	1	6683204	6683204	99.68	0.76	Complete Genome	GCA_001721845.1	PA_D25
+GCF_002208645.1	Pseudomonas aeruginosa	Pseudomonas	1	7411863	7411863	99.68	0.53	Complete Genome	GCA_002208645.1	Pa1207
+GCF_002442855.1	Pseudomonas aeruginosa	Pseudomonas	1	6334472	6334472	99.68	0.11	Complete Genome	GCA_002442855.1	PA_150577
+GCF_002997005.1	Pseudomonas aeruginosa	Pseudomonas	1	6822666	6822666	99.68	0.94	Complete Genome	GCA_002997005.1	AR_0095
+GCF_003347525.2	Pseudomonas aeruginosa	Pseudomonas	1	6468234	6468334	99.68	0.16	Chromosome	GCA_003347525.2	LV
+GCF_003798125.1	Pseudomonas aeruginosa	Pseudomonas	1	6706800	6706800	99.68	0.11	Complete Genome	GCA_003798125.1	H25883
+GCF_004355145.1	Pseudomonas aeruginosa	Pseudomonas	1	6373893	6373893	99.68	0.11	Complete Genome	GCA_004355145.1	AES1R
+GCF_009676765.1	Pseudomonas aeruginosa	Pseudomonas	1	7344079	7344079	99.68	0.78	Complete Genome	GCA_009676765.1	1811-13R031
+GCF_013375875.1	Pseudomonas aeruginosa	Pseudomonas	1	6866106	6866206	99.68	0.45	Chromosome	GCA_013375875.1	PABCH46
+GCF_900636975.1	Pseudomonas aeruginosa	Pseudomonas	1	6765311	6765311	99.68	0.53	Complete Genome	GCA_900636975.1	NCTC13715
+GCF_900637045.1	Pseudomonas aeruginosa	Pseudomonas	1	6363395	6363395	99.68	0.43	Complete Genome	GCA_900637045.1	NCTC10728
+GCF_000006765.1	Pseudomonas aeruginosa	Pseudomonas	1	6264404	6264404	99.68	0.11	Complete Genome	GCA_000006765.1	PAO1
+GCF_000223965.1	Pseudomonas aeruginosa	Pseudomonas	1	6719211	6719211	99.68	0.54	Chromosome	GCA_000223965.2	213BR
+GCF_000414035.1	Pseudomonas aeruginosa	Pseudomonas	1	6342034	6342034	99.68	0.11	Complete Genome	GCA_000414035.1	RP73
+GCF_001293085.1	Pseudomonas aeruginosa	Pseudomonas	1	6500439	6500439	99.68	0.3	Complete Genome	GCA_001293085.1	PA1RG
+GCF_001516225.2	Pseudomonas aeruginosa	Pseudomonas	1	6896700	6896700	99.68	0.11	Complete Genome	GCA_001516225.2	W60856
+GCF_003074095.1	Pseudomonas aeruginosa	Pseudomonas	1	7167115	7167215	99.68	1.03	Chromosome	GCA_003074095.1	AR_0440
+GCF_003074115.1	Pseudomonas aeruginosa	Pseudomonas	1	6776614	6776714	99.68	0.17	Chromosome	GCA_003074115.1	AR_0443
+GCF_012276675.1	Pseudomonas aeruginosa	Pseudomonas	1	6375262	6375262	99.68	0.11	Complete Genome	GCA_012276675.1	CMC-115
+GCF_013305645.2	Pseudomonas aeruginosa	Pseudomonas	1	6870662	6870662	99.68	0.51	Complete Genome	GCA_013305645.2	YT12746
+GCF_013305765.1	Pseudomonas aeruginosa	Pseudomonas	1	6275136	6275136	99.68	0.11	Complete Genome	GCA_013305765.1	LIUYANG-E
+GCF_013415005.1	Pseudomonas aeruginosa	Pseudomonas	1	6264423	6264523	99.68	0.11	Chromosome	GCA_013415005.1	P4CT
+GCF_016126955.1	Pseudomonas aeruginosa	Pseudomonas	1	6842475	6842475	99.68	0.11	Complete Genome	GCA_016126955.1	FDAARGOS_1041
+GCF_016745115.1	Pseudomonas aeruginosa	Pseudomonas	1	7177049	7177049	99.68	0.86	Complete Genome	GCA_016745115.1	YTSEY8
+GCF_017378395.1	Pseudomonas aeruginosa	Pseudomonas	1	6638990	6638990	99.68	0.48	Complete Genome	GCA_017378395.1	LYSZa5
+GCF_001045685.1	Pseudomonas aeruginosa	Pseudomonas	1	6317050	6317050	99.68	0.11	Complete Genome	GCA_001045685.1	DSM 50071
+GCF_001516345.1	Pseudomonas aeruginosa	Pseudomonas	1	6836415	6836415	99.68	0.11	Complete Genome	GCA_001516345.1	H47921
+GCF_001721825.1	Pseudomonas aeruginosa	Pseudomonas	1	6681981	6681981	99.68	0.76	Complete Genome	GCA_001721825.1	PA_D22
+GCF_002085605.1	Pseudomonas aeruginosa	Pseudomonas	1	7380063	7380063	99.68	0.11	Complete Genome	GCA_002085605.1	RIVM-EMC2982
+GCF_002104615.1	Pseudomonas aeruginosa	Pseudomonas	1	6893164	6893164	99.68	0.56	Complete Genome	GCA_002104615.1	PASGNDM345
+GCF_002287725.2	Pseudomonas aeruginosa	Pseudomonas	1	6930893	6930893	99.68	0.47	Complete Genome	GCA_002287725.2	PPF-1
+GCF_003028335.1	Pseudomonas aeruginosa	Pseudomonas	1	7050928	7050928	99.68	0.43	Complete Genome	GCA_003028335.1	MRSN12280
+GCF_003073795.1	Pseudomonas aeruginosa	Pseudomonas	1	7267567	7267567	99.68	0.56	Complete Genome	GCA_003073795.1	AR442
+GCF_009676785.1	Pseudomonas aeruginosa	Pseudomonas	1	7343000	7343000	99.68	0.78	Complete Genome	GCA_009676785.1	1811-18R001
+GCF_013375815.1	Pseudomonas aeruginosa	Pseudomonas	1	7025566	7025666	99.68	0.35	Chromosome	GCA_013375815.1	PABCH10
+GCF_013375915.1	Pseudomonas aeruginosa	Pseudomonas	1	7046351	7046451	99.68	0.49	Chromosome	GCA_013375915.1	PABCH01
+GCF_014155905.1	Pseudomonas aeruginosa	Pseudomonas	1	7092673	7092673	99.68	0.19	Complete Genome	GCA_014155905.1	401853
+GCF_016584725.1	Pseudomonas aeruginosa	Pseudomonas	1	6534364	6534364	99.68	0.11	Complete Genome	GCA_016584725.1	LYSZa7
+GCF_017900915.1	Pseudomonas aeruginosa	Pseudomonas	1	6602988	6602988	99.68	0.22	Complete Genome	GCA_017900915.1	LICME WGH-6
+GCF_000504045.1	Pseudomonas aeruginosa	Pseudomonas	1	6580038	6580038	99.68	0.11	Complete Genome	GCA_000504045.1	MTB-1
+GCF_000981825.1	Pseudomonas aeruginosa	Pseudomonas	1	7497593	7497593	99.68	0.11	Complete Genome	GCA_000981825.1	Carb01 63
+GCF_001722025.1	Pseudomonas aeruginosa	Pseudomonas	1	6681992	6681992	99.68	0.76	Complete Genome	GCA_001722025.1	PA_D5
+GCF_002205355.1	Pseudomonas aeruginosa	Pseudomonas	1	7148302	7148302	99.68	1.18	Complete Genome	GCA_002205355.1	Pa127
+GCF_003324465.1	Pseudomonas aeruginosa	Pseudomonas	1	6418505	6418505	99.68	0.49	Contig	GCA_003324465.1	AR_0352
+GCF_003369755.1	Pseudomonas aeruginosa	Pseudomonas	1	7106857	7106857	99.68	0.11	Complete Genome	GCA_003369755.1	Y82
+GCF_003429185.1	Pseudomonas aeruginosa	Pseudomonas	1	6546467	6546467	99.68	0.32	Complete Genome	GCA_003429185.1	PABL012
+GCF_009676885.1	Pseudomonas aeruginosa	Pseudomonas	1	6737396	6737396	99.68	0.11	Complete Genome	GCA_009676885.1	KRP1
+GCF_013343375.1	Pseudomonas aeruginosa	Pseudomonas	1	6506945	6506945	99.68	0.11	Complete Genome	GCA_013343375.1	DVT425
+GCF_016919425.1	Pseudomonas aeruginosa	Pseudomonas	1	6398674	6398774	99.68	0.11	Chromosome	GCA_016919425.1	PDNC003
+GCF_900618255.1	Pseudomonas aeruginosa	Pseudomonas	1	6451470	6451470	99.68	0.11	Complete Genome	GCA_900618255.1	paerg002
+GCF_900636755.1	Pseudomonas aeruginosa	Pseudomonas	1	6839985	6839985	99.68	0.11	Complete Genome	GCA_900636755.1	NCTC12903
+GCF_001516245.2	Pseudomonas aeruginosa	Pseudomonas	1	6517340	6517340	99.68	0.11	Complete Genome	GCA_001516245.2	F23197
+GCF_001594325.2	Pseudomonas aeruginosa	Pseudomonas	1	6618768	6618768	99.68	0.15	Complete Genome	GCA_001594325.2	F63912
+GCF_001792835.1	Pseudomonas aeruginosa	Pseudomonas	1	6721480	6721480	99.68	0.54	Complete Genome	GCA_001792835.1	PA1088
+GCF_001874805.1	Pseudomonas aeruginosa	Pseudomonas	1	6963676	6963676	99.68	0.15	Contig	GCA_001874805.1	AR_0092
+GCF_002946935.1	Pseudomonas aeruginosa	Pseudomonas	1	6645227	6645227	99.68	1.93	Complete Genome	GCA_002946935.1	F5677
+GCF_003073615.1	Pseudomonas aeruginosa	Pseudomonas	1	6853499	6853499	99.68	0.11	Complete Genome	GCA_003073615.1	AR444
+GCF_003324295.1	Pseudomonas aeruginosa	Pseudomonas	1	7079305	7079305	99.68	0.48	Contig	GCA_003324295.1	AR_0456
+GCF_003813005.1	Pseudomonas aeruginosa	Pseudomonas	1	7029824	7029824	99.68	0.11	Complete Genome	GCA_003813005.1	FDAARGOS_505
+GCF_004291075.1	Pseudomonas aeruginosa	Pseudomonas	1	6819140	6819140	99.68	0.37	Complete Genome	GCA_004291075.1	E80
+GCF_006364795.1	Pseudomonas aeruginosa	Pseudomonas	1	6792215	6792215	99.68	0.61	Complete Genome	GCA_006364795.1	FDAARGOS_610
+GCF_013395035.1	Pseudomonas aeruginosa	Pseudomonas	1	6490014	6490014	99.68	0.14	Complete Genome	GCA_013395035.1	B18
+GCF_013415045.1	Pseudomonas aeruginosa	Pseudomonas	1	6264554	6264654	99.68	0.11	Chromosome	GCA_013415045.1	P16CT
+GCF_013415085.1	Pseudomonas aeruginosa	Pseudomonas	1	6264658	6264758	99.68	0.11	Chromosome	GCA_013415085.1	A17CT
+GCF_015697665.1	Pseudomonas aeruginosa	Pseudomonas	1	7087087	7087087	99.68	0.11	Complete Genome	GCA_015697665.1	A-I-1
+GCF_018279305.1	Pseudomonas aeruginosa	Pseudomonas	1	6734601	6734601	99.68	0.11	Complete Genome	GCA_018279305.1	ZBX-P11
+GCF_000524595.1	Pseudomonas aeruginosa	Pseudomonas	1	6433441	6433441	99.68	0.43	Complete Genome	GCA_000524595.1	YL84
+GCF_001516185.2	Pseudomonas aeruginosa	Pseudomonas	1	6791731	6791731	99.68	0.17	Complete Genome	GCA_001516185.2	W36662
+GCF_002223805.1	Pseudomonas aeruginosa	Pseudomonas	1	6661962	6661962	99.68	0.17	Complete Genome	GCA_002223805.1	L10
+GCF_002753655.1	Pseudomonas aeruginosa	Pseudomonas	1	6621378	6621378	99.68	0.43	Complete Genome	GCA_002753655.1	12939
+GCF_003194245.1	Pseudomonas aeruginosa	Pseudomonas	1	6859232	6859232	99.68	0.43	Complete Genome	GCA_003194245.1	CCUG 70744
+GCF_008033725.1	Pseudomonas aeruginosa	Pseudomonas	1	6501414	6501414	99.68	1.08	Complete Genome	GCA_008033725.1	IMP67
+GCF_008195485.1	Pseudomonas aeruginosa	Pseudomonas	1	7012798	7012798	99.68	0.27	Complete Genome	GCA_008195485.1	CCUG 51971
+GCF_009905195.1	Pseudomonas aeruginosa	Pseudomonas	1	6335031	6335031	99.68	0.14	Complete Genome	GCA_009905195.1	INP-43
+GCF_013255565.1	Pseudomonas aeruginosa	Pseudomonas	1	6924367	6924367	99.68	0.55	Complete Genome	GCA_013255565.1	PSE6684
+GCF_013305815.1	Pseudomonas aeruginosa	Pseudomonas	1	6266737	6266737	99.68	0.11	Complete Genome	GCA_013305815.1	LIUYANG-C
+GCF_013347245.1	Pseudomonas aeruginosa	Pseudomonas	1	6832395	6832395	99.68	0.51	Complete Genome	GCA_013347245.1	CDN118
+GCF_016864415.1	Pseudomonas aeruginosa	Pseudomonas	1	7130555	7130555	99.68	0.6	Complete Genome	GCA_016864415.1	PARM801
+GCF_017378475.1	Pseudomonas aeruginosa	Pseudomonas	1	6638980	6638980	99.68	0.48	Complete Genome	GCA_017378475.1	LYSZa2
+GCF_900070375.1	Pseudomonas aeruginosa	Pseudomonas	1	6276469	6276469	99.68	0.11	Complete Genome	GCA_900070375.1	PAO1_Orsay
+GCF_904866275.1	Pseudomonas aeruginosa	Pseudomonas	1	6270455	6270455	99.68	0.19	Complete Genome	GCA_904866275.1	MINF_7A-sc-2280434
+GCF_000223945.1	Pseudomonas aeruginosa	Pseudomonas	1	6742964	6742964	99.68	0.9	Chromosome	GCA_000223945.2	19BR
+GCF_000271365.1	Pseudomonas aeruginosa	Pseudomonas	1	6402658	6402658	99.68	0.11	Complete Genome	GCA_000271365.1	DK2
+GCF_000829275.1	Pseudomonas aeruginosa	Pseudomonas	1	6814936	6814936	99.68	0.49	Complete Genome	GCA_000829275.1	NCGM1900;NCGM 1900
+GCF_001721785.1	Pseudomonas aeruginosa	Pseudomonas	1	6645477	6645477	99.68	0.76	Complete Genome	GCA_001721785.1	PA_D9
+GCF_013343475.1	Pseudomonas aeruginosa	Pseudomonas	1	6386887	6386887	99.68	0.11	Complete Genome	GCA_013343475.1	DVT779
+GCF_013343515.1	Pseudomonas aeruginosa	Pseudomonas	1	6930600	6930600	99.68	0.11	Complete Genome	GCA_013343515.1	DVT413
+GCF_013393685.1	Pseudomonas aeruginosa	Pseudomonas	1	7153217	7153217	99.68	0.15	Complete Genome	GCA_013393685.1	SE5369
+GCF_013415065.1	Pseudomonas aeruginosa	Pseudomonas	1	6264406	6264506	99.68	0.11	Chromosome	GCA_013415065.1	A17PBS
+GCF_900149285.1	Pseudomonas aeruginosa	Pseudomonas	1	6288645	6288645	99.68	0.11	Complete Genome	GCA_900149285.1	PcyII-10
+GCF_900185255.1	Pseudomonas aeruginosa	Pseudomonas	1	6902967	6902967	99.68	0.39	Complete Genome	GCA_900185255.1	early isolate NN2 (clone C)
+GCF_000496605.2	Pseudomonas aeruginosa	Pseudomonas	1	6498072	6498072	99.68	0.43	Complete Genome	GCA_000496605.2	PA1
+GCF_000816985.1	Pseudomonas aeruginosa	Pseudomonas	1	6603099	6603099	99.68	0.11	Complete Genome	GCA_000816985.1	F22031
+GCF_001721805.1	Pseudomonas aeruginosa	Pseudomonas	1	6681975	6681975	99.68	0.76	Complete Genome	GCA_001721805.1	PA_D16
+GCF_003204335.1	Pseudomonas aeruginosa	Pseudomonas	1	6799785	6799785	99.68	0.49	Complete Genome	GCA_003204335.1	AR_0110
+GCF_003798145.1	Pseudomonas aeruginosa	Pseudomonas	1	6729216	6729216	99.68	0.81	Complete Genome	GCA_003798145.1	H26023
+GCF_004014755.1	Pseudomonas aeruginosa	Pseudomonas	1	6241875	6241875	99.68	0.11	Complete Genome	GCA_004014755.2	PA0750
+GCF_006364735.1	Pseudomonas aeruginosa	Pseudomonas	1	6263676	6263676	99.68	0.11	Complete Genome	GCA_006364735.1	FDAARGOS_767
+GCF_000623675.2	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000623675.2	SA19970769
+GCF_000626095.2	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000626095.2	EC20120200
+GCF_000750435.1	Salmonella enterica	Salmonella	1	4678377	4678377	100.0	0.04	Complete Genome	GCA_000750435.1	OLF-SE4-0317-8
+GCF_000941015.2	Salmonella enterica	Salmonella	1	4856438	4856438	100.0	0.04	Complete Genome	GCA_000941015.2	USDA-ARS-USMARC-1899
+GCF_001302605.1	Salmonella enterica	Salmonella	1	4793553	4793553	100.0	0.04	Complete Genome	GCA_001302605.1	PM016;13;PM016/13
+GCF_001623625.1	Salmonella enterica	Salmonella	1	4751034	4751034	100.0	0.04	Complete Genome	GCA_001623625.1	USDA-ARS-USMARC-1766
+GCF_001975385.1	Salmonella enterica	Salmonella	1	4618056	4618056	100.0	0.04	Complete Genome	GCA_001975385.1	N1529-D3
+GCF_002761435.1	Salmonella enterica	Salmonella	1	4700953	4700953	100.0	0.18	Complete Genome	GCA_002761435.1	CDC 08-1942
+GCF_003073515.1	Salmonella enterica	Salmonella	1	4914635	4914635	100.0	0.04	Complete Genome	GCA_003073515.1	CFSAN051295
+GCF_003548565.1	Salmonella enterica	Salmonella	1	4780156	4780156	100.0	0.04	Contig	GCA_003548565.1	2014LSAL03344
+GCF_003710205.1	Salmonella enterica	Salmonella	1	4709669	4709669	100.0	0.04	Complete Genome	GCA_003710205.1	CFSAN076213
+GCF_003864055.1	Salmonella enterica	Salmonella	1	4759051	4759051	100.0	0.31	Complete Genome	GCA_003864055.1	ATCC 8387
+GCF_006165105.1	Salmonella enterica	Salmonella	1	4763928	4763928	100.0	0.04	Complete Genome	GCA_006165105.1	USDA-ARS-USMARC-76332
+GCF_008244785.1	Salmonella enterica	Salmonella	1	4870694	4870694	100.0	0.04	Complete Genome	GCA_008244785.1	14028S
+GCF_009664655.1	Salmonella enterica	Salmonella	1	4731476	4731476	100.0	0.04	Complete Genome	GCA_009664655.1	AUSMDU00010531
+GCF_011465695.1	Salmonella enterica	Salmonella	1	4773013	4773013	100.0	0.04	Complete Genome	GCA_011465695.1	Sal-1135
+GCF_903992995.2	Salmonella enterica	Salmonella	1	4881179	4881179	100.0	0.04	Complete Genome	GCA_903992995.2	5d8c9f00c6184d00f9da85a6:sample:O1960-05
+GCA_900636155.1	Salmonella enterica	Salmonella	1	4723444	4723444	100.0	0.75	Complete Genome	GCA_900636155.1	NCTC5741
+GCF_000011885.1	Salmonella enterica	Salmonella	1	4585229	4585229	100.0	0.04	Complete Genome	GCA_000011885.1	ATCC 9150
+GCF_000026565.1	Salmonella enterica	Salmonella	1	4581797	4581797	100.0	0.14	Complete Genome	GCA_000026565.1	AKU_12601;AKU12601
+GCF_000385905.1	Salmonella enterica	Salmonella	1	4791958	4791958	100.0	0.04	Complete Genome	GCA_000385905.1	Ty21a
+GCF_000487915.2	Salmonella enterica	Salmonella	1	4547600	4547600	100.0	0.04	Complete Genome	GCA_000487915.2	ATCC 35640
+GCF_000494385.3	Salmonella enterica	Salmonella	1	4798531	4798531	100.0	0.04	Complete Genome	GCA_000494385.3	392869-2
+GCF_000623295.1	Salmonella enterica	Salmonella	1	4678618	4678618	100.0	0.11	Complete Genome	GCA_000623295.1	EC20110360
+GCF_000750255.1	Salmonella enterica	Salmonella	1	4667283	4667283	100.0	0.04	Complete Genome	GCA_000750255.1	OLF-SE8-1021710
+GCF_001048375.2	Salmonella enterica	Salmonella	1	4796046	4796046	100.0	0.04	Complete Genome	GCA_001048375.2	M223
+GCF_001623585.1	Salmonella enterica	Salmonella	1	4783492	4783492	100.0	0.04	Complete Genome	GCA_001623585.1	USDA-ARS-USMARC-1728
+GCF_001953015.1	Salmonella enterica	Salmonella	1	4710704	4710704	100.0	0.04	Complete Genome	GCA_001953015.1	ATCC BAA-1738;CFSAN000738
+GCF_001975305.1	Salmonella enterica	Salmonella	1	4849139	4849139	100.0	0.07	Complete Genome	GCA_001975305.1	SA20113257
+GCF_003130605.1	Salmonella enterica	Salmonella	1	4694373	4694373	100.0	0.21	Complete Genome	GCA_003130605.1	CFSAN051296
+GCF_003548335.1	Salmonella enterica	Salmonella	1	4784321	4784321	100.0	0.04	Contig	GCA_003548335.1	2014LSAL03410
+GCF_003641265.1	Salmonella enterica	Salmonella	1	4985863	4985863	100.0	0.33	Complete Genome	GCA_003641265.1	10TTU468x
+GCF_003718095.1	Salmonella enterica	Salmonella	1	4782083	4782083	100.0	0.04	Complete Genome	GCA_003718095.1	311189_269186
+GCF_003718175.1	Salmonella enterica	Salmonella	1	4808675	4808675	100.0	0.04	Complete Genome	GCA_003718175.1	311189_255186
+GCF_003718515.1	Salmonella enterica	Salmonella	1	4800586	4800586	100.0	0.04	Complete Genome	GCA_003718515.1	343077_292148
+GCF_006165185.1	Salmonella enterica	Salmonella	1	4794633	4794633	100.0	0.04	Complete Genome	GCA_006165185.1	USDA-ARS-USMARC-76333
+GCF_011466595.1	Salmonella enterica	Salmonella	1	4673793	4673793	100.0	0.04	Complete Genome	GCA_011466595.1	Sal-4295
+GCF_013161625.1	Salmonella enterica	Salmonella	1	4888815	4888815	100.0	0.24	Complete Genome	GCA_013161625.1	2011K-1440
+GCF_014334155.1	Salmonella enterica	Salmonella	1	4857466	4857466	100.0	0.04	Complete Genome	GCA_014334155.1	LT2
+GCF_015052745.1	Salmonella enterica	Salmonella	1	4899433	4899433	100.0	0.04	Complete Genome	GCA_015052745.1	BBS1407
+GCF_016454185.1	Salmonella enterica	Salmonella	1	4794742	4794742	100.0	0.12	Complete Genome	GCA_016454185.1	CVM 30176
+GCF_016903075.1	Salmonella enterica	Salmonella	1	4859543	4859543	100.0	0.37	Complete Genome	GCA_016903075.1	Se29
+GCA_900475965.1	Salmonella enterica	Salmonella	1	4791042	4791042	100.0	0.33	Complete Genome	GCA_900475965.1	NCTC5716
+GCA_900477925.1	Salmonella enterica	Salmonella	1	4638063	4638063	100.0	0.13	Complete Genome	GCA_900477925.1	NCTC5778
+GCF_000188955.2	Salmonella enterica	Salmonella	1	4694375	4694375	100.0	0.21	Complete Genome	GCA_000188955.5	507440-20
+GCF_000271905.2	Salmonella enterica	Salmonella	1	4883715	4883715	100.0	0.04	Complete Genome	GCA_000271905.2	Levine 15
+GCF_000272815.2	Salmonella enterica	Salmonella	1	4755838	4755838	100.0	0.04	Complete Genome	GCA_000272815.2	CVM N18486
+GCF_000483715.2	Salmonella enterica	Salmonella	1	4712541	4712541	100.0	0.04	Complete Genome	GCA_000483715.2	WA_14882
+GCF_000623135.1	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000623135.2	EC20121180
+GCF_001305815.1	Salmonella enterica	Salmonella	1	4708710	4708710	100.0	0.04	Complete Genome	GCA_001305815.1	RM1984
+GCF_001975245.1	Salmonella enterica	Salmonella	1	4847468	4847468	100.0	0.26	Complete Genome	GCA_001975245.1	1422-74
+GCF_001975325.1	Salmonella enterica	Salmonella	1	4801835	4801835	100.0	0.28	Complete Genome	GCA_001975325.1	ST350
+GCF_001975365.1	Salmonella enterica	Salmonella	1	4668861	4668861	100.0	0.4	Complete Genome	GCA_001975365.1	S-1087
+GCF_001975645.1	Salmonella enterica	Salmonella	1	4640929	4640929	100.0	0.04	Complete Genome	GCA_001975645.1	S-1850
+GCF_003031855.1	Salmonella enterica	Salmonella	1	4840810	4840810	100.0	0.31	Complete Genome	GCA_003031855.1	PIR00537
+GCF_003548395.1	Salmonella enterica	Salmonella	1	4780945	4780945	100.0	0.04	Contig	GCA_003548395.1	2014LSAL03404
+GCF_003641325.1	Salmonella enterica	Salmonella	1	4985874	4985874	100.0	0.33	Complete Genome	GCA_003641325.1	11TTU1590
+GCF_004194615.2	Salmonella enterica	Salmonella	1	4924354	4924354	100.0	0.38	Complete Genome	GCA_004194615.2	sg_wt8
+GCF_004919205.1	Salmonella enterica	Salmonella	1	4996602	4996602	100.0	0.11	Complete Genome	GCA_004919205.1	PNCS014848
+GCF_006165125.1	Salmonella enterica	Salmonella	1	4762730	4762730	100.0	0.04	Complete Genome	GCA_006165125.1	USDA-ARS-USMARC-76335
+GCF_008369645.1	Salmonella enterica	Salmonella	1	4680730	4680830	100.0	0.13	Chromosome	GCA_008369645.1	K12SE001
+GCF_900205265.1	Salmonella enterica	Salmonella	1	4795199	4795199	100.0	0.04	Complete Genome	GCA_900205265.1	lupe_GEN0059-sc-1979081
+GCF_901457625.1	Salmonella enterica	Salmonella	1	4837118	4837118	100.0	1.39	Complete Genome	GCA_901457625.1	4316STDY6559672
+GCF_000484195.3	Salmonella enterica	Salmonella	1	4797172	4797172	100.0	0.04	Complete Genome	GCA_000484195.3	460004 2-1
+GCF_000487015.2	Salmonella enterica	Salmonella	1	4756014	4756014	100.0	0.04	Complete Genome	GCA_000487015.2	CFSAN001301;420
+GCF_000940935.2	Salmonella enterica	Salmonella	1	4695514	4695514	100.0	0.06	Complete Genome	GCA_000940935.2	USDA-ARS-USMARC-1927
+GCF_001890445.1	Salmonella enterica	Salmonella	1	4746969	4746969	100.0	0.18	Complete Genome	GCA_001890445.1	CFSAN003387;CFSAN003887
+GCF_002094915.1	Salmonella enterica	Salmonella	1	4485506	4485606	100.0	0.04	Chromosome	GCA_002094915.1	2012K-0678
+GCF_002777175.1	Salmonella enterica	Salmonella	1	4765719	4765719	100.0	0.06	Complete Genome	GCA_002777175.1	CFSAN050752;FDA957831-1-1
+GCF_003429465.1	Salmonella enterica	Salmonella	1	4791341	4791341	100.0	0.04	Complete Genome	GCA_003429465.1	Ty21a
+GCF_003710145.1	Salmonella enterica	Salmonella	1	4651134	4651134	100.0	0.04	Complete Genome	GCA_003710145.1	CFSAN076211
+GCF_003717435.1	Salmonella enterica	Salmonella	1	4783092	4783092	100.0	0.04	Complete Genome	GCA_003717435.1	311189_208103
+GCF_004564195.1	Salmonella enterica	Salmonella	1	4760321	4760321	100.0	0.04	Complete Genome	GCA_004564195.1	UFPRLABMOR1
+GCF_005576575.1	Salmonella enterica	Salmonella	1	4619529	4619529	100.0	0.21	Complete Genome	GCA_005576575.1	FCC0123
+GCF_009184685.1	Salmonella enterica	Salmonella	1	5000356	5000356	100.0	0.07	Complete Genome	GCA_009184685.1	PJM1
+GCF_009729935.1	Salmonella enterica	Salmonella	1	4556079	4556079	100.0	0.07	Complete Genome	GCA_009729935.1	FDAARGOS_707
+GCF_013114975.1	Salmonella enterica	Salmonella	1	4988969	4988969	100.0	0.13	Complete Genome	GCA_013114975.1	SCFS4
+GCA_018986895.1	Salmonella enterica	Salmonella	1	4495821	4495821	100.0	0.04	Complete Genome	GCA_018986895.1	45157
+GCF_000430165.1	Salmonella enterica	Salmonella	1	4822189	4822189	100.0	0.33	Complete Genome	GCA_000430165.1	08-1736
+GCF_000487615.2	Salmonella enterica	Salmonella	1	4737447	4737447	100.0	0.33	Complete Genome	GCA_000487615.2	14;ATCC 6017
+GCF_000623095.1	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000623095.2	EC20121178
+GCF_000623655.2	Salmonella enterica	Salmonella	1	4685847	4685847	100.0	0.13	Complete Genome	GCA_000623655.2	SA19970510
+GCF_000698715.2	Salmonella enterica	Salmonella	1	4727567	4727567	100.0	0.04	Complete Genome	GCA_000698715.2	CFSAN000211
+GCF_000748245.2	Salmonella enterica	Salmonella	1	4727570	4727570	100.0	0.04	Complete Genome	GCA_000748245.2	CFSAN000212
+GCF_001185215.1	Salmonella enterica	Salmonella	1	4678365	4678365	100.0	0.04	Complete Genome	GCA_001185215.1	SEE1
+GCF_001188125.2	Salmonella enterica	Salmonella	1	4751278	4751278	100.0	0.04	Complete Genome	GCA_001188125.2	FDAARGOS_54
+GCF_003031835.1	Salmonella enterica	Salmonella	1	4698556	4698556	100.0	0.04	Complete Genome	GCA_003031835.1	FORC58
+GCF_003717285.1	Salmonella enterica	Salmonella	1	4786194	4786194	100.0	0.04	Complete Genome	GCA_003717285.1	311189_211186
+GCF_003718055.1	Salmonella enterica	Salmonella	1	4806999	4806999	100.0	0.04	Complete Genome	GCA_003718055.1	311189_291186
+GCF_003718235.1	Salmonella enterica	Salmonella	1	4778368	4778368	100.0	0.04	Complete Genome	GCA_003718235.1	311189_232103
+GCF_003718595.1	Salmonella enterica	Salmonella	1	4807245	4807245	100.0	0.04	Complete Genome	GCA_003718595.1	343077_278127
+GCF_003864035.1	Salmonella enterica	Salmonella	1	4818442	4818442	100.0	0.04	Complete Genome	GCA_003864035.1	ATCC 8400
+GCF_000486815.2	Salmonella enterica	Salmonella	1	4648879	4648879	100.0	0.04	Complete Genome	GCA_000486815.2	0250;CFSAN001285
+GCF_000623195.2	Salmonella enterica	Salmonella	1	4679291	4679291	100.0	0.04	Complete Genome	GCA_000623195.2	EC20120005
+GCF_000623315.1	Salmonella enterica	Salmonella	1	4711474	4711474	100.0	0.11	Complete Genome	GCA_000623315.1	EC20110359
+GCF_000623615.2	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000623615.2	SA19960848
+GCF_000626235.1	Salmonella enterica	Salmonella	1	4709033	4709033	100.0	0.11	Complete Genome	GCA_000626235.1	EC20110221
+GCF_000818115.1	Salmonella enterica	Salmonella	1	4612373	4612373	100.0	0.04	Complete Genome	GCA_000818115.1	CMCC 50503
+GCF_002761015.1	Salmonella enterica	Salmonella	1	4699764	4699764	100.0	0.11	Complete Genome	GCA_002761015.1	81-1435
+GCF_002761375.1	Salmonella enterica	Salmonella	1	4598213	4598213	100.0	0.21	Complete Genome	GCA_002761375.1	USDA-ARS-USMARC-1904
+GCF_003073535.1	Salmonella enterica	Salmonella	1	4807052	4807052	100.0	0.04	Complete Genome	GCA_003073535.1	CFSAN047866
+GCF_003073555.1	Salmonella enterica	Salmonella	1	4766139	4766139	100.0	0.07	Complete Genome	GCA_003073555.1	CFSAN045763
+GCF_004941405.1	Salmonella enterica	Salmonella	1	4995830	4995830	100.0	0.11	Complete Genome	GCA_004941405.1	PNCS014875
+GCF_005166225.1	Salmonella enterica	Salmonella	1	4634278	4634278	100.0	0.04	Complete Genome	GCA_005166225.1	FORC88
+GCF_013358425.1	Salmonella enterica	Salmonella	1	4669238	4669238	100.0	0.45	Complete Genome	GCA_013358425.1	389598
+GCF_016025395.1	Salmonella enterica	Salmonella	1	4885341	4885341	100.0	0.39	Complete Genome	GCA_016025395.1	R13.1544
+GCF_000486365.2	Salmonella enterica	Salmonella	1	4690430	4690430	100.0	0.04	Complete Genome	GCA_000486365.2	CFSAN000736;ATCC 8391
+GCF_000486445.2	Salmonella enterica	Salmonella	1	4817791	4817791	100.0	0.5	Complete Genome	GCA_000486445.2	ATCC 15791
+GCF_000487575.2	Salmonella enterica	Salmonella	1	4706101	4706101	100.0	0.04	Complete Genome	GCA_000487575.2	ATCC BAA-1592
+GCF_000487775.1	Salmonella enterica	Salmonella	1	4603849	4603849	100.0	0.06	Complete Genome	GCA_000487775.2	CFSAN001080
+GCF_000624395.2	Salmonella enterica	Salmonella	1	4679418	4679418	100.0	0.04	Complete Genome	GCA_000624395.2	EC20120002
+GCF_000750475.1	Salmonella enterica	Salmonella	1	4678914	4678914	100.0	0.04	Complete Genome	GCA_000750475.1	OLF-SE1-1019-1
+GCF_000963535.2	Salmonella enterica	Salmonella	1	4731596	4731596	100.0	0.04	Complete Genome	GCA_000963535.2	USDA-ARS-USMARC-1175
+GCF_001623545.2	Salmonella enterica	Salmonella	1	4836393	4836393	100.0	0.33	Complete Genome	GCA_001623545.2	USDA-ARS-USMARC-1677
+GCF_001975555.1	Salmonella enterica	Salmonella	1	4690402	4690402	100.0	0.11	Complete Genome	GCA_001975555.1	S-1843
+GCF_001975625.1	Salmonella enterica	Salmonella	1	4916040	4916040	100.0	0.4	Complete Genome	GCA_001975625.1	SA20092095
+GCF_002119485.1	Salmonella enterica	Salmonella	1	4938076	4938076	100.0	0.07	Complete Genome	GCA_002119485.1	FORC_038
+GCF_002761395.1	Salmonella enterica	Salmonella	1	4547966	4547966	100.0	0.21	Complete Genome	GCA_002761395.1	USDA-ARS-USMARC-1912
+GCF_002900325.1	Salmonella enterica	Salmonella	1	4742945	4742945	100.0	0.04	Complete Genome	GCA_002900325.1	MFDS1004024
+GCF_003718495.1	Salmonella enterica	Salmonella	1	4782235	4782235	100.0	0.04	Complete Genome	GCA_003718495.1	343078_201101
+GCF_007431545.1	Salmonella enterica	Salmonella	1	4855239	4855239	100.0	0.61	Complete Genome	GCA_007431545.1	FORC098
+GCF_009664795.1	Salmonella enterica	Salmonella	1	4703625	4703625	100.0	0.04	Complete Genome	GCA_009664795.1	AUSMDU00010528
+GCF_009756475.1	Salmonella enterica	Salmonella	1	4996832	4996832	100.0	0.11	Complete Genome	GCA_009756475.1	PNCS014875
+GCF_900478065.1	Salmonella enterica	Salmonella	1	5029670	5029670	100.0	0.33	Complete Genome	GCA_900478065.1	NCTC10080
+GCF_901457615.1	Salmonella enterica	Salmonella	1	4839011	4839011	100.0	1.39	Complete Genome	GCA_901457615.1	4316STDY6559669
+GCA_900475825.1	Salmonella enterica	Salmonella	1	4707477	4707477	100.0	0.04	Complete Genome	GCA_900475825.1	NCTC5740
+GCF_000271885.2	Salmonella enterica	Salmonella	1	4841916	4841916	100.0	0.04	Complete Genome	GCA_000271885.2	Levine 1
+GCF_000486725.2	Salmonella enterica	Salmonella	1	4580689	4580689	100.0	0.04	Complete Genome	GCA_000486725.2	ATCC 11511
+GCF_000623375.1	Salmonella enterica	Salmonella	1	4682805	4682805	100.0	0.26	Complete Genome	GCA_000623375.1	EC20110356
+GCF_000626275.2	Salmonella enterica	Salmonella	1	4712309	4712309	100.0	0.04	Complete Genome	GCA_000626275.2	EC20090641
+GCF_000940895.2	Salmonella enterica	Salmonella	1	4667713	4667713	100.0	0.04	Complete Genome	GCA_000940895.2	CDC 06-0532
+GCF_001623775.1	Salmonella enterica	Salmonella	1	4823793	4823793	100.0	0.04	Complete Genome	GCA_001623775.1	CDC 2009K-2059
+GCF_002761415.1	Salmonella enterica	Salmonella	1	4773383	4773383	100.0	0.51	Complete Genome	GCA_002761415.1	CDC 07-0954
+GCF_003054535.1	Salmonella enterica	Salmonella	1	4597370	4597370	100.0	0.24	Complete Genome	GCA_003054535.1	CDC 2009K-0792
+GCF_003073595.1	Salmonella enterica	Salmonella	1	4694399	4694399	100.0	0.21	Complete Genome	GCA_003073595.1	CFSAN045764
+GCF_003548295.1	Salmonella enterica	Salmonella	1	4781012	4781012	100.0	0.04	Contig	GCA_003548295.1	2014LSAL03416
+GCF_003549275.1	Salmonella enterica	Salmonella	1	4778979	4778979	100.0	0.04	Contig	GCA_003549275.1	2015LSAL02588
+GCF_003718155.1	Salmonella enterica	Salmonella	1	4800376	4800376	100.0	0.04	Complete Genome	GCA_003718155.1	311189_256186
+GCF_004328765.1	Salmonella enterica	Salmonella	1	4662027	4662027	100.0	0.04	Complete Genome	GCA_004328765.1	USDA-ARS-USMARC-60983
+GCF_006165245.1	Salmonella enterica	Salmonella	1	4763929	4763929	100.0	0.04	Complete Genome	GCA_006165245.1	USDA-ARS-USMARC-76339
+GCF_009729895.1	Salmonella enterica	Salmonella	1	4611029	4611029	100.0	0.07	Complete Genome	GCA_009729895.1	FDAARGOS_710
+GCF_015697765.1	Salmonella enterica	Salmonella	1	5059260	5059260	100.0	0.04	Complete Genome	GCA_015697765.1	S530
+GCA_900478235.1	Salmonella enterica	Salmonella	1	4630342	4630342	100.0	0.04	Complete Genome	GCA_900478235.1	NCTC6703
+GCF_000473275.1	Salmonella enterica	Salmonella	1	4707648	4707648	100.0	0.04	Complete Genome	GCA_000473275.1	RM6836
+GCF_000624175.1	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000624175.2	EC20121177
+GCF_000940975.1	Salmonella enterica	Salmonella	1	4565462	4565462	100.0	0.21	Complete Genome	GCA_000940975.1	USDA-ARS-USMARC-1903
+GCF_001104885.2	Salmonella enterica	Salmonella	1	4784041	4784041	100.0	0.04	Complete Genome	GCA_001104885.3	SGB90
+GCF_001185245.1	Salmonella enterica	Salmonella	1	4677830	4677830	100.0	0.04	Complete Genome	GCA_001185245.1	SEE2
+GCF_002211845.1	Salmonella enterica	Salmonella	1	4812886	4812886	100.0	0.25	Complete Genome	GCA_002211845.1	SA20041608
+GCF_003548545.1	Salmonella enterica	Salmonella	1	4780847	4780847	100.0	0.04	Contig	GCA_003548545.1	2014LSAL03348
+GCF_003549665.1	Salmonella enterica	Salmonella	1	4779561	4779561	100.0	0.04	Contig	GCA_003549665.1	2014LSAL03401
+GCF_003641305.1	Salmonella enterica	Salmonella	1	4985867	4985867	100.0	0.33	Complete Genome	GCA_003641305.1	11TTU1615b
+GCF_003717855.1	Salmonella enterica	Salmonella	1	4791108	4791108	100.0	0.04	Complete Genome	GCA_003717855.1	343076_269157
+GCF_004136335.1	Salmonella enterica	Salmonella	1	4780894	4780894	100.0	0.04	Complete Genome	GCA_004136335.1	LXYSH
+GCF_004354245.1	Salmonella enterica	Salmonella	1	4819673	4819673	100.0	0.09	Complete Genome	GCA_004354245.1	CFSAN087304
+GCF_004354285.1	Salmonella enterica	Salmonella	1	4820913	4820913	100.0	0.07	Complete Genome	GCA_004354285.1	FSW0104
+GCF_006165165.1	Salmonella enterica	Salmonella	1	4763930	4763930	100.0	0.04	Complete Genome	GCA_006165165.1	USDA-ARS-USMARC-76340
+GCF_006165225.1	Salmonella enterica	Salmonella	1	4763925	4763925	100.0	0.04	Complete Genome	GCA_006165225.1	USDA-ARS-USMARC-76337
+GCF_006969245.1	Salmonella enterica	Salmonella	1	5052222	5052222	100.0	0.43	Complete Genome	GCA_006969245.1	MAC15
+GCF_011465815.1	Salmonella enterica	Salmonella	1	4813791	4813791	100.0	0.04	Complete Genome	GCA_011465815.1	Sal-2097
+GCF_014840915.2	Salmonella enterica	Salmonella	1	5024881	5024881	100.0	0.43	Complete Genome	GCA_014840915.2	R16.0431
+GCF_017094605.1	Salmonella enterica	Salmonella	1	4862477	4862477	100.0	0.04	Complete Genome	GCA_017094605.1	AB42049
+GCF_000009505.1	Salmonella enterica	Salmonella	1	4685848	4685848	100.0	0.13	Complete Genome	GCA_000009505.1	P125109
+GCF_000623455.2	Salmonella enterica	Salmonella	1	4685849	4685849	100.0	0.13	Complete Genome	GCA_000623455.2	SA19992322
+GCF_000626195.1	Salmonella enterica	Salmonella	1	4711924	4711924	100.0	0.11	Complete Genome	GCA_000626195.1	EC20120008
+GCF_000626375.1	Salmonella enterica	Salmonella	1	4679953	4679953	100.0	0.11	Complete Genome	GCA_000626375.1	EC20111095
+GCF_000626695.2	Salmonella enterica	Salmonella	1	4685849	4685849	100.0	0.13	Complete Genome	GCA_000626695.2	EC20100325
+GCF_001048035.2	Salmonella enterica	Salmonella	1	4758451	4758451	100.0	0.04	Complete Genome	GCA_001048035.2	ERL103914
+GCF_001163025.2	Salmonella enterica	Salmonella	1	4843068	4843068	100.0	0.04	Complete Genome	GCA_001163025.2	H12ESR04734-001A
+GCF_001454965.1	Salmonella enterica	Salmonella	1	4799793	4799793	100.0	0.04	Complete Genome	GCA_001454965.1	FORC_020
+GCF_001620225.1	Salmonella enterica	Salmonella	1	4676958	4676958	100.0	0.04	Complete Genome	GCA_001620225.1	SAN082;USDA-ARS-USMARC-1676
+GCF_001975515.1	Salmonella enterica	Salmonella	1	4532753	4532753	100.0	0.13	Complete Genome	GCA_001975515.1	ST278
+GCF_002386165.1	Salmonella enterica	Salmonella	1	4588003	4588003	100.0	0.04	Complete Genome	GCA_002386165.1	FDAARGOS_368
+GCF_002761355.1	Salmonella enterica	Salmonella	1	4587202	4587202	100.0	0.21	Complete Genome	GCA_002761355.1	USDA-ARS-USMARC-1901
+GCF_002946375.1	Salmonella enterica	Salmonella	1	4846817	4846817	100.0	0.04	Complete Genome	GCA_002946375.1	2014LSAL01779
+GCF_002952975.1	Salmonella enterica	Salmonella	1	4900326	4900326	100.0	0.33	Complete Genome	GCA_002952975.1	PU131
+GCF_003177255.1	Salmonella enterica	Salmonella	1	5070296	5070296	100.0	0.15	Complete Genome	GCA_003177255.1	DA34837
+GCF_003547975.1	Salmonella enterica	Salmonella	1	4783130	4783130	100.0	0.04	Contig	GCA_003547975.1	2014LSAL05213
+GCF_003641285.1	Salmonella enterica	Salmonella	1	4588222	4588222	100.0	0.21	Complete Genome	GCA_003641285.1	11TTUC-046
+GCF_004847625.1	Salmonella enterica	Salmonella	1	4726558	4726558	100.0	0.04	Complete Genome	GCA_004847625.1	CFSAN000963
+GCF_006874805.1	Salmonella enterica	Salmonella	1	5031277	5031277	100.0	0.11	Complete Genome	GCA_006874805.1	USDA15WA-1
+GCF_008244825.1	Salmonella enterica	Salmonella	1	4869252	4869252	100.0	0.04	Complete Genome	GCA_008244825.1	14028S
+GCF_008244845.1	Salmonella enterica	Salmonella	1	4870263	4870263	100.0	0.04	Complete Genome	GCA_008244845.1	14028S
+GCF_014521465.1	Salmonella enterica	Salmonella	1	4725087	4725087	100.0	0.45	Complete Genome	GCA_014521465.1	K_SA184
+GCF_016864955.1	Salmonella enterica	Salmonella	1	4691273	4691273	100.0	0.07	Complete Genome	GCA_016864955.1	16-174478
+GCF_900205295.1	Salmonella enterica	Salmonella	1	4618754	4618754	100.0	0.04	Complete Genome	GCA_900205295.1	E98_3139-sc-1927833
+GCA_900477995.1	Salmonella enterica	Salmonella	1	4907449	4907449	100.0	0.29	Complete Genome	GCA_900477995.1	NCTC6480
+GCA_900478195.1	Salmonella enterica	Salmonella	1	4732250	4732250	100.0	0.33	Complete Genome	GCA_900478195.1	NCTC9936
+GCA_900478225.1	Salmonella enterica	Salmonella	1	4883767	4883767	100.0	0.07	Complete Genome	GCA_900478225.1	NCTC10310
+GCF_000442415.1	Salmonella enterica	Salmonella	1	4915960	4915960	100.0	0.04	Complete Genome	GCA_000442415.1	USMARC-S3124.1
+GCF_000486915.2	Salmonella enterica	Salmonella	1	4905181	4905181	100.0	0.15	Complete Genome	GCA_000486915.2	ATCC 51958
+GCF_000623355.1	Salmonella enterica	Salmonella	1	4678418	4678418	100.0	0.04	Complete Genome	GCA_000623355.1	EC20110357
+GCF_000626175.1	Salmonella enterica	Salmonella	1	4711160	4711160	100.0	0.11	Complete Genome	GCA_000626175.1	EC20110354
+GCF_000750395.2	Salmonella enterica	Salmonella	1	4679127	4679127	100.0	0.04	Complete Genome	GCA_000750395.2	OLF-SE3;OLF-SE3-98983-4
+GCF_000750495.1	Salmonella enterica	Salmonella	1	4677619	4677619	100.0	0.04	Complete Genome	GCA_000750495.1	OLF-SE6-00219-16
+GCF_001104165.2	Salmonella enterica	Salmonella	1	4777711	4777711	100.0	0.04	Complete Genome	GCA_001104165.2	SGB89
+GCF_001118185.2	Salmonella enterica	Salmonella	1	4781466	4781466	100.0	0.04	Complete Genome	GCA_001118185.2	H12ESR00394-001A
+GCF_001305835.1	Salmonella enterica	Salmonella	1	4701355	4701355	100.0	0.04	Complete Genome	GCA_001305835.1	RM1986
+GCF_001922165.1	Salmonella enterica	Salmonella	1	4846742	4846742	100.0	0.62	Complete Genome	GCA_001922165.1	0007-33
+GCF_001941405.1	Salmonella enterica	Salmonella	1	4602439	4602439	100.0	0.13	Complete Genome	GCA_001941405.1	87
+GCF_900476455.1	Streptococcus pneumoniae	Streptococcus	1	2145551	2145551	99.82	1.0	Complete Genome	GCA_900476455.1	4041STDY6836169
+GCF_900618575.1	Streptococcus pneumoniae	Streptococcus	1	2038006	2038006	99.82	0.2	Complete Genome	GCA_900618575.1	180-2
+GCF_000211015.1	Streptococcus pneumoniae	Streptococcus	1	2037254	2037254	99.82	0.2	Complete Genome	GCA_000211015.1	SNP034183
+GCF_900636585.1	Streptococcus pneumoniae	Streptococcus	1	2115408	2115408	99.82	1.39	Complete Genome	GCA_900636585.1	NCTC12977
+GCF_000211035.1	Streptococcus pneumoniae	Streptococcus	1	2026239	2026239	99.82	0.2	Complete Genome	GCA_000211035.2	SNP994038
+GCF_003966505.1	Streptococcus pneumoniae	Streptococcus	1	2058492	2058492	99.82	0.2	Complete Genome	GCA_003966505.1	HU-OH
+GCF_000211055.1	Streptococcus pneumoniae	Streptococcus	1	2026505	2026505	99.82	0.2	Complete Genome	GCA_000211055.2	SNP994039
+GCF_000210955.1	Streptococcus pneumoniae	Streptococcus	1	2036867	2036867	99.82	0.2	Complete Genome	GCA_000210955.1	OXC141
+GCF_003044325.1	Streptococcus pneumoniae	Streptococcus	1	2122740	2122840	99.82	0.2	Chromosome	GCA_003044325.1	CP2215
+GCF_009664475.1	Streptococcus pneumoniae	Streptococcus	1	2090792	2090792	99.82	0.2	Complete Genome	GCA_009664475.1	AUSMDU00010538
+GCF_900618585.1	Streptococcus pneumoniae	Streptococcus	1	2037269	2037269	99.82	0.2	Complete Genome	GCA_900618585.1	180-15
+GCF_000018985.1	Streptococcus pneumoniae	Streptococcus	1	2120234	2120234	99.82	0.2	Complete Genome	GCA_000018985.1	JJA
+GCF_000210995.1	Streptococcus pneumoniae	Streptococcus	1	2024476	2024476	99.82	0.2	Complete Genome	GCA_000210995.1	SNP034156
+GCF_003966485.1	Streptococcus pneumoniae	Streptococcus	1	2096423	2096423	99.82	0.2	Complete Genome	GCA_003966485.1	ATCC 49619
+GCF_003351645.1	Streptococcus pneumoniae	Streptococcus	1	2096231	2096231	99.82	0.2	Complete Genome	GCA_003351645.1	M16808
+GCF_900693055.1	Streptococcus pneumoniae	Streptococcus	1	2120740	2120740	99.81	0.63	Complete Genome	GCA_900693055.1	55896440-41bd-11e5-998e-3c4a9275d6c6;GPSC18
+GCF_001255215.1	Streptococcus pneumoniae	Streptococcus	1	1983415	1983415	99.81	0.21	Complete Genome	GCA_001255215.1	A66
+GCF_000210935.1	Streptococcus pneumoniae	Streptococcus	1	2093317	2093317	99.81	0.63	Complete Genome	GCA_000210935.1	INV200
+GCF_900618555.1	Streptococcus pneumoniae	Streptococcus	1	2109624	2109624	99.81	0.21	Complete Genome	GCA_900618555.1	947
+GCF_001896045.1	Streptococcus pneumoniae	Streptococcus	1	2206644	2206644	99.76	0.25	Complete Genome	GCA_001896045.1	SP49
+GCF_003994915.1	Streptococcus pneumoniae	Streptococcus	1	2038121	2038121	99.74	0.26	Complete Genome	GCA_003994915.1	HKU1-14
+GCF_000180515.1	Streptococcus pneumoniae	Streptococcus	1	2129934	2129934	99.62	0.21	Complete Genome	GCA_000180515.2	SPNA45;A45
+GCF_900693025.1	Streptococcus pneumoniae	Streptococcus	1	2202359	2202359	99.6	0.32	Complete Genome	GCA_900693025.1	2245STDY6178787;GPSC47
+GCF_000019265.1	Streptococcus pneumoniae	Streptococcus	1	2245615	2245615	99.6	0.21	Complete Genome	GCA_000019265.1	Hungary19A-6
+GCF_002813535.1	Streptococcus pneumoniae	Streptococcus	1	2125517	2125517	99.6	0.49	Complete Genome	GCA_002813535.1	BHN97x
+GCF_003003495.1	Streptococcus pneumoniae	Streptococcus	1	2046572	2046572	99.6	0.21	Complete Genome	GCA_003003495.1	D39V
+GCF_900476475.1	Streptococcus pneumoniae	Streptococcus	1	2157682	2157682	99.6	0.21	Complete Genome	GCA_900476475.1	4041STDY6583227
+GCF_008253725.1	Streptococcus pneumoniae	Streptococcus	1	2038617	2038617	99.6	0.21	Complete Genome	GCA_008253725.1	R6CIB17
+GCF_018336875.1	Streptococcus pneumoniae	Streptococcus	1	2046551	2046551	99.6	0.21	Complete Genome	GCA_018336875.1	D39_P0
+GCF_000014365.2	Streptococcus pneumoniae	Streptococcus	1	2046116	2046116	99.6	0.21	Complete Genome	GCA_000014365.2	D39
+GCF_003351525.1	Streptococcus pneumoniae	Streptococcus	1	2114141	2114141	99.6	0.21	Complete Genome	GCA_003351525.1	M23734
+GCF_003351725.1	Streptococcus pneumoniae	Streptococcus	1	2109726	2109726	99.6	0.21	Complete Genome	GCA_003351725.1	M26368
+GCF_003967155.2	Streptococcus pneumoniae	Streptococcus	1	2156271	2156271	99.6	0.21	Complete Genome	GCA_003967155.2	ASP0581
+GCF_000019005.1	Streptococcus pneumoniae	Streptococcus	1	2111882	2111882	99.6	0.21	Complete Genome	GCA_000019005.1	P1031
+GCF_000210975.1	Streptococcus pneumoniae	Streptococcus	1	2142122	2142122	99.6	0.21	Complete Genome	GCA_000210975.1	INV104
+GCF_000211075.1	Streptococcus pneumoniae	Streptococcus	1	2131190	2131190	99.6	0.21	Complete Genome	GCA_000211075.1	SPN032672
+GCF_900475515.1	Streptococcus pneumoniae	Streptococcus	1	2039982	2039982	99.6	0.21	Complete Genome	GCA_900475515.1	NCTC13276
+GCF_003351705.1	Streptococcus pneumoniae	Streptococcus	1	2169584	2169584	99.6	0.37	Complete Genome	GCA_003351705.1	M26365
+GCF_000019985.1	Streptococcus pneumoniae	Streptococcus	1	2209198	2209198	99.6	0.21	Complete Genome	GCA_000019985.1	CGSP14
+GCF_900475305.1	Streptococcus pneumoniae	Streptococcus	1	2046573	2046573	99.6	0.21	Complete Genome	GCA_900475305.1	NCTC7466
+GCF_000299015.1	Streptococcus pneumoniae	Streptococcus	1	2064154	2064154	99.56	0.21	Complete Genome	GCA_000299015.1	gamPNI0373
+GCF_000007045.1	Streptococcus pneumoniae	Streptococcus	1	2038615	2038615	99.56	0.21	Complete Genome	GCA_000007045.1	R6
+GCF_004291255.1	Streptococcus pneumoniae	Streptococcus	1	2101621	2101621	99.56	0.21	Complete Genome	GCA_004291255.1	EF3030
+GCF_017569245.1	Streptococcus pneumoniae	Streptococcus	1	2134668	2134668	99.54	0.21	Complete Genome	GCA_017569245.1	BVJ1JL
+GCF_000146975.1	Streptococcus pneumoniae	Streptococcus	1	2130580	2130580	99.54	0.26	Complete Genome	GCA_000146975.1	AP200
+GCF_900618545.1	Streptococcus pneumoniae	Streptococcus	1	2169270	2169270	99.52	0.21	Complete Genome	GCA_900618545.1	4496
+GCA_004331935.1	Streptococcus pneumoniae	Streptococcus	1	2041494	2041494	99.49	0.21	Complete Genome	GCA_004331935.1	521
+GCF_900476465.1	Streptococcus pneumoniae	Streptococcus	1	2104636	2104636	99.47	0.2	Complete Genome	GCA_900476465.1	4041STDY6836170
+GCF_000006885.1	Streptococcus pneumoniae	Streptococcus	1	2160842	2160842	99.42	0.2	Complete Genome	GCA_000006885.1	TIGR4;ATCC BAA-334
+GCF_900692935.1	Streptococcus pneumoniae	Streptococcus	1	2074861	2074861	99.42	0.2	Complete Genome	GCA_900692935.1	GPSC10;GPS_US_PATH396-sc-2296505
+GCF_000026665.1	Streptococcus pneumoniae	Streptococcus	1	2221315	2221315	99.42	0.25	Complete Genome	GCA_000026665.1	ATCC 700669
+GCF_002843545.1	Streptococcus pneumoniae	Streptococcus	1	2168552	2168552	99.42	0.2	Complete Genome	GCA_002843545.1	Xen35
+GCF_000251085.2	Streptococcus pneumoniae	Streptococcus	1	2150813	2150813	99.42	0.2	Complete Genome	GCA_000251085.2	ST556
+GCF_900476505.1	Streptococcus pneumoniae	Streptococcus	1	2200529	2200529	99.42	0.7	Complete Genome	GCA_900476505.1	4041STDY6836166
+GCF_000269665.1	Streptococcus pneumoniae	Streptococcus	1	2162245	2162245	99.42	0.2	Contig	GCA_000269665.1	TIGR4;Tigr4
+GCF_000019025.1	Streptococcus pneumoniae	Streptococcus	1	2112148	2112148	99.42	0.2	Complete Genome	GCA_000019025.1	Taiwan19F-14
+GCF_015839035.1	Streptococcus pneumoniae	Streptococcus	1	2180123	2180123	99.42	0.6	Complete Genome	GCA_015839035.1	475
+GCF_015840115.1	Streptococcus pneumoniae	Streptococcus	1	2140016	2140016	99.42	0.6	Complete Genome	GCA_015840115.1	563
+GCF_003609935.1	Streptococcus pneumoniae	Streptococcus	1	2045062	2045062	99.42	0.2	Complete Genome	GCA_003609935.1	MDRSPN001
+GCF_001896085.1	Streptococcus pneumoniae	Streptococcus	1	2073113	2073113	99.42	0.2	Complete Genome	GCA_001896085.1	SP64
+GCF_015839235.1	Streptococcus pneumoniae	Streptococcus	1	2141347	2141347	99.42	0.6	Complete Genome	GCA_015839235.1	521
+GCF_900795205.1	Streptococcus pneumoniae	Streptococcus	1	2074160	2074160	99.42	0.2	Complete Genome	GCA_900795205.1	b04a6400-1f66-11e7-b93e-3c4a9275d6c8;GPSC55
+GCF_015839775.1	Streptococcus pneumoniae	Streptococcus	1	2114775	2114775	99.42	0.6	Complete Genome	GCA_015839775.1	573
+GCF_000019825.1	Streptococcus pneumoniae	Streptococcus	1	2078953	2078953	99.42	0.2	Complete Genome	GCA_000019825.1	G54
+GCF_003966525.1	Streptococcus pneumoniae	Streptococcus	1	2180605	2180605	99.42	0.2	Complete Genome	GCA_003966525.1	NU83127
+GCF_002357995.1	Streptococcus pneumoniae	Streptococcus	1	2148476	2148476	99.42	0.2	Complete Genome	GCA_002357995.1	KK0981
+GCF_015839575.1	Streptococcus pneumoniae	Streptococcus	1	2124184	2124184	99.42	0.6	Complete Genome	GCA_015839575.1	566
+GCF_015839915.1	Streptococcus pneumoniae	Streptococcus	1	2089999	2089999	99.42	0.6	Complete Genome	GCA_015839915.1	574
+GCF_000273445.1	Streptococcus pneumoniae	Streptococcus	1	2163340	2163340	99.42	0.2	Chromosome	GCA_000273445.1	TIGR4
+GCF_002947575.1	Streptococcus pneumoniae	Streptococcus	1	2221315	2221315	99.42	0.25	Complete Genome	GCA_002947575.1	endophthalmitis;335
+GCF_015838875.1	Streptococcus pneumoniae	Streptococcus	1	2121469	2121469	99.42	0.6	Complete Genome	GCA_015838875.1	310
+GCF_000196595.1	Streptococcus pneumoniae	Streptococcus	1	2088772	2088772	99.42	0.2	Complete Genome	GCA_000196595.1	TCH8431;19A;TCH8431/19A
+GCF_900476445.1	Streptococcus pneumoniae	Streptococcus	1	2131442	2131442	99.39	0.21	Complete Genome	GCA_900476445.1	4041STDY6836167
+GCF_000018965.1	Streptococcus pneumoniae	Streptococcus	1	2184682	2184682	99.39	0.32	Complete Genome	GCA_000018965.1	70585
+GCF_900693075.1	Streptococcus pneumoniae	Streptococcus	1	2066251	2066251	99.39	0.21	Complete Genome	GCA_900693075.1	569492b0-41bd-11e5-998e-3c4a9275d6c6;GPSC13
+GCF_013047165.1	Streptococcus pneumoniae	Streptococcus	1	2219840	2219840	99.38	0.69	Complete Genome	GCA_013047165.1	6A-10
+GCF_000817005.1	Streptococcus pneumoniae	Streptococcus	1	2287774	2287774	99.37	0.29	Complete Genome	GCA_000817005.1	NT_110_58
+GCF_015839415.1	Streptococcus pneumoniae	Streptococcus	1	2141694	2141694	99.37	0.6	Complete Genome	GCA_015839415.1	525
+GCF_003354825.1	Streptococcus pneumoniae	Streptococcus	1	2057144	2057144	99.29	0.26	Complete Genome	GCA_003354825.1	SPN XDR SMC1710-32
+GCA_000211095.1	Streptococcus pneumoniae	Streptococcus	1	2133496	2133496	99.21	0.21	Complete Genome	GCA_000211095.1	SPN033038
+GCF_000147095.1	Streptococcus pneumoniae	Streptococcus	1	2240045	2240045	99.18	0.29	Complete Genome	GCA_000147095.1	670-6B
+GCF_002813955.1	Streptococcus pneumoniae	Streptococcus	1	2079194	2079194	99.18	0.21	Complete Genome	GCA_002813955.1	11A
+GCF_900475805.1	Streptococcus pneumoniae	Streptococcus	1	2093242	2093242	99.18	0.21	Complete Genome	GCA_900475805.1	NCTC11902
+GCF_001457635.1	Streptococcus pneumoniae	Streptococcus	1	2110968	2110968	99.18	0.63	Complete Genome	GCA_001457635.1	NCTC7465
+GCF_001896065.1	Streptococcus pneumoniae	Streptococcus	1	2071812	2071812	99.02	0.2	Complete Genome	GCA_001896065.1	SP61
+GCF_001902455.1	Streptococcus pneumoniae	Streptococcus	1	2092148	2092148	99.02	0.2	Complete Genome	GCA_001902455.1	SWU02
+GCF_900622505.2	Streptococcus pneumoniae	Streptococcus	2	2150981	2156228	99.81	0.21	Complete Genome	GCA_900622505.2	4559
+GCF_900693045.1	Streptococcus pneumoniae	Streptococcus	2	2021608	2026174	99.81	0.26	Chromosome	GCA_900693045.1	GPSC43;GPS_HK_150-sc-2296816
+GCA_901482425.1	Streptococcus pneumoniae	Streptococcus	2	1845765	2013929	99.71	0.21	Contig	GCA_901482425.1	NCTC10659
+GCF_900459635.1	Streptococcus pneumoniae	Streptococcus	2	2111094	2127330	99.6	1.47	Contig	GCA_900459635.1	NCTC13755
+GCF_900459895.1	Streptococcus pneumoniae	Streptococcus	2	2014498	2032795	99.6	1.26	Contig	GCA_900459895.1	NCTC11898
+GCF_000348705.1	Streptococcus pneumoniae	Streptococcus	2	2073283	2076531	99.6	0.21	Chromosome	GCA_000348705.1	PCS8235
+GCF_011694695.1	Streptococcus pneumoniae	Streptococcus	2	2143685	2145834	99.6	0.21	Complete Genome	GCA_011694695.1	PZ900701590
+GCF_900459595.1	Streptococcus pneumoniae	Streptococcus	2	2165891	2169054	99.42	0.2	Contig	GCA_900459595.1	NCTC11901
+GCF_900459735.1	Streptococcus pneumoniae	Streptococcus	2	2050559	2054745	99.42	0.2	Contig	GCA_900459735.1	NCTC11893
+GCF_900618125.1	Streptococcus pneumoniae	Streptococcus	2	1928015	2022705	99.42	0.2	Contig	GCA_900618125.1	NCTC11032
+GCF_900693005.1	Streptococcus pneumoniae	Streptococcus	3	1493002	2121917	99.82	0.25	Chromosome	GCA_900693005.1	GPSC4;GPS_HK_21-sc-2296565
+GCF_900459835.1	Streptococcus pneumoniae	Streptococcus	3	2070878	2086806	99.82	1.39	Contig	GCA_900459835.1	NCTC11900
+GCF_900461665.1	Streptococcus pneumoniae	Streptococcus	3	2232637	2249195	99.6	0.29	Contig	GCA_900461665.1	NCTC13735
+GCF_900459505.1	Streptococcus pneumoniae	Streptococcus	3	2171914	2195746	99.5	0.63	Contig	GCA_900459505.1	NCTC11905
+GCF_900459845.1	Streptococcus pneumoniae	Streptococcus	3	2087391	2117552	99.42	1.39	Contig	GCA_900459845.1	NCTC11899
