@@ -119,6 +119,70 @@ Digestion is cached, so the marginal cost of `--reverse` is the synteny step twi
 
 ---
 
+## 3b. The truth column is wrong, and that is worth fixing before anything else
+
+Your status note reads the corrected `breakpoint_count vs contig count` figure of
+**-0.377** as "the metric is now properly uncoupled from contig count". Two things
+about that, both checked against the tables now in the repo (n = 43,078 pairs joined
+on `pairid`, Spearman unless stated).
+
+**First, the number does not reproduce with a different definition of contig count.**
+Deriving effective contig count from Syn2b's own `observable_fraction`
+(`K = 1 + (1 - observable_fraction) * shared_tags`, i.e. contigs actually carrying
+landmarks) gives **-0.097 Spearman / -0.041 Pearson**, not -0.377. The likely
+difference is raw FASTA contig count versus effective contig count, which diverge
+sharply on assemblies with many tiny contigs. Worth reconciling, because the two are
+not interchangeable and the reports quote one of them.
+
+**Second, and more important: zero is not the right target.** dnadiff's own
+`Breakpoints` -- the column currently used as truth -- correlates **+0.163** with
+contig count. The truth is itself fragmentation-contaminated, so a metric driven to
+0 is under-counting relative to it, not clean.
+
+Splitting dnadiff's classified events (`dnadiff_events_50k.tsv`, reference side)
+shows exactly where the contamination sits:
+
+| dnadiff channel | vs contig count | vs Syn2b breakpoints |
+|---|---|---|
+| Translocations | **+0.799** | 0.373 |
+| Insertions | +0.158 | 0.695 |
+| Breakpoints (current truth) | +0.163 | 0.724 |
+| Relocations | -0.208 | 0.751 |
+| Inversions | -0.331 | 0.647 |
+
+`Translocations` is very nearly a contig counter. That is not a defect in dnadiff --
+it calls a translocation when consecutive alignments come from different *sequences*,
+and on a fragmented assembly they constantly do -- but it makes it useless as
+rearrangement truth here.
+
+Dropping it gives a strictly better truth channel on every measure:
+
+| candidate truth | vs contig count | r with Syn2b bp | partial r \| contigs |
+|---|---|---|---|
+| `Breakpoints` (current) | +0.163 | 0.724 | 0.734 |
+| `Reloc + Transloc + Inv` | +0.484 | 0.683 | 0.781 |
+| **`Relocations + Inversions`** | **-0.243** | **0.766** | **0.790** |
+
+**So: validate the count channel against `dd_relocations_ref + dd_inversions_ref`,
+not against `dd_breakpoints_ref`.** The agreement with Syn2b goes *up* (0.724 ->
+0.766) while the truth becomes fragmentation-clean, so this is not a trade.
+
+This affects the reports you just regenerated -- `SV_REANALYSIS.md`,
+`SV_COMPARISON_REPORT.md`, `SV_EVALUATION_REPORT.md` -- all of which regress against
+`dnadiff_breakpoints`. Re-deriving those correlations from the events table is a
+minutes-long pass over files already on disk; no re-alignment. Please do that before
+drawing conclusions about whether the `breakpoint_count` fix helped or hurt, because
+the raw r = 0.465 -> 0.133 drop is measured against a truth column that is partly
+counting the same artifact the fix removed.
+
+The same finding changed task 9's script: `collect_junction_coordinates.py` now
+returns INV and JMP positions in `dnadiff_pos` and puts SEQ in a separate
+`dnadiff_pos_seq`, excluded from the position comparison by default. Without that
+split, the position comparison on draft assemblies would have been matching Syn2b's
+junctions against contig boundaries.
+
+---
+
 ## 4. Order to run, and why
 
 Tasks 1–4 are done. 5 stays deferred. Run the rest in this order — it is by
