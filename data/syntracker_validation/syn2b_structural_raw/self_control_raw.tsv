@@ -1,0 +1,5 @@
+cohort	label	n	passed	median_breakpoints	median_scj	median_observable_fraction	K_est	max_dev_syn2b_scj_distance	max_dev_syn2b_breakpoints	max_dev_syn2b_inverted_fraction
+Streptomyces_rimosus	raw	20	1	0.0	0.0	0.9752	423.6912000000008	0.0	0.0	0.0
+Escherichia_coli_hypermutator	raw	23	1	0.0	0.0	0.9982	11.299600000000137	0.0	0.0	0.0
+Neisseria_gonorrhoeae	raw	12	1	0.0	0.0	0.9958499999999999	15.197150000000335	0.0	0.0	0.0
+Helicobacter_pylori	raw	77	1	0.0	0.0	0.9977	3.9853999999999594	0.0	0.0	0.0

@@ -33,10 +33,14 @@ Thumbs.db
 # Large binary files
 *.s2ba
 *.sketch
+*.tgt
 results/synteny_bench/sim/
 # large pilot genome files
 data/cagpai_pilot/*.fna
 data/cagpai_pilot/*.gb*
+# intermediate Syn2b synteny caches
+data/syntracker_validation/syn2b_structural_*/pairs/
+data/syntracker_validation/syn2b_structural_*/tgt/
 
 # GTDB metadata is too large for GitHub (>100 MB); keep local copies only
 data/gtdb_metadata/*.tsv

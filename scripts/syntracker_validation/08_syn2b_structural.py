@@ -124,11 +124,14 @@ EXPECTATION = {
 }
 
 # Self-comparison must return exactly this. A genome is collinear with itself.
+# observable_fraction is NOT required to be 1.0 on draft assemblies; it only
+# reflects how many of A's adjacencies B can judge, and a draft A judges fewer
+# than a closed A. The fragmentation-immune metrics (breakpoints, SCJ,
+# inverted_fraction) must be zero.
 SELF_EXPECT = {
     "syn2b_scj_distance": 0.0,
     "syn2b_breakpoints": 0.0,
     "syn2b_inverted_fraction": 0.0,
-    "syn2b_observable_fraction": 1.0,
 }
 SELF_TOL = 1e-9
 
@@ -394,12 +397,13 @@ def main():
     failed = [c for c in args.cohorts if not control[c]["passed"]]
     if failed:
         print(f"\nSelf-comparison control FAILED for: {', '.join(failed)}", file=sys.stderr)
-        print("A genome compared against itself must give 0 breakpoints, SCJ 0, "
-              "inverted_fraction 0 and observable_fraction 1. A nonzero floor means "
-              "the cohort's structural numbers measure assembly fragmentation, not "
-              "biology -- which is precisely how the earlier Syn2bANI pass produced "
-              "a species ranking that matched its own self-comparison floor to within "
-              "a few percent.", file=sys.stderr)
+        print("A genome compared against itself must give 0 breakpoints, SCJ 0 and "
+              "inverted_fraction 0. (observable_fraction is allowed to be <1 on draft "
+              "assemblies; it estimates contig count.) A nonzero floor on the three "
+              "fragmentation-immune metrics means the cohort's structural numbers "
+              "measure assembly fragmentation, not biology -- which is precisely how "
+              "the earlier Syn2bANI pass produced a species ranking that matched its "
+              "own self-comparison floor to within a few percent.", file=sys.stderr)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     ctrl_path = out_dir / f"self_control_{args.label}.tsv"
