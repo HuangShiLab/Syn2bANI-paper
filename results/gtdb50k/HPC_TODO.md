@@ -514,6 +514,49 @@ $PY $ROOT/scripts/gtdb50k/compare_junction_positions.py \
     --out    $WORK/junction_coords/position_agreement.tsv
 ```
 
+### If you are re-running Syn2b anyway, do that first
+
+`run_syn2b_inverted_fraction.py` now (a) collects the junction coordinates itself,
+(b) emits `legacy_adjacency`, and (c) runs each pair in **both directions** by
+default, which is what makes `scj_distance` usable. Re-running removes the
+dependency on scavenging `tmp_pairs/` and produces `syn2b_scj_corrected` in the same
+pass. Digestion is cached, so the marginal cost is the synteny step, twice.
+
+**`scj_distance` is the one metric here that is not fragmentation-immune.** It is the
+raw symmetric difference of the adjacency sets, so every contig break genuinely
+removes an adjacency and adds to it. The correction subtracts that term using Syn2b's
+own output:
+
+    hidden        = observable_adjacencies * (1/observable_fraction - 1)
+    scj_corrected = scj_distance - hidden(A->B) - hidden(B->A)
+
+Both directions are needed because `observable_fraction` is defined on genome_A's
+adjacencies alone, so it accounts for one genome's contig breaks while
+`scj_distance` is inflated by both. Measured on E. coli K-12 shattered independently
+on both sides, truth SCJ 0:
+
+| K per genome | 5 | 10 | 20 | 40 | 80 | 160 |
+|---|---|---|---|---|---|---|
+| raw `scj_distance` | 8 | 18 | 37 | 77 | 153 | 287 |
+| one-sided correction | +4 | +9 | +18 | +39 | +77 | +141 |
+| **two-sided correction** | **+0.2** | **+0.1** | **+0.1** | **+0.2** | **+0.1** | **-4.0** |
+
+With a real 200 kb inversion underneath (truth SCJ 4) the two-sided value reads
+4.00 / 4.15 / 3.79 at K = 1 / 20 / 80, against a raw `scj_distance` of 4 / 41 / 155.
+
+### The coordinate frame, which is not optional
+
+Syn2b reports junctions in **genome-wide concatenated** coordinates; dnadiff's
+`.1coords` reports positions **within a reference contig**, alongside its name. On a
+closed genome the two frames coincide and the mismatch is invisible. On a draft they
+differ by the cumulative length of every preceding contig — on a 20-contig test
+reference that was 769,591 bp, enough to make every comparison meaningless.
+
+`collect_junction_coordinates.py` converts using the contig table in the reference's
+own TGT header (`#contigs=name:len;...`), which is the table Syn2b itself used, so
+point `--tgt-cache` at the directory holding `<acc>.tgt`. Pairs it cannot convert are
+marked `frame = no_offsets_multicontig` and excluded rather than reported wrong.
+
 ### Reading the result
 
 The two sets are matched **one-to-one**, greedily by increasing distance — nearest

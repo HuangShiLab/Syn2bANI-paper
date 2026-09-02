@@ -91,6 +91,50 @@ def read_syn2b_junctions(pairdir: Path):
     return sorted(out)
 
 
+def contig_offsets_from_tgt(tgt_path: Path):
+    """Cumulative genome-wide offset per reference contig, in FASTA order.
+
+    REQUIRED, and the comparison is wrong without it. Syn2b reports junctions in
+    genome-wide concatenated coordinates (`digest` accumulates an offset across
+    contigs), while dnadiff's .1coords reports positions *within* a reference
+    contig alongside its name. On a closed genome the two frames coincide and the
+    error is invisible; on a draft they differ by the cumulative length of every
+    preceding contig, which is most of gtdb50k.
+
+    The TGT header carries the contig table Syn2b itself used, so taking it from
+    there rather than from the FASTA guarantees the two frames agree:
+
+        #contigs=name:len;name:len:circular;...
+    """
+    if not tgt_path.exists():
+        return None
+    header = None
+    with open(tgt_path) as fh:
+        for line in fh:
+            if line.startswith("#contigs="):
+                header = line[len("#contigs="):].strip()
+                break
+            if not line.startswith((">", "#")):
+                break            # past the header block
+    if not header:
+        return None
+    offsets, off = {}, 0
+    for field in header.split(";"):
+        if not field:
+            continue
+        parts = field.split(":")
+        if len(parts) < 2:
+            continue
+        name = parts[0]
+        try:
+            length = int(parts[1])
+        except ValueError:
+            continue
+        offsets.setdefault(name, off)
+        off += length
+    return offsets or None
+
+
 def parse_1coords(path: Path):
     """show-coords -rclTH: S1 E1 S2 E2 LEN1 LEN2 %IDY LENR LENQ COVR COVQ TAGR TAGQ.
 
@@ -114,8 +158,13 @@ def parse_1coords(path: Path):
     return blocks
 
 
-def derive_dnadiff_boundaries(blocks):
+def derive_dnadiff_boundaries(blocks, offsets=None):
     """Reference coordinates where the query stops being collinear.
+
+    Positions are returned in Syn2b's frame: genome-wide if `offsets` maps each
+    reference contig name to its cumulative offset, and within-contig otherwise.
+    A caller without an offset table gets `None` back for multi-contig references
+    rather than silently mismatched coordinates.
 
     Returns (positions, counts) with counts keyed SEQ / INV / JMP.
     """
@@ -148,7 +197,8 @@ def derive_dnadiff_boundaries(blocks):
                 kind = "JMP" if moved_backwards else None
             if kind:
                 counts[kind] += 1
-                positions.append(a_e1)
+                base = offsets.get(a[0], 0) if offsets else 0
+                positions.append(base + a_e1)
     return sorted(positions), counts
 
 
@@ -177,7 +227,7 @@ def parse_feature_estimates(path: Path):
 
 
 def one_pair(task):
-    pairid, tgt_cache, dnadiff_dir = task
+    pairid, tgt_cache, dnadiff_dir, ref_acc = task
     rec = {"pairid": pairid}
 
     syn = read_syn2b_junctions(Path(tgt_cache) / "tmp_pairs" / pairid)
@@ -187,7 +237,26 @@ def one_pair(task):
     dd = Path(dnadiff_dir) / pairid
     coords_path = dd / "dd.1coords"
     if coords_path.exists():
-        pos, counts = derive_dnadiff_boundaries(parse_1coords(coords_path))
+        blocks = parse_1coords(coords_path)
+        offsets = contig_offsets_from_tgt(Path(tgt_cache) / f"{ref_acc}.tgt") if ref_acc else None
+        n_ref_contigs = len({b[0] for b in blocks})
+        if offsets is None and n_ref_contigs > 1:
+            # Frames would silently disagree by the cumulative length of every
+            # preceding contig. Refuse rather than emit misaligned coordinates.
+            rec["dnadiff_n"] = -1
+            rec["dnadiff_pos"] = ""
+            rec["dnadiff_inv"] = rec["dnadiff_jmp"] = rec["dnadiff_seq"] = -1
+            rec["frame"] = "no_offsets_multicontig"
+            est = parse_feature_estimates(dd / "dd.report")
+            rec["report_rearrangements"] = (
+                est.get("Relocations", 0) + est.get("Translocations", 0) + est.get("Inversions", 0)
+                if est else -1)
+            rec["report_breakpoints"] = est.get("Breakpoints", -1) if est else -1
+            rec["report_inversions"] = est.get("Inversions", -1) if est else -1
+            rec["count_diff"] = ""
+            return rec
+        rec["frame"] = "genome_wide" if offsets else "single_contig"
+        pos, counts = derive_dnadiff_boundaries(blocks, offsets)
         rec["dnadiff_n"] = len(pos)
         rec["dnadiff_pos"] = ",".join(map(str, pos))
         rec["dnadiff_inv"] = counts["INV"]
@@ -197,6 +266,7 @@ def one_pair(task):
         rec["dnadiff_n"] = -1
         rec["dnadiff_pos"] = ""
         rec["dnadiff_inv"] = rec["dnadiff_jmp"] = rec["dnadiff_seq"] = -1
+        rec["frame"] = "no_1coords"
 
     est = parse_feature_estimates(dd / "dd.report")
     if est:
@@ -218,9 +288,9 @@ def one_pair(task):
     return rec
 
 
-FIELDS = ["pairid", "syn2b_n", "dnadiff_n", "report_rearrangements", "report_breakpoints",
-          "report_inversions", "dnadiff_inv", "dnadiff_jmp", "dnadiff_seq", "count_diff",
-          "syn2b_pos", "dnadiff_pos"]
+FIELDS = ["pairid", "frame", "syn2b_n", "dnadiff_n", "report_rearrangements",
+          "report_breakpoints", "report_inversions", "dnadiff_inv", "dnadiff_jmp",
+          "dnadiff_seq", "count_diff", "syn2b_pos", "dnadiff_pos"]
 
 
 def main():
@@ -238,19 +308,23 @@ def main():
     pairids = []
     with open(args.pairs) as fh:
         for r in csv.DictReader(fh, delimiter="\t"):
-            pairids.append(r.get("pairid") or f"{r['q_acc']}__{r['r_acc']}")
+            pid = r.get("pairid") or f"{r['q_acc']}__{r['r_acc']}"
+            # dnadiff is invoked as `dnadiff <ref> <qry>` and the syn2b runner makes
+            # the same accession genome_A, so the reference TGT is the contig table
+            # both frames must agree on.
+            pairids.append((pid, r.get("r_acc", "")))
     seen, uniq = set(), []
-    for pid in pairids:
+    for pid, racc in pairids:
         if pid not in seen:
             seen.add(pid)
-            uniq.append(pid)
+            uniq.append((pid, racc))
     if len(uniq) != len(pairids):
         print(f"note: {len(pairids) - len(uniq)} duplicate pairids in --pairs, deduplicated",
               file=sys.stderr)
 
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
-    tasks = [(pid, args.tgt_cache, args.dnadiff) for pid in uniq]
+    tasks = [(pid, args.tgt_cache, args.dnadiff, racc) for pid, racc in uniq]
     print(f"collecting {len(tasks)} pairs with {args.workers} workers ...", flush=True)
 
     rows = []
@@ -273,6 +347,16 @@ def main():
     have_dd = sum(1 for r in rows if r["dnadiff_n"] >= 0)
     both = sum(1 for r in rows if r["syn2b_n"] >= 0 and r["dnadiff_n"] >= 0)
     print(f"\navailability: syn2b {have_syn}/{n}, dnadiff 1coords {have_dd}/{n}, both {both}/{n}")
+    frames = {}
+    for r in rows:
+        frames[r.get("frame", "?")] = frames.get(r.get("frame", "?"), 0) + 1
+    print("coordinate frames: " + ", ".join(f"{k} {v}" for k, v in sorted(frames.items())))
+    if frames.get("no_offsets_multicontig"):
+        print(f"  {frames['no_offsets_multicontig']} pairs skipped: the reference is "
+              f"multi-contig and its TGT was not found in --tgt-cache, so dnadiff's "
+              f"within-contig coordinates could not be put in Syn2b's genome-wide "
+              f"frame. Point --tgt-cache at the directory holding <acc>.tgt.",
+              file=sys.stderr)
     if have_syn == 0:
         print("  No syn2b junction files found. They live in <tgt-dir>/tmp_pairs/<pairid>/ ; "
               "check that --tgt-cache is the same --tgt-dir the run used.", file=sys.stderr)

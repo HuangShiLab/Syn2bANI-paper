@@ -20,7 +20,31 @@ Inputs:
     --out        output TSV
 
 Outputs:
-    TSV with pairid, syn2b_breakpoints, syn2b_inverted_fraction, syn2b_observable_fraction, ...
+    One TSV row per pair carrying Syn2b's whole structural channel, not only
+    inverted_fraction -- the script name is a leftover from what it was first
+    written for. Columns:
+
+      syn2b_*                breakpoints, scj_distance, breakpoint_density, both
+                             inverted_fraction variants, the three orientation
+                             counters, observable_fraction/adjacencies, structural,
+                             shared_tags, repeats_dropped, landmarks_collapsed,
+                             circular, legacy_adjacency
+      syn2b_junctions        breakpoint coordinates in the reference frame,
+                             comma-separated
+      syn2b_rev_*            the same pair with the roles swapped (--reverse,
+                             on by default), including query-frame junctions
+      syn2b_scj_corrected    scj_distance - hidden_a - hidden_b
+
+`scj_distance` is the one metric here that is NOT fragmentation-immune -- it is the
+raw symmetric difference of the adjacency sets, so each contig break genuinely
+removes an adjacency and adds to it. `syn2b_scj_corrected` subtracts that term using
+Syn2b's own output, and it needs both directions because `observable_fraction` is
+defined on genome_A's adjacencies alone. Measured on E. coli K-12 shattered
+independently on both sides with truth SCJ 0, the one-sided correction leaves
++4 / +9 / +18 / +39 / +77 / +141 at K = 5 / 10 / 20 / 40 / 80 / 160 -- no correction
+at all -- while the two-sided one leaves +0.2 / +0.1 / +0.1 / +0.2 / +0.1 / -4.0.
+With a real 200 kb inversion underneath (truth SCJ 4) it reads 4.2 / 4.1 / 3.8 at
+K = 5 / 20 / 80.
 """
 
 import argparse
@@ -67,63 +91,132 @@ def digest_genome(args):
         return acc, f"ERROR: {e}"
 
 
-def run_pair(args):
-    pairid, q_acc, r_acc, tgt_dir, syn2b = args
-    q_tgt = tgt_dir / f"{q_acc}.tgt"
-    r_tgt = tgt_dir / f"{r_acc}.tgt"
-    if not q_tgt.exists() or not r_tgt.exists():
-        return {"pairid": pairid, "status": "missing_tgt"}
+SYN2B_COLS = ("breakpoints", "scj_distance", "breakpoint_density",
+              "inverted_fraction", "raw_inverted_fraction",
+              "orientation_mismatches", "orientation_mismatches_raw",
+              "orientation_uninformative", "observable_fraction",
+              "observable_adjacencies", "structural", "shared_tags",
+              "repeats_dropped", "landmarks_collapsed", "circular",
+              # The metric the current one replaced. Kept because the paper's
+              # argument is the *contrast*: legacy_adjacency correlates r=+0.982
+              # with SynTracker's APSS while responding to divergence rather than
+              # order, and the new metric is its mirror image. Dropping it leaves
+              # that figure unplottable (MATH_REVIEW.md section 6).
+              "legacy_adjacency")
 
-    tmpdir = tgt_dir / "tmp_pairs" / pairid
+
+def hidden_adjacencies(rec, prefix=""):
+    """Adjacencies of genome_A that genome_B is in no position to judge.
+
+    `observable_fraction = observable_adjacencies / |adj_A|`, so
+    `|adj_A| - observable = observable * (1/f - 1)`. This is the quantity
+    `scj_distance` is inflated by, one contig break at a time.
+    """
+    try:
+        f = float(rec[f"syn2b_{prefix}observable_fraction"])
+        obs = float(rec[f"syn2b_{prefix}observable_adjacencies"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    if not (0.0 < f <= 1.0):
+        return None
+    return obs * (1.0 / f - 1.0)
+
+
+def _synteny_once(pairid, a_acc, b_acc, tgt_dir, syn2b, subdir, prefix):
+    """Run one direction. `a_acc` becomes genome_A, so all coordinates and the
+    fixed-reference raw_inverted_fraction are in its frame."""
+    a_tgt = tgt_dir / f"{a_acc}.tgt"
+    b_tgt = tgt_dir / f"{b_acc}.tgt"
+    if not a_tgt.exists() or not b_tgt.exists():
+        return None, "missing_tgt"
+
+    tmpdir = tgt_dir / subdir / pairid
     tmpdir.mkdir(parents=True, exist_ok=True)
     # Remove stale symlinks from previous naming conventions so only the two
     # current TGTs are present per pair.
     for existing in tmpdir.glob("*.tgt"):
         existing.unlink()
-    # Name files so r_acc (reference, matching dnadiff) sorts first and becomes
-    # genome_A. q_acc (query) sorts second and becomes genome_B.
-    r_link = tmpdir / f"a_ref_{r_acc}.tgt"
-    q_link = tmpdir / f"b_qry_{q_acc}.tgt"
-    r_link.symlink_to(r_tgt.resolve())
-    q_link.symlink_to(q_tgt.resolve())
+    # Name files so a_acc sorts first and becomes genome_A.
+    (tmpdir / f"a_ref_{a_acc}.tgt").symlink_to(a_tgt.resolve())
+    (tmpdir / f"b_qry_{b_acc}.tgt").symlink_to(b_tgt.resolve())
 
     out_csv = tmpdir / "synteny.csv"
     try:
         run([syn2b, "synteny", "-i", str(tmpdir), "-o", str(out_csv)], timeout=120)
     except Exception as e:
-        err_file = tmpdir / "synteny.err"
-        err_file.write_text(str(e))
-        return {"pairid": pairid, "status": f"synteny_error: {e}"}
+        (tmpdir / "synteny.err").write_text(str(e))
+        return None, f"synteny_error: {e}"
 
     try:
         with open(out_csv) as fh:
-            # skip comment lines starting with '#'
             lines = [line for line in fh if not line.startswith("#")]
-            if len(lines) < 2:
-                return {"pairid": pairid, "status": "no_data"}
-            reader = csv.DictReader(lines)
-            row = next(reader)
-            return {
-                "pairid": pairid,
-                "status": "ok",
-                "syn2b_breakpoints": row["breakpoints"],
-                "syn2b_scj_distance": row["scj_distance"],
-                "syn2b_breakpoint_density": row["breakpoint_density"],
-                "syn2b_inverted_fraction": row["inverted_fraction"],
-                "syn2b_raw_inverted_fraction": row.get("raw_inverted_fraction", "NA"),
-                "syn2b_orientation_mismatches": row["orientation_mismatches"],
-                "syn2b_orientation_mismatches_raw": row.get("orientation_mismatches_raw", "NA"),
-                "syn2b_orientation_uninformative": row["orientation_uninformative"],
-                "syn2b_observable_fraction": row["observable_fraction"],
-                "syn2b_observable_adjacencies": row["observable_adjacencies"],
-                "syn2b_structural": row["structural"],
-                "syn2b_shared_tags": row["shared_tags"],
-                "syn2b_repeats_dropped": row["repeats_dropped"],
-                "syn2b_landmarks_collapsed": row["landmarks_collapsed"],
-                "syn2b_circular": row["circular"],
-            }
+        if len(lines) < 2:
+            return None, "no_data"
+        row = next(csv.DictReader(lines))
     except Exception as e:
-        return {"pairid": pairid, "status": f"parse_error: {e}"}
+        return None, f"parse_error: {e}"
+
+    out = {f"syn2b_{prefix}{c}": row.get(c, "NA") for c in SYN2B_COLS}
+    # `syn2b synteny` writes the breakpoint coordinates next to the CSV and this
+    # runner used to read only the CSV, so they were produced 43k times and never
+    # collected. They are what turns "the two methods agree on counts" into "the
+    # two methods agree on positions".
+    jpath = out_csv.with_suffix(".junctions.tsv")
+    pos = []
+    if jpath.exists():
+        try:
+            with open(jpath) as fh:
+                for r in csv.DictReader(fh, delimiter="\t"):
+                    pos.append(int(r["junction_pos_in_A"]))
+        except Exception:
+            pos = []
+    out[f"syn2b_{prefix}junctions"] = ",".join(map(str, sorted(pos)))
+    return out, "ok"
+
+
+def run_pair(args):
+    pairid, q_acc, r_acc, tgt_dir, syn2b, reverse = args
+    # r_acc (reference, matching `dnadiff <ref> <qry>`) is genome_A in the forward
+    # direction, so Syn2b's junction coordinates and dnadiff's are in the same frame.
+    rec, status = _synteny_once(pairid, r_acc, q_acc, tgt_dir, syn2b, "tmp_pairs", "")
+    if rec is None:
+        return {"pairid": pairid, "status": status}
+    rec["pairid"] = pairid
+    rec["status"] = status
+
+    if reverse:
+        # The same pair with the roles swapped. Needed because `observable_fraction`
+        # is defined on genome_A's adjacencies only, so it accounts for exactly one
+        # genome's contig breaks -- and `scj_distance` is inflated by both.
+        #
+        # Measured on E. coli K-12 shattered independently on both sides, truth
+        # SCJ 0: subtracting one side leaves +4 / +9 / +18 / +39 / +77 / +141 at
+        # K = 5 / 10 / 20 / 40 / 80 / 160, i.e. no correction at all. Subtracting
+        # both leaves +0.2 / +0.1 / +0.1 / +0.2 / +0.1 / -4.0. With a real 200 kb
+        # inversion underneath (truth SCJ 4) the two-sided value reads 4.2 / 4.1 /
+        # 3.8 at K = 5 / 20 / 80.
+        #
+        # It also puts the query-side breakpoint coordinates in hand, which is the
+        # frame dnadiff's discarded dd.qdiff was in.
+        rev, rstatus = _synteny_once(pairid, q_acc, r_acc, tgt_dir, syn2b,
+                                     "tmp_pairs_rev", "rev_")
+        if rev is not None:
+            rec.update(rev)
+        rec["reverse_status"] = rstatus
+
+        hA = hidden_adjacencies(rec)
+        hB = hidden_adjacencies(rec, "rev_")
+        try:
+            scj = float(rec["syn2b_scj_distance"])
+        except (KeyError, TypeError, ValueError):
+            scj = None
+        if scj is not None and hA is not None and hB is not None:
+            rec["syn2b_scj_corrected"] = f"{scj - hA - hB:.2f}"
+            rec["syn2b_hidden_a"] = f"{hA:.2f}"
+            rec["syn2b_hidden_b"] = f"{hB:.2f}"
+    return rec
+
+
 
 
 def main():
@@ -144,6 +237,15 @@ def main():
                         "Needs its own --tgt-dir, for the same reason as --enzymes.")
     p.add_argument("--kmer", type=int, default=31,
                    help="FracMinHash k-mer length, 1..32. Ignored in 2brad mode.")
+    p.add_argument("--reverse", dest="reverse", action="store_true", default=True,
+                   help="also run each pair with the roles swapped (default on). "
+                        "Doubles the synteny step, which is cheap next to digestion, "
+                        "and is what makes scj_distance usable: observable_fraction "
+                        "is defined on genome_A only, so it accounts for one "
+                        "genome's contig breaks while scj_distance is inflated by "
+                        "both. It also yields query-side junction coordinates.")
+    p.add_argument("--no-reverse", dest="reverse", action="store_false",
+                   help="forward direction only. scj_corrected is then not emitted.")
     p.add_argument("--scale", type=int, default=750,
                    help="FracMinHash compression: expected landmark spacing in bp. "
                         "750 matches the four-enzyme panel's density on a 4.5 Mb "
@@ -199,9 +301,11 @@ def main():
     # synteny per pair
     synteny_tasks = []
     for _, row in pairs.iterrows():
-        synteny_tasks.append((row["pairid"], row["q_acc"], row["r_acc"], tgt_dir, args.syn2b))
+        synteny_tasks.append((row["pairid"], row["q_acc"], row["r_acc"], tgt_dir,
+                              args.syn2b, args.reverse))
 
-    print(f"running synteny for {len(synteny_tasks)} pairs ...", flush=True)
+    print(f"running synteny for {len(synteny_tasks)} pairs "
+          f"({'both directions' if args.reverse else 'forward only'}) ...", flush=True)
     records = []
     with Pool(max(1, args.workers // 2)) as pool:
         for i, rec in enumerate(pool.imap_unordered(run_pair, synteny_tasks, chunksize=10)):
@@ -213,6 +317,13 @@ def main():
     out_df = pairs[["pairid", "q_acc", "r_acc"]].merge(out_df, on="pairid", how="left")
     out_df.to_csv(args.out, sep="\t", index=False)
     print(f"wrote {args.out}: {len(out_df)} rows, {(out_df['status'] == 'ok').sum()} ok")
+    if args.reverse and "syn2b_scj_corrected" in out_df.columns:
+        n = out_df["syn2b_scj_corrected"].notna().sum()
+        print(f"  scj_corrected written for {n} pairs "
+              f"(= scj_distance - hidden_a - hidden_b; see run_pair)")
+    if "syn2b_junctions" in out_df.columns:
+        n = (out_df["syn2b_junctions"].fillna("") != "").sum()
+        print(f"  junction coordinates collected for {n} pairs")
 
 
 if __name__ == "__main__":

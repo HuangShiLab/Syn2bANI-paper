@@ -172,11 +172,18 @@ def main():
     synt = load_lookup(args.syn2b, "pairid",
                        ["syn2b_shared_tags", "syn2b_observable_fraction"])
 
-    rows, skipped_check, no_data = [], 0, 0
+    rows, skipped_check, no_data, bad_frame = [], 0, 0, 0
     with open(args.coords) as fh:
         for r in csv.DictReader(fh, delimiter="\t"):
             if r["syn2b_n"] in ("-1", "") or r["dnadiff_n"] in ("-1", ""):
                 no_data += 1
+                continue
+            # Only frames the collector could put in Syn2b's genome-wide coordinates.
+            # A multi-contig reference whose TGT was unavailable yields dnadiff
+            # positions counted from the start of each contig, which would differ
+            # from Syn2b's by the cumulative length of every preceding one.
+            if r.get("frame") not in (None, "", "single_contig", "genome_wide"):
+                bad_frame += 1
                 continue
             if args.require_count_match and r.get("count_diff") != "0":
                 skipped_check += 1
@@ -224,6 +231,9 @@ def main():
               f"disagreed with dd.report (use --all-pairs to include them)")
     if no_data:
         print(f"  excluded {no_data} pairs missing one side entirely")
+    if bad_frame:
+        print(f"  excluded {bad_frame} pairs whose dnadiff coordinates could not be "
+              f"placed in Syn2b's genome-wide frame (multi-contig reference, no TGT)")
 
     # ---- the headline: distance distribution of the matched set --------------
     all_d = [d for r in rows for d in parse_positions(r["dists"])]
