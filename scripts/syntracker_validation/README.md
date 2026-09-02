@@ -72,6 +72,35 @@ All commands assume the working root `/lustre1/g/aos_shihuang/data/syntracker_va
      --outdir figures/syntracker_validation
    ```
 
+## 8. Syn2b structural channel — see [README_syn2b_structural.md](README_syn2b_structural.md)
+
+Steps 1–7 above run **Syn2bANI** (ANI + `anchor_adjacency` + `breakpoint_count`).
+Step 8 runs the **Syn2b** structural channel (`breakpoints`, `scj_distance`,
+`inverted_fraction`, `observable_fraction`), which has never been run on these
+cohorts, and scores it against the paper's published positive/negative controls.
+
+> **The step-4/6 outputs currently in the repo are not usable for a structural
+> claim.** Every genome was also compared against itself, and those self-comparisons
+> return 904 / 25 / 327 / 1415 breakpoints (*E. coli* / *H. pylori* /
+> *N. gonorrhoeae* / *S. rimosus*) where the only correct answer is 0 — which is,
+> to within a few percent, the entire per-cohort mean reported in
+> `results/syntracker_validation/syntracker_summary.tsv`. The cross-species ordering
+> in that table ranks assembly fragmentation, not biology. Cause: the reference-side
+> inflation fixed in Syn2bANI `c974f5f`. **Re-run steps 4 and 6 with the fixed
+> binary, then regenerate `syntracker_summary.tsv`, `correlation_summary.tsv` and
+> supplementary figures S10/S11 before citing any of them.**
+
+```bash
+BASE=/lustre1/g/aos_shihuang/data/syntracker_validation
+python3 $BASE/scripts/08_syn2b_structural.py \
+    --assembly-dir $BASE/assemblies --samples-dir $BASE/samples \
+    --out-dir      $BASE/syn2b_structural \
+    --syn2b        /lustre1/g/aos_shihuang/Syn2b/target/release/syn2b \
+    --label raw --workers 16
+```
+
+The self-comparison control runs first and blocks the rest on failure (exit 2).
+
 ## Notes / requirements
 
 - `shovill` is tried first for assembly; if it is not installed on the compute
