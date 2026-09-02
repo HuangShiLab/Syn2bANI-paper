@@ -1,0 +1,123 @@
+assembly_acc	assembly_name	organism	strain	biosample	country	isolation_source	collection_date
+GCF_016889945.1	ASM1688994v1	Staphylococcus aureus (firmicutes)	FDAARGOS_1245	SAMN16357387	USA:MD	missing	missing
+GCF_016889145.1	ASM1688914v1	Staphylococcus aureus (firmicutes)	FDAARGOS_1246	SAMN16357388	USA:MD	missing	missing
+GCF_016727585.1	ASM1672758v1	Staphylococcus aureus (firmicutes)	FDAARGOS_1086	SAMN16357255	Germany:Langen	missing	missing
+GCF_008693765.1	ASM869376v1	Staphylococcus aureus (firmicutes)	FDAARGOS_660	SAMN11056375	USA: KY	clinical isolate	missing
+GCF_006370485.1	ASM637048v1	Staphylococcus aureus (firmicutes)	FDAARGOS_612	SAMN10346776	USA: Miami, FL	Pig skin (A), aerobic, NASA, Univ. of Miami, USA	missing
+GCF_006364775.1	ASM636477v1	Staphylococcus aureus (firmicutes)	FDAARGOS_766	SAMN11056481	USA:VA	ATCC Isolate	missing
+GCF_006364675.1	ASM636467v1	Staphylococcus aureus (firmicutes)	FDAARGOS_773	SAMN11056488	USA:VA	ATCC Isolate	missing
+GCF_003938815.1	ASM393881v1	Staphylococcus aureus (firmicutes)	FDAARGOS_572	SAMN10163196	missing	UCC isolate	missing
+GCF_003937725.1	ASM393772v1	Staphylococcus aureus (firmicutes)	FDAARGOS_573	SAMN10163197	missing	UCC isolate	missing
+GCF_003827915.1	ASM382791v1	Staphylococcus aureus (firmicutes)	FDAARGOS_504	SAMN10163180	missing	UCC isolate	missing
+GCF_001471715.2	ASM147171v2	Staphylococcus aureus (firmicutes)	FDAARGOS_140	SAMN03996284	USA: DC	abscess	2014-02-27
+GCF_000626615.2	ASM62661v3	Staphylococcus aureus (firmicutes)	FDAARGOS_5	SAMN02700075	USA	human	missing
+GCF_001019255.2	ASM101925v2	Staphylococcus aureus (firmicutes)	FDAARGOS_1	SAMN03255441	Portugal:Lisbon	child - hospital pneumology ward	1996
+GCF_001018645.2	ASM101864v2	Staphylococcus aureus (firmicutes)	FDAARGOS_2	SAMN03255442	United Kingdom	community aquired	1998
+GCF_001018655.2	ASM101865v2	Staphylococcus aureus (firmicutes)	FDAARGOS_6	SAMN03255445	missing	human	missing
+GCF_001018725.2	ASM101872v2	Staphylococcus aureus (firmicutes)	FDAARGOS_10	SAMN03255449	French Guiana	human	1996
+GCF_001018805.1	ASM101880v2	Staphylococcus aureus (firmicutes)	FDAARGOS_15	SAMN03255454	missing	human	missing
+GCF_001019495.2	ASM101949v2	Staphylococcus aureus (firmicutes)	FDAARGOS_40	SAMN03255479	Japan	wound	missing
+GCF_001019125.2	ASM101912v2	Staphylococcus aureus (firmicutes)	FDAARGOS_43	SAMN03255482	USA:North Dakota	fatal septicaemia and septic arthritis in a 16-month-old American-Indian girl who had no risk factors associated with health care	1998
+GCF_001019205.2	ASM101920v2	Staphylococcus aureus (firmicutes)	FDAARGOS_48	SAMN03255487	Portugal:Lisbon	child - hospital pneumology ward	1996
+GCF_001558795.2	ASM155879v2	Staphylococcus aureus (firmicutes)	FDAARGOS_159	SAMN03996304	USA:DC	skin swab	2014-05-15
+GCA_000626615.2	ASM62661v2	Staphylococcus aureus (firmicutes)	NRS 100	SAMN02700075	USA	human	missing
+GCF_001018735.2	ASM101873v2	Staphylococcus aureus (firmicutes)	FDAARGOS_12	SAMN03255451	missing	human	missing
+GCF_001019275.2	ASM101927v2	Staphylococcus aureus (firmicutes)	FDAARGOS_7	SAMN03255446	missing	human	missing
+GCF_001019575.2	ASM101957v2	Staphylococcus aureus (firmicutes)	FDAARGOS_47	SAMN03255486	Portugal	human	1992
+GCF_001018835.2	ASM101883v2	Staphylococcus aureus (firmicutes)	FDAARGOS_19	SAMN03255458	missing	wound	missing
+GCF_001019305.2	ASM101930v2	Staphylococcus aureus (firmicutes)	FDAARGOS_9	SAMN03255448	Japan	respiratory; pharyngeal smear	1982
+GCF_001019485.2	ASM101948v2	Staphylococcus aureus (firmicutes)	FDAARGOS_35	SAMN03255474	USA:Massachusetts	peritoneal fluid inpatient/outpatient	2001
+GCF_001018845.2	ASM101884v2	Staphylococcus aureus (firmicutes)	FDAARGOS_21	SAMN03255460	missing	human	missing
+GCF_001018775.2	ASM101877v2	Staphylococcus aureus (firmicutes)	FDAARGOS_14	SAMN03255453	missing	human	1971
+GCF_001018685.2	ASM101868v2	Staphylococcus aureus (firmicutes)	FDAARGOS_4	SAMN03255444	USA:Texas	buttock abscess; community aquired	2002
+GCF_001019535.2	ASM101953v2	Staphylococcus aureus (firmicutes)	FDAARGOS_42	SAMN03255481	USA:North Dakota	fatal septicaemia and septic arthritis in a 16-month-old American-Indian girl who had no risk factors associated with health care	1998
+GCF_001018975.2	ASM101897v2	Staphylococcus aureus (firmicutes)	FDAARGOS_30	SAMN03255469	missing	human	missing
+GCF_001018915.2	ASM101891v2	Staphylococcus aureus (firmicutes)	FDAARGOS_27	SAMN03255466	missing	sepsis patient	1960
+GCF_001019435.2	ASM101943v2	Staphylococcus aureus (firmicutes)	FDAARGOS_25	SAMN03255464	Japan	Isolated from pus and debrided tissue at surgical incision in sternum	1996
+GCF_001019415.2	ASM101941v2	Staphylococcus aureus (firmicutes)	FDAARGOS_24	SAMN03255463	missing	human	missing
+GCF_001019395.2	ASM101939v2	Staphylococcus aureus (firmicutes)	FDAARGOS_20	SAMN03255459	missing	wound	missing
+GCF_002206395.1	ASM220639v2	Staphylococcus aureus (firmicutes)	FDAARGOS_356	SAMN06173369	missing	human	missing
+GCF_001471675.2	ASM147167v2	Staphylococcus aureus (firmicutes)	FDAARGOS_169	SAMN03996293	USA: DC	abscess	2014-04-01
+GCF_001471695.2	ASM147169v2	Staphylococcus aureus (firmicutes)	FDAARGOS_135	SAMN03996279	USA: DC	swab	2014-01-30
+GCF_001019195.2	ASM101919v2	Staphylococcus aureus (firmicutes)	FDAARGOS_49	SAMN03255488	USA:New York	human	1996
+GCF_001019215.2	ASM101921v2	Staphylococcus aureus (firmicutes)	FDAARGOS_50	SAMN03255489	missing	human	2003
+GCF_001019565.2	ASM101956v2	Staphylococcus aureus (firmicutes)	FDAARGOS_46	SAMN03255485	Denmark	blood	1964
+GCF_001019175.2	ASM101917v2	Staphylococcus aureus (firmicutes)	FDAARGOS_45	SAMN03255484	Denmark	human	2002
+GCF_001019555.1	ASM101955v2	Staphylococcus aureus (firmicutes)	FDAARGOS_44	SAMN03255483	missing	human	missing
+GCF_001019135.2	ASM101913v2	Staphylococcus aureus (firmicutes)	FDAARGOS_41	SAMN03255480	USA:Michigan	foot ulcer of a diabetic patient	2002
+GCF_001019055.2	ASM101905v2	Staphylococcus aureus (firmicutes)	FDAARGOS_38	SAMN03255477	USA:New York	urine from long term care facility	2004
+GCF_001019065.2	ASM101906v2	Staphylococcus aureus (firmicutes)	FDAARGOS_37	SAMN03255476	Japan	purulent sputum, cardio thoracic surgery	1996
+GCF_001019045.2	ASM101904v2	Staphylococcus aureus (firmicutes)	FDAARGOS_36	SAMN03255475	France	skin infection	missing
+GCF_001019035.2	ASM101903v2	Staphylococcus aureus (firmicutes)	FDAARGOS_34	SAMN03255473	USA	human	missing
+GCF_001019455.2	ASM101945v2	Staphylococcus aureus (firmicutes)	FDAARGOS_32	SAMN03255471	United Kingdom: London	septic arthritis	1935
+GCF_001019015.2	ASM101901v2	Staphylococcus aureus (firmicutes)	FDAARGOS_31	SAMN03255470	missing	human	missing
+GCF_001019475.2	ASM101947v2	Staphylococcus aureus (firmicutes)	FDAARGOS_33	SAMN03255472	missing	human	missing
+GCF_001018965.2	ASM101896v2	Staphylococcus aureus (firmicutes)	FDAARGOS_29	SAMN03255468	USA:NY	bloodstream of an adult FeMale ICU patient	1999
+GCF_001018905.2	ASM101890v2	Staphylococcus aureus (firmicutes)	FDAARGOS_26	SAMN03255465	USA:Washington	wound	missing
+GCF_001018955.2	ASM101895v2	Staphylococcus aureus (firmicutes)	FDAARGOS_28	SAMN03255467	missing	human	missing
+GCF_001018885.2	ASM101888v2	Staphylococcus aureus (firmicutes)	FDAARGOS_23	SAMN03255462	missing	human	missing
+GCF_001018875.2	ASM101887v2	Staphylococcus aureus (firmicutes)	FDAARGOS_22	SAMN03255461	USA:Tennessee	sputum	missing
+GCF_001018795.2	ASM101879v2	Staphylococcus aureus (firmicutes)	FDAARGOS_18	SAMN03255457	missing	human	missing
+GCF_001019375.2	ASM101937v2	Staphylococcus aureus (firmicutes)	FDAARGOS_17	SAMN03255456	missing	vaginal tampon	missing
+GCF_001019355.2	ASM101935v2	Staphylococcus aureus (firmicutes)	FDAARGOS_16	SAMN03255455	missing	human	missing
+GCF_001019335.2	ASM101933v2	Staphylococcus aureus (firmicutes)	FDAARGOS_13	SAMN03255452	missing	human	missing
+GCF_001018715.2	ASM101871v2	Staphylococcus aureus (firmicutes)	FDAARGOS_11	SAMN03255450	missing	human	missing
+GCF_001018635.2	ASM101863v2	Staphylococcus aureus (firmicutes)	FDAARGOS_3	SAMN03255443	USA:NY	blood	1981
+GCF_001019295.2	ASM101929v2	Staphylococcus aureus (firmicutes)	FDAARGOS_8	SAMN03255447	France	human	1999
+GCF_002554295.1	ASM255429v1	Staphylococcus aureus (firmicutes)	FDAARGOS_359	SAMN07312405	USA: MD	wound	2015-04-01
+GCF_002386245.1	ASM238624v1	Staphylococcus aureus (firmicutes)	FDAARGOS_412	SAMN07312456	missing	human	missing
+GCA_002206395.1	ASM220639v1	Staphylococcus aureus (firmicutes)	FDAARGOS_356	SAMN06173369	missing	human	missing
+GCF_001558795.1	ASM155879v1	Staphylococcus aureus (firmicutes)	FDAARGOS_159	SAMN03996304	USA:DC	skin swab	2014-05-15
+GCF_001471715.1	ASM147171v1	Staphylococcus aureus (firmicutes)	FDAARGOS_140	SAMN03996284	USA: DC	abscess	2014-02-27
+GCF_001471695.1	ASM147169v1	Staphylococcus aureus (firmicutes)	FDAARGOS_135	SAMN03996279	USA: DC	swab	2014-01-30
+GCF_001471675.1	ASM147167v1	Staphylococcus aureus (firmicutes)	FDAARGOS_169	SAMN03996293	USA: DC	abscess	2014-04-01
+GCA_001019555.1	ASM101955v1	Staphylococcus aureus (firmicutes)	052C	SAMN03255483	missing	human	missing
+GCF_001019575.1	ASM101957v1	Staphylococcus aureus (firmicutes)	HPV107	SAMN03255486	Portugal	human	1992
+GCF_001019565.1	ASM101956v1	Staphylococcus aureus (firmicutes)	E2125	SAMN03255485	Denmark	blood	1964
+GCF_001019535.1	ASM101953v1	Staphylococcus aureus (firmicutes)	Mw2	SAMN03255481	USA:North Dakota	fatal septicaemia and septic arthritis in a 16-month-old American-Indian girl who had no risk factors associated with health care	1998
+GCF_001019485.1	ASM101948v1	Staphylococcus aureus (firmicutes)	NRS120	SAMN03255474	USA:Massachusetts	peritoneal fluid inpatient/outpatient	2001
+GCF_001019495.1	ASM101949v1	Staphylococcus aureus (firmicutes)	NRS1	SAMN03255479	Japan	wound	missing
+GCF_001019475.1	ASM101947v1	Staphylococcus aureus (firmicutes)	NRS140	SAMN03255472	missing	human	missing
+GCF_001019455.1	ASM101945v1	Staphylococcus aureus (firmicutes)	NRS104	SAMN03255471	United Kingdom: London	septic arthritis	1935
+GCF_001019435.1	ASM101943v1	Staphylococcus aureus (firmicutes)	NRS1	SAMN03255464	Japan	Isolated from pus and debrided tissue at surgical incision in sternum	1996
+GCF_001019415.1	ASM101941v1	Staphylococcus aureus (firmicutes)	NRS146	SAMN03255463	missing	human	missing
+GCF_001019395.1	ASM101939v1	Staphylococcus aureus (firmicutes)	NRS484	SAMN03255459	missing	wound	missing
+GCF_001019375.1	ASM101937v1	Staphylococcus aureus (firmicutes)	NRS156	SAMN03255456	missing	vaginal tampon	missing
+GCF_001019355.1	ASM101935v1	Staphylococcus aureus (firmicutes)	NRS155	SAMN03255455	missing	human	missing
+GCF_001019335.1	ASM101933v1	Staphylococcus aureus (firmicutes)	NRS142	SAMN03255452	missing	human	missing
+GCF_001019295.1	ASM101929v1	Staphylococcus aureus (firmicutes)	NRS108	SAMN03255447	France	human	1999
+GCF_001019305.1	ASM101930v1	Staphylococcus aureus (firmicutes)	NRS70	SAMN03255448	Japan	respiratory; pharyngeal smear	1982
+GCF_001019275.1	ASM101927v1	Staphylococcus aureus (firmicutes)	NRS107	SAMN03255446	missing	human	missing
+GCF_001019255.1	ASM101925v1	Staphylococcus aureus (firmicutes)	HDE288	SAMN03255441	Portugal:Lisbon	child - hospital pneumology ward	1996
+GCF_001019215.1	ASM101921v1	Staphylococcus aureus (firmicutes)	NRS402	SAMN03255489	missing	human	2003
+GCF_001019205.1	ASM101920v1	Staphylococcus aureus (firmicutes)	HDE288	SAMN03255487	Portugal:Lisbon	child - hospital pneumology ward	1996
+GCF_001019195.1	ASM101919v1	Staphylococcus aureus (firmicutes)	BK2529	SAMN03255488	USA:New York	human	1996
+GCF_001019175.1	ASM101917v1	Staphylococcus aureus (firmicutes)	HAR21	SAMN03255484	Denmark	human	2002
+GCF_001019125.1	ASM101912v1	Staphylococcus aureus (firmicutes)	Mw2	SAMN03255482	USA:North Dakota	fatal septicaemia and septic arthritis in a 16-month-old American-Indian girl who had no risk factors associated with health care	1998
+GCF_001019135.1	ASM101913v1	Staphylococcus aureus (firmicutes)	NRS408	SAMN03255480	USA:Michigan	foot ulcer of a diabetic patient	2002
+GCF_001019115.1	ASM101911v1	Staphylococcus aureus (firmicutes)	NRS178	SAMN03255478	France	wound from outpatient	missing
+GCF_001019065.1	ASM101906v1	Staphylococcus aureus (firmicutes)	NRS2	SAMN03255476	Japan	purulent sputum, cardio thoracic surgery	1996
+GCF_001019045.1	ASM101904v1	Staphylococcus aureus (firmicutes)	NRS158	SAMN03255475	France	skin infection	missing
+GCF_001019035.1	ASM101903v1	Staphylococcus aureus (firmicutes)	NRS105	SAMN03255473	USA	human	missing
+GCF_001019055.1	ASM101905v1	Staphylococcus aureus (firmicutes)	VRSA 3a	SAMN03255477	USA:New York	urine from long term care facility	2004
+GCF_001019015.1	ASM101901v1	Staphylococcus aureus (firmicutes)	NRS136	SAMN03255470	missing	human	missing
+GCF_001018955.1	ASM101895v1	Staphylococcus aureus (firmicutes)	NRS134	SAMN03255467	missing	human	missing
+GCF_001018965.1	ASM101896v1	Staphylococcus aureus (firmicutes)	NRS22	SAMN03255468	USA:NY	bloodstream of an adult FeMale ICU patient	1999
+GCF_001018975.1	ASM101897v1	Staphylococcus aureus (firmicutes)	NRS143	SAMN03255469	missing	human	missing
+GCF_001018885.1	ASM101888v1	Staphylococcus aureus (firmicutes)	NRS131	SAMN03255462	missing	human	missing
+GCF_001018915.1	ASM101891v1	Staphylococcus aureus (firmicutes)	NRS133	SAMN03255466	missing	sepsis patient	1960
+GCF_001018905.1	ASM101890v1	Staphylococcus aureus (firmicutes)	NRS387	SAMN03255465	USA:Washington	wound	missing
+GCF_001018875.1	ASM101887v1	Staphylococcus aureus (firmicutes)	NRS127	SAMN03255461	USA:Tennessee	sputum	missing
+GCA_001018805.1	ASM101880v1	Staphylococcus aureus (firmicutes)	NRS152	SAMN03255454	missing	human	missing
+GCF_001018845.1	ASM101884v1	Staphylococcus aureus (firmicutes)	NRS153	SAMN03255460	missing	human	missing
+GCF_001018835.1	ASM101883v1	Staphylococcus aureus (firmicutes)	NRS271	SAMN03255458	missing	wound	missing
+GCF_001018795.1	ASM101879v1	Staphylococcus aureus (firmicutes)	NRS281	SAMN03255457	missing	human	missing
+GCF_001018715.1	ASM101871v1	Staphylococcus aureus (firmicutes)	NRS128	SAMN03255450	missing	human	missing
+GCF_001018775.1	ASM101877v1	Staphylococcus aureus (firmicutes)	NRS149	SAMN03255453	missing	human	1971
+GCF_001018725.1	ASM101872v1	Staphylococcus aureus (firmicutes)	NRS129	SAMN03255449	French Guiana	human	1996
+GCF_001018735.1	ASM101873v1	Staphylococcus aureus (firmicutes)	NRS137	SAMN03255451	missing	human	missing
+GCF_001018685.1	ASM101868v1	Staphylococcus aureus (firmicutes)	TCH 959	SAMN03255444	USA:Texas	buttock abscess; community aquired	2002
+GCF_001018645.1	ASM101864v1	Staphylococcus aureus (firmicutes)	MSSA476	SAMN03255442	United Kingdom	community aquired	1998
+GCF_001018635.1	ASM101863v1	Staphylococcus aureus (firmicutes)	1063	SAMN03255443	USA:NY	blood	1981
+GCF_001018655.1	ASM101865v1	Staphylococcus aureus (firmicutes)	NRS106	SAMN03255445	missing	human	missing
+GCF_000626615.1	ASM62661v1	Staphylococcus aureus (firmicutes)	NRS 100	SAMN02700075	USA	human	missing

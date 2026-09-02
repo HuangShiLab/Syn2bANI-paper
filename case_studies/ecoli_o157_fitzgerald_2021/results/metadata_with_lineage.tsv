@@ -1,0 +1,75 @@
+nucleotide_acc	assembly_acc	assembly_name	organism	status	strain	country	isolation_source	collection_date	serotype	biosample	assigned_lineage	host_category
+CP008957	GCF_000732965.1	ASM73296v1	Escherichia coli O157:H7 str. EDL933	current	EDL933					SAMN02905113	Ia	other/unknown
+CP010304	GCF_000803705.1	ASM80370v1	Escherichia coli O157:H7 str. SS52	current	SS52	USA: Western States	Cattle feces	2010-06-01		SAMN03265100	I/II	bovine
+CP015831	GCF_001650295.1	ASM165029v1	Escherichia coli O157	current	644-PT8	United Kingdom	fecal sample	2012-08-30		SAMN05007045	II	bovine
+CP015832	GCF_001650275.1	ASM165027v1	Escherichia coli O157	current	180-PT54	United Kingdom	fecal sample	2012-10-24		SAMN05007044	II	bovine
+CP018237	GCF_001890205.1	ASM189020v1	Escherichia coli	current	155	United Kingdom	human	2012	O157:H7	SAMN05544764	Ia	human
+CP018239	GCF_001890225.1	ASM189022v1	Escherichia coli	current	272	United Kingdom	human	2013	O157:H7	SAMN05544766	I/II	human
+CP018241	GCF_001890325.1	ASM189032v1	Escherichia coli	current	319	United Kingdom	human	2012	O157:H7	SAMN05544768	II	human
+CP018243	GCF_001890265.1	ASM189026v1	Escherichia coli	current	350	United Kingdom	human	2011	O157:H7	SAMN05544765	II	human
+CP018245	GCF_001890245.1	ASM189024v1	Escherichia coli	current	472	United Kingdom	human	2012	O157:H7	SAMN05544767	II	human
+CP018247	GCF_001890305.1	ASM189030v1	Escherichia coli	current	7784	United Kingdom	Cattle faeces	2002	O157:H7	SAMN05544762	II	bovine
+CP018250	GCF_001890345.1	ASM189034v1	Escherichia coli	current	10671	United Kingdom	Cattle faeces	2002	O157:H7	SAMN05544761	II	bovine
+CP018252	GCF_001890285.2	ASM189028v2	Escherichia coli	current	9000	United Kingdom	Cattle faeces	2002	O157:H7	SAMN05544760	Ic	bovine
+CP038282	GCF_013167135.1	ASM1316713v1	Escherichia coli O157:H7	current	F8492	USA	beef	missing	O157:H7	SAMN11267279	II	bovine
+CP038284	GCF_013167155.1	ASM1316715v1	Escherichia coli O157:H7	current	YB14-1	USA:Nebraska	cattle feces	2002	O157:H7	SAMN05360245	II	bovine
+CP038290	GCF_013167195.1	ASM1316719v1	Escherichia coli O157:H7	current	TX 265-1	USA:Texas	cattle feces	2000	O157:H7	SAMN05360242	II	bovine
+CP038292	GCF_013167235.1	ASM1316723v1	Escherichia coli O157:H7	current	TB21-1	USA:Nebraska	cattle feces	2002	O157:H7	SAMN05360240	II	bovine
+CP038300	GCF_013167275.1	ASM1316727v1	Escherichia coli O157:H7	current	SS TX 754-1	USA:Texas	cattle feces	2000	O157:H7	SAMN05360237	I/II	bovine
+CP038302	GCF_013167295.1	ASM1316729v1	Escherichia coli O157:H7	current	SS TX 313-1	USA:Texas	cattle feces	2000	O157:H7	SAMN05360235	II	bovine
+CP038309	GCF_013167335.1	ASM1316733v1	Escherichia coli O157:H7	current	Show KS 470-1	USA:Kansas	cattle feces	1999	O157:H7	SAMN05360225	II	bovine
+CP038319	GCF_013167395.1	ASM1316739v1	Escherichia coli O157:H7	current	NE122	USA:Nebraska	missing	missing	O157:H7	SAMN11229495	I/II	other/unknown
+CP038333	GCF_013167475.1	ASM1316747v1	Escherichia coli O157:H7	current	N8B7-2	USA:Nebraska	cattle feces	2002	O157:H7	SAMN05360221	II	bovine
+CP038339	GCF_013167515.1	ASM1316751v1	Escherichia coli O157:H7	current	H6437	USA	missing	missing	O157:H7	SAMN11229492	I/II	other/unknown
+CP038342	GCF_013167535.1	ASM1316753v1	Escherichia coli O157:H7	current	H2495	USA	missing	missing	O157:H7	SAMN11229491	Ia	other/unknown
+CP038344	GCF_013167555.1	ASM1316755v1	Escherichia coli O157:H7	current	Gim1-1	USA:Nebraska	cattle feces	1999	O157:H7	SAMN05360205	II	bovine
+CP038346	GCF_013167575.1	ASM1316757v1	Escherichia coli O157:H7	current	G5295	USA	missing	missing	O157:H7	SAMN05360178	Ia	other/unknown
+CP038349	GCF_013167595.1	ASM1316759v1	Escherichia coli O157:H7	current	F8952	USA	missing	missing	O157:H7	SAMN05360175	Ia	other/unknown
+CP038351	GCF_013167615.1	ASM1316761v1	Escherichia coli O157:H7	current	F8798	USA	missing	missing	O157:H7	SAMN05360171	Ia	other/unknown
+CP038353	GCF_013167635.1	ASM1316763v1	Escherichia coli O157:H7	current	F8797	USA	missing	missing	O157:H7	SAMN05360170	I/II	other/unknown
+CP038355	GCF_013167655.1	ASM1316765v1	Escherichia coli O157:H7 str. F8092B	current	F8092B	USA	missing	missing	O157:H7	SAMN02304041	II	other/unknown
+CP038357	GCF_013167675.1	ASM1316767v1	Escherichia coli O157:H7	current	F7508	USA	missing	missing	O157:H7	SAMN05360163	Ia	other/unknown
+CP038360	GCF_013167695.1	ASM1316769v1	Escherichia coli O157:H7	current	F7386	USA	missing	missing	O157:H7	SAMN05360162	I/II	other/unknown
+CP038366	GCF_013167735.1	ASM1316773v1	Escherichia coli O157:H7	current	F6667	USA	missing	missing	O157:H7	SAMN05360149	II	other/unknown
+CP038372	GCF_013167775.1	ASM1316777v1	Escherichia coli O157:H7	current	F6294	USA	beef	missing	O157:H7	SAMN11229489	Ia	bovine
+CP038402	GCF_013168055.1	ASM1316805v1	Escherichia coli O157:H7	current	BB24-1	USA:Louisiana	cattle feces	2002	O157:H7	SAMN05360196	II	bovine
+CP038414	GCF_013168135.1	ASM1316813v1	Escherichia coli O157:H7	current	17B6-2	USA:Ohio	cattle feces	2002	O157:H7	SAMN05360191	I/II	bovine
+CP038416	GCF_013168155.1	ASM1316815v1	Escherichia coli O157:H7	current	3-5-1	USA:Nebraska	cattle feces	1999	O157:H7	SAMN05360204	I/II	bovine
+CP039834	GCF_013343595.1	ASM1334359v1	Escherichia coli O157:H7	current	MB41-1	USA:Louisiana	cattle feces	2002	O157:H7	SAMN05360216	Ia	bovine
+CP062700	GCF_017164775.1	ASM1716477v1	Escherichia coli O157:H7	current	Z1835	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327615	II	bovine
+CP062702	GCF_017164795.1	ASM1716479v1	Escherichia coli O157:H7	current	Z1834	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327614	II	bovine
+CP062705	GCF_017164815.1	ASM1716481v1	Escherichia coli O157:H7	current	Z1833	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327613	II	bovine
+CP062708	GCF_017164835.1	ASM1716483v1	Escherichia coli O157:H7	current	Z1832	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327612	II	bovine
+CP062711	GCF_017164855.1	ASM1716485v1	Escherichia coli O157:H7	current	Z1831	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327611	II	bovine
+CP062713	GCF_017164875.1	ASM1716487v1	Escherichia coli O157:H7	current	Z1830	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327610	II	bovine
+CP062715	GCF_017164895.1	ASM1716489v1	Escherichia coli O157:H7	current	Z1826	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327609	II	bovine
+CP062717	GCF_017164915.1	ASM1716491v1	Escherichia coli O157:H7	current	Z1825	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327608	II	bovine
+CP062719	GCF_017164935.1	ASM1716493v1	Escherichia coli O157:H7	current	Z1816	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327607	II	bovine
+CP062721	GCF_017164955.1	ASM1716495v1	Escherichia coli O157:H7	current	Z1815	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327606	II	bovine
+CP062723	GCF_017164975.1	ASM1716497v1	Escherichia coli O157:H7	current	Z1814	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327605	Ic	bovine
+CP062725	GCF_017164995.1	ASM1716499v1	Escherichia coli O157:H7	current	Z1813	United Kingdom	feces	2002	O157:H7	SAMN16327604	II	other/unknown
+CP062727	GCF_017165015.1	ASM1716501v1	Escherichia coli O157:H7	current	Z1812	United Kingdom	feces	2002	O157:H7	SAMN16327603	II	other/unknown
+CP062729	GCF_017165035.1	ASM1716503v1	Escherichia coli O157:H7	current	Z1811	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327602	II	bovine
+CP062731	GCF_017165075.1	ASM1716507v1	Escherichia coli O157:H7	current	Z1768	United Kingdom	Bovine Faeces	2015	O157:H7	SAMN16327600	II	bovine
+CP062733	GCF_017165095.1	ASM1716509v1	Escherichia coli O157:H7	current	Z1767	United Kingdom	Bovine Faeces	2015	O157:H7	SAMN16327599	II	bovine
+CP062736	GCF_017165135.1	ASM1716513v1	Escherichia coli O157:H7	current	Z1766	United Kingdom	Bovine Faeces	2015	O157:H7	SAMN16327598	II	bovine
+CP062739	GCF_017165115.1	ASM1716511v1	Escherichia coli O157:H7	current	Z1723	United Kingdom	Bovine Faeces	2015	O157:H7	SAMN16327597	II	bovine
+CP062742	GCF_017165155.1	ASM1716515v1	Escherichia coli O157:H7	current	Z1626	United Kingdom	feces	2014	O157:H7	SAMN16327596	II	other/unknown
+CP062744	GCF_017165215.1	ASM1716521v1	Escherichia coli O157:H7	current	Z1615	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327595	II	bovine
+CP062746	GCF_017165235.1	ASM1716523v1	Escherichia coli O157:H7	current	Z1504	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327594	II	bovine
+CP062749	GCF_017165255.1	ASM1716525v1	Escherichia coli O157:H7	current	Z1486	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327593	II	bovine
+CP062752	GCF_017165275.1	ASM1716527v1	Escherichia coli O157:H7	current	Z910	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327592	II	bovine
+CP062755	GCF_017165295.1	ASM1716529v1	Escherichia coli O157:H7	current	Z903	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327591	II	bovine
+CP062758	GCF_017165335.1	ASM1716533v1	Escherichia coli O157:H7	current	Z892	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327590	II	bovine
+CP062761	GCF_017165315.1	ASM1716531v1	Escherichia coli O157:H7	current	Z887	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327589	II	bovine
+CP062763	GCF_017165355.1	ASM1716535v1	Escherichia coli O157:H7	current	Z885	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327588	II	bovine
+CP062766	GCF_017165375.1	ASM1716537v1	Escherichia coli O157:H7	current	Z866	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327586	II	bovine
+CP062769	GCF_017165415.1	ASM1716541v1	Escherichia coli O157:H7	current	Z852	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327585	II	bovine
+CP062771	GCF_017165435.1	ASM1716543v1	Escherichia coli O157:H7	current	Z570	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327584	II	bovine
+CP062774	GCF_017165455.1	ASM1716545v1	Escherichia coli O157:H7	current	Z563	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327583	II	bovine
+CP062778	GCF_017164755.1	ASM1716475v1	Escherichia coli O157:H7	current	Z1836	United Kingdom	Bovine Faeces	2014	O157:H7	SAMN16327616	II	bovine
+CP062780	GCF_017165055.1	ASM1716505v1	Escherichia coli O157:H7	current	Z1769	United Kingdom	Bovine Faeces	2015	O157:H7	SAMN16327601	II	bovine
+CP062782	GCF_017165395.1	ASM1716539v1	Escherichia coli O157:H7	current	Z869	United Kingdom	Bovine Faeces	2002	O157:H7	SAMN16327587	II	bovine
+NC_002695	GCF_000008865.2	ASM886v2	Escherichia coli O157:H7 str. Sakai	current	SAKAI (EHEC)	Japan: Sakai City, Osaka prefecture	Human intestinal microflora	1996	E. coli O157:H7	SAMN01911278	Ia	human
+NC_011353	GCF_000021125.1	ASM2112v1	Escherichia coli O157:H7 str. EC4115	current	EC4115					SAMN02603441	I/II	other/unknown
+NC_013008	GCF_000022225.1	ASM2222v1	Escherichia coli O157:H7 str. TW14359	current	TW14359				O157:H7	SAMN02604255	I/II	other/unknown
