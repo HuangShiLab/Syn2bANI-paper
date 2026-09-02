@@ -1,0 +1,40 @@
+
+=== BcgI vs dnadiff truth (raw_inverted_fraction) ===
+n = 41485
+MAE  (raw) = 0.0576
+RMSE (raw) = 0.0961
+MAE  (min) = 0.1248
+RMSE (min) = 0.2101
+mean resid = -0.0006
+sd resid   = 0.0961
+Pearson r (raw) = 0.8303 (p=0.00e+00)
+p_raw = 0.9989 * truth + -0.0000; R2=0.6893
+Pearson r (min) = 0.1274
+
+--- error model calibration ---
+mean predicted SE: 0.0697
+observed RMSE:     0.0961
+z mean: -0.022; sd: 2.880
+|z| > 2: 0.058
+|z| > 3: 0.022
+
+--- by shared-tag decile ---
+m_low	m_high	n	mean_m	truth_mean	p_raw_mean	obs_rmse	pred_se
+2	14	4231	8	0.487	0.480	0.2360	0.1726
+14	31	4116	22	0.489	0.493	0.1171	0.1232
+31	63	4139	46	0.488	0.488	0.0864	0.0883
+63	99	4193	81	0.492	0.492	0.0665	0.0677
+99	142	4085	120	0.495	0.495	0.0561	0.0570
+142	206	4141	172	0.495	0.496	0.0484	0.0488
+206	291	4148	246	0.497	0.496	0.0429	0.0425
+291	454	4151	363	0.495	0.494	0.0368	0.0369
+454	761	4133	592	0.493	0.493	0.0302	0.0317
+761	4886	4148	1303	0.493	0.493	0.0235	0.0266
+
+--- by ANI band ---
+80-85: n=11221 truth=0.493 p_raw=0.492 rmse=0.1172 pred=0.0824
+85-90: n=15271 truth=0.493 p_raw=0.492 rmse=0.0959 pred=0.0696
+90-95: n=14589 truth=0.492 p_raw=0.492 rmse=0.0779 pred=0.0610
+95-100: n=404 truth=0.490 p_raw=0.486 rmse=0.0355 pred=0.0383
+
+wrote results/gtdb50k/inverted_fraction_truth_bcgI.tsv

@@ -16,7 +16,9 @@ def main():
 
     bp_mae = np.mean(np.abs(merged["breakpoint_count"] - merged["dnadiff_breakpoints"]))
     bp_r = float(np.corrcoef(merged["breakpoint_count"], merged["dnadiff_breakpoints"])[0, 1])
-    syn_r = float(np.corrcoef(merged["anchor_adjacency"], merged["dnadiff_anchor_adjacency"])[0, 1])
+    # dnadiff synteny score has been renamed in truth tables; accept both.
+    syn_truth_col = "dnadiff_anchor_adjacency" if "dnadiff_anchor_adjacency" in sv.columns else "dnadiff_synteny_score"
+    syn_r = float(np.corrcoef(merged["anchor_adjacency"], merged[syn_truth_col])[0, 1])
 
     truth_has = (merged["dnadiff_breakpoints"] > 0).astype(int)
     pred_has = (merged["breakpoint_count"] > 0).astype(int)

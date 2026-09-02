@@ -19,8 +19,8 @@ ROOT=/lustre1/g/aos_shihuang/Syn2bANI-paper
 |---|---|---|
 | 1. Classified dnadiff events | **done** | `dnadiff_events_50k.tsv` and `dnadiff_events_high_ani_all.tsv` written. |
 | 2. Deduplicate high-ANI outputs | **done** | Cause: duplicate rows in `high_ani_pairs_ready.tsv` (pairs sampled into both 95–97 and 97–100 strata), not append mode. Files deduped and stratum corrected. |
-| 3. Single-enzyme BcgI pass | **running** | SLURM job `3974133` (`g50k_bcgI_invfrac`) on `amd`, 16 CPUs, 4 h. |
-| 4. `breakpoint_count` reference-side inflation | **code done, re-run in progress** | Fix pushed to Syn2bANI `main` (`c974f5f`). New binary copied to HPC; s2b array resubmitted to regenerate `s2b_50k.tsv`. |
+| 3. Single-enzyme BcgI pass | **done** | Output `syn2b_inverted_fraction_50k_bcgI.tsv` written (5.7 MB, 43,334 pairs). Validation report: `BCGI_ERROR_MODEL_VALIDATION.md`. |
+| 4. `breakpoint_count` reference-side inflation | **done** | Fix pushed to Syn2bANI `main` (`c974f5f`). HPC binary rebuilt; wrapper `3974244` completed; `s2b_50k.tsv` regenerated. Reports updated. |
 | 5. Closed-genome control | **not started** | Low priority; kept for reviewer response. |
 
 ---

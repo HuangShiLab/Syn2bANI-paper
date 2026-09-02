@@ -1,0 +1,40 @@
+
+=== four-enzyme vs dnadiff truth (raw_inverted_fraction) ===
+n = 43312
+MAE  (raw) = 0.0370
+RMSE (raw) = 0.0555
+MAE  (min) = 0.1095
+RMSE (min) = 0.1959
+mean resid = -0.0005
+sd resid   = 0.0555
+Pearson r (raw) = 0.9355 (p=0.00e+00)
+p_raw = 1.0039 * truth + -0.0024; R2=0.8751
+Pearson r (min) = 0.1771
+
+--- error model calibration ---
+mean predicted SE: 0.0463
+observed RMSE:     0.0555
+z mean: -0.011; sd: 1.076
+|z| > 2: 0.053
+|z| > 3: 0.010
+
+--- by shared-tag decile ---
+m_low	m_high	n	mean_m	truth_mean	p_raw_mean	obs_rmse	pred_se
+2	63	4391	34	0.474	0.470	0.1165	0.1044
+63	114	4330	89	0.487	0.489	0.0680	0.0652
+114	166	4334	140	0.491	0.492	0.0566	0.0535
+166	229	4306	197	0.496	0.496	0.0498	0.0464
+229	314	4312	270	0.492	0.492	0.0445	0.0411
+314	431	4339	372	0.496	0.497	0.0387	0.0366
+431	580	4315	501	0.496	0.495	0.0349	0.0333
+580	853	4323	701	0.492	0.492	0.0312	0.0301
+853	1373	4339	1077	0.495	0.494	0.0256	0.0273
+1373	7401	4323	2239	0.492	0.491	0.0204	0.0242
+
+--- by ANI band ---
+80-85: n=12152 truth=0.490 p_raw=0.490 rmse=0.0747 pred=0.0601
+85-90: n=15998 truth=0.491 p_raw=0.490 rmse=0.0538 pred=0.0462
+90-95: n=14758 truth=0.491 p_raw=0.491 rmse=0.0360 pred=0.0355
+95-100: n=404 truth=0.490 p_raw=0.489 rmse=0.0208 pred=0.0276
+
+wrote results/gtdb50k/inverted_fraction_truth_four.tsv

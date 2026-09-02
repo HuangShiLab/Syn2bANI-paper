@@ -1,4 +1,4 @@
-dnadiff_blocks	dnadiff_breakpoints	dnadiff_large_indels	dnadiff_anchor_adjacency	pairid
+dnadiff_blocks	dnadiff_breakpoints	dnadiff_large_indels	dnadiff_synteny_score	pairid
 628	469	308	0.251993620414673	GCA_000007325.1__GCA_000182945.1
 764	532	403	0.3027522935779816	GCA_000146855.1__GCA_900167215.1
 285	193	147	0.3204225352112676	GCA_000153745.1__GCA_905182285.1

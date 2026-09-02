@@ -1,4 +1,4 @@
-rank	pairid	q_acc	r_acc	anim_ani	ani	anchor_adjacency	breakpoint_count	af_query	af_reference
+rank	pairid	q_acc	r_acc	anim_ani	ani	synteny_score	breakpoint_count	af_query	af_reference
 1	GCF_009862035.1__GCF_009862625.1	GCF_009862035.1	GCF_009862625.1	99.99	99.9995	0.9635	460	0.906	0.9083
 2	GCF_000965005.1__GCF_000965045.1	GCF_000965005.1	GCF_000965045.1	99.62	99.6646	0.9727	26	0.9312	0.9084
 3	GCF_900452715.1__GCF_900640165.1	GCF_900452715.1	GCF_900640165.1	99.97	99.9768	0.9761	84	0.9311	0.9488

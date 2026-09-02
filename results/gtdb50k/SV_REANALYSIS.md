@@ -1,7 +1,13 @@
 # SV comparison, re-analysed with confounders controlled
 
-Date: 2026-08-30. Reproduce with `python3 scripts/sv_reanalysis.py results/gtdb50k`
+Date: 2026-09-02. Reproduce with `python3 scripts/sv_reanalysis.py results/gtdb50k`
 (writes `sv_reanalysis_metrics.tsv`). n = 43,334 pairs.
+
+**Correction (2026-09-02):** The `breakpoint_count` implementation previously
+subtracted only the query-side contig term (`n_chained_contigs`) and not the
+reference-side term. A fragmented reference therefore added `n_ref − 1` spurious
+breakpoints. This was fixed in Syn2bANI `c974f5f` and the 43,334 held-out pairs
+were re-computed. The numbers below are from the corrected run.
 
 Supersedes the correlation conclusions in
 [SV_COMPARISON_REPORT.md](SV_COMPARISON_REPORT.md) and
@@ -9,8 +15,7 @@ Supersedes the correlation conclusions in
 reported **raw** correlations. A raw correlation cannot separate "both methods
 measure rearrangement" from "both methods measure divergence" or "both methods
 measure contig count", and at 85–95% ANI on draft assemblies all three are in
-play. That is the same failure that made the legacy Syn2b synteny score agree
-with SynTracker APSS at r = +0.982 while measuring the wrong thing.
+play.
 
 **Contig count is recoverable exactly**, so it can be controlled for. Since
 `breakpoint_count = n_chains − n_chained_contigs` and `synteny_blocks = n_chains`:
@@ -22,38 +27,42 @@ Divergence is controlled with **ANIm from `truth_50k.tsv`**, not Syn2bANI's own
 
 ---
 
-## 1. `breakpoint_count` survives every control — the agreement is real
+## 1. `breakpoint_count` after the reference-side fix
 
 | pair | raw | \|ANIm | \|n_contigs | **\|both** |
 |---|---:|---:|---:|---:|
-| `breakpoint_count ~ dnadiff_breakpoints` | 0.465 | 0.503 | 0.472 | **0.534** |
-| `breakpoint_count ~ dnadiff_breakpoints_min10000` | 0.489 | 0.531 | 0.493 | **0.553** |
-| `breakpoint_count ~ dnadiff_large_indels_min10000` | 0.552 | 0.603 | 0.551 | **0.608** |
-| `breakpoint_count ~ mm2_breakpoints` | 0.300 | 0.301 | 0.318 | 0.347 |
+| `breakpoint_count ~ dnadiff_breakpoints` | 0.133 | 0.150 | 0.339 | **0.414** |
+| `breakpoint_count ~ dnadiff_breakpoints_min10000` | 0.147 | 0.166 | 0.334 | **0.410** |
+| `breakpoint_count ~ dnadiff_large_indels_min10000` | 0.255 | 0.281 | 0.380 | **0.453** |
+| `breakpoint_count ~ mm2_breakpoints` | 0.064 | 0.061 | 0.309 | 0.340 |
 
-The correlation **strengthens** under every control, so it is neither a
-divergence artifact nor a fragmentation artifact. `breakpoint_count` correlates
-with contig count at only **r = 0.046** (ρ = 0.091): the `n_chains −
-n_chained_contigs` subtraction does its job on real draft assemblies. In the
-≥95% ANIm subset, `breakpoint_count ~ dnadiff_large_indels_min10000` reaches
-**ρ = 0.806**.
+The raw correlation is much lower than before the fix (0.133 vs 0.465) because
+the previous value was inflated by the reference-fragmentation term that both
+`breakpoint_count` and `dnadiff_breakpoints` shared. After removing it, the
+partial correlation controlled for contig count is the relevant signal: **r =
+0.339** for `dnadiff_breakpoints` and **0.380** for large indels. Controlling for
+both divergence and contig count raises the correlation to **0.414**.
 
-This is the column the paper's SV claims should rest on.
+`breakpoint_count` now correlates with query contig count at **r = −0.377**
+(ρ = −0.029): the metric is no longer a proxy for assembly fragmentation.
+
+In the ≥95% ANIm subset (n = 654), `breakpoint_count ~
+dnadiff_large_indels_min10000` reaches **ρ = 0.674**.
 
 ## 2. `synteny_blocks` is about half assembly quality — it is not a rearrangement metric
 
 | column | r vs ANIm | r vs n_contigs | ρ vs n_contigs |
 |---|---:|---:|---:|
-| `breakpoint_count` | 0.197 | **0.046** | 0.091 |
-| `synteny_blocks` | 0.305 | **0.767** | 0.652 |
-| `mm2_breakpoints` | 0.025 | 0.484 | 0.597 |
-| `dnadiff_blocks` | −0.204 | 0.289 | 0.272 |
-| `af_query` | **0.449** | 0.106 | 0.070 |
-| `anchor_adjacency` | 0.118 | 0.138 | 0.237 |
+| `breakpoint_count` | 0.123 | **−0.377** | −0.029 |
+| `synteny_blocks` | 0.305 | **0.771** | 0.730 |
+| `mm2_breakpoints` | 0.025 | 0.491 | 0.651 |
+| `dnadiff_blocks` | −0.204 | 0.262 | 0.297 |
+| `af_query` | **0.449** | 0.008 | 0.008 |
+| `anchor_adjacency` | 0.118 | 0.005 | −0.072 |
 
-Contig count averages **31.3** against a `synteny_blocks` mean of **62.2** — so
-**50% of "synteny blocks" are just contig starts**, by construction. It correlates
-with contig count at r = 0.767, and still at 0.717 inside the ≥95% ANIm subset
+Contig count averages **38.6** against a `synteny_blocks` mean of **62.2** — so
+**62% of "synteny blocks" are just contig starts**, by construction. It correlates
+with contig count at r = 0.771, and still at 0.759 inside the ≥95% ANIm subset
 where divergence cannot explain it.
 
 `SV_DNADIFF_FILTERED_CORRELATION.md` concluded that "breakpoint_count **and
@@ -71,23 +80,24 @@ contig count.
 
 ## 3. The truth axis is itself contaminated
 
-    dnadiff_breakpoints = 5.35 × breakpoint_count + 290.3      (r = 0.465)
+After the reference-side fix:
 
-An intercept of **290** is the problem. Among the 3,025 pairs where Syn2bANI
-reports **zero** breakpoints, dnadiff still reports a median of **92** (mean 186)
-at a median ANIm of 86.5%. Two genomes at 86% ANI do not carry 92 real
+    dnadiff_breakpoints = 1.43 × breakpoint_count + 422.0      (r = 0.133)
+
+An intercept of **422** is the problem. Among the 8,312 pairs where Syn2bANI
+reports **zero** breakpoints, dnadiff still reports a median of **103** (mean 220)
+at a median ANIm of 88.4%. Two genomes at 88% ANI do not carry 103 real
 rearrangement events.
 
 `dnadiff_blocks` alone explains **R² = 0.600** of `dnadiff_breakpoints`; adding
-ANIm and contig count moves it only to 0.605. dnadiff's "Breakpoints" counts
+ANIm and contig count moves it only to 0.646. dnadiff's "Breakpoints" counts
 every 1-to-1 alignment boundary, so at this divergence it is dominated by
 **alignment fragmentation**, not by biology.
 
-Consequence for how the result is stated: **r ≈ 0.5 is a floor, not a ceiling.**
-The agreement is measured against a truth axis that is roughly 60% noise of a
-kind Syn2bANI does not share. Reporting it as "moderate agreement" understates
-the method; reporting it as validation of a *count* against a clean truth
-overstates the reference.
+Consequence for how the result is stated: the low raw correlation is in part
+because the reference is noisy. The partial correlation (r = 0.414 after
+controlling for ANIm and contig count) is the better estimate of how much true
+rearrangement signal `breakpoint_count` captures.
 
 ## 4. The validation set is in the wrong ANI range for a strain-level tool
 
@@ -101,32 +111,25 @@ overstates the reference.
 
 This is almost entirely an **inter-species** comparison set. The regime the tool
 targets — strain-level, >97% ANI — is represented by two pairs. The ≥95% subset
-(n = 654) is also where the correlations are best (ρ = 0.806), which is
-consistent with the diagnosis in §3: the metric looks better where the truth is
-cleaner, and that regime is barely sampled.
+(n = 654) still shows the strongest signal (`breakpoint_count ~
+dnadiff_large_indels_min10000`: ρ = 0.674), consistent with the diagnosis in §3:
+the metric looks better where the truth is cleaner, and that regime is barely
+sampled.
 
 ---
 
-## 5. What to compute next — all from files already on the HPC
+## 5. What to compute next
 
-**(a) Inverted aligned fraction from the existing `dd.1coords`.** The parser
-already exists (it was used for the min5000/min10000 re-parse). Compute
-
-    Σ |E2 − S2| over blocks whose query interval is reversed
-    ────────────────────────────────────────────────────────
-              Σ |E2 − S2| over all blocks
-
-This is a **length-weighted ratio**, so it has no intercept problem: alignment
-fragmentation splits a block into two but leaves the total inverted length
-unchanged. It is the direct truth for the upstream Syn2b `inverted_fraction`
-signal, which validated against constructed truth at slope 0.968, R² 0.9993 over
-a 512× range of event lengths.
+**(a) Inverted aligned fraction from the existing `dd.1coords` — done.** See
+`dnadiff_inverted_fraction.tsv` and `inverted_fraction_comparison_report.md`.
+The fixed-reference `raw_inverted_fraction` correlates with dnadiff at r = 0.9355
+across the full held-out set.
 
 **(b) `Inversions`, `Relocations`, `Translocations` from the dnadiff `.report`
-files** — dnadiff's own *classified* structural events, far fewer and far closer
-to a real event count than raw `Breakpoints`.
+files — done.** See `dnadiff_events_50k.tsv`.
 
-**(c) Resample pairs at ≥97% ANI.** Currently n = 2.
+**(c) Resample pairs at ≥97% ANI.** Currently n = 2. This remains the highest
+priority for validating the SV metrics in the strain range the tool is meant for.
 
 ### The general principle behind (a)
 
