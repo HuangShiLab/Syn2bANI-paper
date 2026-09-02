@@ -93,9 +93,15 @@ captures only through m.
 3. **BcgI alone is still informative.** At r = 0.83, unbiased, it gives a
    length-weighted SV proxy at a fraction of the wet-lab cost. It is a viable
    option when only one enzyme is available, but with ~70% higher RMSE.
+4. **The over-dispersion is not about landmark count.** FracMinHash at
+   BcgI-matched density (`--scale 1582`, median m ≈ 105) calibrates well
+   (z SD = 1.18), while BcgI at a similar m is over-dispersed (z SD = 2.88).
+   The difference is landmark distribution: restriction sites cluster on motifs
+   and leave large gaps, while FracMinHash landmarks are Poisson-uniform.
 
 ## 6. Next step
 
-Refit the error model separately to BcgI (and ideally to each enzyme) to obtain
-panel-specific constants `c_panel` and `sigma0_panel`. That would turn the
-formula into a genuine design rule for arbitrary enzyme panels.
+The design rule is "use uniform landmarks", not "recalibrate per panel".
+Run `--scale 750` (four-enzyme-matched density, ~6,030 landmarks) to confirm
+that the same two constants hold at higher density, then decide whether a full
+sweep (250 / 750 / 2000 / 6000) is needed for the paper.
