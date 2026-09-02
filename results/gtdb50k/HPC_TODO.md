@@ -409,7 +409,42 @@ reusing the four-enzyme cache would silently feed enzyme TGTs to a FracMinHash r
 (Syn2b refuses a *mixed* comparison, but a cache hit is not a mixed comparison — it
 is a run that quietly never used the mode you asked for.)
 
-### What it answers
+### What it answers — sharpened by the BcgI result
+
+`BCGI_ERROR_MODEL_VALIDATION.md` now shows the error model does **not** transfer from
+the four-enzyme panel to BcgI: z SD 1.08 vs **2.88**, under-predicting by ~1.4x and
+worst at low m (median m = 8: RMSE 0.236 against a predicted 0.173). It concludes the
+constants are panel-specific.
+
+That conclusion confounds two candidate causes, and this run separates them:
+
+1. **Landmark count.** BcgI simply has fewer landmarks, which the `1.504*p(1-p)/m`
+   term already claims to handle. If it handles it correctly, matching m should
+   remove the over-dispersion.
+2. **What the landmarks are.** Restriction sites cluster on their recognition motifs
+   and vary ~5x in density across GC 0.28-0.72, so BcgI leaves large gaps that m does
+   not see. Measured directly: on a closed E. coli K-12 control the *maximum*
+   breakpoint-localisation error is 3,671 bp for BcgI **and unchanged at 3,671 bp for
+   the four-enzyme panel** — adding enzymes does not fill a gap that has no sites —
+   while FracMinHash at BcgI-matched density reaches 1,031 bp because its spacing is
+   Poisson-uniform. BcgI also carries 28 Hamming-1 near-duplicate landmark pairs
+   (0.954%) against FracMinHash's 0.
+
+**The decisive run is FracMinHash at BcgI-matched density: `--scale 1582`**, which
+gives ~2,870 landmarks on a 4.5 Mb genome against BcgI's 2,872.
+
+| result | reading |
+|---|---|
+| z SD ~ 1 at scale 1582 | the over-dispersion is **not** about landmark count. The model's `1/m` term is right, and what breaks BcgI is the *distribution* of its landmarks — clustering and near-duplicates. The design rule then is "use uniform landmarks", not "recalibrate per panel". |
+| z SD ~ 2.9 at scale 1582 | the over-dispersion **is** about landmark count, the `1/m` term is misspecified at small m, and the model needs a different functional form rather than per-panel constants. |
+
+Either answer is publishable and they call for opposite fixes, which is why this
+should run before anyone refits per-enzyme constants (section 6 of that report).
+
+Run `--scale 1582` first, then the sweep below; `--scale 750` remains the
+four-enzyme-matched point.
+
+### What else it answers
 
 `scale 750` gives ~6,030 landmarks on a 4.5 Mb genome against the four-enzyme
 panel's ~6,080, so this is density-matched and the two runs are directly comparable.
