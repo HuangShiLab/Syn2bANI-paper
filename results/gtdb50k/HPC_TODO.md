@@ -22,6 +22,11 @@ ROOT=/lustre1/g/aos_shihuang/Syn2bANI-paper
 | 3. Single-enzyme BcgI pass | **done** | Output `syn2b_inverted_fraction_50k_bcgI.tsv` written (5.7 MB, 43,334 pairs). Validation report: `BCGI_ERROR_MODEL_VALIDATION.md`. |
 | 4. `breakpoint_count` reference-side inflation | **done** | Fix pushed to Syn2bANI `main` (`c974f5f`). HPC binary rebuilt; wrapper `3974244` completed; `s2b_50k.tsv` regenerated. Reports updated. |
 | 5. Closed-genome control | **not started** | Low priority; kept for reviewer response. |
+| 6. Annotate closed inversion pairs | **done** | `closed_inversion_pairs.tsv` written; 371 near-closed ≥97% ANIm pairs ranked by species. |
+| 7. SynTracker cohorts (raw) | **done** | Self-comparison control PASS for all cohorts; positive/negative controls behave as expected. |
+| 7b. Closed-genome cohort selection | **in progress** | 701 genomes selected; 699 being fetched from NCBI (login node). |
+| 8. FracMinHash scale 1582 | **done** | `syn2b_inverted_fraction_50k_fmh1582.tsv` written; z SD = 1.18 vs dnadiff truth. Scale 750 running. |
+| 9. Junction coordinates | **done** | `junction_coordinates.tsv` and `position_agreement.tsv` written; 3,265 pairs pass derivation check. |
 
 ---
 
