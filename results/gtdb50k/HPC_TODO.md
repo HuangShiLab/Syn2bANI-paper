@@ -446,6 +446,104 @@ Send back `syn2b_inverted_fraction_50k_fmh750.tsv`. The comparison against
 `syn2b_inverted_fraction_50k.tsv` runs locally.
 
 
+---
+
+## 9. Do the two methods put breakpoints in the same *places*?
+
+**Cost: a parse pass over files already on disk. No alignment, no digestion.**
+
+`MATH_REVIEW.md` claims Syn2b and dnadiff place breakpoints at the same coordinates
+(~1,544,640 / ~1,945,050) at a ~2790x cost difference. That rests on two hand-checked
+cases. Both sides' coordinates exist for all 43k pairs already, and nothing has ever
+collected them.
+
+### Check this first — it decides whether the task is possible
+
+`syn2b synteny` writes `synteny.junctions.tsv` next to its CSV, and
+`run_syn2b_inverted_fraction.py` reads only the CSV. The pair directories are never
+cleaned up, so the files *should* still be under the TGT cache:
+
+```bash
+ls $WORK/syn2b_tgts_cache/tmp_pairs | wc -l
+find $WORK/syn2b_tgts_cache/tmp_pairs -name 'synteny.junctions.tsv' | wc -l
+ls $WORK/out/*/dd.1coords 2>/dev/null | wc -l
+```
+
+If the first two are ~43k, this is a parse pass. If scratch was cleaned, the Syn2b
+side needs re-running (cheap — the TGT cache makes it a synteny pass, not a
+digestion pass); the dnadiff side cannot be recovered without re-alignment.
+
+### The dnadiff side is *derived*, and that is the catch
+
+`run_dnadiff_slice.sh` deletes `dd.rdiff` and `dd.qdiff` — dnadiff's own
+structural-difference coordinates — to save space:
+
+```bash
+rm -f "$DD"/dd.delta ... "$DD"/dd.qdiff "$DD"/dd.rdiff "$DD"/dd.snps
+```
+
+It keeps `dd.1coords`, the 1-to-1 alignment coordinates those files are derived from,
+so the boundaries can be re-derived: walk the blocks in reference order and mark
+where the query stops being collinear — different query sequence (translocation),
+opposite strand (inversion), or a backwards jump (relocation). Classification is by
+*order*, not distance, so there is no tolerance to tune and a pure indel is correctly
+not a boundary.
+
+That is a re-derivation, not dnadiff's output, so it is checked rather than trusted:
+`dd.report`'s `[Feature Estimates]` carries dnadiff's own Relocations +
+Translocations + Inversions, and the script compares its derived count per pair.
+**Only pairs where the two agree exactly are used** (`--all-pairs` to override). The
+paper must say dd.rdiff was not retained.
+
+```bash
+$PY $ROOT/scripts/gtdb50k/collect_junction_coordinates.py \
+    --pairs     $WORK/pairs_50k.tsv \
+    --tgt-cache $WORK/syn2b_tgts_cache \
+    --dnadiff   $WORK/out \
+    --outdir    $WORK/junction_coords \
+    --workers   32
+```
+
+Then, locally or on HPC:
+
+```bash
+$PY $ROOT/scripts/gtdb50k/compare_junction_positions.py \
+    --coords $WORK/junction_coords/junction_coordinates.tsv \
+    --truth  $WORK/high_ani_truth.tsv \
+    --syn2b  $WORK/syn2b_inverted_fraction_50k.tsv \
+    --out    $WORK/junction_coords/position_agreement.tsv
+```
+
+### Reading the result
+
+The two sets are matched **one-to-one**, greedily by increasing distance — nearest
+neighbour in both directions would let one Syn2b junction satisfy three dnadiff
+boundaries and read as three successes. Greedy is not the optimal assignment, but it
+can only inflate matched distances, so the agreement reported is a lower bound.
+
+**The expected answer is set by landmark spacing, not by the algorithm.** Syn2b
+reports the left landmark of the broken adjacency, so its error is bounded by the gap
+to the next landmark. Measured on a closed E. coli K-12 control with three known
+200 kb inversions:
+
+| landmarks | spacing | median error | max error |
+|---|---|---|---|
+| BcgI, 2,872 | 1,582 bp | 614 bp | 3,671 bp |
+| 4-enzyme, 6,079 | 747 bp | 273 bp | 3,671 bp |
+| FracMinHash s=750, 6,034 | 753 bp | 456 bp | 1,031 bp |
+| FracMinHash s=200, 22,708 | 200 bp | 248 bp | 783 bp |
+| FracMinHash s=50, 90,394 | 50 bp | 44 bp | 71 bp |
+
+So a median matched distance near the panel's spacing is the *expected* result and
+the correct claim. A distance much larger than spacing is the finding that would need
+explaining. Note the enzyme path's max error does not improve from BcgI to the
+four-enzyme panel — restriction sites cluster on their motifs, so adding enzymes does
+not fill a gap that has none — while FracMinHash at matched density already reaches
+1,031 bp because its spacing is Poisson-uniform.
+
+Send back `junction_coordinates.tsv` and `position_agreement.tsv`.
+
+
 ## Not needed any more
 
 **Resampling pairs at >=97% ANIm.** This was on the list because held_out_50k has
