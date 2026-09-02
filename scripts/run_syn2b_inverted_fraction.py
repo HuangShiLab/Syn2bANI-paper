@@ -2,8 +2,16 @@
 """Compute Syn2b inverted_fraction for a list of genome pairs.
 
 Workflow:
-  1. Digest every unique genome with --enzymes (default: BcgI,AlfI,AloI,FalI).
+  1. Extract landmarks from every unique genome, either by restriction digest
+     (--mode 2brad, default, with --enzymes) or by FracMinHash (--mode fracminhash,
+     with --kmer and --scale).
   2. For each pair, run syn2b synteny on the two TGTs and parse inverted_fraction.
+
+The two landmark sources are not interchangeable inside one run: syn2b refuses a
+comparison across them. Give each mode its own --tgt-dir, since the cache keys on
+accession alone. FracMinHash k=31 --scale 750 gives ~6,030 landmarks on a 4.54 Mb
+genome, matching the four-enzyme panel's ~6,080, which is the density-matched
+comparison point.
 
 Inputs:
     --pairs      TSV with columns pairid, q_acc, r_acc
@@ -41,13 +49,19 @@ def run(cmd, **kw):
 
 
 def digest_genome(args):
-    acc, genome_path, tgt_dir, syn2b, enzymes = args
+    acc, genome_path, tgt_dir, syn2b, enzymes, mode, kmer, scale = args
     out_tgt = tgt_dir / f"{acc}.tgt"
     if out_tgt.exists() and out_tgt.stat().st_size > 0:
         return acc, str(out_tgt)
+    if mode == "fracminhash":
+        cmd = [syn2b, "digest", "-i", str(genome_path), "-o", str(out_tgt),
+               "--mode", "fracminhash", "--kmer", str(kmer), "--scale", str(scale),
+               "-f", "text"]
+    else:
+        cmd = [syn2b, "digest", "-i", str(genome_path), "-o", str(out_tgt),
+               "-e", enzymes, "-f", "text"]
     try:
-        run([syn2b, "digest", "-i", str(genome_path), "-o", str(out_tgt),
-             "-e", enzymes, "-f", "text"], timeout=120)
+        run(cmd, timeout=300)
         return acc, str(out_tgt)
     except Exception as e:
         return acc, f"ERROR: {e}"
@@ -124,6 +138,16 @@ def main():
                    help="comma-separated enzyme panel passed to `syn2b digest`. "
                         "Use a --tgt-dir per panel: the cache keys on accession "
                         "only, so reusing one across panels silently mixes them.")
+    p.add_argument("--mode", default="2brad", choices=["2brad", "fracminhash"],
+                   help="landmark source. `2brad` digests with --enzymes; "
+                        "`fracminhash` selects k-mers by hash and uses --kmer/--scale. "
+                        "Needs its own --tgt-dir, for the same reason as --enzymes.")
+    p.add_argument("--kmer", type=int, default=31,
+                   help="FracMinHash k-mer length, 1..32. Ignored in 2brad mode.")
+    p.add_argument("--scale", type=int, default=750,
+                   help="FracMinHash compression: expected landmark spacing in bp. "
+                        "750 matches the four-enzyme panel's density on a 4.5 Mb "
+                        "genome. Ignored in 2brad mode.")
     args = p.parse_args()
 
     pairs = pd.read_csv(args.pairs, sep="\t")
@@ -154,12 +178,16 @@ def main():
         if not gp.exists():
             missing.append(acc)
             continue
-        digest_tasks.append((acc, str(gp), tgt_dir, args.syn2b, args.enzymes))
+        digest_tasks.append((acc, str(gp), tgt_dir, args.syn2b, args.enzymes,
+                             args.mode, args.kmer, args.scale))
 
     if missing:
         print(f"WARNING: {len(missing)} genomes missing, e.g. {missing[:5]}", flush=True)
 
-    print(f"digesting {len(digest_tasks)} genomes with {args.workers} workers ...", flush=True)
+    what = (f"FracMinHash k={args.kmer} scale={args.scale}"
+            if args.mode == "fracminhash" else f"enzymes {args.enzymes}")
+    print(f"extracting landmarks from {len(digest_tasks)} genomes "
+          f"[{what}] with {args.workers} workers ...", flush=True)
     with Pool(args.workers) as pool:
         digest_results = pool.imap_unordered(digest_genome, digest_tasks, chunksize=10)
         for i, (acc, result) in enumerate(digest_results):

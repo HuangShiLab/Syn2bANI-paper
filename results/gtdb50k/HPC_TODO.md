@@ -384,6 +384,68 @@ since it needs no new genomes.
 
 ---
 
+---
+
+## 8. gtdb50k under FracMinHash landmarks — does the error model survive a source swap?
+
+**Cost: one digestion pass plus one synteny pass over the same pairs. No downloads,
+no alignment.** Needs Syn2b at `c10bfa3` or later on HPC (`--mode` did not exist before).
+
+Syn2b now takes landmarks from either source (`README.md`, "Landmark sources"):
+
+```bash
+$PY $ROOT/scripts/run_syn2b_inverted_fraction.py \
+    --pairs      $WORK/pairs_50k.tsv \
+    --genome-dir /lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all \
+    --syn2b      /lustre1/g/aos_shihuang/Syn2b/target/release/syn2b \
+    --mode fracminhash --kmer 31 --scale 750 \
+    --tgt-dir    $WORK/syn2b_tgts_cache_fmh750 \
+    --out        $WORK/syn2b_inverted_fraction_50k_fmh750.tsv \
+    --workers    16
+```
+
+**Use a separate `--tgt-dir` per mode.** The cache keys on accession alone, so
+reusing the four-enzyme cache would silently feed enzyme TGTs to a FracMinHash run.
+(Syn2b refuses a *mixed* comparison, but a cache hit is not a mixed comparison — it
+is a run that quietly never used the mode you asked for.)
+
+### What it answers
+
+`scale 750` gives ~6,030 landmarks on a 4.5 Mb genome against the four-enzyme
+panel's ~6,080, so this is density-matched and the two runs are directly comparable.
+Three things fall out:
+
+1. **Is the error model a property of the estimator or of the enzymes?**
+   `Var(err) = 1.504*p(1-p)/m + 0.0205^2` was fitted on four-enzyme landmarks
+   (R^2 0.9988 over 12 bins, out-of-sample SD(z) 1.006). If the same two constants
+   come back from FracMinHash landmarks, the model is a property of the adjacency
+   mathematics. If they move, they are a property of the panel — which is worth
+   knowing before the paper states them as a design result.
+
+2. **A continuous sweep of `m`, which the enzyme path cannot do.** The enzyme path
+   offers four discrete densities (1, 2, 4, 16 enzymes). `--scale` is continuous, so
+   the `1/m` term can be tested across a decade rather than at four points. Suggested
+   rungs once the matched run is in: `--scale 250 / 750 / 2000 / 6000`.
+
+3. **Does the sub_2 mechanism show up at scale?** Measured on one genome
+   (`docs/MATH_REVIEW.md`): on a substitution ladder the four-enzyme panel leaves
+   `scj_distance` 6 at 3% and 18 at 5% while FracMinHash leaves 0, because E. coli
+   K-12 has 116 Hamming-1 near-duplicate landmark pairs under the panel and 0 under
+   the sketch. The gtdb50k pairs are the test of whether that holds across taxa —
+   compare `scj_distance` between the two runs on the same pairs, banded by ANIm.
+
+### Expected, and what would be surprising
+
+`breakpoints`, `inverted_fraction` and `observable_fraction` should agree closely;
+verified identical on five genome-scale controls (self, 1.2 Mb rotation, 500 kb
+inversion, 1/2/3/5 inversions, 40-contig shatter). A systematic gap in
+`inverted_fraction` at high ANIm would be the interesting result and would need
+explaining before either number is published.
+
+Send back `syn2b_inverted_fraction_50k_fmh750.tsv`. The comparison against
+`syn2b_inverted_fraction_50k.tsv` runs locally.
+
+
 ## Not needed any more
 
 **Resampling pairs at >=97% ANIm.** This was on the list because held_out_50k has
