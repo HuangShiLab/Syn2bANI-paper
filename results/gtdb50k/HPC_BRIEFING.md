@@ -322,16 +322,24 @@ start coordinate between the reference and the query assembly. Because the cagPA
 window (547,327–583,481) lies inside this span, the overlap test is always true,
 so `complete_rearranged` is inflated.
 
-**Immediate actions:**
+**Status / fix:**
 
-1. **Syn2bANI `struct` needs circular-origin handling.** Port or replicate the
-   per-contig circularity fix from Syn2b (`0c4c541`). Before pairwise comparison,
-   normalize circular contigs to a common start. After calling, flag any SV whose
-   span exceeds a fixed fraction of the contig (default 50%) as a
-   `COORDINATE_ARTIFACT` and exclude it from rearrangement counts.
-2. **Re-run `syn2bani struct` for all 528 genomes versus 26695** after the fix.
-3. **Recompute the extended cagPAI state** with the span filter applied.
-4. **Recompute disease-stage associations with lineage stratification.** The raw
+- Implemented in Syn2bANI `main` (`e158252`): `syn2bani struct` now accepts
+  `--circular <contig-name>[,...]` and `--artifact-threshold <fraction>` (default
+  0.5). Calls on a declared-circular contig whose reference or query span exceeds
+  the threshold are filtered as coordinate artifacts. Example verified on
+  GCA_000521245.1: the `TRA:1459-1666206` genome-spanning call is removed, while
+  local SVs are retained.
+- The H. pylori runner (`case_studies/h_pylori_cagpai/scripts/run_struct_vs_26695.py`)
+  now calls `struct --bed --circular NC_000915.1` and writes to
+  `struct_vs_26695_filtered/`.
+- A full re-run of all 528 genomes is in progress locally.
+
+**Remaining actions:**
+
+1. **Recompute the extended cagPAI state** with the filtered BED outputs (script
+   `classify_rearrangement.py` is already pointed at `struct_vs_26695_filtered/`).
+2. **Recompute disease-stage associations with lineage stratification.** The raw
    FastBAPS association (χ², p = 3.9 × 10⁻⁸) is much stronger than the disease-stage
    association (p = 9.9 × 10⁻⁴), and lineage is confounded with geography/cohort
    structure. Use Cochran–Mantel–Haenszel or logistic regression with FastBAPS as a

@@ -1,0 +1,42 @@
+# Lineage-stratified cagPAI–disease associations (n=528)
+# Extended state counts after circular-origin filtering:
+#   empty: 85 (16.10%)
+#   partial: 11 (2.08%)
+#   complete_collinear: 145 (27.46%)
+#   complete_rearranged: 287 (54.36%)
+
+### cagPAI presence: GC vs NAG
+fastbaps	case_outcome	case_no_outcome	control_outcome	control_no_outcome
+fastbaps_L2	52	4	43	4
+fastbaps_L3	26	9	46	19
+fastbaps_L4	8	1	11	1
+fastbaps_L5	13	1	26	15
+fastbaps_L6	4	0	1	1
+CMH chi2=1.4019, df=1, p=0.2364, OR_MH=1.599
+
+### cagPAI rearrangement: GC vs NAG
+fastbaps	case_outcome	case_no_outcome	control_outcome	control_no_outcome
+fastbaps_L2	33	23	26	21
+fastbaps_L3	18	17	33	32
+fastbaps_L4	4	5	5	7
+fastbaps_L5	10	4	18	23
+fastbaps_L6	4	0	0	2
+CMH chi2=0.8028, df=1, p=0.3703, OR_MH=1.294
+
+### cagPAI presence (advanced vs early): GC/IM vs AG/NAG
+fastbaps	case_outcome	case_no_outcome	control_outcome	control_no_outcome
+fastbaps_L2	56	4	126	11
+fastbaps_L3	59	21	48	21
+fastbaps_L4	26	3	18	1
+fastbaps_L5	44	8	41	20
+fastbaps_L6	4	3	10	4
+CMH chi2=1.5539, df=1, p=0.2126, OR_MH=1.389
+
+### cagPAI rearrangement (advanced vs early): GC/IM vs AG/NAG
+fastbaps	case_outcome	case_no_outcome	control_outcome	control_no_outcome
+fastbaps_L2	37	23	79	58
+fastbaps_L3	42	38	35	34
+fastbaps_L4	14	15	9	10
+fastbaps_L5	29	23	30	31
+fastbaps_L6	4	3	8	6
+CMH chi2=0.4664, df=1, p=0.4946, OR_MH=1.152
