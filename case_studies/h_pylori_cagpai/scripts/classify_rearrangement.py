@@ -87,7 +87,7 @@ def main():
     )
     parser.add_argument(
         '--struct-dir', type=Path,
-        default=Path('/Volumes/MoneyCat/Data/song_2026_hpylori/struct_vs_26695'),
+        default=Path('/Volumes/MoneyCat/Data/song_2026_hpylori/struct_vs_26695_filtered'),
         help='Directory containing <genome>.vs_hp26695.bed files.'
     )
     parser.add_argument(

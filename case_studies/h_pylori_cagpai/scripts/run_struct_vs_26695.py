@@ -9,7 +9,7 @@ from multiprocessing import Pool, cpu_count
 S2B = Path('/Users/macstudio/Downloads/Syn2bANI/target/release/syn2bani')
 GENOMES = Path('/Volumes/MoneyCat/Data/song_2026_hpylori/genomes')
 REF = Path('/Users/macstudio/Downloads/Syn2bANI-paper/data/cagpai_pilot/hp26695.fna')
-OUT = Path('/Volumes/MoneyCat/Data/song_2026_hpylori/struct_vs_26695')
+OUT = Path('/Volumes/MoneyCat/Data/song_2026_hpylori/struct_vs_26695_filtered')
 OUT.mkdir(parents=True, exist_ok=True)
 
 def run_one(fna):
