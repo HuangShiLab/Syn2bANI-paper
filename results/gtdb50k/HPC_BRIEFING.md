@@ -368,19 +368,35 @@ metrics mapped to their interpretive niches.
 This is the highest-priority HPC step. It unblocks v6 calibration and proper
 validation in the ≥97% range, which is currently underpowered.
 
-### 6.4 Closed-genome cohort has two problems that must be diagnosed
+### 6.4 Closed-genome cohort: diagnosis complete
 
-`results/gtdb50k/CLOSED_GENOME_INVERSION_REPORT.md` reports:
+A diagnostic run (`scripts/diagnose_closed_inversions.py`, report
+`CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`) resolved both problems:
 
-- Median `raw_inverted_fraction` = 0.36 across 61,537 pairs; 90th percentile = 0.9291;
-  95th percentile = 0.9995. A 36% median inversion rate among same-species pairs is
-  biologically implausible and likely reflects circular-origin / global-orientation
-  artifacts.
-- 371 expected seed pairs appear 0 times in 61,537 outputs. This is an identifier
-  or filtering bug that must be explained.
+**Problem 1 — 0/371 seed pairs:** This is an **identifier mismatch**, not a
+filtering bug. The 371 seed pairs in `closed_inversion_pairs.tsv` use accessions
+that do not appear in the 701-genome closed-genome cohort at all (even stripping
+version suffixes gives zero overlap). The closed-genome all-vs-all was run on a
+different genome set than the seed-pair list. The seed-pair validation is
+therefore disconnected and must be rerun with the correct accessions, or replaced
+by validating the 701-genome cohort directly.
 
-These two diagnostics are the highest local priority because `raw_inverted_fraction`
-is the proposed headline metric.
+**Problem 2 — 36% median inverted fraction:** This is an **orientation artifact**.
+The report used `syn2b_raw_inverted_fraction`, which is reference-oriented. For
+undirected all-vs-all pairs with arbitrary global orientation, ~50% of the genome
+is classified as inverted. The corrected column `syn2b_inverted_fraction`
+(`min(raw, 1 - raw)`, capped at 0.5) has median **0.184** instead of 0.360. The
+top 20 "most inverted" raw pairs are all *Pseudomonas aeruginosa* with raw = 1.0;
+under the corrected metric these are perfectly collinear but opposite
+orientation. Contig count is not the driver (correlation ≈ 0).
+
+**Consequences:**
+- Use `syn2b_inverted_fraction` (corrected), not `raw`, for undirected
+  all-vs-all comparisons.
+- For directed comparisons against a fixed reference (e.g., H. pylori vs 26695),
+  raw is appropriate, but circular-origin normalization is still required.
+- The closed-genome report should be regenerated after fixing the seed-pair
+  mismatch and adding circular-origin normalization.
 
 ### 6.5 Revised execution order
 

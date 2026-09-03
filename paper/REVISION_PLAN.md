@@ -67,19 +67,20 @@ Pull `high_ani_results.tsv`, `linear_cal_v6.json`, and `calibration_v6_*.tsv` ba
 
 ### 3. Diagnose closed-genome `raw_inverted_fraction` distribution and 0/371 seed bug
 
-**What:** Two independent problems in the closed-genome all-vs-all output (`results/gtdb50k/syn2b_inverted_fraction_closed.tsv`):
-- Median inversion fraction 0.36 is biologically implausible for same-species pairs.
-- 371 expected seed pairs appear 0 times in 61,537 outputs.
+**Status:** Diagnosed. Report: `results/gtdb50k/CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`.
 
-**Why:** `raw_inverted_fraction` is the proposed headline metric; it cannot be presented until these are explained.
+**Findings:**
+- **0/371 seed pairs:** Identifier mismatch. The seed-pair accessions do not appear in the 701-genome closed-genome cohort (zero overlap even after stripping versions). The closed-genome all-vs-all was run on a different genome set than the seed-pair list. Fix: re-run with the correct seed accessions, or validate the 701-genome cohort directly.
+- **36% median inversion:** Orientation artifact. The report used `syn2b_raw_inverted_fraction`, which is reference-oriented; for undirected all-vs-all pairs with arbitrary global orientation, ~50% of the genome is classified as inverted. The corrected column `syn2b_inverted_fraction` (`min(raw, 1 - raw)`, capped at 0.5) has median **0.184**. The top 20 raw-inverted pairs are all *Pseudomonas aeruginosa* with raw = 1.0 and corrected = 0.0, i.e. perfectly collinear but opposite orientation.
 
-**Hypotheses to test:**
-- Median 36% is circular-origin / global orientation artifact (same as *H. pylori* but on many species).
-- 0/371 seed pairs is an identifier mismatch or a filtering bug in the runner.
+**Actions:**
+- Use `syn2b_inverted_fraction` (corrected) for undirected all-vs-all comparisons.
+- For directed comparisons (e.g., H. pylori vs 26695), keep raw but add circular-origin normalization.
+- Re-run/re-report the closed-genome validation after fixing seed-pair selection and circular-origin handling.
 
 **Priority:** Critical for headline metric credibility.  
-**Effort:** Small (diagnostic scripts on existing tables).  
-**Owner:** `results/gtdb50k/CLOSED_GENOME_INVERSION_REPORT.md` update; new diagnostic script.
+**Effort:** Small (diagnostic done); re-run cost depends on seed-pair fix.  
+**Owner:** `results/gtdb50k/CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`; HPC re-run.
 
 ---
 
