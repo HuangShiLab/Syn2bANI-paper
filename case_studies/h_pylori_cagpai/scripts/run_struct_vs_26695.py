@@ -17,7 +17,8 @@ def run_one(fna):
     bed = OUT / f"{gid}.vs_hp26695.bed"
     if bed.exists() and bed.stat().st_size > 0:
         return gid, 'skipped'
-    cmd = [str(S2B), 'struct', '--bed', str(fna), str(REF), '-o', str(bed)]
+    cmd = [str(S2B), 'struct', '--bed', '--circular', 'NC_000915.1',
+           str(fna), str(REF), '-o', str(bed)]
     try:
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=300)
         return gid, 'ok'
