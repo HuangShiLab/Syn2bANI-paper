@@ -296,3 +296,139 @@ agreement rate, coordinate-frame counts) whose result matters as much as the tab
 If a control fails, send the failure rather than working around it. Two of the three
 problems found this week — the SynTracker self-comparison floor and the duplicate
 pairids — were invisible in the summary tables and only showed up in a check.
+
+---
+
+## 6. Post-briefing update (2026-09-03): circular-origin artifacts and revised priorities
+
+A reanalysis of the cagPAI cohort and the closed-genome cohort has changed the
+manuscript strategy. The HPC plan below supersedes the order in `HPC_TODO.md` for
+anything that touches structural output or the cagPAI case study.
+
+### 6.1 *H. pylori* cagPAI `complete_rearranged` is mostly a coordinate artifact
+
+In the 528-genome cohort versus 26695, 420 genomes were classified as
+`complete_rearranged`. Of these:
+
+- 400 (95.2%) carry a structural call spanning >50% of the genome.
+- The most common call is `TRA:1459-1666206`, present in 283 genomes and spanning
+  99.8% of the ~1.67 Mb chromosome.
+- 119 genomes (28.3% of `complete_rearranged`) have no local SV other than this
+  genome-spanning call.
+
+*H. pylori* 26695 has a circular chromosome. A call that covers 99.8% of the
+chromosome is not a biological translocation; it is the arbitrary difference in
+start coordinate between the reference and the query assembly. Because the cagPAI
+window (547,327–583,481) lies inside this span, the overlap test is always true,
+so `complete_rearranged` is inflated.
+
+**Immediate actions:**
+
+1. **Syn2bANI `struct` needs circular-origin handling.** Port or replicate the
+   per-contig circularity fix from Syn2b (`0c4c541`). Before pairwise comparison,
+   normalize circular contigs to a common start. After calling, flag any SV whose
+   span exceeds a fixed fraction of the contig (default 50%) as a
+   `COORDINATE_ARTIFACT` and exclude it from rearrangement counts.
+2. **Re-run `syn2bani struct` for all 528 genomes versus 26695** after the fix.
+3. **Recompute the extended cagPAI state** with the span filter applied.
+4. **Recompute disease-stage associations with lineage stratification.** The raw
+   FastBAPS association (χ², p = 3.9 × 10⁻⁸) is much stronger than the disease-stage
+   association (p = 9.9 × 10⁻⁴), and lineage is confounded with geography/cohort
+   structure. Use Cochran–Mantel–Haenszel or logistic regression with FastBAPS as a
+   covariate. The presence/absence axis (`empty`/`partial`/`complete`, from
+   minimap2 marker coverage) is independent and remains valid.
+
+### 6.2 Strategic repositioning of the four structural columns
+
+The GTDB-R207 SV reanalysis and the fragmentation theorem in `Syn2b/docs/MATH_REVIEW.md`
+lead to the following hierarchy for the *Nature Methods* manuscript:
+
+| Metric | New role | Key evidence |
+|---|---|---|
+| `raw_inverted_fraction` | **Headline structural output** | r = 0.936 vs dnadiff (all); r = 0.996 at ANIm ≥ 97%; fragmentation-invariant. |
+| `breakpoint_count` | Secondary count-based descriptor | Partial r = 0.414 vs `dnadiff breakpoints`, ~0.79 vs `dnadiff relocations + inversions`; control for contig count. |
+| `synteny_blocks` | Assembly-structure diagnostic | 62% of variance tracks contig count. |
+| `af_query` / `af_reference` | Coverage / aligned-fraction metrics | Correlate with dnadiff/minimap2 coverage. |
+| `anchor_adjacency` | Local anchor-order conservation | Separate metric; not base-pair synteny. |
+
+The manuscript should be rewritten around `raw_inverted_fraction`, with the other
+metrics mapped to their interpretive niches.
+
+### 6.3 High-ANI dataset is ready but not yet submitted
+
+`results/gtdb50k/HIGH_ANI_STATUS.md` is current:
+
+- `high_ani_truth.tsv`: 7,695 rows of dnadiff/ANIm truth.
+- `high_ani_pairs_final.tsv`: 2,348 pairs ≥95% ANIm (95–97%: 322; 97–100%: 1,724),
+  split 60/40 train/test.
+- SLURM arrays `s7_s2b_high_ani_final.slurm`, `s8_skani_high_ani_final.slurm`,
+  `s9_fastani_high_ani_final.slurm` are written.
+- `merge_high_ani_results.py` and `calibration_v6.py` are ready.
+
+This is the highest-priority HPC step. It unblocks v6 calibration and proper
+validation in the ≥97% range, which is currently underpowered.
+
+### 6.4 Closed-genome cohort has two problems that must be diagnosed
+
+`results/gtdb50k/CLOSED_GENOME_INVERSION_REPORT.md` reports:
+
+- Median `raw_inverted_fraction` = 0.36 across 61,537 pairs; 90th percentile = 0.9291;
+  95th percentile = 0.9995. A 36% median inversion rate among same-species pairs is
+  biologically implausible and likely reflects circular-origin / global-orientation
+  artifacts.
+- 371 expected seed pairs appear 0 times in 61,537 outputs. This is an identifier
+  or filtering bug that must be explained.
+
+These two diagnostics are the highest local priority because `raw_inverted_fraction`
+is the proposed headline metric.
+
+### 6.5 Revised execution order
+
+| Priority | Task | Cost | Unblocks |
+|---|---|---|---|
+| 1 | Submit the three high-ANI SLURM arrays | Minutes to submit; HPC runtime | v6 calibration; ≥97% validation |
+| 2 | Fix circular-origin handling in Syn2bANI `struct`; re-run *H. pylori* | Small to medium | cagPAI case study credibility |
+| 3 | Diagnose closed-genome `raw_inverted_fraction` distribution and 0/371 seed bug | Small | headline metric credibility |
+| 4 | Train v6 calibration (depends on 1) | Medium | manuscript accuracy numbers |
+| 5 | Rewrite manuscript structural section | Medium | — |
+| 6 | Recompute cagPAI disease associations with lineage stratification (depends on 2) | Small | phenotype association claims |
+
+**Recommended parallelization:** Submit the high-ANI arrays first, then work on
+tasks 2 and 3 while the arrays run. Both are bug-fix/diagnostic tasks on existing
+outputs and should fit in the queue wait time.
+
+### 6.6 Span-statistics script for HPC validation
+
+To reproduce and validate the *H. pylori* circular-origin finding on HPC, use the
+span filter. A helper script is provided at
+`case_studies/h_pylori_cagpai/scripts/filter_circular_origin.py`. It reads the BED
+files produced by `syn2bani struct --bed`, reports the maximum SV span per genome,
+and flags any genome whose largest call exceeds a contig-fraction threshold
+(default 50%). Run it before `classify_rearrangement.py` to obtain an artifact-free
+extended state.
+
+Example:
+```bash
+python3 case_studies/h_pylori_cagpai/scripts/filter_circular_origin.py \
+    --struct-dir /path/to/struct_vs_26695 \
+    --ref-length 1667825 \
+    --threshold 0.50 \
+    --out cagpai_circular_origin_flags.tsv
+```
+
+Any genome flagged here should have its genome-spanning call excluded from the
+`complete_rearranged` classification.
+
+### 6.7 Implications for the two papers
+
+- **Syn2b (methods paper):** The fragmentation theorem is the central result.
+  The GTDB-R207 reanalysis provides three independent empirical legs:
+  (i) `raw_inverted_fraction` vs dnadiff, (ii) `breakpoint_count` contig
+  confounding, and (iii) the *H. pylori* circular-origin case. The main evidence
+  figure should be `raw_inverted_fraction` vs dnadiff. The ≥97% validation still
+  depends on submitting the high-ANI arrays.
+
+- **Syn2bANI (Nature Methods application paper):** Submit the high-ANI arrays,
+  fix circular-origin handling, re-run cagPAI, then rewrite the structural
+  section around `raw_inverted_fraction`. The cagPAI case study can survive on
+  the presence/absence axis even if the rearrangement axis collapses.
