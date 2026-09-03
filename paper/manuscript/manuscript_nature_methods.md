@@ -130,9 +130,20 @@ Anchors are grouped by (query contig, reference contig, orientation) — never a
 
 ### Chain-restricted stratified MLE, gating, and flags
 
-For a query tag inside a chained region, with tag length k, recognition-site length s, mutable body b = k − s, and mismatch budget tol, the outcome probabilities under per-base identity a are: found with m body mismatches, P_m(a) = C(b, m)·(1−a)^m·a^(k−m) for m ≤ tol; not found, P_miss(a) = 1 − Σ P_m(a). Mismatches are observable only in the body — a site mutation deletes the tag — so the site contributes a^s but never appears in the histogram; this also sets a hard retention ceiling (~0.72 at 95% ANI, ~0.50 at 90%). The log-likelihood is summed over per-enzyme strata (each with its own k and b) and maximized over the scalar a by golden-section search. Two partial estimators — `ani_from_loss` (miss rate only) and `ani_from_hist` (histogram only, renormalized by P(found)) — are independent estimates of the same quantity and power the diagnostics.
-
-The heterogeneous model gives each region a rate multiplier r ~ Gamma(α, α); because rate variation acts at kilobase scale while a tag is ~30 bp, all sites in a tag share one r, and integrating r out turns the mismatch count negative binomial with two parameters (mean divergence d, shape α) identifiable from the three histogram degrees of freedom plus the miss count. Guardrails: the second parameter is spent only when the likelihood-ratio statistic exceeds 3.841, and α is clamped to [0.1, 200]. Because the gamma shape and mean couple at the identifiability boundary when few tags survive (overshoots of 4–10 ANI points at mid-ANI), the shipped point estimate is **gated**: report the homogeneous fit when |ani_from_loss − ani_from_hist| > 5 ANI points, else the gamma fit. The threshold is an effect size, not a significance level — significance-scaled variants invert their error ranking on GTDB — and was chosen at the flat optimum (4.5–6 points) of a threshold sweep on the GTDB-ANIm matrix. It fires on 5.5% of GTDB pairs (MAE 2.819 vs 2.881 always-gamma; per-pair oracle bound 2.788), on all 15 mid-ANI pairs (gamma MAE 4.48 → uniform fallback MAE 1.42), and never on uniform-rate sims, mosaic sims, or oral/gut same-species pairs, preserving gamma's advantage exactly where it is real. The `flag` column reports `BELOW_DETECTION` (expected retention < 0.20; precedence), `INCONSISTENT` (the gate fell back, or the chains carry > 0.5 rearrangement breakpoints per anchor — a structural statistic that does not share the chain-restricted likelihood denominator), else `ok`. The recalibrated flag never inverts its error ranking on any validation set (kept vs flagged MAE: GTDB-ANIm 2.415 vs 4.153; oral/gut 0.514 vs 4.269; mid-ANI 0.343 vs 1.113), at a disclosed cost in near-clonal sensitivity.
+The estimator is a chain-restricted maximum-likelihood fit to per-enzyme tag
+outcomes. For each stratum, tags inside chains are classified as found with 0,
+1, or 2 body mismatches, or missing; the per-base identity `a` is found by
+golden-section search on a likelihood that respects the recognition-site
+geometry (a site mutation deletes the tag, so only body mismatches are
+observable). A gamma rate-heterogeneity extension is available but is **gated**
+by an effect-size test on the two partial estimators (`ani_from_loss` from the
+miss channel and `ani_from_hist` from the mismatch histogram): when they diverge
+by more than 5 ANI points the method reports the homogeneous fit, otherwise the
+gamma fit. The threshold was chosen at the flat optimum of a sweep on the
+GTDB-ANIm training matrix. The hierarchical `flag` column reports
+`BELOW_DETECTION` (expected retention < 0.20), `INCONSISTENT` (gate fallback or
+> 0.5 breakpoints per anchor), or `ok`. Full formulas, the negative-binomial
+derivation, and the gating/flag rationale are given in Supplementary Note 4.
 
 ### Short-contig rescue pass
 
@@ -144,11 +155,29 @@ Batch subcommands (`dist`, `search`, `triangle`, `db search`) run a two-stage pi
 
 ### Ridge calibration protocol
 
-The calibration model is ridge regression on nine Syn2bANI-internal features — `ani_gated`, `ani_uniform`, `af_query`, `af_reference`, `std_err`, `retention`, `n_anchors`, `n_chains`, `n_tags_in_chains` — with median imputation and standardization, regularization α = 10 selected by inner cross-validation (scikit-learn29), trained on 2,520 ANIm-truth pairs (2,053 finite pairs from the stratified 2,074-pair GTDB benchmark plus 467 targeted 95.0–99.15% ANIm pairs from a skani screen of all 2.26 M same-genus GTDB-R207 pairs followed by dnadiff on 650 selected candidates; 607 species, 26 phyla, zero overlap with the existing set). Validation is **band-holdout**: each of the four ANI bands (80–85, 85–90, 90–95, 95–99) is predicted by a model trained on the other three only. Training rows are shuffled with a fixed seed before CV (the inner KFold of the ridge CV is order-sensitive); seed spread over 5 seeds is ≤ 0.0015 MAE. An expanded 18-feature variant and a gradient-boosted model on the same features were evaluated and rejected (nonlinearity buys nothing at n ≈ 2,500, and the expanded set degrades out-of-distribution on near-clonal pairs). A learning-curve analysis (492/984/1,476/1,969 training pairs → CV MAE 0.952/0.902/0.887/0.893) shows the linear model plateaus at ~1,500 pairs. The model ships as a versioned JSON swapped into the binary; all feature matrices were re-run with the post-rescue binary before training, so there is no version skew between the shipped estimator and the deployed model. Calibrated output is a separate column (`--calibrate`); it returns no value on `BELOW_DETECTION` pairs rather than extrapolating.
+The calibration model is ridge regression on nine Syn2bANI-internal features
+(`ani_gated`, `ani_uniform`, `af_query`, `af_reference`, `std_err`, `retention`,
+`n_anchors`, `n_chains`, `n_tags_in_chains`), with median imputation and
+standardization. Regularization strength `α = 10` is selected by inner
+cross-validation (scikit-learn29). The model is trained on 2,520 ANIm-truth pairs
+(80–99.5% ANIm) spanning 607 species and 26 phyla, with zero genome-level overlap
+between the 2,074-pair stratified benchmark and the 467-pair 95–99.5% expansion.
+Validation is **band-holdout**: each ANI band (80–85, 85–90, 90–95, 95–99) is
+predicted by a model trained on the other three only. Calibrated output is a
+separate column (`--calibrate`) and is omitted on `BELOW_DETECTION` pairs rather
+than extrapolated. Learning-curve, feature-expansion, and model-comparison
+details are in Supplementary Notes 2 and 6.
 
 ### The spatial-model negative result (identifiability analysis)
 
-The mechanistic alternative to calibration was evaluated in full (prototype in Python against 19 exact-truth mosaic simulations, then the GTDB-ANIm matrix). The bias decomposes into an in-chain distribution-family term — asymptotic in-chain MAE 2.25 for gamma, 1.25 for a capped grid NPMLE, so a nonparametric fit fixes at most ~0.1–0.2 GTDB MAE — and a coverage term: the divergence of the unchained fraction is not identifiable from tag data, since the out-of-chain anchor residual is ≈ 0 within multi-match noise whether the unchained mass is saturated-divergent or accessory, and an oracle given the exact identity of the chained sample still errs by MAE 1.36 against whole-genome truth. No candidate (AF-weighted mixtures, discrete mixtures, ascertainment-aware tilts, capped NPMLE with and without LRT gating, model averaging) beats the gated baseline while holding all simulation gates. The raw estimator is therefore at its identifiability floor at 4-enzyme tag density; this analysis is why calibration, not a new likelihood, is the deployed correction layer.
+A mechanistic spatial-rate model was also evaluated as an alternative to
+post-hoc calibration. The raw estimator is already at its identifiability floor
+at 4-enzyme tag density: in-chain distribution-family changes can fix at most
+~0.1–0.2 ANI points, and the divergence of the unchained fraction is not
+identifiable from tag data. No candidate spatial model (AF-weighted mixtures,
+discrete mixtures, ascertainment-aware tilts, capped NPMLE, model averaging)
+beats the gated baseline while preserving exact-truth simulation gates. The full
+negative result is reported in Supplementary Note 5.
 
 ### Structural-variant calling
 

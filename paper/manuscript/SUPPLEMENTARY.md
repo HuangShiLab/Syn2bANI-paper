@@ -229,3 +229,123 @@ query is `-q`, not `--q`; (iii) conda environments on shared clusters can
 be shadowed by user-site packages (numpy ABI mismatch in CheckM2), fixed
 with PYTHONNOUSERSITE=1. Full incident log:
 `results/mag_validation/RUNBOOK.md`.
+
+## Supplementary Note 4 — Chain-restricted stratified MLE, gating, and flags
+
+For a query tag inside a chained region, with tag length `k`, recognition-site
+length `s`, mutable body `b = k − s`, and mismatch budget `tol`, the outcome
+probabilities under per-base identity `a` are:
+
+- **Found with `m` body mismatches** (for `m ≤ tol`):
+  `P_m(a) = C(b, m) · (1 − a)^m · a^(k−m)`.
+- **Not found** (miss): `P_miss(a) = 1 − Σ_{m=0}^{tol} P_m(a)`.
+
+Mismatches are observable only in the mutable body — a mutation inside the
+recognition site deletes the tag entirely — so the site contributes a factor
+`a^s` to `P_found` but never appears in the histogram. This also sets a hard
+retention ceiling (for example, ~0.72 at 95% ANI and ~0.50 at 90% with the
+default budget). The per-enzyme strata differ in `k` and `b`; the total
+log-likelihood is the sum over strata and is maximized over the scalar `a` by
+golden-section search.
+
+Two partial estimators are computed as diagnostics:
+
+- `ani_from_loss` — uses `P_miss(a)` only (the miss-rate channel).
+- `ani_from_hist` — uses the mismatch histogram renormalized by `P_found(a)`.
+
+When the data are well behaved these two estimates agree; large divergence
+signals either model misspecification or sparse data.
+
+**Heterogeneous (gamma) model.** To account for rate heterogeneity, each
+chained region receives a per-region rate multiplier `r ~ Gamma(α, α)` (mean 1,
+shape α). Because rate variation acts at kilobase scale while a tag is ~30 bp,
+all sites within one tag share the same `r`. Integrating `r` out converts the
+mismatch count distribution into a negative binomial with two parameters: mean
+divergence `d` and shape `α`. These are identifiable from the three histogram
+degrees of freedom plus the miss count. Two guardrails are applied: the second
+parameter is used only when the likelihood-ratio statistic exceeds 3.841, and
+`α` is clamped to `[0.1, 200]`.
+
+At the identifiability boundary with few surviving tags, the gamma shape and
+mean couple and can overshoot by 4–10 ANI points in the mid-ANI range. The
+shipped point estimate is therefore **gated**: report the homogeneous (uniform)
+fit when `|ani_from_loss − ani_from_hist| > 5` ANI points, otherwise report the
+gamma fit. The threshold is an effect size, not a significance level; threshold
+sweeps on the GTDB-ANIm training matrix show a flat optimum between 4.5 and 6
+points. The gate fires on 5.5% of GTDB pairs, on all 15 mid-ANI pairs (where it
+reduces gamma MAE from 4.48 to 1.42), and never on uniform-rate simulations,
+mosaic simulations, or oral/gut same-species pairs, preserving gamma's advantage
+exactly where it is real.
+
+**Flags.** The `flag` column is hierarchical:
+
+- `BELOW_DETECTION` — expected retention < 0.20 (takes precedence).
+- `INCONSISTENT` — the gate fell back to the uniform model, or the chains carry
+  > 0.5 rearrangement breakpoints per anchor (a structural statistic independent
+  of the chain-restricted likelihood denominator).
+- `ok` — otherwise.
+
+The recalibrated flag never inverts its error ranking on any validation set
+(kept vs flagged MAE: GTDB-ANIm 2.415 vs 4.153; oral/gut 0.514 vs 4.269;
+mid-ANI 0.343 vs 1.113), at a disclosed cost in near-clonal sensitivity.
+
+## Supplementary Note 5 — The spatial-model negative result (identifiability analysis)
+
+A mechanistic spatial-rate model was evaluated as an alternative to the ridge
+calibration layer. The prototype was written in Python, tested on 19 exact-truth
+mosaic simulations, and then evaluated on the GTDB-ANIm matrix.
+
+The residual bias decomposes into two terms. The first is an in-chain
+distribution-family term: the asymptotic in-chain MAE is 2.25 for gamma and 1.25
+for a capped grid NPMLE, so a nonparametric in-chain fit can fix at most
+~0.1–0.2 ANI points of the GTDB MAE. The second is a coverage term: the
+divergence of the unchained fraction is not identifiable from tag data, because
+the out-of-chain anchor residual is approximately zero within multi-match noise
+whether the unchained mass is saturated-divergent or accessory. Even an oracle
+given the exact identity of the chained sample still errs by MAE 1.36 against
+whole-genome truth.
+
+Candidates tested included AF-weighted mixtures, discrete mixtures,
+ascertainment-aware tilts, capped NPMLE with and without likelihood-ratio gating,
+and model averaging. None beats the gated homogeneous/gamma baseline while
+holding all simulation gates. The raw estimator is therefore at its
+identifiability floor at 4-enzyme tag density; this negative result is why the
+shipped pipeline uses calibration, rather than a more elaborate likelihood, as
+the real-genome correction layer.
+
+## Supplementary Note 6 — Ridge calibration protocol details
+
+The v5 calibration model is ridge regression on nine Syn2bANI-internal features:
+`ani_gated`, `ani_uniform`, `af_query`, `af_reference`, `std_err`, `retention`,
+`n_anchors`, `n_chains`, and `n_tags_in_chains`. Features are median-imputed and
+standardized; regularization strength `α = 10` is selected by inner
+cross-validation with scikit-learn29.
+
+**Training set.** 2,520 ANIm-truth pairs (80–99.5% ANIm). This combines 2,053
+finite pairs from a stratified 2,074-pair GTDB benchmark and 467 targeted
+95.0–99.15% ANIm pairs selected by screening all 2.26 M same-genus GTDB-R207
+representative pairs with skani and running dnadiff on 650 candidates. The
+expanded set spans 607 species and 26 phyla and has zero genome-level overlap
+with the original 2,074-pair set.
+
+**Validation.** Band-holdout cross-validation: each of the four ANI bands
+(80–85, 85–90, 90–95, 95–99) is predicted by a model trained on the other three
+only. Training rows are shuffled with a fixed seed before CV because the inner
+KFold of the ridge CV is order-sensitive.
+
+**Model comparisons.** An expanded 18-feature variant and a gradient-boosted
+regressor on the same features were evaluated and rejected: nonlinearity buys
+nothing at `n ≈ 2,500`, and the expanded feature set degrades out-of-distribution
+on near-clonal pairs. Seed spread over 5 seeds is ≤ 0.0015 MAE.
+
+**Learning curve.** Subsampling the 2,520-pair training matrix at 492/984/1,476
+and 1,969 pairs gives band-holdout CV MAE of 0.952, 0.902, 0.887, and 0.893,
+respectively (Supplementary Note 2); the linear model plateaus at ~1,500 pairs.
+
+**Deployment.** The model ships as a versioned JSON file containing ridge
+weights, scaling parameters, and feature order; it is embedded in the binary and
+evaluated at runtime in < 1 µs. All feature matrices were regenerated with the
+post-rescue binary before training, so there is no version skew between the
+shipped estimator and the deployed model. Calibrated output is a separate column
+(`--calibrate`); it returns no value on `BELOW_DETECTION` pairs rather than
+extrapolating.
