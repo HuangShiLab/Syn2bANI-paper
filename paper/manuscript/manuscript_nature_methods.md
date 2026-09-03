@@ -76,7 +76,7 @@ The v5 calibration is trained on complete GTDB-R207 genomes and improves accurac
 
 ANI is a scalar average and therefore blind to genome architecture. Syn2bANI reports three structurally informative quantities from the same anchor chains: `breakpoint_count`, the number of chain-disrupting orientation flips and large indels; `anchor_adjacency`, the fraction of chained-anchor adjacencies that remain collinear; and `af_query`, the base-pair fraction of the query covered by chains. `breakpoint_count` is the primary rearrangement statistic; `anchor_adjacency` is an anchor-adjacency conservation metric; `af_query` is the coverage metric that corresponds to alignment-based aligned fraction.
 
-We quantified this on four published isolate collections from a recent synteny-based strain-tracking study10. In a longitudinal *E. coli* hypermutator lineage, every cross-time pair with ANI >99.9% shows an anchor adjacency of only 0.70–0.76 and 850–1,130 breakpoints. Re-analysis with `syn2bani struct` resolves representative pairs into dozens of chains with tens of inversions and translocations (Fig. 6a; Table 1). *Helicobacter pylori* same-host pairs cluster at ANI >99.9% but the lowest-anchor-adjacency cases carry 44–63 breakpoints. *Neisseria gonorrhoeae* and *Streptomyces rimosus* near-clonal pairs show the same decoupling, with *S. rimosus* reaching 2,957 breakpoints at 99.9945% ANI (Fig. 6b; Supplementary Fig. S11).
+We quantified this on four published isolate collections from a recent synteny-based strain-tracking study10. In a longitudinal *E. coli* hypermutator lineage, every cross-time pair with ANI >99.9% shows 850–1,130 Syn2bANI breakpoints. Re-analysis with `syn2bani struct` resolves representative pairs into dozens of chains with tens of inversions and translocations (Fig. 6a; Table 1). *Helicobacter pylori* same-host pairs cluster at ANI >99.9% but carry 44–63 breakpoints in the lowest-synteny cases. *Neisseria gonorrhoeae* and *Streptomyces rimosus* near-clonal pairs show the same ANI–breakpoint-count decoupling, with *S. rimosus* reaching 2,957 breakpoints at 99.9945% ANI (Fig. 6c,d).
 
 Two additional isolate collections reinforce the point at even higher ANI. In 74 *E. coli* O157:H7 genomes from a global source surveillance study (Fitzgerald et al., 2021), all 2,701 pairwise ANIs are ≥99.886%, yet every pair carries ≥171 breakpoints and the most structurally divergent pairs exceed 1,100 breakpoints at ANI >99.9% (Supplementary Fig. S15). The human-source isolates carry fewer breakpoints on average than bovine isolates (mean 410 vs 494), suggesting that host-restricted sub-lineages differ in recombination history even when ANI cannot separate them. In 122 FDA-ARGOS *Staphylococcus aureus* genomes, 7,381 refined pairs have mean ANI 98.72% and mean breakpoint count 24, with pairs at 100% ANI still showing >150 breakpoints (Supplementary Fig. S16). These collections are not exceptional: they exemplify why an ANI-only similarity search can return genomes that are nearly identical in average sequence but differ by hundreds of rearrangements.
 
@@ -170,7 +170,7 @@ All datasets, their ground truth, and the analyses they support are summarized i
 
 **GTDB-R207 benchmark series.** These datasets form a single coherent evaluation built from GTDB-R207. They are disjoint at the genome level wherever independence is required.
 - **Calibration/training set (v5).** 2,520 pairs (80–99.5% ANIm) used to train the ridge calibration. This combines 2,074 representative pairs stratified across 80–85/85–90/90–95/95–99 bands and phyla, with 467 targeted 95–99.5% pairs selected by screening all 2.26 M same-genus representative pairs with skani and running dnadiff on 650 candidates (607 species, 26 phyla).
-- **Large-scale FastANI comparison set.** 45,000 representative pairs sampled across taxonomic levels (intra-species / intra-genus / intra-family / random; `scripts/sample_gtdb_pairs.py`, seed-fixed). FastANI reports 672 of these pairs and they provide the large-scale comparison in Fig. 6.
+- **Large-scale FastANI comparison set.** 45,000 representative pairs sampled across taxonomic levels (intra-species / intra-genus / intra-family / random; `scripts/sample_gtdb_pairs.py`, seed-fixed). FastANI reports 672 of these pairs and they are summarized in Supplementary analysis.
 - **Strict held-out benchmark.** 43,334 same-genus representative pairs sampled from the 628,617 non-self GTDB-R207 representative pairs passing a skani pre-screen (AF ≥ 15%), stratified into bands 80–85 / 85–90 / 90–95 / 95–100% (12,172 / 16,000 / 14,758 / 404 pairs; 24,831 genomes, 74 phyla; `scripts/gtdb50k/`). Every genome in the v5 calibration set was excluded in both directions, making this a strict holdout for the gate, flag, and calibration; dnadiff/ANIm truth was computed for all pairs.
 - **High-ANI test set.** 727 test pairs sampled from non-representative GTDB-R207 genomes (95–97%, n = 95; 97–100%, n = 632), excluding genomes in the v5 calibration set or the 43,334 held-out set in either direction. These add dense coverage of the 95–100% regime that the held-out representative set lacks.
 - **Unified 80–100% benchmark.** The 43,334 held-out pairs combined with the 727 high-ANI test pairs (44,061 total), used to evaluate the hybrid estimator (Supplementary Fig. S3).
@@ -264,7 +264,7 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 ---
 
 *Manuscript draft — Nature Methods format. Main-text target: ~3,000–5,000 words; abstract: 153 words.*
-*Corresponding author: Shi Huang (huangshi@njau.edu.cn)*
+*Corresponding author: Shi Huang (shihuang@hku.hk)*
 
 ---
 
@@ -280,7 +280,7 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 
 **Figure 5 | Accuracy on 695 CAMI2 MAGs.** (a) Syn2bANI raw gated estimate vs dnadiff ANIm truth, colored by contamination class. (b) Absolute-error distributions by tool. (c) Syn2bANI error by CheckM2 quality tier. Source: `figures/report/mag_validation.png`.
 
-**Figure 6 | High-ANI pairs hide extensive rearrangements.** (a) *E. coli* hypermutator and *H. pylori* isolates: ANI vs anchor adjacency (Syn2bANI left, skani right); highlighted pairs were re-analyzed with `syn2bani struct`. (b) *N. gonorrhoeae* and *S. rimosus* isolates show the same ANI–anchor-adjacency decoupling. Source: `figures/syntracker_validation/syntracker_high_ani_low_synteny.png` and `figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png`.
+**Figure 6 | High-ANI pairs hide extensive rearrangements.** skani ANI versus Syn2bANI `breakpoint_count` for four published near-clonal isolate collections: (a) *E. coli* hypermutator (253 pairs), (b) *H. pylori* (2,926 pairs), (c) *N. gonorrhoeae* (66 pairs), and (d) *S. rimosus* (190 pairs). In all four collections ANI is pinned near 100% while breakpoint counts vary over orders of magnitude, illustrating that rearrangement burden is not captured by the divergence scalar. Annotated points are the top discordant cases by ANI–synteny rank difference; representative pairs were re-analyzed with `syn2bani struct` (Table 1). Source: `figures/syntracker_validation/syntracker_ani_vs_breakpoints.png`.
 
 **Figure 7 | Locus-targeted chain coverage detects a phenotype-associated structural difference invisible to genome-wide ANI.** 185 *Bifidobacterium longum* isolates stratified by abfA gene-cluster status (complete vs deleted/peripheral-truncated). (a) Syn2bANI chain coverage across the abfA locus (8.5–37.1 kb on reference contig; core genes 8.8–17.2 kb, peripheral region 17.2–37.1 kb). (b) Boxplot of periphery coverage (17.2–37.1 kb) by group. Whole-genome ANI and aligned fraction do not separate the groups, but local chain coverage over the cluster periphery is significantly reduced in the deleted group (MWU p = 1.4 × 10⁻³). Source: `figures/report/fig_b_longum_abfa.png`.
 
@@ -326,12 +326,12 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 | 7 | Inversion ladder | simulated | ANI 95/98; 0–32 inversions (2 breakpoints each) | exact | Fig. S1 |
 | 8 | GTDB-ANIm benchmark | real | 2,074 GTDB-R207 pairs, 4 bands (475/837/690/72) | dnadiff ANIm | Fig. 3, Table 1 |
 | 9 | 95–99.5% expansion | real | 467 pairs; 607 species, 26 phyla | dnadiff ANIm | calibration training |
-| 10 | GTDB scale set | real | 45,000 pairs, taxonomic-level stratified | FastANI (672 pairs) | Fig. S3 |
-| 11 | Unified high-ANI set | real | 2,342 GTDB-R207 pairs (95–97 / 97–100), genome-level train/test | dnadiff ANIm | Table 1, Fig. 4 |
+| 10 | GTDB scale set | real | 45,000 pairs, taxonomic-level stratified | FastANI (672 pairs) | Supplementary analysis |
+| 11 | Unified high-ANI set | real | 727 GTDB-R207 non-representative pairs (95–97 / 97–100), training genomes excluded | dnadiff ANIm | Table 1, Fig. 4 |
 | 12 | Mid-ANI set | real | 15 pairs, ANIm 87.6–90.2 | dnadiff ANIm | Results |
 | 13 | Oral/gut set | real | 50 genomes, 10 species (5 oral + 5 gut); 1,225 pairs | FastANI/skani (100 same-species) | Results |
 | 14 | Enterobacteriaceae completes | real | 13 chromosomes vs MG1655, ANI ~81–99.99 | dnadiff structural | Fig. 1 |
-| 15 | Real drafts | real | 8 E. coli assemblies, 88–8,025 contigs; RC controls | complete-genome reference | Fig. 2, Fig. 5 |
+| 15 | Real drafts | real | 8 E. coli assemblies, 88–8,025 contigs; RC controls | complete-genome reference | Fig. 2 |
 | 16 | CAMI2 MAG benchmark | real metagenomes | 35 samples → 695 bins ≥ 100 kbp | dnadiff ANIm + CAMI2 assignment | Fig. 5 |
 | 17 | GTDB 50k held-out benchmark | real | 43,334 same-genus pairs, 24,831 genomes, 74 phyla; training genomes excluded | dnadiff ANIm | Fig. 3, Table 1 |
 | 18 | GTDB 50k SV benchmark | real | same 43,334 pairs as #17 | dnadiff structural + minimap2 | Results |

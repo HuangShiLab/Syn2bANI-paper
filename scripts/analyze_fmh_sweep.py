@@ -37,9 +37,10 @@ SCALES = {
 
 def fit_model(df):
     """Fit Var(resid) = c1 * p*(1-p)/m + c0 by weighted least squares."""
-    df = df.dropna(subset=["dnadiff_inverted_fraction", "syn2b_inverted_fraction", "syn2b_shared_tags"])
+    col = "syn2b_raw_inverted_fraction"
+    df = df.dropna(subset=["dnadiff_inverted_fraction", col, "syn2b_shared_tags"])
     p = df["dnadiff_inverted_fraction"].values
-    resid = (df["syn2b_inverted_fraction"] - p).values
+    resid = (df[col] - p).values
     m = df["syn2b_shared_tags"].values
     ok = (m > 0) & (p >= 0) & (p <= 1)
     p, resid, m = p[ok], resid[ok], m[ok]
@@ -55,14 +56,15 @@ def fit_model(df):
 
 
 def summarize(df, label):
-    df = df.dropna(subset=["dnadiff_inverted_fraction", "syn2b_inverted_fraction"])
-    err = df["syn2b_inverted_fraction"] - df["dnadiff_inverted_fraction"]
+    col = "syn2b_raw_inverted_fraction"
+    df = df.dropna(subset=["dnadiff_inverted_fraction", col])
+    err = df[col] - df["dnadiff_inverted_fraction"]
     return {
         "scale": label,
         "n": len(df),
         "mae": np.mean(np.abs(err)),
         "rmse": np.sqrt(np.mean(err ** 2)),
-        "pearson_r": np.corrcoef(df["dnadiff_inverted_fraction"], df["syn2b_inverted_fraction"])[0, 1],
+        "pearson_r": np.corrcoef(df["dnadiff_inverted_fraction"], df["syn2b_raw_inverted_fraction"])[0, 1],
         "mean_shared_tags": df["syn2b_shared_tags"].mean() if "syn2b_shared_tags" in df else np.nan,
         "median_shared_tags": df["syn2b_shared_tags"].median() if "syn2b_shared_tags" in df else np.nan,
     }

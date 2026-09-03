@@ -111,35 +111,53 @@ estimator reduces error relative to the uniform estimator (e.g., gamma MAE
 misspecification (gamma MAE 2.43 vs uniform 3.42), motivating the real-genome
 ridge calibration of Results 2.5.
 
-## Supplementary Figure S10 — Breakpoint counts scale independently of ANI in high-ANI isolate collections
-
-(`figures/syntracker_validation/syntracker_breakpoints_vs_ani.png`)
-
-Syn2bANI ANI versus breakpoint count for (a) *E. coli* hypermutator (23
-isolates, 253 pairs) and (b) *H. pylori* (77 isolates, 2,926 pairs). In both
-collections ANI is pinned near 100% while breakpoint counts vary over more
-than an order of magnitude, illustrating that rearrangement burden is not
-captured by the divergence scalar. Annotated points are the top discordant
-cases by ANI–synteny rank difference.
-
-## Supplementary Figure S11 — Near-clonal *Neisseria gonorrhoeae* and *Streptomyces rimosus* isolates also show ANI–anchor-adjacency decoupling
-
-(`figures/syntracker_validation/syntracker_supp_ngonorrhoeae_srimosus.png`)
-
-Left column: Syn2bANI ANI vs anchor adjacency; right column: skani ANI vs the
-same anchor adjacency. (a,b) 12 *N. gonorrhoeae* isolates (66 pairs); pairs with
-ANI >99.9% have anchor adjacencies 0.85–0.89 and up to 376 breakpoints. (c,d) 20
-*S. rimosus* isolates (190 pairs); near-clonal pairs (ANI 99.99–100%) have
-anchor adjacencies 0.89–0.96 and an average of ~1,980 breakpoints. The most
-discordant cases (NG_05 vs NG_10 and SR_06 vs SR_10) were re-analyzed with
-`syn2bani struct`; counts are in Table 4 and
-`results/syntracker_validation/struct_top_cases_summary.tsv`.
-
 ## Supplementary Figure S12 — Engineered *H. pylori* cagPAI deletion is recovered at exact size
 
 (`figures/report/fig_s12_cagpai_pilot.png`)
 
 Eight *H. pylori* 26695-derived genomes: wild-type (WT), a 36,154 bp cagPAI deletion (ΔcagPAI), cagPAI inversion, cagPAI translocation, and the same four structures on a mut1 background carrying ~1% substitutions. All pairwise comparisons were run with `syn2bani ani` and `syn2bani struct`. (a) ANI is ~100% for same-background pairs and ~99% across backgrounds, independent of the 36 kb rearrangement. (b) `breakpoint_count` increases for inversion and translocation pairs. (c) `anchor_adjacency` (chain coverage) drops only modestly with the deletion and is insensitive to inversion/translocation, confirming that it measures coverage rather than rearrangement burden. The WT vs ΔcagPAI comparison returns a single insertion call of exactly 36,154 bp.
+
+## Supplementary Figure S14 — Inverted fraction agrees with dnadiff and carries a closed-form standard error
+
+(`figures/report/fig_inverted_fraction_comparison_high_ani.png`)
+
+(a) Syn2b `inverted_fraction` versus dnadiff inverted fraction across the 43,334 held-out GTDB-R207 pairs (Pearson r = 0.936). (b) Strain-level zoom for ANIm ≥ 97% (r = 0.996, slope 1.006, intercept −0.004). The standard-error model based on shared landmark count reproduces the observed spread (R² = 0.999 across divergence bins).
+
+## Supplementary Figure S15 — High-ANI *E. coli* O157:H7 pairs carry hundreds of breakpoints
+
+(`figures/report/fig_s15_ecoli_o157_breakpoints_lineage.png`, `figures/report/fig_s15_ecoli_o157_breakpoints_host.png`)
+
+Seventy-four genomes from Fitzgerald et al. (2021), 2,701 non-self pairs. (a) ANI vs breakpoint count colored by lineage (I/II, II, Ia, Ic). (b) Same data colored by host category (bovine, human, other/unknown). All pairwise ANIs exceed 99.886% yet breakpoints range from 171 to >1,100. Source: `case_studies/ecoli_o157_fitzgerald_2021/`.
+
+## Supplementary Figure S16 — High-ANI FDA-ARGOS *Staphylococcus aureus* pairs show wide breakpoint variation
+
+(`figures/report/fig_s16_saureus_breakpoints_country.png`, `figures/report/fig_s16_saureus_breakpoints_source.png`)
+
+One hundred and twenty-two genomes, 7,381 refined pairs. (a) ANI vs breakpoint count colored by country. (b) ANI vs breakpoint count colored by isolation source. Pairs at 100% ANI still carry >150 breakpoints. Source: `case_studies/fda_argos_s_aureus/`.
+
+## Supplementary Figure S17 — cagPAI extended state by country
+
+(`figures/report/fig_s17_cagpai_by_country.png`)
+
+Stacked-bar distribution of the five extended cagPAI states across countries of isolation for the 528 *H. pylori* cohort genomes.
+
+## Supplementary Figure S18 — cagPAI extended state by phylogenetic population
+
+(`figures/report/fig_s18_cagpai_by_population.png`)
+
+Same as S17, stratified by phylogenetic population.
+
+## Supplementary Figure S19 — cagPAI extended state by FastBAPS lineage
+
+(`figures/report/fig_s19_cagpai_by_fastbaps.png`)
+
+Same as S17, stratified by FastBAPS lineage.
+
+## Supplementary Figure S20 — cagPAI extended state by disease stage
+
+(`figures/report/fig_s20_cagpai_by_disease_stage.png`)
+
+Same as S17, stratified by Correa's cascade disease stage (NAG, AG, IM, GC).
 
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 
