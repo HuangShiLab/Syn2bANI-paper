@@ -22,7 +22,7 @@ Average Nucleotide Identity (ANI) is the standard metric for prokaryotic species
 
 ## Introduction
 
-Average Nucleotide Identity (ANI) — the mean nucleotide identity of orthologous regions shared by two genomes — underpins prokaryotic species delineation and strain-level relatedness1,2. It is computed at scale in dereplication pipelines, outbreak investigations, and metagenomic surveys, increasingly on metagenome-assembled genomes (MAGs) that are fragmented by construction3.
+Average Nucleotide Identity (ANI) — the mean nucleotide identity of orthologous regions shared by two genomes — underpins prokaryotic species delineation and strain-level relatedness1,2. It is computed at scale in dereplication pipelines16, outbreak investigations, and metagenomic surveys, increasingly on metagenome-assembled genomes (MAGs) that are fragmented by construction3.
 
 Three tool families dominate. Alignment-based methods (ANIm/ANIb) are the direct realization of the definition but too slow for database-scale all-vs-all screens4,5,17,18. FastANI popularized an alignment-free approximation from 20-mer seed matches and fragment-level chaining2; skani replaced seeding with sparse k-mer sketches and a regressed chain statistic, gaining orders of magnitude in speed6. Related sketching approaches such as Mash13, Dashing14, and BinDash15 trade accuracy for speed by estimating distances from k-mer containment. Both k-mer tools reduce the comparison to essentially one number: ANI plus an aligned-fraction estimate. Neither reports *where* the genomes agree — collinear blocks, inversions, translocations, or indels — even though that structural information is computed and then discarded inside their own chaining steps.
 
@@ -212,11 +212,11 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 
 ## Author contributions
 
-[To be determined — placeholder.]
+Y.Z. implemented the software, designed and executed the benchmarks, and generated the figures. S.H. conceived the project, supervised the research, and wrote the manuscript with input from Y.Z.
 
 ## Competing interests
 
-[To be determined — placeholder: The authors declare no competing interests.]
+The authors declare no competing interests.
 
 ## References
 
@@ -229,7 +229,7 @@ Syn2bANI is free and open source (MIT License) at https://github.com/HuangShiLab
 7. Wang, S., Meyer, E., McKay, J. K. & Matz, M. V. 2b-RAD: a simple and flexible method for genome-wide genotyping. *Nat. Methods* **9**, 808–810 (2012).
 8. Sun, Z., Huang, S., Zhu, P. et al. Species-resolved sequencing of low-biomass or degraded microbiomes using 2bRAD-M. *Genome Biol.* **23**, 36 (2022).
 9. Yang, Z. Maximum likelihood phylogenetic estimation from DNA sequences with variable rates over sites: approximate methods. *J. Mol. Evol.* **39**, 306–314 (1994).
-10. Enav, H., Paz, I. & Ley, R. E. Strain tracking in complex microbiomes using synteny analysis reveals per-species modes of evolution. *Nat. Biotechnol.* (2024).
+10. Enav, H., Paz, I. & Ley, R. E. Strain tracking in complex microbiomes using synteny analysis reveals per-species modes of evolution. *Nat. Biotechnol.* **43**, 773–783 (2025).
 11. Parks, D. H. et al. A standardized bacterial taxonomy based on genome phylogeny substantially revises the tree of life. *Nat. Biotechnol.* **36**, 996–1004 (2018).
 12. Parks, D. H. et al. GTDB: an ongoing census of bacterial and archaeal diversity through a phylogenetically consistent, rank normalized and complete genome-based taxonomy. *Nucleic Acids Res.* **50**, D785–D794 (2022).
 13. Ondov, B. D. et al. Mash: fast genome and metagenome distance estimation using MinHash. *Genome Biol.* **17**, 132 (2016).

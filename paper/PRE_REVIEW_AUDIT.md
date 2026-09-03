@@ -11,52 +11,45 @@
 
 | Section | Status | Notes |
 |---|---|---|
-| Title / authors / affiliations | OK | Correspondence uses shihuang@hku.hk; line 267 still has old placeholder `huangshi@njau.edu.cn`. |
+| Title / authors / affiliations | OK | Correspondence email updated to shihuang@hku.hk throughout. |
 | Abstract | OK | Could mention structural outputs and case studies more explicitly. |
 | Introduction | OK | Clear motivation and differentiation from k-mer tools. |
 | Results | OK | 8 subsections; logic flows from estimator → simulations → real benchmarks → structural outputs → case studies → efficiency. |
 | Discussion | OK | Three boundaries are well stated; could add a dedicated "Limitations" subheading. |
 | Methods | OK | Very detailed; may be too long for Nature Methods (consider moving some derivations to Supplementary). |
 | Data/Code availability | OK | Repo links present; commit `fe0f36c` should be verified as current. |
-| References | CHECK | Ref 10 (Syntracker) year/format needs verification. Ref 16 (dRep) is cited in text? Verify all numbered refs are cited. |
+| References | OK | Ref 10 updated to 2025. Ref 16 now cited in Introduction. |
 
 ## Critical issues
 
-### 1. Figure file naming vs. figure numbers
+### 1. Figure file naming vs. figure numbers — FIXED
 
-The PNG files in `figures/report/` do **not** follow main-text figure numbers; captions instead reference source files by descriptive name. This is acceptable for assembly, but risks confusion. Recommended: rename or create a `figures/submission/` folder with `fig1.png`–`fig8.png` copies mapped to captions.
+Created `figures/submission/` with source PNGs mapped to main-text figure numbers and a `README.md` assembly guide.
 
-### 2. Missing supplementary figures
+### 2. Missing supplementary figures — FIXED
 
-The following supplementary figures are referenced but not present in the repository:
+| Figure | Status | Notes |
+|---|---|---|
+| S10/S11 | REMOVED | Main-text Fig. 6 now uses the existing four-panel `syntracker_ani_vs_breakpoints.png`; orphaned S10/S11 sections were removed from Supplementary. |
+| S14 | OK | Linked to existing `figures/report/fig_inverted_fraction_comparison_high_ani.png`. |
+| S15 | OK | Copied from `case_studies/ecoli_o157_fitzgerald_2021/figures/`. |
+| S16 | OK | Copied from `case_studies/fda_argos_s_aureus/figures/`. |
+| S17–S20 | OK | Copied from `case_studies/h_pylori_cagpai/results/struct_extended/` and assigned explicit numbers. |
 
-| Figure | Caption location | Needed content | Current status |
-|---|---|---|---|
-| S10 | SUPPLEMENTARY.md:114 | `syntracker_breakpoints_vs_ani.png` — E. coli + H. pylori ANI vs breakpoints | **MISSING** |
-| S11 | SUPPLEMENTARY.md:125 | `syntracker_supp_ngonorrhoeae_srimosus.png` — N. gonorrhoeae + S. rimosus decoupling | **MISSING** |
-| S14 | manuscript:89 | inverted_fraction standard-error model / comparison (referenced in main text) | **MISSING** |
-| S15 | manuscript:289 | E. coli O157:H7 ANI vs breakpoints by lineage/host | **MISSING** (source files exist in `case_studies/ecoli_o157_fitzgerald_2021/figures/`) |
-| S16 | manuscript:291 | FDA-ARGOS S. aureus breakpoint distribution | **MISSING** (source files exist in `case_studies/fda_argos_s_aureus/figures/`) |
-| S17–S20 | manuscript:287 | cagPAI extended state by country / population / FastBAPS / disease-stage stacked bars | **PARTIAL** (4 PNGs exist in `case_studies/h_pylori_cagpai/results/struct_extended/` but not linked as S17–S20) |
+### 3. Table 3 inconsistencies — FIXED
 
-**Action**: generate/copy the missing panels and assign explicit S10–S20 filenames.
+- Row 10: changed "Fig. S3" → "Supplementary analysis".
+- Row 11: changed 2,342 → 727 pairs to match text; added "non-representative" and exclusion note.
+- Row 15: removed erroneous "Fig. 5" reference.
+- Fig. 6 caption and main-text references updated to use existing breakpoints figure; 45,000 FastANI comparison no longer claims to be in Fig. 6.
 
-### 3. Table 3 inconsistencies
+### 4. Correspondence email inconsistency — FIXED
 
-- Row 10: "GTDB scale set" says used in "Fig. S3", but S3 is the unified 80–100% benchmark. The 45,000 FastANI comparison may not be shown in any main/supplementary figure; clarify or remove reference.
-- Row 11: "Unified high-ANI set" says 2,342 pairs, but text says 727 high-ANI test pairs. Reconcile.
-- Row 15: "Real drafts" says "Fig. 5", but Fig. 5 is CAMI2 MAGs. Should likely be Fig. 2.
-- Row 17/18: GTDB 50k held-out/SV benchmark — 43,334 pairs in text vs 45,000 in row 10; make consistent.
+Updated line 267 from `huangshi@njau.edu.cn` to `shihuang@hku.hk`.
 
-### 4. Correspondence email inconsistency
+### 5. Reference 10 citation — FIXED
 
-Line 11: `shihuang@hku.hk`  
-Line 267: `huangshi@njau.edu.cn` (old placeholder)  
-**Action**: update line 267.
-
-### 5. Reference 10 citation
-
-Ref 10: Enav, Paz & Ley, *Nat. Biotechnol.* (2024). Verify exact volume/page/year; the paper may have been published in 2025 or as online early. Also confirm the in-text citation at line 79 is the intended Syntracker reference.
+Updated to: Enav, H., Paz, I. & Ley, R. E. *Nat. Biotechnol.* **43**, 773–783 (2025).
 
 ## Technical / claim-level risks for peer review
 
@@ -77,11 +70,13 @@ Ref 10: Enav, Paz & Ley, *Nat. Biotechnol.* (2024). Verify exact volume/page/yea
 ## Recommended revision plan
 
 ### Phase A — fix submission mechanics (1–2 days)
-- [ ] Remove/update placeholder lines (affiliation email, acknowledgements, author contributions, competing interests).
-- [ ] Resolve Table 3 figure/number inconsistencies.
-- [ ] Generate/copy missing supplementary figures S10, S11, S14, S15, S16 and link S17–S20 explicitly.
-- [ ] Create `figures/submission/` or rename final figure files to match main-text figure numbers.
-- [ ] Verify all references are cited and formatted correctly.
+- [x] Remove/update placeholder lines (affiliation email).
+- [x] Resolve Table 3 figure/number inconsistencies.
+- [x] Generate/copy missing supplementary figures S14–S20; remove orphaned S10/S11.
+- [x] Create `figures/submission/` with main-text figure files and assembly README.
+- [x] Update placeholders: Author contributions, Competing interests (Acknowledgements left for funding details).
+- [x] Verify references: Ref 10 updated to 2025 Nat. Biotechnol. 43:773–783; Ref 16 (dRep) now cited in Introduction.
+- [x] FracMinHash scale sweep completed and reported in `results/gtdb50k/FRACMINHASH_VALIDATION.md`.
 
 ### Phase B — strengthen scientific narrative (2–3 days)
 - [ ] Add a "Limitations" subsection in Discussion or expand the existing three-boundary paragraph.
