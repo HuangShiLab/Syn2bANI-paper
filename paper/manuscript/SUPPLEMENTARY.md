@@ -6,7 +6,7 @@ https://github.com/HuangShiLab/Syn2bANI-paper.
 
 ## Supplementary Figure S1 — Synteny benchmark: exact-truth inversion ladder
 
-(`figures/report/fig_synteny_ladder.png`)
+(`paper/figures/supplementary/fig_s1_synteny_ladder.png`)
 
 E. coli MG1655 evolved to ANI 95.00/98.00 (counted substitutions) with 0–32
 non-overlapping inversions (100–400 kb; 2 true breakpoints each).
@@ -18,9 +18,9 @@ real MAG pairs (dnadiff-derived truth, median 0 breaks): median
 anchor_adjacency 0.9997, no spurious structural flags. Data and report:
 `results/synteny_bench/`.
 
-## Supplementary Figure S2 — Held-out GTDB-R207 benchmark
+## Supplementary Figure S2 — Held-out GTDB-R207 benchmark (v5 detail)
 
-(`figures/report/fig_gtdb50k_heldout.png`)
+(`paper/figures/supplementary/fig_s2_gtdb50k_heldout.png`)
 
 43,334 same-genus pairs sampled from GTDB R207 representatives (24,831
 genomes, 74 phyla), with every genome of the 2,520-pair calibration training
@@ -30,22 +30,17 @@ Panels (a–c) Calibrated Syn2bANI v5, skani, and FastANI vs ANIm (MAE 0.619, 0.
 `results/gtdb50k/` (report `GTDB50K_HELDOUT_REPORT.md`, metrics
 `gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
 
-## Supplementary Figure S3 — Unified GTDB-R207 80–100% benchmark
+## Supplementary Figure S3 — Per-band ANI comparison
 
-(`figures/gtdb_r207_unified_benchmark.png`)
+(`paper/figures/supplementary/fig_s3_anim_by_band.png`)
 
-43,334 held-out same-genus pairs (80–95% plus the 95–100% stratum split into
-95–97 and 97–100 by truth) combined with 727 high-ANI test pairs sampled from
-non-representative GTDB-R207 genomes. (a) Estimated vs ANIm truth for Syn2bANI
-raw gated, Syn2bANI v6-calibrated, Syn2bANI hybrid (raw ≥98% / calibrated
-<98%), skani, and FastANI. (b) Per-band MAE. (c) Signed-error distributions.
-(d) High-ANI zoom (95–100%). On the full 80–100% range the Syn2bANI hybrid
-estimator attains the lowest overall MAE (**0.615**), while recovering the
-accurate raw gated estimate in the 97–100% sub-band (MAE 0.23).
+Band-holdout cross-validation on the 2,074-pair GTDB-R207 ANIm benchmark:
+MAE by ANI band for raw gamma, calibrated v5, skani, and FastANI. This is the
+per-band detail behind the unified benchmark of Fig. 3.
 
 ## Supplementary Figure S4 — Genome quality does not drive ANI error on GTDB-R207
 
-(`figures/report/gtdb_quality_vs_mae_combined.png`)
+(`paper/figures/supplementary/fig_s4_gtdb_quality_vs_mae.png`)
 
 39,903 held-out same-genus pairs with GTDB R207 metadata (completeness,
 contamination, contig count, mean contig length) and dnadiff/ANIm truth.
@@ -58,51 +53,17 @@ most fragmented genomes (<5 kb mean contig length) show a modest accuracy
 degradation; typical MAG-level completeness/contamination variation has little
 effect on ANI accuracy.
 
-## Supplementary Figure S5 — Exact-truth indel ladder and indel sweep
+## Supplementary Figure S5 — GC coverage ladder
 
-(`figures/report/fig_s5_simulation_indel.png`)
-
-(a) ANI ladder evolved from *E. coli* K-12 MG1655 at 85.0–99.9% true ANI with
-a 400 kb inversion plus ~1 deletion per 100 kb; Syn2bANI (4-enzyme panel) MAE
-= 0.073 ANI points. (b) Indel sweep at fixed true ANI 95.000 with 0–4 deletions
-per 100 kb; error stays between +0.032 and +0.184 (MAE 0.081). Gamma and
-uniform estimates are identical on uniform-rate data.
-
-## Supplementary Figure S6 — GC coverage ladder
-
-(`figures/report/fig_s6_simulation_gc.png`)
+(`paper/figures/supplementary/fig_s5_simulation_gc.png`)
 
 Substitution ladders evolved on five real template genomes spanning GC
 27.2–72.1%. Syn2bANI error is 0.074–0.356 ANI points and is *not* monotone in
-GC; the worst genome (*B. longum*, GC 60.1%) sits mid-range. The GC sweep
-source genomes are not present in the repository, so this panel reproduces the
-historical 4-enzyme sweep reported in `ALGORITHM_MLE.md` §4.8.
+GC; the worst genome (*B. longum*, GC 60.1%) sits mid-range.
 
-## Supplementary Figure S7 — Simulated fragmentation
+## Supplementary Figure S6 — Mosaic/rate-heterogeneity family
 
-(`figures/report/fig_s7_simulation_fragment.png`)
-
-A 95% ANI *E. coli* query was fragmented into 20–201 contigs (~50%
-reverse-complemented, order shuffled, no sequence lost). Syn2bANI error is
-0.018–0.179 (MAE 0.070), confirming that random fragmentation per se does not
-bias the chain-restricted MLE. Real assemblies below ~20 kb N50 behave
-differently because they lose sequence at repeat boundaries; see Results 2.3
-and Fig. 10c.
-
-## Supplementary Figure S8 — Accessory-content confound
-
-(`figures/report/fig_s8_simulation_accessory.png`)
-
-Core ANI fixed at 95.000 with 0–50% of the genome replaced by
-composition-preserving, homology-destroying shuffled blocks. (a) ANI estimate
-remains flat across accessory fractions (+0.044 to +0.250, MAE 0.112) because
-only tags inside chains contribute to the likelihood. (b) `af_query` tracks
-the true shared fraction (1 − F) to within 0.004, demonstrating the decoupling
-of divergence and shared-content estimates.
-
-## Supplementary Figure S9 — Mosaic/rate-heterogeneity family
-
-(`figures/report/fig_s9_simulation_mosaic.png`)
+(`paper/figures/supplementary/fig_s6_simulation_mosaic.png`)
 
 Per-block divergence rates sampled from Gamma(α, α) with α = 0.5/1/2 (mean
 ANI 90–98) and deliberately misspecified bimodal 50/70%-core cases. The gamma
@@ -111,53 +72,61 @@ estimator reduces error relative to the uniform estimator (e.g., gamma MAE
 misspecification (gamma MAE 2.43 vs uniform 3.42), motivating the real-genome
 ridge calibration of Results 2.5.
 
-## Supplementary Figure S12 — Engineered *H. pylori* cagPAI deletion is recovered at exact size
+## Supplementary Figure S7 — Accuracy on 695 CAMI2 MAGs
 
-(`figures/report/fig_s12_cagpai_pilot.png`)
+(`paper/figures/supplementary/fig_s7_mag_validation.png`)
 
-Eight *H. pylori* 26695-derived genomes: wild-type (WT), a 36,154 bp cagPAI deletion (ΔcagPAI), cagPAI inversion, cagPAI translocation, and the same four structures on a mut1 background carrying ~1% substitutions. All pairwise comparisons were run with `syn2bani ani` and `syn2bani struct`. (a) ANI is ~100% for same-background pairs and ~99% across backgrounds, independent of the 36 kb rearrangement. (b) `breakpoint_count` increases for inversion and translocation pairs. (c) `anchor_adjacency` (chain coverage) drops only modestly with the deletion and is insensitive to inversion/translocation, confirming that it measures coverage rather than rearrangement burden. The WT vs ΔcagPAI comparison returns a single insertion call of exactly 36,154 bp.
+695 CAMI2 bins vs dnadiff ANIm truth (raw gated syn2bani; skani; FastANI).
+(a) Syn2bANI raw gated estimate vs dnadiff ANIm truth, colored by contamination
+class. (b) Absolute-error distributions by tool. (c) Syn2bANI error by CheckM2
+quality tier.
 
-## Supplementary Figure S14 — Inverted fraction agrees with dnadiff and carries a closed-form standard error
+## Supplementary Figure S8 — High-ANI isolate collections show extensive rearrangements
 
-(`figures/report/fig_inverted_fraction_comparison_high_ani.png`)
+(`paper/figures/supplementary/fig_s8_syntracker_breakpoints.png`)
 
-(a) Syn2b `inverted_fraction` versus dnadiff inverted fraction across the 43,334 held-out GTDB-R207 pairs (Pearson r = 0.936). (b) Strain-level zoom for ANIm ≥ 97% (r = 0.996, slope 1.006, intercept −0.004). The standard-error model based on shared landmark count reproduces the observed spread (R² = 0.999 across divergence bins).
+skani ANI versus Syn2bANI `breakpoint_count` for four published near-clonal
+isolate collections: (a) *E. coli* hypermutator (253 pairs), (b) *H. pylori*
+(2,926 pairs), (c) *N. gonorrhoeae* (66 pairs), and (d) *S. rimosus* (190
+pairs). In all four collections ANI is pinned near 100% while breakpoint counts
+vary over orders of magnitude.
 
-## Supplementary Figure S15 — High-ANI *E. coli* O157:H7 pairs carry hundreds of breakpoints
+## Supplementary Figure S9 — High-ANI *E. coli* O157:H7 pairs carry hundreds of breakpoints
 
-(`figures/report/fig_s15_ecoli_o157_breakpoints_lineage.png`, `figures/report/fig_s15_ecoli_o157_breakpoints_host.png`)
+(`paper/figures/supplementary/fig_s9_ecoli_o157_breakpoints.png`)
 
-Seventy-four genomes from Fitzgerald et al. (2021), 2,701 non-self pairs. (a) ANI vs breakpoint count colored by lineage (I/II, II, Ia, Ic). (b) Same data colored by host category (bovine, human, other/unknown). All pairwise ANIs exceed 99.886% yet breakpoints range from 171 to >1,100. Source: `case_studies/ecoli_o157_fitzgerald_2021/`.
+Seventy-four genomes from Fitzgerald et al. (2021), 2,701 non-self pairs.
+(a) ANI vs breakpoint count colored by lineage (I/II, II, Ia, Ic). (b) Same
+data colored by host category (bovine, human, other/unknown). All pairwise ANIs
+exceed 99.886% yet breakpoints range from 171 to >1,100.
 
-## Supplementary Figure S16 — High-ANI FDA-ARGOS *Staphylococcus aureus* pairs show wide breakpoint variation
+## Supplementary Figure S10 — High-ANI FDA-ARGOS *Staphylococcus aureus* pairs show wide breakpoint variation
 
-(`figures/report/fig_s16_saureus_breakpoints_country.png`, `figures/report/fig_s16_saureus_breakpoints_source.png`)
+(`paper/figures/supplementary/fig_s10_saureus_breakpoints.png`)
 
-One hundred and twenty-two genomes, 7,381 refined pairs. (a) ANI vs breakpoint count colored by country. (b) ANI vs breakpoint count colored by isolation source. Pairs at 100% ANI still carry >150 breakpoints. Source: `case_studies/fda_argos_s_aureus/`.
+One hundred and twenty-two genomes, 7,381 refined pairs. (a) ANI vs breakpoint
+count colored by country. (b) ANI vs breakpoint count colored by isolation
+source. Pairs at 100% ANI still carry >150 breakpoints.
 
-## Supplementary Figure S17 — cagPAI extended state by country
+## Supplementary Figure S11 — cagPAI extended state by country and phylogenetic population
 
-(`figures/report/fig_s17_cagpai_by_country.png`)
+(`paper/figures/supplementary/fig_s11_cagpai_country_population.png`)
 
-Stacked-bar distribution of the five extended cagPAI states across countries of isolation for the 528 *H. pylori* cohort genomes.
+Stacked-bar distribution of extended cagPAI states (after circular-origin
+filtering) across countries of isolation and phylogenetic population for the
+528 *H. pylori* cohort genomes.
 
-## Supplementary Figure S18 — cagPAI extended state by phylogenetic population
+## Supplementary Figure S12 — Circular-origin artifact filtering in *H. pylori* cagPAI
 
-(`figures/report/fig_s18_cagpai_by_population.png`)
+(`paper/figures/supplementary/fig_s12_circular_origin_filtering.png`)
 
-Same as S17, stratified by phylogenetic population.
+Before and after counts of the four extended cagPAI states. Filtering
+reclassifies 133 complete-marker genomes from `complete_rearranged` to
+`complete_collinear` because their only cagPAI-overlapping SV is a
+genome-spanning call consistent with a different arbitrary start coordinate on
+the circular *H. pylori* chromosome.
 
-## Supplementary Figure S19 — cagPAI extended state by FastBAPS lineage
 
-(`figures/report/fig_s19_cagpai_by_fastbaps.png`)
-
-Same as S17, stratified by FastBAPS lineage.
-
-## Supplementary Figure S20 — cagPAI extended state by disease stage
-
-(`figures/report/fig_s20_cagpai_by_disease_stage.png`)
-
-Same as S17, stratified by Correa's cascade disease stage (NAG, AG, IM, GC).
 
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
 
@@ -189,7 +158,7 @@ Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 | low-AF (30–60%) | 40 | 0.461 | 72.5% |
 | verylow-AF (< 30%) | 17 | 0.744 | 52.9% |
 
-## Supplementary Table S8 — Lineage-stratified cagPAI–disease associations
+## Supplementary Table S4 — Lineage-stratified cagPAI–disease associations
 
 Five hundred and twenty-eight *H. pylori* isolates from Song et al. (2026) were
 classified into extended cagPAI states after circular-origin filtering (empty
