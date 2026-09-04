@@ -1,64 +1,80 @@
 #!/usr/bin/env python3
-"""Generate Figure 6: ANI and SV are decoupled in GTDB-R207."""
+"""Generate Figure 6: ANI and SV are decoupled in GTDB-R207.
+
+Publication-quality 2-panel figure.
+"""
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from scipy import stats
+from pathlib import Path
 
-D = "results/gtdb50k"
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from plot_style import set_publication_style, figure_size, label_panel, save_figure, COLORS
+
+set_publication_style()
+D = Path("results/gtdb50k")
+OUT = Path("paper/figures/main/fig6_ani_sv_discordance")
 
 
 def main():
-    inv = pd.read_csv(f"{D}/syn2b_inverted_fraction_50k.tsv", sep="\t")
-    dna = pd.read_csv(f"{D}/dnadiff_inverted_fraction.tsv", sep="\t")
-    inv = inv.merge(dna[["pairid", "dnadiff_inverted_fraction"]], on="pairid", how="inner")
-    sv = pd.read_csv(f"{D}/sv_comparison_merged.tsv", sep="\t")
-    truth = pd.read_csv(f"{D}/truth_50k.tsv", sep="\t")
-    df = inv.merge(truth[["pairid", "anim_ani"]], on="pairid", how="inner").merge(
-        sv[["pairid", "breakpoint_count"]], on="pairid", how="inner")
-    df = df.dropna()
+    # 336 high-AF same-species pairs
+    pairs = pd.read_csv(D / "all_high_ani_high_af_pairs.tsv", sep="\t")
+    pairs = pairs.rename(columns={"synteny_score": "anchor_adjacency"})
 
-    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    # Top-20 discordant pairs for highlight (lowest anchor adjacency among high-ANI pairs)
+    sv = pd.read_csv(D / "struct_top_discordant_summary.tsv", sep="\t")
+    discordant_ids = set(sv["case"].head(20))
+    pairs["discordant"] = pairs["pairid"].isin(discordant_ids)
 
-    # (a) ANIm vs inverted fraction
-    ax = axes[0, 0]
-    ax.scatter(df["anim_ani"], df["dnadiff_inverted_fraction"], alpha=0.2, s=5)
+    sv_top = sv.head(10).copy()
+    sv_top["pair_label"] = sv_top["query_species"].str.replace(" ", "\n", regex=False)
+
+    fig, axes = plt.subplots(1, 2, figsize=figure_size(17.8, aspect=0.42))
+
+    # (a) ANIm vs anchor adjacency
+    ax = axes[0]
+    ax.scatter(
+        pairs["anim_ani"], pairs["anchor_adjacency"],
+        c=COLORS["grey"], s=12, alpha=0.6, edgecolors="none", label="High-AF same-species pairs"
+    )
+    disc = pairs[pairs["discordant"]]
+    ax.scatter(
+        disc["anim_ani"], disc["anchor_adjacency"],
+        c=COLORS["vermillion"], s=20, alpha=0.9, edgecolors="none", label="Top 20 discordant pairs"
+    )
+    ax.axhline(0.95, color=COLORS["black"], ls="--", lw=0.8)
+    ax.axvline(99, color=COLORS["black"], ls="--", lw=0.8)
     ax.set_xlabel("ANIm (%)")
-    ax.set_ylabel("dnadiff inverted fraction")
-    ax.set_title("(a) ANIm vs inverted fraction (GTDB-R207)")
+    ax.set_ylabel("Anchor adjacency")
+    ax.set_xlim(98.8, 100.05)
+    ax.set_ylim(0.78, 1.005)
+    label_panel(ax, "a")
+    ax.set_title(f"GTDB-R207 high-AF same-species pairs (n = {len(pairs)})", fontsize=8)
+    ax.legend(loc="lower left", fontsize=7, frameon=False)
 
-    # (b) ANIm vs breakpoint count
-    ax = axes[0, 1]
-    ax.scatter(df["anim_ani"], df["breakpoint_count"], alpha=0.2, s=5)
-    ax.set_xlabel("ANIm (%)")
-    ax.set_ylabel("Syn2bANI breakpoint count")
-    ax.set_title("(b) ANIm vs breakpoint count")
-
-    # (c) inverted fraction by ANI band
-    ax = axes[1, 0]
-    bands = [(80, 85), (85, 90), (90, 95), (95, 97), (97, 99), (99, 101)]
-    vals = [df[(df["anim_ani"] >= lo) & (df["anim_ani"] < hi)]["dnadiff_inverted_fraction"].values
-            for lo, hi in bands]
-    labels = [f"{lo}-{hi}" for lo, hi in bands]
-    bp = ax.boxplot(vals, labels=labels, showfliers=False, patch_artist=True)
-    for patch in bp["boxes"]:
-        patch.set_facecolor("lightblue")
-    ax.set_xlabel("ANIm band (%)")
-    ax.set_ylabel("dnadiff inverted fraction")
-    ax.set_title("(c) Inverted fraction distribution by ANI band")
-
-    # (d) high-ANI high-SV examples
-    ax = axes[1, 1]
-    disc = df[(df["anim_ani"] >= 99) & (df["dnadiff_inverted_fraction"] >= 0.3)]
-    ax.scatter(disc["anim_ani"], disc["dnadiff_inverted_fraction"], color="red", s=20)
-    ax.set_xlabel("ANIm (%)")
-    ax.set_ylabel("dnadiff inverted fraction")
-    ax.set_title(f"(d) Discordant pairs: ANI ≥ 99% & inv-frac ≥ 0.3 (n = {len(disc)})")
+    # (b) SV composition of top-10 discordant pairs
+    ax = axes[1]
+    x = np.arange(len(sv_top))
+    width = 0.6
+    bottom = np.zeros(len(sv_top))
+    colors = [COLORS["blue"], COLORS["orange"], COLORS["bluish_green"]]
+    labels = ["Inversions", "Translocations", "Indels"]
+    for col, color, label in zip(["n_inversions", "n_translocations", "n_indels"], colors, labels):
+        vals = sv_top[col].values
+        ax.bar(x, vals, width, bottom=bottom, color=color, label=label, edgecolor="white", linewidth=0.3)
+        bottom += vals
+    ax.set_xticks(x)
+    ax.set_xticklabels(sv_top["pair_label"], rotation=45, ha="right", fontsize=6)
+    ax.set_ylabel("SV count")
+    ax.set_xlabel("Top discordant pairs")
+    ax.set_ylim(0, bottom.max() * 1.15)
+    label_panel(ax, "b")
+    ax.set_title("SV composition of 10 most discordant pairs", fontsize=8)
+    ax.legend(loc="upper right", fontsize=7, frameon=False)
 
     plt.tight_layout()
-    out = "paper/figures/main/fig6_ani_sv_discordance.png"
-    plt.savefig(out, dpi=300, bbox_inches="tight")
-    print(f"Wrote {out}")
+    save_figure(fig, OUT)
 
 
 if __name__ == "__main__":
