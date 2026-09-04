@@ -189,6 +189,25 @@ Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 | low-AF (30–60%) | 40 | 0.461 | 72.5% |
 | verylow-AF (< 30%) | 17 | 0.744 | 52.9% |
 
+## Supplementary Table S8 — Lineage-stratified cagPAI–disease associations
+
+Five hundred and twenty-eight *H. pylori* isolates from Song et al. (2026) were
+classified into extended cagPAI states after circular-origin filtering (empty
+85, partial 11, complete_collinear 145, complete_rearranged 287). The raw
+Pearson χ² test for disease stage is significant (χ² = 24.60, df = 9, p = 0.0034),
+but the association is confounded by FastBAPS lineage. Cochran–Mantel–Haenszel
+statistics stratified by FastBAPS lineage:
+
+| Contrast | Case | Control | Outcome | CMH χ² | p | OR_MH |
+|---|---|---|---|---:|---:|---:|
+| cagPAI presence | GC | NAG | complete vs empty/partial | 1.4019 | 0.2364 | 1.599 |
+| cagPAI rearrangement | GC | NAG | complete_rearranged vs complete_collinear | 0.8028 | 0.3703 | 1.294 |
+| cagPAI presence (advanced vs early) | GC/IM | AG/NAG | complete vs empty/partial | 1.5539 | 0.2126 | 1.389 |
+| cagPAI rearrangement (advanced vs early) | GC/IM | AG/NAG | complete_rearranged vs complete_collinear | 0.4664 | 0.4946 | 1.152 |
+
+None of the lineage-stratified associations is significant. Full per-stratum
+counts: `case_studies/h_pylori_cagpai/results/cagpai_association_stratified.tsv`.
+
 ## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
 
 The 695 MAG anchor pairs were re-run with `ani --calibrate` (deployed v5
@@ -349,3 +368,27 @@ post-rescue binary before training, so there is no version skew between the
 shipped estimator and the deployed model. Calibrated output is a separate column
 (`--calibrate`); it returns no value on `BELOW_DETECTION` pairs rather than
 extrapolating.
+
+**Hybrid estimator threshold.** The raw gated estimate is more accurate than the
+calibrated estimate in the near-clonal regime, whereas calibration is essential
+at lower ANI. A hybrid rule was therefore evaluated: report the raw gated
+estimate when it exceeds a threshold `t`, otherwise report the calibrated
+estimate. The threshold was chosen by overall MAE on the unified 80–100% ANIm
+benchmark (43,334 held-out GTDB-R207 pairs plus 727 high-ANI test pairs,
+n = 40,629 pairs with non-missing raw and calibrated values):
+
+| Threshold `t` (%) | n | MAE | Bias |
+|---|---:|---:|---:|
+| 95.0 | 40,629 | 0.7065 | +0.0284 |
+| 96.0 | 40,629 | 0.6443 | −0.0699 |
+| 97.0 | 40,629 | 0.6189 | −0.1089 |
+| 97.5 | 40,629 | 0.6161 | −0.1133 |
+| 98.0 | 40,629 | 0.6146 | −0.1154 |
+| 98.5 | 40,629 | 0.6144 | −0.1169 |
+| 99.0 | 40,629 | 0.6140 | −0.1191 |
+| 99.5 | 40,629 | 0.6145 | −0.1211 |
+
+MAE decreases sharply from 95% to 97%, then plateaus; 98% was selected as the
+operating threshold because it lies on the plateau while keeping the calibrated
+estimate active for the broadest range of strain-level pairs. The hybrid rule is
+not sensitive to the exact threshold in the 97–99% window.
