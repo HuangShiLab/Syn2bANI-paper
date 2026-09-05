@@ -456,3 +456,75 @@ Any genome flagged here should have its genome-spanning call excluded from the
   fix circular-origin handling, re-run cagPAI, then rewrite the structural
   section around `raw_inverted_fraction`. The cagPAI case study can survive on
   the presence/absence axis even if the rearrangement axis collapses.
+
+---
+
+## 7. Separating Syn2b's results from Syn2bANI's (2026-09-04)
+
+§6 and the `--circular` fix in Syn2bANI `e158252` close the cagPAI artifact. This
+section is about something the fix does not address: the two tools' outputs have
+become mixed in this directory, and sorting them changes which paper should carry
+the structural claims.
+
+### 7.1 The structural analysis exists twice
+
+| | `Syn2b synteny` | `syn2bani struct` |
+|---|---|---|
+| source | `Syn2b/src/synteny/{blocks,graph,scoring}.rs` | `Syn2bANI/src/core/{structure_analyzer,synteny_builder}.rs` |
+| circular origin | normalised at `scoring.rs:194` | added in `e158252` as `--circular` + `--artifact-threshold` |
+| >=2-landmark relocation rule (`sub_2`) | yes (`0cf765a`) | no |
+| two-sided SCJ correction | yes | no |
+| pluggable landmark source (2bRAD / FracMinHash) | yes (`c10bfa3`) | no |
+
+§2 already notes the split as an invalidation footnote ("different repo, different
+code path"). It is more than that: the cagPAI artifact existed **because** the
+circularity handling Syn2b had carried since `0c4c541` was never in
+`syn2bani struct`. The fix in `e158252` restores parity on that one property and
+leaves the other three unmatched, so the next divergence is a matter of time.
+
+Not a decision for HPC to take alone — see 7.4.
+
+### 7.2 Which columns belong to which tool
+
+The prefix is the rule. Do not put both in one correlation table without saying so.
+
+| name | tool |
+|---|---|
+| `syn2b_*` (`syn2b_raw_inverted_fraction`, `syn2b_breakpoints`, `syn2b_scj_distance`, `syn2b_observable_fraction`, …) | **Syn2b** |
+| `breakpoint_count`, `synteny_blocks`, `af_query`, `anchor_adjacency` | **Syn2bANI** |
+| `dnadiff_*`, `mm2_*`, `anim_ani` | third-party truth |
+
+### 7.3 Sorted by tool, the picture reverses
+
+| metric | tool | agreement with dnadiff |
+|---|---|---|
+| `syn2b_raw_inverted_fraction` | **Syn2b** | **r = 0.9355** on the full held-out set |
+| `syn2b_inverted_fraction` (majority-frame) | **Syn2b** | r = 0.90, slope 0.96, intercept 0.001 on its unsaturated range; saturates at 0.5 by construction (`MATH_REVIEW.md` §7) |
+| `breakpoint_count` | Syn2bANI | raw 0.133; partial (\|ANIm, \|contigs) 0.414 |
+| `synteny_blocks` | Syn2bANI | not a rearrangement metric — r = 0.771 with contig count, 62% of "blocks" are contig starts (`SV_REANALYSIS.md` §2) |
+| `af_query` | Syn2bANI | divergence-driven, r = 0.449 vs ANIm |
+
+**The strongest structural result in the project is Syn2b's; the contaminated ones
+are Syn2bANI's.** The division that follows:
+
+- **Syn2b paper** carries every structural claim, led by the length-weighted
+  inverted fraction and the fragmentation theorem stated at the end of
+  `SV_REANALYSIS.md` (transition counts carry a term linear in segment count;
+  length-weighted ratios do not).
+- **Syn2bANI paper** carries ANI and **cites Syn2b** for structure instead of
+  re-deriving it from `breakpoint_count` and `synteny_blocks`.
+
+This is what the numbers support, not only what is tidier. Manuscript work, not
+HPC work — flagged here because it decides which tables belong in which paper.
+
+### 7.4 Open decision: what to do about the duplication
+
+In preference order:
+
+1. `syn2bani struct` calls `Syn2b` — one implementation, one place for fixes.
+2. Port `sub_2` and the two-sided SCJ correction into `syn2bani struct`, and add a
+   cross-tool regression test asserting the two agree on a fixed pair set.
+3. Retire `syn2bani struct`; route structural work through `Syn2b`.
+
+`e158252` effectively chose (2) for circularity alone. Worth settling deliberately
+rather than one property at a time.
