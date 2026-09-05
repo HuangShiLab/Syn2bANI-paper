@@ -16,10 +16,9 @@ set_publication_style()
 D = Path("results/gtdb50k")
 OUT = Path("paper/figures/main/fig3_gtdb_r207_benchmark")
 
-# Consistent method styling across panels.
+# Main figure shows the best Syn2bANI estimator (hybrid) alongside skani and FastANI.
+# Raw and v6 calibration variants are detailed in Supplementary Figs. S2-S3.
 METHODS = [
-    ("Syn2bANI raw", "syn2bani_raw", "ani_gated", COLORS['sky_blue']),
-    ("Syn2bANI v6", "syn2bani_v6", "ani_cal", COLORS['orange']),
     ("Syn2bANI hybrid", "syn2bani_hybrid", "hybrid", COLORS['reddish_purple']),
     ("skani", "skani", "skani_ani", COLORS['bluish_green']),
     ("FastANI", "fastani", "fastani_ani", COLORS['vermillion']),
@@ -114,10 +113,12 @@ def panel_scatter_all(ax, df):
 def panel_band_mae(ax, df):
     """Panel (b): per-band MAE bar chart with value labels."""
     x = np.arange(len(BANDS))
-    width = 0.15
+    width = 0.22
+    n_methods = len(METHODS)
+    offsets = np.arange(n_methods) - (n_methods - 1) / 2
     for i, (label, key, col, color) in enumerate(METHODS):
         values = [band_mae(df, col, b) for b in BANDS]
-        bars = ax.bar(x + (i - 2) * width, values, width, label=label, color=color)
+        bars = ax.bar(x + offsets[i] * width, values, width, label=label, color=color)
         # Annotate each bar with its MAE (small font).
         for bar, val in zip(bars, values):
             if not np.isnan(val):

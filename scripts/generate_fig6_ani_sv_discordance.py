@@ -28,9 +28,10 @@ def main():
     pairs["discordant"] = pairs["pairid"].isin(discordant_ids)
 
     sv_top = sv.head(10).copy()
-    sv_top["pair_label"] = sv_top["query_species"].str.replace(" ", "\n", regex=False)
+    # Keep full taxonomic labels on a single line; use small font to avoid overlap.
+    sv_top["pair_label"] = sv_top["query_species"]
 
-    fig, axes = plt.subplots(1, 2, figsize=figure_size(17.8, aspect=0.42))
+    fig, axes = plt.subplots(1, 2, figsize=figure_size(17.8, aspect=0.55))
 
     # (a) ANIm vs anchor adjacency
     ax = axes[0]
@@ -53,25 +54,26 @@ def main():
     ax.set_title(f"GTDB-R207 high-AF same-species pairs (n = {len(pairs)})", fontsize=8)
     ax.legend(loc="lower left", fontsize=7, frameon=False)
 
-    # (b) SV composition of top-10 discordant pairs
+    # (b) SV composition of top-10 discordant pairs (horizontal bars)
     ax = axes[1]
-    x = np.arange(len(sv_top))
-    width = 0.6
-    bottom = np.zeros(len(sv_top))
+    y = np.arange(len(sv_top))
+    height = 0.6
+    left = np.zeros(len(sv_top))
     colors = [COLORS["blue"], COLORS["orange"], COLORS["bluish_green"]]
     labels = ["Inversions", "Translocations", "Indels"]
     for col, color, label in zip(["n_inversions", "n_translocations", "n_indels"], colors, labels):
         vals = sv_top[col].values
-        ax.bar(x, vals, width, bottom=bottom, color=color, label=label, edgecolor="white", linewidth=0.3)
-        bottom += vals
-    ax.set_xticks(x)
-    ax.set_xticklabels(sv_top["pair_label"], rotation=45, ha="right", fontsize=6)
-    ax.set_ylabel("SV count")
-    ax.set_xlabel("Top discordant pairs")
-    ax.set_ylim(0, bottom.max() * 1.15)
+        ax.barh(y, vals, height, left=left, color=color, label=label, edgecolor="white", linewidth=0.3)
+        left += vals
+    ax.set_yticks(y)
+    ax.set_yticklabels(sv_top["pair_label"], fontsize=5)
+    ax.set_xlabel("SV count")
+    ax.set_ylabel("Top discordant pairs")
+    ax.set_xlim(0, left.max() * 1.15)
+    ax.invert_yaxis()
     label_panel(ax, "b")
     ax.set_title("SV composition of 10 most discordant pairs", fontsize=8)
-    ax.legend(loc="upper right", fontsize=7, frameon=False)
+    ax.legend(loc="lower right", fontsize=7, frameon=False)
 
     plt.tight_layout()
     save_figure(fig, OUT)
