@@ -116,15 +116,19 @@ Stacked-bar distribution of extended cagPAI states (after circular-origin
 filtering) across countries of isolation and phylogenetic population for the
 528 *H. pylori* cohort genomes.
 
-## Supplementary Figure S12 — Circular-origin artifact filtering in *H. pylori* cagPAI
+## Supplementary Figure S12 — Circular-origin artifact filtering and sensitivity in *H. pylori* cagPAI
 
 (`paper/figures/supplementary/fig_s12_circular_origin_filtering.png`)
 
-Before and after counts of the four extended cagPAI states. Filtering
+(a, b) Before and after counts of the four extended cagPAI states. Filtering
 reclassifies 133 complete-marker genomes from `complete_rearranged` to
 `complete_collinear` because their only cagPAI-overlapping SV is a
 genome-spanning call consistent with a different arbitrary start coordinate on
-the circular *H. pylori* chromosome.
+the circular *H. pylori* chromosome. (c) Number of `complete_rearranged` genomes
+and number of excluded calls as a function of the artifact-span threshold.
+(d) Crude association p-value for cagPAI rearrangement (GC vs NAG) across the
+same threshold range; the association remains non-significant throughout.
+Source data: `case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`.
 
 
 
@@ -158,24 +162,39 @@ Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 | low-AF (30–60%) | 40 | 0.461 | 72.5% |
 | verylow-AF (< 30%) | 17 | 0.744 | 52.9% |
 
-## Supplementary Table S4 — Lineage-stratified cagPAI–disease associations
+## Supplementary Table S4 — Crude and lineage-stratified cagPAI–disease associations
 
 Five hundred and twenty-eight *H. pylori* isolates from Song et al. (2026) were
 classified into extended cagPAI states after circular-origin filtering (empty
 85, partial 11, complete_collinear 145, complete_rearranged 287). The raw
 Pearson χ² test for disease stage is significant (χ² = 24.60, df = 9, p = 0.0034),
-but the association is confounded by FastBAPS lineage. Cochran–Mantel–Haenszel
-statistics stratified by FastBAPS lineage:
+but the association is confounded by FastBAPS lineage. The table below reports
+crude odds ratios (Woolf 95% CI), χ² p-values, Cochran–Mantel–Haenszel (CMH)
+p-values and Mantel–Haenszel odds ratios, and Breslow–Day tests of homogeneity
+across FastBAPS strata.
 
-| Contrast | Case | Control | Outcome | CMH χ² | p | OR_MH |
-|---|---|---|---|---:|---:|---:|
-| cagPAI presence | GC | NAG | complete vs empty/partial | 1.4019 | 0.2364 | 1.599 |
-| cagPAI rearrangement | GC | NAG | complete_rearranged vs complete_collinear | 0.8028 | 0.3703 | 1.294 |
-| cagPAI presence (advanced vs early) | GC/IM | AG/NAG | complete vs empty/partial | 1.5539 | 0.2126 | 1.389 |
-| cagPAI rearrangement (advanced vs early) | GC/IM | AG/NAG | complete_rearranged vs complete_collinear | 0.4664 | 0.4946 | 1.152 |
+| Contrast | n | Case | Control | Outcome | crude OR (95% CI) | crude p | CMH χ² | CMH p | OR_MH | Breslow–Day p |
+|---|---:|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| cagPAI presence | 285 | GC | NAG | complete vs empty/partial | 2.16 (1.13–4.13) | 0.018 | 2.406 | 0.121 | 1.70 | 0.005 |
+| cagPAI rearrangement | 230 | GC | NAG | complete_rearranged vs complete_collinear | 1.11 (0.64–1.93) | 0.700 | 0.315 | 0.574 | 1.17 | 0.153 |
+| cagPAI presence (advanced vs early) | 528 | GC/IM | AG/NAG | complete vs empty/partial | 1.14 (0.73–1.78) | 0.576 | 1.864 | 0.172 | 1.39 | 0.021 |
+| cagPAI rearrangement (advanced vs early) | 432 | GC/IM | AG/NAG | complete_rearranged vs complete_collinear | 1.02 (0.68–1.52) | 0.928 | 0.004 | 0.951 | 1.01 | 0.780 |
 
-None of the lineage-stratified associations is significant. Full per-stratum
-counts: `case_studies/h_pylori_cagpai/results/cagpai_association_stratified.tsv`.
+Only the first contrast (presence, GC vs NAG) showed a nominally significant
+crude association. After FastBAPS stratification the CMH p-value is 0.12 and the
+Mantel–Haenszel OR is 1.70. The Breslow–Day test is significant (p = 0.005),
+indicating that the OR is heterogeneous across lineages. The other three
+contrasts were not significant even in the crude analysis. Discordant-cell
+counts are small: only 15 cagPAI-negative gastric-cancer genomes exist across
+the whole cohort, distributed as 4 / 9 / 1 / 1 / 0 across FastBAPS L2–L6. Thus
+the presence association is attenuated but not abolished by lineage
+stratification, and the current design is under-powered to resolve it.
+
+Rearrangement-state associations were also evaluated across artifact-span
+thresholds from 0.20 to 0.50; p-values remained non-significant throughout
+(`case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`).
+Full per-stratum counts and CMH diagnostics:
+`case_studies/h_pylori_cagpai/results/cagpai_association_crude_and_stratified.tsv`.
 
 ## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
 
