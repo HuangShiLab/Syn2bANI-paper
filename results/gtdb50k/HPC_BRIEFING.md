@@ -6,6 +6,39 @@ which do not, so you do not re-run work that is still valid.
 
 ---
 
+## Execution update (2026-09-06)
+
+The tasks below were executed on HPC2021. Syn2b and Syn2bANI were updated to
+`c10bfa3` and `e158252`, respectively, and rebuilt.
+
+| Task | Job ID | Status | Output |
+|---|---|---|---|
+| High-ANI syn2bani (`s7_s2b_high_ani_final.slurm`) | 3999656 | COMPLETED | `results/gtdb50k/s2b_high_ani_final/` |
+| High-ANI skani (`s8_skani_high_ani_final.slurm`) | 3999733 | COMPLETED | `results/gtdb50k/skani_high_ani_final/` |
+| High-ANI FastANI (`s9_fastani_high_ani_final.slurm`) | 3999783 | COMPLETED | `results/gtdb50k/fastani_high_ani_final/` |
+| Merge high-ANI results | local | COMPLETED | `results/gtdb50k/high_ani_results.tsv` |
+| v6 calibration | local | COMPLETED | `results/panel_by_band/linear_cal_v6.json` (identical to previously committed version) |
+
+All 2,342 high-ANI pairs were re-run with the `e158252` binary (post-circular-
+origin fix). The merge script found 2,342 s2b, 2,342 skani, and 2,342 fastani
+outputs. v6 calibration was re-run; results were unchanged from the previously
+committed `linear_cal_v6.json`.
+
+FracMinHash `fmh1582` and `fmh750` outputs were already present on disk
+(`syn2b_inverted_fraction_50k_fmh1582.tsv` and `syn2b_inverted_fraction_50k_fmh750.tsv`,
+both with the 37-column schema); a new SLURM script
+`scripts/gtdb50k/s10_syn2b_fmh1582.slurm` was added for reproducibility.
+
+The *H. pylori* cagPAI circular-origin filtering and lineage-stratified
+association were completed locally (Mac); results are in
+`case_studies/h_pylori_cagpai/results/` and the manuscript already reflects the
+filtered state.
+
+Remaining: rerun any downstream analyses that consume `high_ani_results.tsv` or
+`linear_cal_v6.json` if their outputs are stale.
+
+---
+
 ## 1. Update both repositories, and rebuild Syn2b
 
 ```bash
