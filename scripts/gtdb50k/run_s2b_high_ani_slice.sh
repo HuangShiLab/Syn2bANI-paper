@@ -5,7 +5,7 @@ set -uo pipefail
 
 WORK=${SYN2BANI_WORK:-/lustre1/g/aos_shihuang/Syn2bANI-paper/results/gtdb50k}
 GENOMES=${SYN2BANI_GENOMES:-$WORK/genomes_high_ani}
-S2B=${SYN2BANI:-/lustre1/g/aos_shihuang/Syn2bANI-hi95/target/release/syn2bani}
+S2B=${SYN2BANI:-/lustre1/g/aos_shihuang/Syn2bANI/target/release/syn2bani}
 NSLICES=${NSLICES:-80}
 
 SLICE=$1
