@@ -8,6 +8,8 @@ Panels
 (c) Stacked-bar distribution of extended cagPAI states by FastBAPS lineage.
 (d) Stacked-bar distribution of extended cagPAI states by disease stage,
     with lineage-stratified CMH annotation.
+(e) Cross-validation against independent cagA molecular typing.
+(f) SV burden by macrolide-resistance genotype (crude vs lineage-stratified).
 
 Outputs
 -------
@@ -25,6 +27,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Patch
 
 # Ensure the repository plot-style module is importable when running from root.
@@ -197,47 +200,47 @@ def plot_panel_a(ax, rows: list[dict[str, str]]) -> None:
 
 
 def plot_panel_b(ax) -> None:
-    """Workflow schematic for extended-state classification."""
+    """Workflow schematic for extended-state classification (vertical layout)."""
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
     ax.set_title("Extended-state classification workflow")
 
     boxes = [
-        (0.11, "28 cagPAI\nmarkers", "minimap2 ≥80%\ncoverage & identity"),
-        (0.36, "syn2bani\nstruct", "vs 26695\nINV/DEL/TRA calls"),
-        (0.61, "Circular-origin\nfilter", "exclude >50%\nchromosome spans"),
-        (0.86, "Extended\nstate", "empty / partial /\ncollinear / rearranged"),
+        (0.82, "28 cagPAI markers", "minimap2 ≥80% coverage & identity"),
+        (0.63, "syn2bani struct", "vs 26695: INV/DEL/TRA calls"),
+        (0.44, "Circular-origin filter", "exclude >50% chromosome spans"),
+        (0.25, "Extended state", "empty / partial / collinear / rearranged"),
     ]
 
-    for x, title, subtitle in boxes:
+    for y, title, subtitle in boxes:
         box = FancyBboxPatch(
-            (x - 0.09, 0.62), 0.18, 0.22,
-            boxstyle="round,pad=0.02,rounding_size=0.015",
+            (0.14, y - 0.065), 0.72, 0.13,
+            boxstyle="round,pad=0.01,rounding_size=0.015",
             facecolor=plot_style.COLORS["light_grey"],
             edgecolor=plot_style.COLORS["grey"],
             linewidth=1.0,
         )
         ax.add_patch(box)
-        ax.text(x, 0.77, title, ha="center", va="center", fontsize=7, fontweight="bold")
-        ax.text(x, 0.67, subtitle, ha="center", va="center", fontsize=6, color="#333333")
+        ax.text(0.5, y + 0.022, title, ha="center", va="center", fontsize=7, fontweight="bold")
+        ax.text(0.5, y - 0.026, subtitle, ha="center", va="center", fontsize=6, color="#333333")
 
     for i in range(len(boxes) - 1):
-        x0 = boxes[i][0] + 0.09
-        x1 = boxes[i + 1][0] - 0.09
+        y0 = boxes[i][0] - 0.065
+        y1 = boxes[i + 1][0] + 0.065
         arrow = FancyArrowPatch(
-            (x0, 0.73), (x1, 0.73),
+            (0.5, y0), (0.5, y1),
             arrowstyle="->", mutation_scale=10,
             linewidth=1.0, color="#333333",
         )
         ax.add_patch(arrow)
 
     notes = (
-        "• 28 marker loci classify presence as empty / partial / complete.\n"
-        "• SVs overlapping the cagPAI window split complete into collinear vs rearranged.\n"
-        "• Genome-spanning translocations from circular-origin shifts are filtered."
+        "• Markers classify presence: empty / partial / complete.\n"
+        "• cagPAI-overlapping SVs split complete: collinear vs rearranged.\n"
+        "• Genome-spanning calls reflect circular-origin shifts and are filtered."
     )
-    ax.text(0.5, 0.22, notes, ha="center", va="top", fontsize=6.5, color="#333333")
+    ax.text(0.5, 0.10, notes, ha="center", va="top", fontsize=6, color="#333333")
 
 
 def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
@@ -269,18 +272,102 @@ def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
     ax.set_xlim(0, 1.18)
 
 
+# Three-level presence status used for the cagA cross-validation panel.
+PRESENCE_ORDER = ["empty", "partial", "complete"]
+PRESENCE_LABELS = {"empty": "empty", "partial": "partial", "complete": "complete"}
+
+
+def plot_panel_e(ax, merged: pd.DataFrame) -> None:
+    """cagPAI presence cross-validated against independent cagA typing."""
+    df = merged.copy()
+    df["cagA_grp"] = np.where(
+        df["cagA_result"] == "Detected", "cagA detected",
+        np.where(df["cagA_result"] == "Not_detected", "cagA not detected", "other/indeterminate"),
+    )
+    order = ["cagA detected", "cagA not detected", "other/indeterminate"]
+    labels = ["cagA detected", "cagA not\ndetected", "other /\nindeterminate"]
+
+    counts = np.zeros((len(order), len(PRESENCE_ORDER)))
+    for i, g in enumerate(order):
+        sub = df[df["cagA_grp"] == g]
+        vc = sub["status"].value_counts()
+        for j, s in enumerate(PRESENCE_ORDER):
+            counts[i, j] = vc.get(s, 0)
+    totals = counts.sum(axis=1, keepdims=True)
+    totals[totals == 0] = 1
+    fracs = counts / totals
+    labels = [f"{lab}\n(n={int(totals[i].item())})" for i, lab in enumerate(labels)]
+
+    colors = [STATE_COLORS["empty"], STATE_COLORS["partial"], STATE_COLORS["complete_collinear"]]
+    left = np.zeros(len(order))
+    for j, s in enumerate(PRESENCE_ORDER):
+        ax.bar(np.arange(len(order)), fracs[:, j], bottom=left, color=colors[j],
+               label=PRESENCE_LABELS[s], width=0.6, edgecolor="white", linewidth=0.5)
+        left += fracs[:, j]
+
+    # Annotate complete fraction per group.
+    for i in range(len(order)):
+        ax.text(i, fracs[i, 2] / 2 + fracs[i, :2].sum(), f"{fracs[i, 2]:.2f}",
+                ha="center", va="center", fontsize=7, color="white")
+
+    ax.set_xticks(np.arange(len(order)))
+    ax.set_xticklabels(labels, fontsize=7)
+    ax.set_ylim(0, 1.34)
+    ax.set_ylabel("cagPAI presence")
+    ax.set_xlabel("Independent cagA typing (collaborator)")
+    ax.set_title("Cross-validation vs cagA typing")
+    ax.text(-0.38, 1.20,
+            "OR = 783 (179–3,421); stratified OR = 3,986;\n"
+            "CMH p < 10$^{-16}$; Breslow–Day p = 0.96",
+            ha="left", va="top", fontsize=7)
+
+
+def plot_panel_f(ax, merged: pd.DataFrame) -> None:
+    """SV burden by macrolide-resistance genotype, crude vs lineage-stratified."""
+    df = merged.dropna(subset=["res_macrolide", "sv_total_n"])
+    res = df[df["res_macrolide"] == True]["sv_total_n"]
+    sens = df[df["res_macrolide"] == False]["sv_total_n"]
+
+    bp = ax.boxplot([sens, res], tick_labels=[f"susceptible\n(n={len(sens)})",
+                                            f"macrolide R\n(n={len(res)})"],
+                    showfliers=False, patch_artist=True, widths=0.55,
+                    medianprops=dict(color="black", linewidth=1.2))
+    for patch, color in zip(bp["boxes"], [plot_style.COLORS["sky_blue"], plot_style.COLORS["vermillion"]]):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.55)
+        patch.set_edgecolor("#333333")
+
+    # Jittered points.
+    rng = np.random.default_rng(7)
+    for i, vals in enumerate([sens, res]):
+        x = rng.normal(i + 1, 0.05, size=len(vals))
+        ax.scatter(x, vals, s=4, color="#333333", alpha=0.25, linewidths=0, zorder=1)
+
+    ax.set_ylabel("SV calls vs 26695")
+    ax.set_xlabel("CARD macrolide genotype (23S rRNA)")
+    ax.set_title("SV burden vs macrolide resistance")
+    ymax = max(res.max(), sens.max())
+    ax.set_ylim(0, ymax * 1.22)
+    ax.text(0.03, 0.97,
+            "crude OR = 2.81 (1.71–4.62), q = 8.5 $\\times$ 10$^{-5}$\n"
+            "lineage-stratified OR = 1.33 (0.73–2.40), p = 0.35",
+            transform=ax.transAxes, ha="left", va="top", fontsize=7)
+
+
 def main() -> int:
     plot_style.set_publication_style()
 
     assoc_path = CASE_DIR / "cagpai_association_filtered.tsv"
     strat_path = CASE_DIR / "cagpai_association_stratified.tsv"
     pilot_path = CASE_DIR / "cagpai_states_pilot.tsv"
+    merged_path = CASE_DIR / "metadata_assoc" / "merged_genome_table.tsv"
 
     # Load data
     fastbaps_table = parse_count_table(assoc_path, "fastbaps")
     group_table = parse_count_table(assoc_path, "group")
     pilot_rows = load_pilot(pilot_path)
     cmh_pvals = parse_cmh_p_values(strat_path)
+    merged = pd.read_csv(merged_path, sep="\t")
 
     # Recompute statistics from counts.
     fb_chi2 = chi2_from_table(fastbaps_table)
@@ -294,14 +381,16 @@ def main() -> int:
 
     min_cmh_p = min(cmh_pvals.values()) if cmh_pvals else 0.21
 
-    fig = plt.figure(figsize=plot_style.figure_size(17.8, aspect=0.70))
-    gs = fig.add_gridspec(2, 2, left=0.08, right=0.92, top=0.92, bottom=0.10,
-                          wspace=0.35, hspace=0.45)
+    fig = plt.figure(figsize=plot_style.figure_size(17.8, aspect=0.72))
+    gs = fig.add_gridspec(2, 3, left=0.07, right=0.95, top=0.92, bottom=0.12,
+                          wspace=0.42, hspace=0.55)
 
     ax_a = fig.add_subplot(gs[0, 0])
     ax_b = fig.add_subplot(gs[0, 1])
+    ax_e = fig.add_subplot(gs[0, 2])
     ax_c = fig.add_subplot(gs[1, 0])
     ax_d = fig.add_subplot(gs[1, 1])
+    ax_f = fig.add_subplot(gs[1, 2])
 
     # Panel (a)
     plot_panel_a(ax_a, pilot_rows)
@@ -311,6 +400,10 @@ def main() -> int:
     plot_panel_b(ax_b)
     plot_style.label_panel(ax_b, "b")
 
+    # Panel (e)
+    plot_panel_e(ax_e, merged)
+    plot_style.label_panel(ax_e, "e")
+
     # Panel (c)
     fb_order = [f"fastbaps_L{i}" for i in (2, 3, 4, 5, 6)]
     plot_stacked_bar(ax_c, fastbaps_table, fb_order,
@@ -319,8 +412,8 @@ def main() -> int:
     chi2, dof, p = fb_chi2
     p_str = f"{p:.2e}" if p < 0.001 else f"{p:.3g}"
     ax_c.text(0.03, 0.97,
-              f"$\\chi^2={chi2:.2f}$, df={dof}, $p={p_str}$",
-              transform=ax_c.transAxes, ha="left", va="top", fontsize=8)
+              f"$\\chi^2$ = {chi2:.2f}, df = {dof},\n$p$ = {p_str}",
+              transform=ax_c.transAxes, ha="left", va="top", fontsize=7)
     plot_style.label_panel(ax_c, "c")
 
     # Panel (d)
@@ -331,12 +424,16 @@ def main() -> int:
     chi2_g, dof_g, p_g = grp_chi2
     p_g_str = f"{p_g:.2e}" if p_g < 0.001 else f"{p_g:.3g}"
     cmh_text = (
-        f"Marginal: $\\chi^2={chi2_g:.2f}$, df={dof_g}, $p={p_g_str}$\n"
-        f"CMH (lineage-stratified): $p \\geq {min_cmh_p:.2f}$"
+        f"marginal: $\\chi^2$ = {chi2_g:.2f}, df = {dof_g},\n$p$ = {p_g_str}\n"
+        f"CMH (lineage-strat.): $p \\geq {min_cmh_p:.2f}$"
     )
     ax_d.text(0.03, 0.97, cmh_text,
-              transform=ax_d.transAxes, ha="left", va="top", fontsize=8)
+              transform=ax_d.transAxes, ha="left", va="top", fontsize=7)
     plot_style.label_panel(ax_d, "d")
+
+    # Panel (f)
+    plot_panel_f(ax_f, merged)
+    plot_style.label_panel(ax_f, "f")
 
     # Shared figure legend for extended states.
     legend_handles = [
