@@ -130,6 +130,18 @@ and number of excluded calls as a function of the artifact-span threshold.
 same threshold range; the association remains non-significant throughout.
 Source data: `case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`.
 
+## Supplementary Figure S13 — Lineage-stratified association forest plot for *H. pylori* metadata tests
+
+(`case_studies/h_pylori_cagpai/results/metadata_assoc/fig_forest_stratified.png`)
+
+Crude (circle) and FastBAPS-lineage-stratified Mantel–Haenszel (triangle) odds
+ratios with 95% CIs for the headline association tests: cagPAI presence vs cagA
+detection and vacA s1/i1/m1 (top, strong and lineage-robust), and SV burden vs
+macrolide resistance (bottom, crude OR ≈ 2.8 collapsing to ≈ 1.3 after
+stratification). The macrolide rows straddle OR = 1, visually demonstrating the
+lineage confounding described in the main text.
+Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`.
+
 
 
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
@@ -195,6 +207,39 @@ thresholds from 0.20 to 0.50; p-values remained non-significant throughout
 (`case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`).
 Full per-stratum counts and CMH diagnostics:
 `case_studies/h_pylori_cagpai/results/cagpai_association_crude_and_stratified.tsv`.
+
+## Supplementary Table S5 — cagPAI cross-validation against independent cagA/vacA typing and SV–resistance associations
+
+Five hundred and twenty-eight isolates were merged with collaborator-generated
+metadata (cagA detection with EPIYA genotyping and genome-level rescue, vacA
+s/i/m typing, CARD resistance hits; merge losses: none). Crude odds ratios
+(Woolf 95% CI), Fisher p, Cochran–Mantel–Haenszel (CMH) stratified OR and
+p, Breslow–Day homogeneity (B–D p), and Benjamini–Hochberg q across the
+executed test family are shown; q ≈ 0 denotes underflow.
+
+| Test | n | crude OR (95% CI) | crude p | stratified OR (95% CI) | CMH p | B–D p | q |
+|---|---:|---|---|---|---|---|---:|---:|
+| cagPAI complete vs cagA detected | 524 | 782.9 (179.2–3420.8) | 7.2 × 10⁻⁶⁸ | 3986 (263.3–60342.6) | < 10⁻¹⁶ | 0.956 | ≈ 0 |
+| cagPAI complete vs cagA EPIYA genotype (4-level) | 450 | — | 0.515 (χ²) | — | — | — | 0.57 |
+| cagPAI complete vs vacA s1 | 462 | 556.1 (74.0–4180.4) | 1.4 × 10⁻³⁹ | 510.9 (74.1–3520.8) | < 10⁻¹⁶ | 1 × 10⁻⁶ | ≈ 0 |
+| cagPAI complete vs vacA i1 | 477 | 38.0 (19.6–73.7) | 4.6 × 10⁻³² | 27.0 (13.6–53.8) | < 10⁻¹⁶ | 0.77 | ≈ 0 |
+| cagPAI complete vs vacA m1 | 519 | 11.8 (6.6–21.4) | 1.4 × 10⁻²¹ | 11.4 (6.4–20.4) | < 10⁻¹⁶ | 0.018 | ≈ 0 |
+| SV burden (median split) vs macrolide resistance | 528 | 2.81 (1.71–4.62) | 3.0 × 10⁻⁵ | 1.33 (0.73–2.40) | 0.35 | 0.90 | 8.5 × 10⁻⁵ |
+| cagPAI complete vs GC (vs NAG) | 285 | 2.16 (1.13–4.13) | 0.022 | 1.70 (0.87–3.32) | 0.121 | 0.005 | 0.044 |
+
+Contingency for the headline test: cagPAI-complete → 429/431 cagA-positive;
+partial → 10/11; empty → 10/82. Fluoroquinolone, tetracycline, and
+nitroimidazole classes were excluded pre-test (intrinsic hp1181 efflux pump at
+99.8% prevalence); beta-lactam was excluded (0.6% prevalence). The 26 genomes
+discordant between marker state and cagA typing were reviewed at assembly level:
+17 showed loss of the island backbone with cagA sequence retained at the
+evacuated site (8 near full-length, 9 fragmentary), 2 carried a precise cagA
+excision on an otherwise intact island (both FastBAPS L3, Latin America), 5
+were threshold-level partial calls in high-divergence backgrounds, and 2 were
+clean fully assembled island deletions; none was attributable to assembly
+incompleteness.
+Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`;
+assembly-level review: `case_studies/h_pylori_cagpai/results/metadata_assoc/discordant_review/`.
 
 ## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
 
