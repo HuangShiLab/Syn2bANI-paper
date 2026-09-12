@@ -241,6 +241,45 @@ incompleteness.
 Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`;
 assembly-level review: `case_studies/h_pylori_cagpai/results/metadata_assoc/discordant_review/`.
 
+## Supplementary Table S6 — Stage-level runtime decomposition and Stage-1 screen recall
+
+**Stage decomposition (n = 22-genome panel, 484 ordered pairs, median of 3
+replicates).** Syn2bANI does not emit per-stage timers; stages that are measured
+only jointly are marked as such rather than apportioned arbitrarily. Full
+machine-readable table: `results/efficiency_v8/stage_breakdown.tsv`.
+
+| Stage | wall time | timing status |
+|---|---|---|
+| End-to-end, FASTA mode (digest + screen + chain + MLE) | 3.73 s | measured |
+| End-to-end, sketch mode (sketch load + screen + chain + MLE) | 2.79 s | measured |
+| `sketch` command (digest + build + write) | 0.50 s | measured; digestion vs build/write not separable from these data |
+| In-silico digestion (in-memory) | ≈0.9 s | derived upper bound (FASTA − sketch mode; sub-second I/O noise) |
+| Screen (pass-1 index lookup) | — | not separately timed; 0 < t < 2.79 s |
+| Chaining (anchor DP) | — | not separately timed (merged with screen + MLE) |
+| MLE fit + calibration | — | not separately timed (calibration is a linear-model evaluation, sub-ms per pair) |
+| Marginal cost of screen+chain+MLE | 5.7 ms/pair | derived from sketch-mode scaling (n = 2 → 22) |
+| `syn2bani struct` (SV stage, 16-way process pool) | 4.36 s | measured (includes process-spawn overhead) |
+
+Cross-scale anchors (HPC, 32 threads, screen+refine combined, no finer split):
+triangle n = 500 genomes (124,750 pairs) 8.5 s; n = 2,000 (1,999,000 pairs)
+86.6 s; n = 5,000 (12,497,500 pairs) 406.7 s; search 100 × 5,000-genome DB 22.0 s.
+
+**Stage-1 screen recall and pass rate.** Gate: window 18 bp, ≥3 shared keys AND
+containment ≥ 0.001. Full machine-readable table:
+`results/efficiency_v8/screen_recall.tsv`.
+
+| Metric | Scale | Value |
+|---|---|---:|
+| Screen pass rate | all-vs-all triangle, n = 500 / 2,000 / 5,000 | 17.3% / 15.3% / 12.6% |
+| False-reject rate on validated true pairs (ANIm 80–100) | 500 true pairs | 0 / 500 (0%) |
+| False-reject rate, forced pass-all reconciliation | triangle n = 2,000 | 1 / 844 (0.12%; lost pair had af = 0) |
+| Search recall vs skani hits | 100 queries × 5,000-genome DB | 12 / 12 (100%) |
+| Legacy exact-tag screen (retired), same true pairs | 500 true pairs | 472 / 500 rejected (94.4%) |
+
+Screen numbers at the full GTDB-R207 scale (65,703 genomes) do not exist: the
+50k held-out benchmark ran `ani` on pre-selected pairs, so the largest scale at
+which the screen was exercised is the n = 5,000 all-vs-all above.
+
 ## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
 
 The 695 MAG anchor pairs were re-run with `ani --calibrate` (deployed v5
