@@ -43,7 +43,10 @@ median **0.1837**:
 | Metric | mean | 50% | 90% | max |
 |---|---:|---:|---:|---:|
 | `syn2b_raw_inverted_fraction` | 0.398 | 0.359 | 0.929 | 1.000 |
-| `syn2b_inverted_fraction` (corrected) | 0.187 | 0.184 | 0.349 | 0.500 |
+| `syn2b_inverted_fraction` (corrected) | 0.187 | 0.184 | 0.452 | 0.500 |
+
+(The corrected q90 is 0.4516 as recomputed from `syn2b_inverted_fraction_closed.tsv`;
+0.349 quoted earlier was a transcription error.)
 
 23,908 / 61,537 pairs (38.9%) have `raw > 0.5`; for these the corrected value is
 `1 - raw`. The high raw median is therefore driven by arbitrary global

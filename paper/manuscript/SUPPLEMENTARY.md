@@ -142,6 +142,28 @@ stratification). The macrolide rows straddle OR = 1, visually demonstrating the
 lineage confounding described in the main text.
 Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`.
 
+## Supplementary Figure S14 — Orientation artifact in undirected all-vs-all inversion calling and its correction
+
+(`paper/figures/supplementary/fig_s14_closed_genome_inversion.png`)
+
+(a) Distribution of the reference-oriented raw inverted fraction (computed with
+the companion Syn2b implementation of the same length-weighted orientation
+ratio) across 61,537
+same-species genome pairs from 701 near-complete GTDB-R207 genomes; the median
+of 0.3595 and q90 of 0.9291 are biologically implausible, and 38.9% of pairs
+have raw > 0.5 (shaded region) because the two assemblies are arbitrarily
+oriented with respect to each other, scoring entire chromosomes as inverted.
+(b) The corrected metric, defined as min(raw, 1 − raw), is bounded at 0.5 with a
+median of 0.1837. (c) Corrected versus raw values for all pairs: 61.1% of pairs
+lie on the identity arm (corrected = raw) and 38.9% on the mirror arm
+(corrected = 1 − raw). The raw column is meaningful in fixed-reference mode,
+where it corresponds directly to the dnadiff inverted-alignment fraction;
+undirected all-vs-all analyses should use the corrected column, and circular
+chromosomes should additionally be normalized to a common origin before
+comparison.
+Source data: `results/gtdb50k/syn2b_inverted_fraction_closed.tsv`; diagnostic
+report: `results/gtdb50k/CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`.
+
 
 
 ## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
