@@ -7,8 +7,11 @@ c) Chaining: gap-penalized collinear DP, orientation blocks; an inverted
    block in the query demonstrates inversion detection.
 d) Chain-restricted MLE: per-enzyme tag outcome counts inside chains
    (0/1/2 mismatches, miss) -> likelihood -> outputs.
+e) Contrast: k-mer tools (skani/FastANI) also chain seeds, but regress the
+   chain into a single ANI scalar and discard the coordinates/geometry.
 
-Output: figures/report/fig1_algorithm_schematic.png/.pdf
+Output: figures/report/fig1_algorithm_schematic.png/.pdf and
+        paper/figures/main/fig1_algorithm.png/.pdf
 """
 from pathlib import Path
 
@@ -130,10 +133,10 @@ ax2.text(1.12, 1055, "log L(â)", color="#b2182b", fontsize=9)
 axd.set_ylim(0, 1150)
 axd.tick_params(labelsize=9)
 
-# ---- bottom row: outputs box spanning all columns ----
-axo = fig.add_subplot(gs[1, :])
+# ---- bottom row: outputs box + k-mer contrast ----
+axo = fig.add_subplot(gs[1, 0:2])
 axo.axis("off")
-axo.add_patch(Rectangle((0.03, 0.12), 0.60, 0.80, fc="#f4f4f4", ec="k",
+axo.add_patch(Rectangle((0.03, 0.12), 0.94, 0.80, fc="#f4f4f4", ec="k",
                         lw=0.8, transform=axo.transAxes))
 outputs = [
     "ANI ± standard error (gated gamma / uniform MLE)",
@@ -144,18 +147,67 @@ outputs = [
     "ani_upper95 when no point estimate is responsible",
 ]
 for i, t in enumerate(outputs):
-    axo.text(0.045, 0.82 - i * 0.125, "• " + t, fontsize=10,
+    axo.text(0.05, 0.82 - i * 0.125, "• " + t, fontsize=9,
              transform=axo.transAxes, va="center")
-arr = FancyArrowPatch((0.25, 1.10), (0.33, 0.98), transform=axo.transAxes,
+arr = FancyArrowPatch((0.30, 1.10), (0.40, 0.98), transform=axo.transAxes,
                       arrowstyle="-|>", mutation_scale=18, color="k", lw=1.2)
 axo.add_patch(arr)
-axo.text(0.67, 0.52,
+axo.text(0.97, 0.52,
          "one sketch, one pass:\n~8 ms per pair, 58 MB peak RSS\n"
          "(vs 8–10 s per pair for dnadiff)",
-         fontsize=10, transform=axo.transAxes, va="center", style="italic")
+         fontsize=8.5, transform=axo.transAxes, va="center", ha="right",
+         style="italic")
+
+# ---- panel e: contrast with k-mer tools ----
+axe = fig.add_subplot(gs[1, 2:4])
+axe.axis("off")
+axe.set_title("e  k-mer tools (skani / FastANI): same chaining, geometry discarded",
+              fontsize=11, loc="left")
+axe.set_xlim(0, 1); axe.set_ylim(0, 1)
+
+# Mini genome pair with the same chains, grayed out.
+def mini_genome_bar(ax, y):
+    ax.add_patch(Rectangle((0.02, y - 0.030), 0.46, 0.060, fc="#e8e8e8",
+                           ec="#888888", lw=0.8, zorder=1))
+
+mini_genome_bar(axe, 0.66)
+mini_genome_bar(axe, 0.30)
+mini_pos = ref_pos * 0.44 + 0.02
+mini_qpos = qry_pos * 0.44 + 0.02
+for i in range(N_TAGS):
+    if not keep[i]:
+        continue
+    inv = inv_lo <= i < inv_hi
+    axe.plot([mini_pos[i], mini_qpos[i]], [0.62, 0.34],
+             color="#b0b0b0", lw=1.4 if inv else 0.8, zorder=2)
+for p, e in zip(mini_pos, ref_enz):
+    axe.plot([p, p], [0.66 - 0.07, 0.66 + 0.07], color="#c0c0c0", lw=1.6, zorder=3)
+for p, e in zip(mini_qpos, ref_enz):
+    axe.plot([p, p], [0.30 - 0.07, 0.30 + 0.07], color="#c0c0c0", lw=1.6, zorder=3)
+axe.text(0.25, 0.84, "k-mer seeds → chains (shared step)", ha="center",
+         fontsize=8.5, style="italic")
+
+# Arrow into a scalar box.
+arr = FancyArrowPatch((0.50, 0.48), (0.62, 0.48), arrowstyle="-|>",
+                      mutation_scale=16, color="k", lw=1.2)
+axe.add_patch(arr)
+axe.add_patch(Rectangle((0.63, 0.38), 0.16, 0.20, fc="white", ec="k", lw=1.0))
+axe.text(0.71, 0.48, "ANI\n97.3", ha="center", va="center", fontsize=11,
+         fontweight="bold")
+
+# Crossed-out structural information.
+axe.plot([0.84, 0.97], [0.58, 0.38], color="#b2182b", lw=1.6)
+axe.plot([0.84, 0.97], [0.38, 0.58], color="#b2182b", lw=1.6)
+axe.text(0.905, 0.68, "inversions, translocations,\nindel positions: not reported",
+         ha="center", fontsize=8, color="#b2182b")
+axe.text(0.5, 0.08,
+         "k-mer chaining computes chain geometry, then regresses it into a single scalar;\n"
+         "fixed restriction-site anchors retain coordinates, so structure is reported at no extra cost",
+         ha="center", fontsize=8.5, style="italic")
 
 fig.suptitle("Syn2bANI: chain-restricted maximum-likelihood ANI on fixed restriction-site anchors",
              fontsize=12.5)
 for ext in ["png", "pdf"]:
     fig.savefig(FIGD / f"fig1_algorithm_schematic.{ext}", dpi=300)
+    fig.savefig(ROOT / "paper" / "figures" / "main" / f"fig1_algorithm.{ext}", dpi=300)
 print("figure ->", FIGD / "fig1_algorithm_schematic.png")

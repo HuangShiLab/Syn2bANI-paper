@@ -425,3 +425,58 @@ MAE decreases sharply from 95% to 97%, then plateaus; 98% was selected as the
 operating threshold because it lies on the plateau while keeping the calibrated
 estimate active for the broadest range of strain-level pairs. The hybrid rule is
 not sensitive to the exact threshold in the 97–99% window.
+
+## Supplementary Note 7 — Count-based versus ratio-based structural metrics under assembly fragmentation
+
+The choice of structural metric is not arbitrary: under assembly fragmentation,
+count-based and length-weighted ratio-based statistics fail in *different*, closed
+ways. This note summarizes the general result (derived in full, with proofs and
+additional measurements, in the companion Syn2b repository,
+`docs/MATH_REVIEW.md`, https://github.com/HuangShiLab/Syn2b).
+
+**Setup.** Every observation process partitions a genome into contiguous observed
+segments: contigs (assembly), 1-to-1 blocks (nucmer), or anchor chains (Syn2bANI).
+A genome carrying `S` landmarks, cut into `K` segments, has `K − 1` internal
+boundaries at which adjacency information is absent — not contradicted.
+
+**Transition counts acquire a term linear in K.** Observable adjacencies drop
+from `S` (circular) to `S − K`, so any statistic that counts transitions —
+junctions, breakpoints, blocks, chain ends — has
+
+    E[T] = T_true + c·(K − 1) + …
+
+where the constant `c` is decided by one design choice: is an absent adjacency
+counted as a contradicted one? Measured values of `c`: counting absence as a
+junction gives `c = 1` (119 false junctions on a 120-contig assembly of a genome
+against itself); dnadiff `Breakpoints` has `c = 1` by construction (intercept 290
+in `dnadiff_breakpoints = 5.35·breakpoint_count + 290`, with median 92 where
+Syn2bANI reports zero); requiring a positive contradiction before counting a
+junction gives `c = 0` (zero false junctions up to K = 1,000). The term is
+therefore removable in principle, not merely reducible.
+
+**Length-weighted ratios are invariant to K.** Define
+`F = Σ_{i∈P} ℓ_i / Σ_i ℓ_i`, where `P` is a property that splitting preserves
+("this segment is inverted relative to the other genome" is one). Splitting a
+segment leaves both sums unchanged, so `F` does not depend on `K` at all — no
+correction term exists to get wrong. Measured: `inverted_fraction` reads 0.000 on
+a 120-contig self-assembly and regresses on the true inverted base-pair fraction
+at slope 0.97, R² = 0.999 across a 512-fold range of event lengths and 0–5%
+divergence. The price is that a ratio carries no event count and saturates past
+50% inverted. Counts and ratios are therefore complementary with disjoint failure
+modes: counts localize events but are fragile to fragmentation; ratios are
+fragmentation-invariant but blind to event number. Syn2bANI reports both and does
+not derive one from the other. For comparison with a fixed-reference alignment
+method, the reference-oriented `raw_inverted_fraction` (range [0, 1], the direct
+analog of the alignment-based inverted aligned fraction) is used; for undirected
+all-vs-all screens the mirror-corrected `min(raw, 1 − raw)` is appropriate
+(Supplementary Fig. S14).
+
+**Corollary: the sensitivity discount, in closed form.** With `c = 0`, what
+remains is a loss of sensitivity — junctions falling at segment boundaries are
+invisible. That share is exactly the observable adjacency fraction,
+`observable_fraction ≈ 1 − (K − 1)/S`, exact to four decimals up to K = 300 on
+*E. coli* with the default panel, and an unbiased predictor of surviving junctions
+(mean error −0.31, sd 1.26 against a binomial sampling sd of ≈1.5 at a truth of
+10, over 16 fragmentation levels). In scale-free form: recovery is essentially
+complete while segments hold ≳10 landmarks, i.e. contig N50 ≳ 10× the landmark
+spacing (~15 kb for the default four-enzyme panel).
