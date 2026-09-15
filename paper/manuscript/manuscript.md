@@ -1,3 +1,11 @@
+> **SUPERSEDED (2026-09-15).** This is the pre-submission long-form draft. The
+> current manuscript is `manuscript_nature_methods.md`. Every structural number
+> in this file — breakpoint counts, the "hundreds of rearrangements" framing,
+> Figure 11 and the SynTracker tables — was produced with a pre-c974f5f
+> Syn2bANI build whose `breakpoint_count` counted contig ends, repeat chains
+> and collinear chain breaks; those numbers are withdrawn. Kept for provenance
+> only; do not cite.
+
 # Syn2b-ANI: Strain-level ANI estimation and structural comparison via fixed restriction-site anchors
 
 ## Authors

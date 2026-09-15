@@ -1,0 +1,81 @@
+method	subset	band	n	mae	bias	r
+syn2bani raw gated	all 43,334	all	43229	1.6701	1.4346	0.8494
+syn2bani raw gated	all 43,334	80-85	12094	1.9642	1.6328	0.1201
+syn2bani raw gated	all 43,334	85-90	15973	1.8918	1.6613	0.4917
+syn2bani raw gated	all 43,334	90-95	14758	1.2141	1.0478	0.7686
+syn2bani raw gated	all 43,334	95-100	404	0.7544	0.6653	0.5120
+syn2bani raw gated	common 39,903	all	39903	1.6988	1.4988	0.8336
+syn2bani raw gated	common 39,903	80-85	8823	2.2012	1.9924	-0.0615
+syn2bani raw gated	common 39,903	85-90	15918	1.8937	1.6646	0.4875
+syn2bani raw gated	common 39,903	90-95	14758	1.2141	1.0478	0.7686
+syn2bani raw gated	common 39,903	95-100	404	0.7544	0.6653	0.5120
+syn2bani calibrated v5	all 43,334	all	39903	0.6194	-0.1223	0.9620
+syn2bani calibrated v5	all 43,334	80-85	8823	0.7155	-0.2092	0.4136
+syn2bani calibrated v5	all 43,334	85-90	15918	0.6445	-0.0954	0.7741
+syn2bani calibrated v5	all 43,334	90-95	14758	0.5397	-0.1047	0.8997
+syn2bani calibrated v5	all 43,334	95-100	404	0.4411	0.0701	0.6065
+syn2bani calibrated v5	common 39,903	all	39903	0.6194	-0.1223	0.9620
+syn2bani calibrated v5	common 39,903	80-85	8823	0.7155	-0.2092	0.4136
+syn2bani calibrated v5	common 39,903	85-90	15918	0.6445	-0.0954	0.7741
+syn2bani calibrated v5	common 39,903	90-95	14758	0.5397	-0.1047	0.8997
+syn2bani calibrated v5	common 39,903	95-100	404	0.4411	0.0701	0.6065
+skani	all 43,334	all	43334	1.0324	-0.8829	0.9752
+skani	all 43,334	80-85	12172	1.9690	-1.9674	0.6825
+skani	all 43,334	85-90	16000	0.8930	-0.7421	0.8312
+skani	all 43,334	90-95	14758	0.4307	-0.1663	0.9329
+skani	all 43,334	95-100	404	0.3185	0.0335	0.7266
+skani	common 39,903	all	39903	0.9575	-0.7962	0.9734
+skani	common 39,903	80-85	8823	1.9843	-1.9825	0.6571
+skani	common 39,903	85-90	15918	0.8931	-0.7438	0.8310
+skani	common 39,903	90-95	14758	0.4307	-0.1663	0.9329
+skani	common 39,903	95-100	404	0.3185	0.0335	0.7266
+skani + linear(ani), band-holdout	all 43,334	all	43334	0.7528	-0.2848	0.9583
+skani + linear(ani), band-holdout	all 43,334	80-85	12172	0.8032	-0.7145	0.6825
+skani + linear(ani), band-holdout	all 43,334	85-90	16000	0.6545	0.4577	0.8312
+skani + linear(ani), band-holdout	all 43,334	90-95	14758	0.8230	-0.7289	0.9329
+skani + linear(ani), band-holdout	all 43,334	95-100	404	0.5608	-0.5210	0.7266
+skani + linear(ani), band-holdout	common 39,903	all	39903	0.7532	-0.2598	0.9549
+skani + linear(ani), band-holdout	common 39,903	80-85	8823	0.8278	-0.7520	0.6571
+skani + linear(ani), band-holdout	common 39,903	85-90	15918	0.6521	0.4545	0.8310
+skani + linear(ani), band-holdout	common 39,903	90-95	14758	0.8230	-0.7289	0.9329
+skani + linear(ani), band-holdout	common 39,903	95-100	404	0.5608	-0.5210	0.7266
+skani + linear(ani, AF), band-holdout	all 43,334	all	43334	0.7685	-0.2974	0.9570
+skani + linear(ani, AF), band-holdout	all 43,334	80-85	12172	0.8133	-0.7338	0.6961
+skani + linear(ani, AF), band-holdout	all 43,334	85-90	16000	0.6540	0.4798	0.8337
+skani + linear(ani, AF), band-holdout	all 43,334	90-95	14758	0.8612	-0.7747	0.9318
+skani + linear(ani, AF), band-holdout	all 43,334	95-100	404	0.5675	-0.4858	0.6245
+skani + linear(ani, AF), band-holdout	common 39,903	all	39903	0.7683	-0.2698	0.9536
+skani + linear(ani, AF), band-holdout	common 39,903	80-85	8823	0.8324	-0.7620	0.6693
+skani + linear(ani, AF), band-holdout	common 39,903	85-90	15918	0.6517	0.4767	0.8336
+skani + linear(ani, AF), band-holdout	common 39,903	90-95	14758	0.8612	-0.7747	0.9318
+skani + linear(ani, AF), band-holdout	common 39,903	95-100	404	0.5675	-0.4858	0.6245
+FastANI	all 43,334	all	43334	1.0449	-0.9827	0.9819
+FastANI	all 43,334	80-85	12172	1.8350	-1.8344	0.8275
+FastANI	all 43,334	85-90	16000	1.0048	-0.9802	0.8762
+FastANI	all 43,334	90-95	14758	0.4553	-0.3042	0.9311
+FastANI	all 43,334	95-100	404	0.3613	-0.1993	0.6780
+FastANI	common 39,903	all	39903	0.9767	-0.9091	0.9801
+FastANI	common 39,903	80-85	8823	1.8281	-1.8273	0.8087
+FastANI	common 39,903	85-90	15918	1.0038	-0.9790	0.8754
+FastANI	common 39,903	90-95	14758	0.4553	-0.3042	0.9311
+FastANI	common 39,903	95-100	404	0.3613	-0.1993	0.6780
+FastANI + linear(ani), band-holdout	all 43,334	all	43334	0.5376	-0.1741	0.9763
+FastANI + linear(ani), band-holdout	all 43,334	80-85	12172	0.4440	-0.3183	0.8275
+FastANI + linear(ani), band-holdout	all 43,334	85-90	16000	0.5318	0.2553	0.8762
+FastANI + linear(ani), band-holdout	all 43,334	90-95	14758	0.6210	-0.5110	0.9311
+FastANI + linear(ani), band-holdout	all 43,334	95-100	404	0.5447	-0.5228	0.6780
+FastANI + linear(ani), band-holdout	common 39,903	all	39903	0.5480	-0.1680	0.9740
+FastANI + linear(ani), band-holdout	common 39,903	80-85	8823	0.4564	-0.3403	0.8087
+FastANI + linear(ani), band-holdout	common 39,903	85-90	15918	0.5313	0.2545	0.8754
+FastANI + linear(ani), band-holdout	common 39,903	90-95	14758	0.6210	-0.5110	0.9311
+FastANI + linear(ani), band-holdout	common 39,903	95-100	404	0.5447	-0.5228	0.6780
+FastANI + linear(ani, mapped, total), band-holdout	all 43,334	all	43334	0.4823	-0.1460	0.9803
+FastANI + linear(ani, mapped, total), band-holdout	all 43,334	80-85	12172	0.4345	-0.3087	0.8356
+FastANI + linear(ani, mapped, total), band-holdout	all 43,334	85-90	16000	0.4725	0.2347	0.8945
+FastANI + linear(ani, mapped, total), band-holdout	all 43,334	90-95	14758	0.5312	-0.4153	0.9429
+FastANI + linear(ani, mapped, total), band-holdout	all 43,334	95-100	404	0.5292	-0.4799	0.6076
+FastANI + linear(ani, mapped, total), band-holdout	common 39,903	all	39903	0.4872	-0.1344	0.9786
+FastANI + linear(ani, mapped, total), band-holdout	common 39,903	80-85	8823	0.4389	-0.3132	0.8147
+FastANI + linear(ani, mapped, total), band-holdout	common 39,903	85-90	15918	0.4720	0.2340	0.8937
+FastANI + linear(ani, mapped, total), band-holdout	common 39,903	90-95	14758	0.5312	-0.4153	0.9429
+FastANI + linear(ani, mapped, total), band-holdout	common 39,903	95-100	404	0.5292	-0.4799	0.6076

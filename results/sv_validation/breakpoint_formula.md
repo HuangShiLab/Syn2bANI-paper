@@ -1,3 +1,18 @@
+> **Superseded in part (2026-09-15).** The definition validated below —
+> `breakpoint_count = n_chains − n_chained_contigs`, the number of
+> chain-to-chain transitions along the query — is no longer what the tool
+> computes. Two further inflations were found after this record was written: a
+> fragmented *reference* added `n_ref − 1` (fixed in c974f5f, 2026-09-01), and
+> paralogous chains plus collinear chain breaks were still counted at anchor
+> level (fixed in v0.1.1). The released statistic counts *block* transitions
+> that the reference positively contradicts; see the Syn2bANI README and
+> `analysis/breakpoint_ladder.py`, which asserts the expected count for each
+> in-silico edit and is the regression test. The "+1 chain split" excesses
+> tabulated below (q_ani0.8500, 0.9900, 0.9950) are exactly what the v0.1.1
+> collinear-chain-break rule removes. The unchained-anchor analysis in this
+> document remains correct and is the reason `unconserved` was split off for
+> the INCONSISTENT flag.
+
 # Breakpoint-formula validation (`synteny_stats`, `src/core/chain_ani.rs`)
 
 Date: 2026-08-14. Code: Syn2bANI main @ 98177dc + the fix described below

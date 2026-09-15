@@ -81,32 +81,41 @@ ridge calibration of Results 2.5.
 class. (b) Absolute-error distributions by tool. (c) Syn2bANI error by CheckM2
 quality tier.
 
-## Supplementary Figure S8 — High-ANI isolate collections show extensive rearrangements
+## Supplementary Figure S8 — *H. pylori* junction counts resolve by participant
 
-(`paper/figures/supplementary/fig_s8_syntracker_breakpoints.png`)
+(`paper/figures/supplementary/fig_s8_syntracker_h_pylori_by_host.png`)
 
-skani ANI versus Syn2bANI `breakpoint_count` for four published near-clonal
-isolate collections: (a) *E. coli* hypermutator (253 pairs), (b) *H. pylori*
-(2,926 pairs), (c) *N. gonorrhoeae* (66 pairs), and (d) *S. rimosus* (190
-pairs). In all four collections ANI is pinned near 100% while breakpoint counts
-vary over orders of magnitude.
+The *H. pylori* panel of Fig. 6 coloured by the participant each isolate came
+from, 2,926 pairs scored with the Syn2b structural channel. Same-participant
+pairs sit at the zero floor (median 0 junctions, n = 476); different-participant
+pairs carry a median of 8 (n = 2,450; Mann–Whitney p = 4.1 × 10⁻²²⁶). The
+cohort-level medians are 0 (hypermutator *E. coli*), 3 (*N. gonorrhoeae*),
+7 (*H. pylori*) and 10 (*S. rimosus*); see
+`results/syntracker_validation/SYNTRACKER_STRUCTURAL_REANALYSIS.md`.
 
-## Supplementary Figure S9 — High-ANI *E. coli* O157:H7 pairs carry hundreds of breakpoints
+## Supplementary Figure S9 — Near-clonal *E. coli* O157:H7 pairs still differ structurally
 
 (`paper/figures/supplementary/fig_s9_ecoli_o157_breakpoints.png`)
 
-Seventy-four genomes from Fitzgerald et al. (2021), 2,701 non-self pairs.
-(a) ANI vs breakpoint count colored by lineage (I/II, II, Ia, Ic). (b) Same
-data colored by host category (bovine, human, other/unknown). All pairwise ANIs
-exceed 99.886% yet breakpoints range from 171 to >1,100.
+Seventy-four complete genomes from Fitzgerald et al. (2021), 2,701 non-self
+pairs, re-run with Syn2bANI v0.1.1. (a) ANI vs `breakpoint_count` coloured by
+lineage when both members share one (I/II, II, Ia, Ic; grey = different
+lineages). (b) The same by host category (bovine, human, other/unknown). Every
+pairwise ANI exceeds 99.886%, yet the median pair differs by 7 breakpoints
+(IQR 4–9, max 19) and only 7.1% of pairs are structurally identical.
 
-## Supplementary Figure S10 — High-ANI FDA-ARGOS *Staphylococcus aureus* pairs show wide breakpoint variation
+## Supplementary Figure S10 — The FDA-ARGOS *Staphylococcus aureus* collection is structurally conserved
 
 (`paper/figures/supplementary/fig_s10_saureus_breakpoints.png`)
 
-One hundred and twenty-two genomes, 7,381 refined pairs. (a) ANI vs breakpoint
-count colored by country. (b) ANI vs breakpoint count colored by isolation
-source. Pairs at 100% ANI still carry >150 breakpoints.
+Sixty-seven distinct assemblies (the 122 FDA-ARGOS accessions include 54
+GenBank/RefSeq or superseded-version twins of one another, which were
+deduplicated), 2,211 non-self pairs, ANI 93.6–100%, re-run with Syn2bANI
+v0.1.1. (a) ANI vs `breakpoint_count` by country of isolation (grey =
+different countries; 351 pairs have no country on either side). (b)
+Breakpoint-count distribution: 60.5% of pairs carry no breakpoints and the
+maximum is 7. This collection is the negative control for the ANI–structure
+decoupling: here the two are not decoupled.
 
 ## Supplementary Figure S11 — cagPAI extended state by country and phylogenetic population
 

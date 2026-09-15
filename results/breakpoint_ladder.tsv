@@ -1,0 +1,13 @@
+condition	expected_breakpoints	breakpoint_count	synteny_blocks	ani	status
+identical	0	0	1	99.9999	ok
+inversion_500kb	2	2	3	99.9999	ok
+inversion_100kb	2	2	3	99.9999	ok
+inversion_10kb	2	2	3	99.9999	ok
+translocation_500kb	3	3	4	99.9999	ok
+translocation_100kb	3	3	4	99.9999	ok
+deletion_10kb	0	0	1	99.9999	ok
+insertion_10kb	0	0	2	99.9999	ok
+three_inversions_200kb	6	6	7	99.9999	ok
+substitution_1pct	0	0	2	99.0428	ok
+substitution_3pct	0	0	1	97.1307	ok
+inversion_100kb_on_1pct_subst	2	2	4	99.0171	ok

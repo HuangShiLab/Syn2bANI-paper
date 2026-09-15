@@ -10,72 +10,57 @@ This repository contains the manuscript, analysis code, benchmark data, and figu
 
 ```
 Syn2bANI-paper/
-├── paper/              # Manuscript, supplementary, and project indices
-│   ├── manuscript/     # Current manuscript and supplementary files
-│   │   ├── manuscript.md
-│   │   ├── manuscript.docx
-│   │   ├── SUPPLEMENTARY.md
-│   │   └── SUPPLEMENTARY.docx
-│   ├── figures/        # Figure index (source files in figures/)
-│   │   └── FIGURES.md
-│   ├── data/           # Data index and simulation/performance report
-│   │   ├── DATA.md
-│   │   └── SIMULATION_AND_PERFORMANCE_REPORT.md
-│   ├── scripts/        # Script index (source files in scripts/ and analysis/)
-│   │   └── SCRIPTS.md
-│   └── others/         # Legacy/exploratory drafts and notes
-│       ├── MANUSCRIPT_OUTLINE.md
-│       ├── GBRT_DEBIAS_EXPLANATION.md
-│       ├── GBRT_METHODS_FOR_MANUSCRIPT.md
-│       └── GBRT_V2_TRAINING_REPORT.md
-├── analysis/           # Python scripts for analysis and figure generation
-│   ├── analyze_gtdb_quality_vs_mae.py
-│   ├── plot_supplementary_simulations.py
-│   ├── plot_gtdb_quality_combined.py
+├── paper/
+│   ├── manuscript/
+│   │   ├── manuscript_nature_methods.md   # CURRENT manuscript
+│   │   ├── SUPPLEMENTARY.md               # supplementary figures and tables
+│   │   ├── manuscript.md                  # superseded long-form draft (do not cite)
+│   │   └── *.docx
+│   ├── figures/
+│   │   ├── main/                          # Figs. 1-8
+│   │   ├── supplementary/                 # Figs. S1-S12
+│   │   ├── archive/                       # withdrawn figures
+│   │   └── FIGURES.md                     # index (stale numbering; main/ is authoritative)
+│   ├── REVIEW_2026-09-14.md               # internal pre-submission review
+│   ├── data/, scripts/, others/           # indices and legacy notes
+├── analysis/           # analysis and figure scripts
+│   ├── breakpoint_ladder.py               # breakpoint_count regression check
+│   ├── calibrated_comparators.py          # skani/FastANI under the same calibration
 │   └── ...
-├── data/               # Benchmark metadata and intermediate inputs
-│   ├── benchmarks/
-│   ├── gtdb_metadata/
-│   └── ...
-├── figures/            # Publication-ready figures
-│   ├── report/         # Main-text and supplementary figures
-│   ├── gtdb50k/
-│   └── syntracker_validation/
-├── results/            # Benchmark reports and per-pair data
-│   ├── gtdb50k/
-│   ├── mag_validation/
-│   ├── sv_validation/
-│   ├── synteny_bench/
-│   └── ...
-└── scripts/            # Analysis pipelines and HPC submission scripts
-    ├── gtdb50k/
-    ├── mag_validation/
-    ├── syntracker_validation/
-    └── ...
+├── case_studies/
+│   ├── rerun_breakpoints.py               # all-vs-all re-run with a current binary
+│   ├── fetch_ncbi_fna.py                  # genome fetch via the Datasets v2 API
+│   ├── ecoli_o157_fitzgerald_2021/, fda_argos_s_aureus/, h_pylori_cagpai/
+├── data/               # benchmark metadata and intermediate inputs
+├── figures/            # generated figure output (gtdb50k/, syntracker_validation/, report/)
+├── results/            # per-pair data and benchmark reports
+└── scripts/            # pipelines and HPC submission scripts
 ```
 
 ---
 
 ## Key Figures
 
-Main-text figures are in `figures/report/` and supplementary figures in `figures/report/` and selected subdirectories.
+Main-text figures are in `paper/figures/main/`, supplementary figures in
+`paper/figures/supplementary/`. The numbering below is the one used by
+`paper/manuscript/manuscript_nature_methods.md`.
 
-| Figure | Description | Script / Source |
-|--------|-------------|-----------------|
-| Fig. 1 | Syn2bANI algorithm schematic | `figures/report/fig1_algorithm_schematic.png` |
-| Fig. 2 | Exact-truth ANI ladder accuracy | `figures/report/fig1_simulation_ladder.png` |
-| Fig. 3 | Robustness under indels, fragmentation, GC, accessory content | `figures/report/fig2_robustness.png` |
-| Fig. 4 | Enzyme-panel optimization | `figures/report/fig3_enzyme_panel.png` |
-| Fig. 5 | Mid-ANI validation against ANIm | `figures/report/fig4_midani_anim_validation.png` |
-| Fig. 6 | Large-scale comparison against FastANI (45,000 GTDB pairs) | `figures/report/fig5_gtdb_r207_benchmark.png` |
-| Fig. 7 | Computational efficiency | `figures/report/fig6_efficiency.png` |
-| Fig. 8 | ANIm-truth benchmark by ANI band | `figures/report/fig7_anim_by_band.png` |
-| Fig. 9 | Structural-variant detection on real genomes | `figures/report/fig8_sv_detection.png` |
-| Fig. 10 | Accuracy on binned CAMI2 MAGs | `figures/report/mag_validation.png` |
-| Fig. 11 | Near-clonal ANI masks extensive rearrangements | `figures/syntracker_validation/syntracker_high_ani_low_synteny.png` |
-| Fig. 12 | Database-scale structurally divergent top hits | `figures/gtdb50k/gtdb_discordant_high_ani.png` |
+| Figure | Description | File |
+|--------|-------------|------|
+| Fig. 1 | The Syn2bANI estimator | `paper/figures/main/fig1_algorithm.png` |
+| Fig. 2 | Accuracy and robustness under exact truth | `paper/figures/main/fig2_simulations.png` |
+| Fig. 3 | Unified GTDB-R207 80–100% benchmark vs ANIm | `paper/figures/main/fig3_gtdb_r207_benchmark.png` |
+| Fig. 4 | Computational efficiency | `paper/figures/main/fig4_efficiency.png` |
+| Fig. 5 | Structural outputs vs alignment-based truth | `paper/figures/main/fig5_sv_validation.png` |
+| Fig. 6 | Structural divergence at near-clonal ANI, four isolate collections | `paper/figures/main/fig6_syntracker_structure.png` |
+| Fig. 7 | Locus-targeted chain coverage (*B. longum* abfA) | `paper/figures/main/fig7_b_longum_abfa.png` |
+| Fig. 8 | cagPAI architecture in 528 *H. pylori* isolates | `paper/figures/main/fig8_cagpai_h_pylori.png` |
 
-Supplementary figures S1–S9 include the inversion-ladder truth benchmark, GTDB held-out and unified benchmarks, genome-quality robustness, and the exact-truth simulation families (indel, GC, fragmentation, accessory, mosaic).
+Withdrawn: `fig6_ani_sv_discordance` (GTDB-R207 discordant pairs, 61–989 SV
+calls) and `fig_s8_syntracker_breakpoints` were produced with a pre-c974f5f
+`breakpoint_count` and have been removed; see **Manuscript Status** below.
+
+Supplementary figures S1–S12 cover the inversion-ladder truth benchmark, the GTDB held-out and per-band benchmarks, genome-quality robustness, the exact-truth simulation families (GC, mosaic), the CAMI2 MAG benchmark, the *H. pylori* participant resolution (S8), the *E. coli* O157:H7 (S9) and FDA-ARGOS *S. aureus* (S10) collections, and the cagPAI country/population breakdown (S11) and circular-origin filtering (S12). Legends are in `paper/manuscript/SUPPLEMENTARY.md`.
 
 ---
 
@@ -103,10 +88,35 @@ Per-pair benchmark data, ground-truth files, and summary reports are in `results
 Most figures can be regenerated from the provided data using scripts in `analysis/`:
 
 ```bash
-cd analysis
-python3 analyze_gtdb_quality_vs_mae.py      # Fig. S4: genome quality vs ANI accuracy
-python3 plot_supplementary_simulations.py   # Figs. S5–S9: simulation families
-python3 plot_gtdb_quality_combined.py       # combined quality figure (Fig. S4)
+# Supplementary figures from the shipped per-pair data
+python3 analysis/analyze_gtdb_quality_vs_mae.py     # Fig. S4
+python3 analysis/plot_supplementary_simulations.py  # simulation families
+python3 analysis/plot_gtdb_quality_combined.py      # combined quality figure
+
+# Comparators under the same band-holdout calibration Syn2bANI gets
+python3 analysis/calibrated_comparators.py          # results/gtdb50k/CALIBRATED_COMPARATORS.md
+
+# breakpoint_count regression check (needs the syn2bani binary and a MG1655 FASTA)
+python3 analysis/breakpoint_ladder.py \
+    --genome ../Syn2bANI/prototype/mg1655.fasta \
+    --syn2bani ../Syn2bANI/target/release/syn2bani
+
+# Fig. 6 / S8: SynTracker cohorts from the shipped per-pair structural table
+python3 scripts/syntracker_validation/09_analyze_structural_vs_ani.py \
+    --structural data/syntracker_validation/syn2b_structural_raw/syn2b_structural_pairs_raw.tsv \
+    --skani-dir data/syntracker_validation/skani \
+    --metadata-dir data/syntracker_validation/samples \
+    --outdir figures/syntracker_validation
+
+# Figs. S9 / S10: case-study re-runs (downloads genomes first; *.fna is gitignored)
+python3 case_studies/fetch_ncbi_fna.py \
+    --accessions case_studies/ecoli_o157_fitzgerald_2021/scripts/accession_map.tsv \
+    --outdir case_studies/ecoli_o157_fitzgerald_2021/genomes
+python3 case_studies/rerun_breakpoints.py --study ecoli_o157_fitzgerald_2021 \
+    --metadata results/metadata_with_lineage.tsv \
+    --group-cols assigned_lineage,host_category
+python3 case_studies/rerun_breakpoints.py --study fda_argos_s_aureus \
+    --metadata results/assembly_metadata.tsv --group-cols country --dedup-stem
 ```
 
 The main Syn2bANI tool (Rust) lives in the [Syn2bANI code repository](https://github.com/HuangShiLab/Syn2bANI); the simulation harness is in its `prototype/` directory.
@@ -115,11 +125,34 @@ The main Syn2bANI tool (Rust) lives in the [Syn2bANI code repository](https://gi
 
 ## Manuscript Status
 
-The manuscript draft is `paper/manuscript.md` (and `.docx`). Key results are frozen for the current submission version:
+The current manuscript is `paper/manuscript/manuscript_nature_methods.md`.
+`paper/manuscript/manuscript.md` is the superseded long-form draft and carries a
+banner to that effect. Frozen choices for this submission version:
+
 - Default enzyme panel: BcgI, AlfI, AloI, FalI
 - Calibration model: v5 (ridge regression on internal features)
-- Main accuracy claim: MAE 0.619 on 39,903 held-out GTDB-R207 pairs
-- Synteny/structural outputs validated against dnadiff and an exact-truth inversion ladder
+- Main accuracy claim: MAE 0.619 on the 39,903 of 43,334 held-out GTDB-R207
+  pairs for which the calibrated estimator returns a value; with the same
+  band-holdout linear calibration applied to the comparators, skani reaches
+  0.75 and FastANI 0.55, so the gain over uncalibrated tools is largely the
+  removal of a constant bias (`results/gtdb50k/CALIBRATED_COMPARATORS.md`)
+- `breakpoint_count` was redefined in Syn2bANI v0.1.1 (block-level,
+  positive-contradiction; see that repository's README). Every structural
+  number in the current manuscript was recomputed with it, and
+  `analysis/breakpoint_ladder.py` is the regression check. Three classes of
+  result produced with earlier builds are withdrawn: the GTDB-R207
+  ANI-vs-SV discordance figure, the pre-fix SynTracker summary
+  (`results/syntracker_validation/syntracker_summary_pre_fix.tsv`, retained for
+  the record), and the `breakpoint_count`-vs-dnadiff partial correlations on
+  the 43,334-pair set
+
+Open items, each stated as such in the manuscript: the GTDB-R207 structural
+re-computation and the `breakpoint_count`-vs-dnadiff correlations need the
+43,334-pair genome set, which is on HPC storage; the skani comparison uses
+0.1.0 for the simulation and small-subset runs, which predates the published
+0.2.x regression; and the three-class cagPAI locality variable has not been run
+through the stratified disease-stage tests because that needs the cohort
+metadata.
 
 ---
 
