@@ -146,13 +146,22 @@ banner to that effect. Frozen choices for this submission version:
   the record), and the `breakpoint_count`-vs-dnadiff partial correlations on
   the 43,334-pair set
 
-Open items, each stated as such in the manuscript: the GTDB-R207 structural
-re-computation and the `breakpoint_count`-vs-dnadiff correlations need the
-43,334-pair genome set, which is on HPC storage; the skani comparison uses
-0.1.0 for the simulation and small-subset runs, which predates the published
-0.2.x regression; and the three-class cagPAI locality variable has not been run
-through the stratified disease-stage tests because that needs the cohort
-metadata.
+Open items: the simulation-ladder and Enterobacteriaceae skani comparisons
+still use 0.1.0 (caveat stated in the manuscript; the cohort ANI axis has been
+re-run with 0.3.2 and reproduces exactly), and the three-class cagPAI locality
+variable has not been run through the stratified disease-stage tests because
+that needs the cohort metadata. **Closed 2026-09-18:** the 43,334-pair
+structural re-computation and the `breakpoint_count`-vs-dnadiff correlations
+were completed on the HPC with the v0.1.1 binary (partial r = 0.411 vs the
+withdrawn 0.414; large-indels 0.327 vs 0.453; ANIm ≥ 95% ρ = 0.633 vs 0.674;
+plus a new cross-implementation concordance with Syn2b junctions, ρ = 0.86 on
+43,312 pairs — outputs in the Syn2b-paper repository,
+`results/gtdb50k/rerun_v011/` and `results/gtdb50k/sv_reanalysis_v011.md`),
+and the four SynTracker cohorts were re-run through Syn2bANI's own structural
+channel (medians 0/1/5/3; within-*H. pylori* 0 vs between 6; per-pair data in
+`results/syntracker_validation/rerun_v032/` of the Syn2b-paper repository).
+The withdrawn GTDB discordance figure is superseded by the Syn2b-paper
+within-species census (in progress).
 
 ---
 
