@@ -146,11 +146,9 @@ banner to that effect. Frozen choices for this submission version:
   the record), and the `breakpoint_count`-vs-dnadiff partial correlations on
   the 43,334-pair set
 
-Open items: the simulation-ladder and Enterobacteriaceae skani comparisons
-still use 0.1.0 (caveat stated in the manuscript; the cohort ANI axis has been
-re-run with 0.3.2 and reproduces exactly), and the three-class cagPAI locality
-variable has not been run through the stratified disease-stage tests because
-that needs the cohort metadata. **Closed 2026-09-18:** the 43,334-pair
+Open item: the three-class cagPAI locality variable has not been run through
+the stratified disease-stage tests because that needs the cohort metadata.
+**Closed 2026-09-18:** the 43,334-pair
 structural re-computation and the `breakpoint_count`-vs-dnadiff correlations
 were completed on the HPC with the v0.1.1 binary (partial r = 0.411 vs the
 withdrawn 0.414; large-indels 0.327 vs 0.453; ANIm ≥ 95% ρ = 0.633 vs 0.674;
@@ -162,6 +160,9 @@ channel (medians 0/1/5/3; within-*H. pylori* 0 vs between 6; per-pair data in
 `results/syntracker_validation/rerun_v032/` of the Syn2b-paper repository).
 The withdrawn GTDB discordance figure is superseded by the Syn2b-paper
 within-species census (in progress).
+**Closed 2026-09-22:** the simulation-ladder and Enterobacteriaceae comparisons
+were re-run with skani 0.3.2; see
+`results/sv_validation/SKANI_0.3.2_RERUN.md`.
 
 ---
 
