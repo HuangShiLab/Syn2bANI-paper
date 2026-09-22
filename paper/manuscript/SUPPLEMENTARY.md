@@ -233,6 +233,31 @@ the whole cohort, distributed as 4 / 9 / 1 / 1 / 0 across FastBAPS L2–L6. Thus
 the presence association is attenuated but not abolished by lineage
 stratification, and the current design is under-powered to resolve it.
 
+The 432 complete-marker genomes were further partitioned by locality relative
+to the cagPAI window: `complete_collinear` (n = 145), `island_internal` (n = 53),
+`island_boundary` (n = 101) and `island_spanned` (n = 133). For the binary
+contrast, `island_internal` and `island_boundary` were combined as
+island-altering calls, whereas `island_spanned` and `complete_collinear` were
+combined as no island-altering call. The table reports the global Pearson
+χ² test and the two post hoc binary contrasts; q values are
+Benjamini–Hochberg FDR across these three locality tests.
+
+| Locality test | n | Effect | 95% CI | p | q |
+|---|---:|---:|---|---:|---:|
+| Four-stage × four-level locality | 432 | χ² = 19.75 (df = 9) | — | 0.0195 | 0.0302 |
+| Island-altering locality, GC vs NAG | 230 | crude OR = 1.18 | 0.69–2.04 | 0.579 | 0.579 |
+| Island-altering locality, advanced vs early | 432 | crude OR = 1.61 | 1.08–2.39 | 0.0201 | 0.0302 |
+
+FastBAPS lineage attenuated the advanced-versus-early locality contrast:
+the CMH Mantel–Haenszel OR was 1.36 (95% CI 0.90–2.06, CMH p = 0.14;
+Breslow–Day p = 0.064). The GC-versus-NAG locality contrast was null before
+and after stratification (CMH OR = 1.42, 95% CI 0.78–2.58, CMH p = 0.25).
+Thus locality adds a biologically interpretable partition of rearrangement
+calls, but it does not establish an independent disease association after
+lineage stratification. Per-stratum counts and the full four-stage locality
+table are in
+`case_studies/h_pylori_cagpai/results/cagpai_locality_disease_association.tsv`.
+
 Rearrangement-state associations were also evaluated across artifact-span
 thresholds from 0.20 to 0.50; p-values remained non-significant throughout
 (`case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`).

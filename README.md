@@ -146,8 +146,13 @@ banner to that effect. Frozen choices for this submission version:
   the record), and the `breakpoint_count`-vs-dnadiff partial correlations on
   the 43,334-pair set
 
-Open item: the three-class cagPAI locality variable has not been run through
-the stratified disease-stage tests because that needs the cohort metadata.
+**Closed 2026-09-22:** the three-class cagPAI locality variable was run through
+the disease-stage association tests after cohort-metadata recovery. The global
+four-stage × four-level test was nominal (χ² = 19.75, df = 9, p = 0.020,
+q = 0.030), and advanced-stage isolates had more island-altering calls before
+lineage stratification (OR = 1.61, p = 0.020, q = 0.030), but the association
+was not significant after FastBAPS stratification (CMH OR = 1.36, p = 0.14);
+see `case_studies/h_pylori_cagpai/results/cagpai_locality_disease_association.tsv`.
 **Closed 2026-09-18:** the 43,334-pair
 structural re-computation and the `breakpoint_count`-vs-dnadiff correlations
 were completed on the HPC with the v0.1.1 binary (partial r = 0.411 vs the
