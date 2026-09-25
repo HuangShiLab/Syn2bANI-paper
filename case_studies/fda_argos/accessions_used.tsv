@@ -1,0 +1,131 @@
+assembly_acc	organism	strain	biosample	assembly_level	serotype	serovar	isolation_source	host	geo_loc_name	collection_date	host_disease	antibiogram	antimicrobial_resistance	resistance_phenotype	pathotype	isolate	collected_by	sample_type	genome_file
+GCA_000783655.1	Escherichia coli		SAMN02934531	Contig															MISSING
+GCA_016985455.1	Escherichia coli	FDAARGOS_1294	SAMN16357436	Scaffold			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCA_016985455.1.fna
+GCA_017136555.1	Escherichia coli	FDAARGOS_1278	SAMN16357420	Chromosome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCA_017136555.1.fna
+GCA_019047145.1	Escherichia coli	FDAARGOS_1379	SAMN16357521	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047145.1.fna
+GCA_019047165.1	Escherichia coli	FDAARGOS_1384	SAMN16357526	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047165.1.fna
+GCA_019047645.1	Escherichia coli	FDAARGOS_1376	SAMN16357518	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047645.1.fna
+GCA_019047725.1	Escherichia coli	FDAARGOS 1374	SAMN16357516	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047725.1.fna
+GCA_019047745.1	Escherichia coli	FDAARGOS_1381	SAMN16357523	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047745.1.fna
+GCA_019047905.1	Escherichia coli	FDAARGOS_1388	SAMN16357530	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047905.1.fna
+GCA_019047965.1	Escherichia coli	FDAARGOS_1378	SAMN16357520	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019047965.1.fna
+GCA_019048005.1	Escherichia coli	FDAARGOS_1385	SAMN16357527	Complete Genome			Seth Lab Isolate	Seth Lab strain	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048005.1.fna
+GCA_019048145.1	Escherichia coli	FDAARGOS 1386	SAMN16357528	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048145.1.fna
+GCA_019048285.1	Escherichia coli	FDAARGOS 1389	SAMN16357531	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048285.1.fna
+GCA_019048345.1	Escherichia coli	FDAARGOS 1377	SAMN16357519	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048345.1.fna
+GCA_019048425.1	Escherichia coli	FDAARGOS 1380	SAMN16357522	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048425.1.fna
+GCA_019048445.1	Escherichia coli	FDAARGOS 1382	SAMN16357524	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048445.1.fna
+GCA_019048505.1	Escherichia coli	FDAARGOS 1387	SAMN16357529	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048505.1.fna
+GCA_019048605.1	Escherichia coli	FDAARGOS 1375	SAMN16357517	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019048605.1.fna
+GCA_019056115.1	Escherichia coli	FDAARGOS 1383	SAMN16357525	Complete Genome			missing	missing	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019056115.1.fna
+GCA_019397165.1	Escherichia coli	FDAARGOS_1391	SAMN16357533	Scaffold			Seth Lab Isolate	not applicable	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019397165.1.fna
+GCA_019397185.1	Escherichia coli	FDAARGOS_1390	SAMN16357532	Scaffold			Seth Lab Isolate	not applicable	USA:MT	missing	missing					not applicable	Montana State U		genomes/ecoli/GCA_019397185.1.fna
+GCF_001188105.2	Escherichia coli	FDAARGOS_56	SAMN03255436	Contig	111		environmental	Cow	USA:CA	missing	not applicable					not applicable	FDA CFSAN	not applicable	genomes/ecoli/GCF_001188105.2.fna
+GCF_001471755.2	Escherichia coli	FDAARGOS_170	SAMN03996315	Contig			urine cathether	Homo sapiens	USA: DC	2014-06-24	Urinary tract infection					not applicable	Children's National Hospital		genomes/ecoli/GCF_001471755.2.fna
+GCF_001471815.2	Escherichia coli	FDAARGOS_142	SAMN03996286	Contig			sputum	Homo sapiens	USA: DC	2014-03-05	Pneumonia				ESBL	not applicable	Children's National Hospital		genomes/ecoli/GCF_001471815.2.fna
+GCF_001563715.2	Escherichia coli	FDAARGOS_95	SAMN03996336	Chromosome	not applicable	not applicable	environmental	Environment	USA	missing	not applicable					not applicable	FDA CFSAN	not applicable	genomes/ecoli/GCF_001563715.2.fna
+GCF_002206405.2	Escherichia coli O157	FDAARGOS_292	SAMN06173305	Contig			stool	Homo sapiens	USA:DC	2014-02-11	missing					not applicable	George Washington University		genomes/ecoli/GCF_002206405.2.fna
+GCF_002208865.2	Escherichia coli O157	FDAARGOS_293	SAMN06173306	Complete Genome			clinical isolate	Homo sapiens	USA:DC	2014-02-26	missing					not applicable	George Washington University		genomes/ecoli/GCF_002208865.2.fna
+GCF_002209105.2	Escherichia coli O104:H4	FDAARGOS_348	SAMN06173361	Complete Genome	O104:H4		stool	Homo sapiens	USA: Georgia	2009	Bloody diarrhea complicated hemolytic uremic syndrome (HUS)					not applicable	USAMRIID < CDC-Atlanta		genomes/ecoli/GCF_002209105.2.fna
+GCF_002393365.1	Escherichia coli	FDAARGOS_403	SAMN07312447	Complete Genome	O104:H4		human	Homo sapiens	missing	missing	missing					not applicable	USAMRIID < Columbia University	missing	genomes/ecoli/GCF_002393365.1.fna
+GCF_002393465.1	Escherichia coli	FDAARGOS_401	SAMN07312445	Complete Genome	O104:H4		stool	Homo sapiens	Georgia	2009	Bloody diarrhea					not applicable	USAMRIID < CDC	missing	genomes/ecoli/GCF_002393465.1.fna
+GCF_002554325.1	Escherichia coli	FDAARGOS_400	SAMN07312444	Contig	O157:H7		human	Homo sapiens	missing	missing	missing					not applicable	USAMRIID	missing	genomes/ecoli/GCF_002554325.1.fna
+GCF_002554475.1	Escherichia coli	FDAARGOS_398	SAMN07312442	Contig	O157:H7		human	Homo sapiens	missing	missing	missing					not applicable	USAMRIID	missing	genomes/ecoli/GCF_002554475.1.fna
+GCF_002554485.1	Escherichia coli	FDAARGOS_402	SAMN07312446	Contig	O104:H4		human	Homo sapiens	missing	missing	missing					not applicable	USAMRIID < Columbia University	missing	genomes/ecoli/GCF_002554485.1.fna
+GCF_002554675.1	Escherichia coli	FDAARGOS_399	SAMN07312443	Contig	O157:H7		human	Homo sapiens	missing	missing	missing					not applicable	USAMRIID	missing	genomes/ecoli/GCF_002554675.1.fna
+GCF_002588125.1	Escherichia coli	FDAARGOS_441	SAMN07312485	Contig			urine	Homo sapiens	Canada:BC	2015-01	missing					not applicable	BC Centre for Disease Control		genomes/ecoli/GCF_002588125.1.fna
+GCF_002588135.1	Escherichia coli	FDAARGOS_437	SAMN07312481	Contig			urine	Homo sapiens	Canada:BC	2014-09	missing					not applicable	BC Centre for Disease Control		genomes/ecoli/GCF_002588135.1.fna
+GCF_002588385.1	Escherichia coli	FDAARGOS_427	SAMN07312471	Contig			urine	Homo sapiens	Canada:BC	2015-03	missing					not applicable	BC Centre for Disease Control	missing	genomes/ecoli/GCF_002588385.1.fna
+GCF_002589795.1	Escherichia coli	FDAARGOS_433	SAMN07312477	Complete Genome			rectal	Homo sapiens	Canada:BC	2015-12	Screening					not applicable	BC Centre for Disease Control		genomes/ecoli/GCF_002589795.1.fna
+GCF_002591135.1	Escherichia coli	FDAARGOS_448	SAMN07312492	Complete Genome			urine	Homo sapiens	Canada:BC	2014-08	missing					not applicable	BC Centre for Disease Control		genomes/ecoli/GCF_002591135.1.fna
+GCF_002634895.1	Escherichia coli	FDAARGOS_434	SAMN07312478	Chromosome			rectal	Homo sapiens	Canada:BC	2014-08	Screening					not applicable	BC Centre for Disease Control		genomes/ecoli/GCF_002634895.1.fna
+GCF_002944935.1	Escherichia coli	FDAARGOS_144	SAMN03996288	Complete Genome			urine	Homo sapiens	USA:DC	2014-03-21	Urinary tract infection					not applicable	Children's National Hospital		genomes/ecoli/GCF_002944935.1.fna
+GCF_002983645.1	Escherichia coli O104:H4	FDAARGOS_349	SAMN06173362	Complete Genome	O104:H4		stool	Homo sapiens	Germany	2001	Hemolytic uremic syndrome					not applicable	USAMRIID < Bundeswehr Inst. Microbiology		genomes/ecoli/GCF_002983645.1.fna
+GCF_003812625.1	Escherichia coli	FDAARGOS_536	SAMN10163231	Complete Genome			Peripheral blood	Homo sapiens	not applicable	2016-04-02	missing					not applicable	Children's National Hospital		genomes/ecoli/GCF_003812625.1.fna
+GCF_003812945.1	Escherichia coli	FDAARGOS_497	SAMN10163173	Complete Genome			UCC isolate	Homo sapiens	missing	missing	missing					not applicable	USAMRIID		genomes/ecoli/GCF_003812945.1.fna
+GCF_003937705.1	Escherichia coli	FDAARGOS_499	SAMN10163175	Contig			UCC isolate	Homo sapiens	missing	missing	missing					not applicable	USAMRIID		genomes/ecoli/GCF_003937705.1.fna
+GCF_003937765.1	Escherichia coli	FDAARGOS_564	SAMN10163188	Contig			UCC isolate	Homo sapiens	missing	missing	missing					not applicable	USAMRIID		genomes/ecoli/GCF_003937765.1.fna
+GCF_003938635.1	Escherichia coli	FDAARGOS_539	SAMN10163252	Contig			clinical isolate	Homo sapiens	USA	missing	missing					not applicable	University of Washington		genomes/ecoli/GCF_003938635.1.fna
+GCF_003938885.1	Escherichia coli	FDAARGOS_498	SAMN10163174	Contig			UCC isolate	Homo sapiens	missing	missing	missing					not applicable	USAMRIID		genomes/ecoli/GCF_003938885.1.fna
+GCF_003940725.1	Escherichia coli	FDAARGOS_563	SAMN10163187	Contig			UCC isolate	Homo sapiens	missing	missing	missing					not applicable	USAMRIID		genomes/ecoli/GCF_003940725.1.fna
+GCF_006364695.1	Escherichia coli	FDAARGOS_772	SAMN11056487	Complete Genome			ATCC Isolate	NIST Mixed Microbial RM strain	USA:VA	missing	missing					not applicable	NIST<ATCC		genomes/ecoli/GCF_006364695.1.fna
+GCF_006370475.1	Escherichia coli	FDAARGOS_608	SAMN10346772	Contig			Environment	ZymoBIOMICS Microbial Community Standard Strain	USA: Detroit, MI	missing	not applicable					not applicable	ZYMO Research, Ehrlich, J.		genomes/ecoli/GCF_006370475.1.fna
+GCF_016026195.1	Escherichia coli	FDAARGOS_946	SAMN13450476	Complete Genome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026195.1.fna
+GCF_016026215.1	Escherichia coli	FDAARGOS_945	SAMN13450475	Complete Genome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026215.1.fna
+GCF_016026235.1	Escherichia coli	FDAARGOS_944	SAMN13450474	Complete Genome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026235.1.fna
+GCF_016026335.1	Escherichia coli	FDAARGOS_943	SAMN13450473	Complete Genome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026335.1.fna
+GCF_016026355.1	Escherichia coli	FDAARGOS_942	SAMN13450472	Chromosome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026355.1.fna
+GCF_016026375.1	Escherichia coli	FDAARGOS_941	SAMN13450471	Complete Genome			missing	missing	not applicable	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016026375.1.fna
+GCF_016126995.1	Escherichia coli	FDAARGOS_1058	SAMN16357227	Complete Genome			missing	missing	Germany: Braunschweig	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016126995.1.fna
+GCF_016127695.1	Escherichia coli	FDAARGOS_1059	SAMN16357228	Complete Genome			missing	missing	Germany: Braunschweig	missing	missing					not applicable	DSMZ		genomes/ecoli/GCF_016127695.1.fna
+GCF_016728085.1	Escherichia coli	FDAARGOS_1077	SAMN16357246	Complete Genome			missing	missing	Germany:Langen	missing	missing					not applicable	Paul Ehrlich Institut		genomes/ecoli/GCF_016728085.1.fna
+GCF_016888625.1	Escherichia coli	FDAARGOS_1270	SAMN16357412	Contig			ARMADA Isolate	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016888625.1.fna
+GCF_016888685.1	Escherichia coli	FDAARGOS_1263	SAMN16357405	Contig			ARMADA Isolate	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016888685.1.fna
+GCF_016888925.1	Escherichia coli	FDAARGOS_1260	SAMN16357402	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016888925.1.fna
+GCF_016888965.1	Escherichia coli	FDAARGOS_1261	SAMN16357403	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016888965.1.fna
+GCF_016889025.1	Escherichia coli	FDAARGOS_1251	SAMN16357393	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889025.1.fna
+GCF_016889045.1	Escherichia coli	FDAARGOS_1255	SAMN16357397	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889045.1.fna
+GCF_016889085.1	Escherichia coli	FDAARGOS_1256	SAMN16357398	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889085.1.fna
+GCF_016889105.1	Escherichia coli	FDAARGOS_1254	SAMN16357396	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889105.1.fna
+GCF_016889125.1	Escherichia coli	FDAARGOS_1249	SAMN16357391	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889125.1.fna
+GCF_016889185.1	Escherichia coli	FDAARGOS_1257	SAMN16357399	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889185.1.fna
+GCF_016889265.1	Escherichia coli	FDAARGOS_1264	SAMN16357406	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889265.1.fna
+GCF_016889325.1	Escherichia coli	FDAARGOS_1258	SAMN16357400	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889325.1.fna
+GCF_016889605.1	Escherichia coli	FDAARGOS_1268	SAMN16357410	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889605.1.fna
+GCF_016889625.1	Escherichia coli	FDAARGOS_1262	SAMN16357404	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889625.1.fna
+GCF_016889685.1	Escherichia coli	FDAARGOS_1267	SAMN16357409	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889685.1.fna
+GCF_016889725.1	Escherichia coli	FDAARGOS_1252	SAMN16357394	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889725.1.fna
+GCF_016889845.1	Escherichia coli	FDAARGOS_1248	SAMN16357390	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889845.1.fna
+GCF_016889865.1	Escherichia coli	FDAARGOS_1253	SAMN16357395	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889865.1.fna
+GCF_016889905.1	Escherichia coli	FDAARGOS_1259	SAMN16357401	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016889905.1.fna
+GCF_016890005.1	Escherichia coli	FDAARGOS_1250	SAMN16357392	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016890005.1.fna
+GCF_016890045.1	Escherichia coli	FDAARGOS_1265	SAMN16357407	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016890045.1.fna
+GCF_016890105.1	Escherichia coli	FDAARGOS_1266	SAMN16357408	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016890105.1.fna
+GCF_016903275.1	Escherichia coli	FDAARGOS_1282	SAMN16357424	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903275.1.fna
+GCF_016903315.1	Escherichia coli	FDAARGOS_1289	SAMN16357431	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903315.1.fna
+GCF_016903335.1	Escherichia coli	FDAARGOS_1295	SAMN16357437	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903335.1.fna
+GCF_016903375.1	Escherichia coli	FDAARGOS_1286	SAMN16357428	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903375.1.fna
+GCF_016903435.1	Escherichia coli	FDAARGOS_1302	SAMN16357444	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903435.1.fna
+GCF_016903535.1	Escherichia coli	FDAARGOS_1373	SAMN16357515	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903535.1.fna
+GCF_016903595.1	Escherichia coli	FDAARGOS_1279	SAMN16357421	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903595.1.fna
+GCF_016903615.1	Escherichia coli	FDAARGOS_1304	SAMN16357446	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903615.1.fna
+GCF_016903815.1	Escherichia coli	FDAARGOS_1280	SAMN16357422	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903815.1.fna
+GCF_016903835.1	Escherichia coli	FDAARGOS_1299	SAMN16357441	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903835.1.fna
+GCF_016903855.1	Escherichia coli	FDAARGOS_1291	SAMN16357433	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903855.1.fna
+GCF_016903915.1	Escherichia coli	FDAARGOS_1300	SAMN16357442	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903915.1.fna
+GCF_016903935.1	Escherichia coli	FDAARGOS_1288	SAMN16357430	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903935.1.fna
+GCF_016903995.1	Escherichia coli	FDAARGOS_1337	SAMN16357479	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016903995.1.fna
+GCF_016904055.1	Escherichia coli	FDAARGOS_1293	SAMN16357435	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904055.1.fna
+GCF_016904075.1	Escherichia coli	FDAARGOS_1303	SAMN16357445	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904075.1.fna
+GCF_016904115.1	Escherichia coli	FDAARGOS_1290	SAMN16357432	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904115.1.fna
+GCF_016904175.1	Escherichia coli	FDAARGOS_1372	SAMN16357514	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904175.1.fna
+GCF_016904195.1	Escherichia coli	FDAARGOS_1296	SAMN16357438	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904195.1.fna
+GCF_016904235.1	Escherichia coli	FDAARGOS_1287	SAMN16357429	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904235.1.fna
+GCF_016904255.1	Escherichia coli	FDAARGOS_1371	SAMN16357513	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904255.1.fna
+GCF_016904335.1	Escherichia coli	FDAARGOS_1370	SAMN16357512	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904335.1.fna
+GCF_016904395.1	Escherichia coli	FDAARGOS_1277	SAMN16357419	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904395.1.fna
+GCF_016904435.1	Escherichia coli	FDAARGOS_1301	SAMN16357443	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904435.1.fna
+GCF_016904455.1	Escherichia coli	FDAARGOS_1298	SAMN16357440	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904455.1.fna
+GCF_016904475.1	Escherichia coli	FDAARGOS_1292	SAMN16357434	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904475.1.fna
+GCF_016904495.1	Escherichia coli	FDAARGOS_1281	SAMN16357423	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904495.1.fna
+GCF_016904535.1	Escherichia coli	FDAARGOS_1297	SAMN16357439	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904535.1.fna
+GCF_016904555.1	Escherichia coli	FDAARGOS_1285	SAMN16357427	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904555.1.fna
+GCF_016904575.1	Escherichia coli	FDAARGOS_1276	SAMN16357418	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904575.1.fna
+GCF_016904615.1	Escherichia coli	FDAARGOS_1283	SAMN16357425	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904615.1.fna
+GCF_016904655.1	Escherichia coli	FDAARGOS_1284	SAMN16357426	Complete Genome			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_016904655.1.fna
+GCF_016985495.1	Escherichia coli	FDAARGOS_1358	SAMN16357500	Contig			missing	missing	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_016985495.1.fna
+GCF_017081115.1	Escherichia coli	FDAARGOS_1238	SAMN16357380	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081115.1.fna
+GCF_017081125.1	Escherichia coli	FDAARGOS_1239	SAMN16357381	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081125.1.fna
+GCF_017081135.1	Escherichia coli	FDAARGOS_1269	SAMN16357411	Scaffold			missing	Homo sapiens	USA:WA	missing	missing					not applicable	ARMADA		genomes/ecoli/GCF_017081135.1.fna
+GCF_017081175.1	Escherichia coli	FDAARGOS_1352	SAMN16357494	Scaffold			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081175.1.fna
+GCF_017081185.1	Escherichia coli	FDAARGOS_1240	SAMN16357382	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081185.1.fna
+GCF_017081215.1	Escherichia coli	FDAARGOS_1348	SAMN16357490	Scaffold			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081215.1.fna
+GCF_017081225.1	Escherichia coli	FDAARGOS_1346	SAMN16357488	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081225.1.fna
+GCF_017081235.1	Escherichia coli	FDAARGOS_1349	SAMN16357491	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081235.1.fna
+GCF_017081275.1	Escherichia coli	FDAARGOS_1347	SAMN16357489	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081275.1.fna
+GCF_017081285.1	Escherichia coli	FDAARGOS_1356	SAMN16357498	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081285.1.fna
+GCF_017081315.1	Escherichia coli	FDAARGOS_1353	SAMN16357495	Scaffold			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081315.1.fna
+GCF_017081335.1	Escherichia coli	FDAARGOS_1355	SAMN16357497	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081335.1.fna
+GCF_017081345.1	Escherichia coli	FDAARGOS_1354	SAMN16357496	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081345.1.fna
+GCF_017081375.1	Escherichia coli	FDAARGOS_1351	SAMN16357493	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081375.1.fna
+GCF_017081385.1	Escherichia coli	FDAARGOS_1350	SAMN16357492	Contig			missing	not applicable	USA:MD	missing	missing					not applicable	FDA-Stanford Microbiome Effort		genomes/ecoli/GCF_017081385.1.fna
