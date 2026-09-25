@@ -38,7 +38,7 @@ are *trusted most*.
 | H. pylori ANI-discordant biology | song 2026 cohort (528 genomes, metadata recovered) | **done** (pairwise_ani/) | table/figure S |
 | B. longum abfA (ANI-identical isolates, functional island intact vs lost) | 185 JNU isolates + abfA cluster | existing results, reframe | case figure |
 | MAG fragmentation robustness | CAMI2 marine/strain + GTDB50k | data exist; decide scope | Supp figure |
-| PulseNet/FDA-ARGOS outbreak plasmid demo | public outbreak isolate sets | **new** (dataset hunt below) | case figure |
+| PulseNet/FDA-ARGOS outbreak plasmid demo | FDA-ARGOS E. coli (129 genomes) | **done** (case_studies/fda_argos; see below) | case figure |
 
 ## 3. Candidate datasets for the missing demos
 
@@ -77,6 +77,22 @@ within-clone sampling (so ANI ≥ 99.9 pairs exist).
    (FDA-ARGOS Salmonella or E. coli ST131), ~200–500 genomes; run
    syn2bani dist+struct; cross with AMR phenotype; target table: "ANI-identical
    pairs with differing resistance phenotype: n/X".
+   **Status 2026-09-25: DONE (FDA-ARGOS E. coli, 129 genomes).**
+   skani 0.3.2 triangle: 103 pairs >= 99.9 ANI (gate >= 50 passed).
+   syn2bani struct on all 103 pairs, then minimap2 validation of every call:
+   - 41/103 pairs are whole-chromosome flip/rotation convention artifacts
+     (their Mb-scale INV calls sit at rotation junctions — the same artifact
+     class as the H. pylori TRA:1459-1666206 lesson)
+   - corrected headline: 101/103 pairs (98%) carry >= 1 genuine structural
+     difference; 876 indels >= 1 kb verified in minimap2 cs strings
+   - 16 pairs carry genuine large inversions
+   - AMR genotypes recovered for 127/130 isolates via the NCBI Pathogen
+     Detection isolates API (BioSample has none)
+   - flagship pairs: FDAARGOS_1264/1265 (ANI 99.93, blaCTX-M-15 cassette +
+     22 verified indels), 348/403 (O104:H4, blaCTX-M-15), 348/772 (ANI 100.0,
+     tet cassettes + 48 kb insertion)
+   Remaining: AMR x structure cross-table ("ANI-identical pairs with differing
+   AMR genotype: n/X") for the paper.
 5. **Write-up:** reframe B. longum and H. pylori cases as "what the search
    would have missed"; K-12 vignette as the every-microbiologist anchor.
 
