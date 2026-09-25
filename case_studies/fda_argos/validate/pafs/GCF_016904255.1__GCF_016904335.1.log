@@ -1,0 +1,10 @@
+[M::mm_idx_gen::0.059*1.00] collected minimizers
+[M::mm_idx_gen::0.079*1.43] sorted minimizers
+[M::main::0.079*1.43] loaded/built the index for 6 target sequence(s)
+[M::mm_mapopt_update::0.086*1.39] mid_occ = 50
+[M::mm_idx_stat] kmer size: 19; skip: 10; is_hpc: 0; #seq: 6
+[M::mm_idx_stat::0.092*1.37] distinct minimizers: 913095 (98.97% are singletons); average occurrences: 1.024; average spacing: 5.498; total length: 5140426
+[M::worker_pipeline::1.299*1.04] mapped 6 sequences
+[M::main] Version: 2.31-r1302
+[M::main] CMD: /opt/homebrew/bin/minimap2 -cx asm20 genomes/ecoli/GCF_016904255.1.fna genomes/ecoli/GCF_016904335.1.fna
+[M::main] Real time: 1.306 sec; CPU: 1.354 sec; Peak RSS: 0.245 GB
