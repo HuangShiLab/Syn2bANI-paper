@@ -42,6 +42,12 @@ def top_syn2b(qid):
             if row.get("flag") == "BELOW_DETECTION":
                 continue
             try:
+                af = float(row["af_query"])
+            except (ValueError, TypeError):
+                continue
+            if af < 0.5:  # tiny shared islands must not outrank genome-wide hits
+                continue
+            try:
                 ani = float(row["ani_gated"])
             except (ValueError, TypeError):
                 continue

@@ -1,0 +1,16 @@
+mode	n_genomes	n_pairs	rep	struct_wall_s	n_ok
+syn2b_struct	2	4	1	0.631	4
+syn2b_struct	2	4	2	0.743	4
+syn2b_struct	2	4	3	0.173	4
+syn2b_struct	5	25	1	0.478	25
+syn2b_struct	5	25	3	0.343	25
+syn2b_struct	5	25	2	0.374	25
+syn2b_struct	10	100	1	1.029	100
+syn2b_struct	10	100	2	1.061	100
+syn2b_struct	10	100	3	1.045	100
+syn2b_struct	15	225	1	2.313	225
+syn2b_struct	15	225	2	2.319	225
+syn2b_struct	15	225	3	2.288	225
+syn2b_struct	22	484	1	4.398	484
+syn2b_struct	22	484	3	4.357	484
+syn2b_struct	22	484	2	4.324	484

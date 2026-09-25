@@ -36,13 +36,14 @@ SKANI = "/lustre1/g/aos_shihuang/tools/skani-conda/bin/skani"
 FASTANI = "/group/aos_shihuang/conda/envs/fastani/bin/fastANI"
 DNADIFF = "/group/aos_shihuang/conda/envs/anvio/bin/dnadiff"
 TIME_BIN = "/usr/bin/time"
-THREADS = 16
+THREADS = int(os.environ.get("BENCH_THREADS", "16"))
 
 REF_LIST = os.environ.get("GTDB_REF_LIST", os.path.join(BASE, "gtdb_r207_references.txt"))
 SKANI_DB = os.environ.get("GTDB_SKANI_DB", os.path.join(BASE, "gtdb_r207_skani_sketches"))
 S2B_DB = os.environ.get("GTDB_S2B_DB", os.path.join(BASE, "gtdb_r207_s2b_sketches"))
+S2B_PACKED_DB = os.environ.get("GTDB_S2B_PACKED_DB", os.path.join(BASE, "gtdb_r207_s2b_packed.db"))
 
-STAGE1_MODES = {"syn2b_dist", "syn2b_search", "skani_dist", "skani_search", "fastani"}
+STAGE1_MODES = {"syn2b_dist", "syn2b_search", "syn2b_dbsearch", "skani_dist", "skani_search", "fastani"}
 STAGE2_MODES = {"syn2b_struct", "dnadiff"}
 
 HEADER = "\t".join([
@@ -211,7 +212,7 @@ def main():
 
     if mode in STAGE1_MODES:
         stage = "ani_search"
-        tool = {"syn2b_dist": "syn2bani", "syn2b_search": "syn2bani",
+        tool = {"syn2b_dist": "syn2bani", "syn2b_search": "syn2bani", "syn2b_dbsearch": "syn2bani",
                 "skani_dist": "skani", "skani_search": "skani", "fastani": "fastani"}[mode]
         version = tool_version({"syn2bani": S2B, "skani": SKANI, "fastani": FASTANI}[tool],
                                extra=[["--help"]] if tool == "fastani" else None)
@@ -224,6 +225,8 @@ def main():
             cmd = [S2B, "dist", "--ql", qlist, "--rl", REF_LIST, "-t", str(THREADS), "-o", kept_out]
         elif mode == "syn2b_search":
             cmd = [S2B, "search", "--ql", qlist, S2B_DB, "-t", str(THREADS), "-o", kept_out]
+        elif mode == "syn2b_dbsearch":
+            cmd = [S2B, "db", "search", "-q", query_fa, "-d", S2B_PACKED_DB, "-t", str(THREADS), "-o", kept_out]
         elif mode == "skani_dist":
             cmd = [SKANI, "dist", "-t", str(THREADS), "--ql", qlist, "--rl", REF_LIST, "-o", kept_out]
         elif mode == "skani_search":

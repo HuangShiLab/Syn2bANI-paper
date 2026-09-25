@@ -1,0 +1,8 @@
+query_id	query_path	syn2b_ref	skani_ref	syn2b_ani	skani_ani
+GCF_003697165.2	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_003697165.2.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_002965065.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_002965065.1.fna	94.8362	94.28
+GCF_000196555.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000196555.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000269965.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000269965.1.fna	95.6087	95.05
+GCF_900478295.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_900478295.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000476275.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000448485.1.fna	95.2134	95.13
+GCF_001027105.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_001027105.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_015025035.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_002902405.1.fna	90.6243	90.79
+GCF_001457615.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_001457615.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000017205.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000017205.1.fna	94.6820	93.88
+GCF_008704655.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_008704655.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_000720725.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_008634025.1.fna	95.2016	93.99
+GCF_003315235.1	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_003315235.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_900638555.1.fna	/lustre1/g/aos_shihuang/data/gtdb-r207/genomes_all/GCF_900638555.1.fna	95.3009	94.85

@@ -1,0 +1,5 @@
+mode	n_genomes	n_pairs	rep	syntracker_wall_s	max_rss_kb	status
+syntracker	2	4	1	4467	386396	ok
+syntracker	5	25	1	18710	389932	ok
+syntracker	10	100	1	38844	398784	ok
+syntracker	22	484	1	65162	427908	ok
