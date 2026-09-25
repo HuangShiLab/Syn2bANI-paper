@@ -1,0 +1,26 @@
+# Syn2b Pairwise Synteny Matrix
+# breakpoints = junctions: adjacencies of A that B does not
+#   conserve. Exactly 2 per inversion, 3 per translocation, 0
+#   under substitution loads to at least 5%. This is the column
+#   to use; junction coordinates are written alongside.
+# scj_distance = symmetric difference of the adjacency sets, the
+#   single-cut-or-join distance; twice breakpoints when circular.
+# inverted_fraction = shared landmarks whose orientation differs,
+#   over the orientation-informative ones. Measures how much of
+#   the genome moved; breakpoints measures how often. A fraction,
+#   so it is comparable with alignment-based synteny measures.
+# raw_inverted_fraction = same numerator, but relative to genome_A
+#   (no majority-frame flip). Ranges in [0,1] and matches fixed-
+#   reference alignment methods such as dnadiff.
+# observable_fraction = share of A's adjacencies that B can judge
+#   at all; the rest are stranded at contig ends. THIS is where
+#   contig count belongs -- as a discount on detection power, not
+#   as a divisor of breakpoints. Expect to recover about this
+#   fraction of the true junctions.
+# structural = conserved adjacencies over their union. Kept for
+#   continuity, but it divides a discrete event by the landmark
+#   count, so one inversion moves it by ~0.001.
+# legacy_adjacency = the original metric: all consecutive tags, no
+#   canonicalisation. Dominated by substitution load, not structure.
+genome_A,genome_B,breakpoints,scj_distance,breakpoint_density,inverted_fraction,raw_inverted_fraction,orientation_mismatches,orientation_mismatches_raw,orientation_uninformative,observable_fraction,observable_adjacencies,structural,shared_tags,repeats_dropped,landmarks_collapsed,circular,legacy_adjacency
+NC_000913.3,NC_007779.1,2,4,0.00035,0.15985,0.15985,914,914,0,1.0000,5718,0.9993,5718,78,582,true,0.7188

@@ -1,0 +1,4 @@
+[00:00:00.000] (1f12ede80) INFO   skani dist genomes/ecoli_k12_MG1655.fasta genomes/GCF_000010485.1.fna -o out/skani_dist.tsv
+[00:00:00.031] (1f12ede80) INFO   Generating sketch time: 0.025296958
+[00:00:00.040] (1f12ede80) INFO   Learned ANI mode detected. ANI may be adjusted according to a regression model trained on MAGs.
+[00:00:00.044] (1f12ede80) INFO   ANI calculation time: 0.010586584

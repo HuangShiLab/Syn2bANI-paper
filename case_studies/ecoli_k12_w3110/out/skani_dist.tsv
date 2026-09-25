@@ -1,0 +1,2 @@
+Ref_file	Query_file	ANI	Align_fraction_ref	Align_fraction_query	Ref_name	Query_name
+genomes/GCF_000010245.2.fna	genomes/ecoli_k12_MG1655.fasta	99.99	100.00	100.00	NC_007779.1 Escherichia coli str. K-12 substr. W3110, complete sequence	NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome

@@ -1,0 +1,41 @@
+ref	qry	ani	d_cagpai_state	d_cagA	d_vacA	d_res_clarithromycin	d_res_levofloxacin	d_disease_group	d_lineage	sv_burden_abs_diff	n_biology_discordant	ref_cagpai	qry_cagpai	ref_cagA	qry_cagA	ref_vacA	qry_vacA	ref_group	qry_group	ref_lineage	qry_lineage
+GCA_008026375.1	GCA_008027775.1	100.0	1	0.0	0.0	0	0	0	0	1	1.0	complete_rearranged	complete_collinear	other	other	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L3	fastbaps_L3
+GCA_019673525.1	GCA_019673575.1	100.0	1	0.0	0.0	0	0	0	0	3	1.0	complete_collinear	complete_rearranged	ABD	ABD	s1/i1/m1	s1/i1/m1	AG	AG	fastbaps_L2	fastbaps_L2
+GCA_006337325.1	GCA_006337445.1	99.99	0		1.0	1	0	0	0	4	2.0	empty	empty			s1/i1/m2	NA/NA/m2	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_014497485.1	GCA_014497505.1	99.99	0	0.0	0.0	1	0	0	0	2	1.0	complete_rearranged	complete_rearranged	ABCC	ABCC	s1/i1/m1	s1/i1/m1	NAG	NAG	fastbaps_L3	fastbaps_L3
+GCA_008033055.1	GCA_011141115.1	99.99	1	0.0	0.0	0	0	0	0	1	1.0	complete_collinear	complete_rearranged	ABC	ABC	s1/i1/m1	s1/i1/m1	NAG	NAG	fastbaps_L3	fastbaps_L3
+GCA_001940015.1	GCA_001940115.1	99.99	1	0.0	0.0	0	0	0	0	2	1.0	complete_collinear	complete_rearranged	ABD	ABD	NA/NA/m1	NA/NA/m1	GC	GC	fastbaps_L2	fastbaps_L2
+GCA_015904765.1	GCA_015904775.1	99.99	0	1.0	0.0	0	0	0	0	1	1.0	complete_rearranged	complete_rearranged	ABC	ABCC	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L3	fastbaps_L3
+GCA_011140425.1	GCA_011141135.1	99.99	1	0.0	0.0	0	0	1	0	2	1.0	complete_collinear	complete_rearranged	ABC	ABC	s1/i1/m1	s1/i1/m1	GC	NAG	fastbaps_L3	fastbaps_L3
+GCA_003058825.1	GCA_040821695.1	99.99	1	0.0	0.0	0	0	0	0	7	1.0	complete_rearranged	complete_collinear	ABCC	ABCC	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L5	fastbaps_L5
+GCA_006337305.1	GCA_006337445.1	99.99	0		1.0	0	0	0	0	0	1.0	empty	empty			s1/i1/m2	NA/NA/m2	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_002203985.1	GCA_019674175.1	99.98	1	0.0	0.0	0	0	0	0	6	1.0	complete_rearranged	complete_collinear	ABD	ABD	NA/i1/m2	NA/i1/m2	GC	GC	fastbaps_L2	fastbaps_L2
+GCA_008681415.1	GCA_008681485.1	99.98	1	0.0	0.0	0	0	0	0	0	1.0	complete_rearranged	complete_collinear	ABC	ABC	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L4	fastbaps_L4
+GCA_011140555.1	GCA_011140935.1	99.98	1	0.0	0.0	0	0	1	0	1	1.0	complete_rearranged	complete_collinear	ABC	ABC	s1/i1/m1	s1/i1/m1	GC	NAG	fastbaps_L3	fastbaps_L3
+GCA_001939585.1	GCA_001940145.1	99.98	1	0.0	0.0	0	0	0	0	4	1.0	complete_collinear	complete_rearranged	ABD	ABD	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L2	fastbaps_L2
+GCA_006337305.1	GCA_006337325.1	99.98	0		0.0	1	0	0	0	4	1.0	empty	empty			s1/i1/m2	s1/i1/m2	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_009740315.1	GCA_009740985.1	99.97	0	0.0	0.0	1	0	0	0	4	1.0	complete_rearranged	complete_rearranged	other	other	s1/i1/m1	s1/i1/m1	IM	IM	fastbaps_L4	fastbaps_L4
+GCA_002204015.1	GCA_019674015.1	99.97	1	0.0	0.0	0	0	0	0	1	1.0	complete_collinear	complete_rearranged	ABD	ABD	s1/i1/m2	s1/i1/m2	GC	GC	fastbaps_L2	fastbaps_L2
+GCA_009740975.1	GCA_009740985.1	99.97	0	0.0	0.0	1	0	0	0	4	1.0	complete_rearranged	complete_rearranged	other	other	s1/i1/m1	s1/i1/m1	IM	IM	fastbaps_L4	fastbaps_L4
+GCA_008681455.1	GCA_008681485.1	99.96	1	0.0	0.0	0	0	0	0	4	1.0	complete_rearranged	complete_collinear	ABC	ABC	s1/i1/m1	s1/i1/m1	GC	GC	fastbaps_L4	fastbaps_L4
+GCA_014496885.1	GCA_014498655.1	99.95	0		1.0	0	0	0	0	1	1.0	empty	empty			s1/NA/m2	s1/i1/m1	IM	IM	fastbaps_L6	fastbaps_L6
+GCA_019311485.1	GCA_019671905.1	99.93	0	0.0	0.0	1	0	0	0	3	1.0	complete_rearranged	complete_rearranged	other	other	s1/i1/m1	s1/i1/m1	NAG	NAG	fastbaps_L2	fastbaps_L2
+GCA_006337265.1	GCA_006338945.1	99.8	0	1.0	0.0	0	0	0	0	1	1.0	complete_rearranged	complete_rearranged	ABC	other	s1/i1/m1	s1/i1/m1	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_006337265.1	GCA_006338685.1	99.77	0	0.0	1.0	0	0	0	0	1	1.0	complete_rearranged	complete_rearranged	ABC	ABC	s1/i1/m1	NA/NA/m1	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_003382505.1	GCA_003382515.1	99.76	0		1.0	0	0	0	0	2	1.0	empty	empty			s2/i2/m2	s1/i2/m2	GC	GC	fastbaps_L3	fastbaps_L3
+GCA_006338685.1	GCA_006338945.1	99.72	0	1.0	1.0	0	0	0	0	0	2.0	complete_rearranged	complete_rearranged	ABC	other	NA/NA/m1	s1/i1/m1	AG	AG	fastbaps_L5	fastbaps_L5
+GCA_003382515.1	GCA_003382545.1	99.72	0		1.0	0	0	0	0	1	1.0	empty	empty			s1/i2/m2	s2/i2/m2	GC	GC	fastbaps_L3	fastbaps_L3
+GCA_040861005.1	GCA_040861225.1	99.38	0	1.0	0.0	0	0	0	0	5	1.0	complete_rearranged	complete_rearranged	ABC	other	NA/NA/m1	NA/NA/m1	IM	IM	fastbaps_L5	fastbaps_L5
+GCA_014497085.1	GCA_014497445.1	99.25	0	1.0	0.0	0	0	0	0	2	1.0	complete_rearranged	complete_rearranged	ABCC	ABC	s1/i1/m1	s1/i1/m1	NAG	NAG	fastbaps_L3	fastbaps_L3
+GCA_040860925.1	GCA_040861225.1	99.13	0	1.0	1.0	0	0	1	0	2	2.0	complete_rearranged	complete_rearranged	ABC	other	s1/i1/m1	NA/NA/m1	NAG	IM	fastbaps_L5	fastbaps_L5
+GCA_040861165.1	GCA_040861225.1	99.08	0	1.0	0.0	0	0	1	0	1	1.0	complete_rearranged	complete_rearranged	ABC	other	NA/NA/m1	NA/NA/m1	NAG	IM	fastbaps_L5	fastbaps_L5
+GCA_014497525.1	GCA_014497685.1	99.0	0		1.0	0	0	0	0	10	1.0	empty	empty			NA/NA/m2	s2/i2/m2	NAG	NAG	fastbaps_L3	fastbaps_L3
+GCA_040860925.1	GCA_040861005.1	98.99	0	0.0	1.0	0	0	1	0	3	1.0	complete_rearranged	complete_rearranged	ABC	ABC	s1/i1/m1	NA/NA/m1	NAG	IM	fastbaps_L5	fastbaps_L5
+GCA_040860925.1	GCA_040861165.1	98.9	0	0.0	1.0	0	0	0	0	1	1.0	complete_rearranged	complete_rearranged	ABC	ABC	s1/i1/m1	NA/NA/m1	NAG	NAG	fastbaps_L5	fastbaps_L5
+GCA_001998245.1	GCA_030581175.1	98.89	1	0.0	0.0	0	0	1	0	1	1.0	complete_collinear	complete_rearranged	ABC	ABC	s1/i1/m1	s1/i1/m1	IM	NAG	fastbaps_L3	fastbaps_L3
+GCA_040861225.1	GCA_040861245.1	98.89	0	0.0	1.0	0	0	1	0	5	1.0	complete_rearranged	complete_rearranged	other	other	NA/NA/m1	s1/i1/m1	IM	AG	fastbaps_L5	fastbaps_L5
+GCA_014497455.1	GCA_014497605.1	98.7	1	0.0	1.0	0	0	0	0	5	2.0	complete_rearranged	complete_collinear	ABC	ABC	s1/i1/m1	s1/NA/m1	NAG	NAG	fastbaps_L4	fastbaps_L4
+GCA_040861005.1	GCA_040861245.1	98.7	0	1.0	1.0	0	0	1	0	0	2.0	complete_rearranged	complete_rearranged	ABC	other	NA/NA/m1	s1/i1/m1	IM	AG	fastbaps_L5	fastbaps_L5
+GCA_024413815.1	GCA_040861445.1	98.7	1	0.0	0.0	0	0	0	0	9	1.0	complete_collinear	complete_rearranged	ABC	ABC	s1/i1/m2	s1/i1/m2	IM	IM	fastbaps_L5	fastbaps_L5
+GCA_040861165.1	GCA_040861245.1	98.57	0	1.0	1.0	0	0	1	0	4	2.0	complete_rearranged	complete_rearranged	ABC	other	NA/NA/m1	s1/i1/m1	NAG	AG	fastbaps_L5	fastbaps_L5
+GCA_040860925.1	GCA_040861245.1	98.55	0	1.0	0.0	0	0	1	0	3	1.0	complete_rearranged	complete_rearranged	ABC	other	s1/i1/m1	s1/i1/m1	NAG	AG	fastbaps_L5	fastbaps_L5

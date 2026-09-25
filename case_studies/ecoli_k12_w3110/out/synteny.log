@@ -1,0 +1,5 @@
+error: unexpected argument 'out/mg1655.tgt' found
+
+Usage: syn2b synteny --input <INPUT> --output <OUTPUT>
+
+For more information, try '--help'.

@@ -1,0 +1,8 @@
+[00:00:00.000] (1f12ede80) INFO   skani triangle -l /tmp/hp528_list.txt -o results/pairwise_ani/skani_triangle.tsv --sparse -t 8
+[00:00:19.254] (1f12ede80) INFO   Learned ANI mode detected. ANI may be adjusted according to a regression model trained on MAGs.
+[00:00:28.596] (1701af000) INFO   100 query sequences processed.
+[00:00:35.530] (16ffa3000) INFO   200 query sequences processed.
+[00:00:38.724] (16ffa3000) INFO   300 query sequences processed.
+[00:00:43.074] (16f567000) INFO   400 query sequences processed.
+[00:00:48.055] (1703bb000) INFO   500 query sequences processed.
+[00:00:49.046] (1f12ede80) INFO   ANI triangle time: 49.046112
