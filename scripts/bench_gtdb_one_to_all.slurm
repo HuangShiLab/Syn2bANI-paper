@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=gtdb_1toall
+#SBATCH --job-name=g1toall_ani
 #SBATCH --partition=intel
 #SBATCH --array=0-34
 #SBATCH --nodes=1
@@ -7,35 +7,24 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
 #SBATCH --time=24:00:00
-#SBATCH --output=/lustre1/g/aos_shihuang/Syn2bANI-paper-bench/logs/gtdb_1toall_%A_%a.out
-#SBATCH --error=/lustre1/g/aos_shihuang/Syn2bANI-paper-bench/logs/gtdb_1toall_%A_%a.err
+#SBATCH --output=/lustre1/g/aos_shihuang/Syn2bANI-paper-bench/logs/g1toall_ani_%A_%a.out
+#SBATCH --error=/lustre1/g/aos_shihuang/Syn2bANI-paper-bench/logs/g1toall_ani_%A_%a.err
 
-set -euo pipefail
+set -uo pipefail
 BASE=/lustre1/g/aos_shihuang/Syn2bANI-paper-bench
-OUT=$BASE/results
-LOGS=$BASE/logs
-mkdir -p $OUT $LOGS
-
 QUERIES=$BASE/gtdb_one_to_all_queries.tsv
-MODES=(syn2b_fasta syn2b_search skani_fasta skani_sketch fastani)
-N_MODES=${#MODES[@]}
-N_QUERIES=$(tail -n +2 "$QUERIES" | wc -l)
+MODES=(syn2b_dist syn2b_search skani_dist skani_search fastani)
+N_QUERIES=$(($(wc -l < "$QUERIES") - 1))
 
 IDX=$SLURM_ARRAY_TASK_ID
-MODE_IDX=$((IDX / N_QUERIES))
-QUERY_IDX=$((IDX % N_QUERIES))
-MODE=${MODES[$MODE_IDX]}
-QUERY_LINE=$(tail -n +2 "$QUERIES" | sed -n "$((QUERY_IDX + 1))p")
-QUERY_FA=$(echo "$QUERY_LINE" | cut -f6)
-QUERY_NAME=$(echo "$QUERY_LINE" | cut -f2)
+MODE=${MODES[$((IDX / N_QUERIES))]}
+LINE=$(tail -n +2 "$QUERIES" | sed -n "$((IDX % N_QUERIES + 1))p")
+QFA=$(echo "$LINE" | cut -f6)
+QID=$(echo "$LINE" | cut -f2)
 
-RES=$OUT/gtdb_one_to_all_scaling.tsv
-if [ ! -f "$RES" ]; then
-    printf "mode\tquery\twall_s\tpeak_rss_mb\n" > "$RES"
-fi
+ROWS=$BASE/results/rows_ani
+mkdir -p "$ROWS"
 
-echo "Task $IDX: mode=$MODE query=$QUERY_NAME"
-/usr/bin/time -v python3 "$BASE/bench_gtdb_one_to_all.py" "$MODE" "$QUERY_FA" "$RES" \
-    > "$LOGS/gtdb_1toall_${MODE}_${QUERY_NAME}.out" 2> "$LOGS/gtdb_1toall_${MODE}_${QUERY_NAME}.err"
-
+echo "Task $IDX: mode=$MODE query=$QID fasta=$QFA"
+python3 "$BASE/bench_gtdb_one_to_all.py" "$MODE" "$QFA" "$QID" "$ROWS"
 echo "Done task $IDX"
