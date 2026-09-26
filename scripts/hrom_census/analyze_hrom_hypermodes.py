@@ -252,18 +252,18 @@ def main():
             pool,
             size=min(args.plot_selected_points_per_group, len(pool)),
             replace=False)
-    # plot_positions are positions in the filtered arrays; plot_data_idx are
-    # positions in the full census and are needed to retrieve the values.
-    plot_positions = np.concatenate(
+    # plot_data_idx contains indices in the filtered arrays and in the full
+    # census arrays; positions are needed for the sampled group labels.
+    plot_data_idx = np.concatenate(
         [background_idx] + list(group_indices.values()))
-    plot_groups = np.full(len(plot_positions), "background", dtype=object)
+    plot_groups = np.full(len(plot_data_idx), "background", dtype=object)
     for name, idx in group_indices.items():
-        plot_groups[np.isin(plot_positions, idx)] = name
+        plot_groups[np.isin(plot_data_idx, idx)] = name
     plot_tsv = out / "hypermode_figure_points.tsv.gz"
     with gzip.open(plot_tsv, "wt", newline="") as fh:
         writer = csv.writer(fh, delimiter="\t", lineterminator="\n")
         writer.writerow(["ani", "structural", "group"])
-        for pos, data_idx in enumerate(plot_idx):
+        for pos, data_idx in enumerate(plot_data_idx):
             writer.writerow([f"{ani[data_idx]:.6f}",
                              f"{structural[data_idx]:.6f}",
                              plot_groups[pos]])
