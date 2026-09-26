@@ -10,7 +10,7 @@
 #SBATCH --error=/lustre1/g/aos_shihuang/databases/HROM/census/logs/hypermodes_%j.err
 
 set -euo pipefail
-REPO=/lustre1/g/aos_shihuang/Syn2b-paper
+REPO=/lustre1/g/aos_shihuang/Syn2bANI-paper
 CENSUS=/lustre1/g/aos_shihuang/Syn2b-paper/results/census/hrom
 METADATA=/lustre1/g/aos_shihuang/databases/HROM/data/genome_catalog/HROM_representative_genome_metadata.tsv
 OUT=$CENSUS/hypermodes
