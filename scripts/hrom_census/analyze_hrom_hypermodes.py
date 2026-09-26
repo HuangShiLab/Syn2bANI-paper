@@ -258,7 +258,7 @@ def main():
         [background_idx] + list(group_indices.values()))
     plot_groups = np.full(len(plot_positions), "background", dtype=object)
     for name, idx in group_indices.items():
-        plot_groups[np.isin(plot_idx, idx)] = name
+        plot_groups[np.isin(plot_positions, idx)] = name
     plot_tsv = out / "hypermode_figure_points.tsv.gz"
     with gzip.open(plot_tsv, "wt", newline="") as fh:
         writer = csv.writer(fh, delimiter="\t", lineterminator="\n")
