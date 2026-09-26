@@ -159,12 +159,7 @@ def main():
     ax_right.set_xlabel("Density", fontsize=6)
     ax_main.set_xlabel("Syn2b structural similarity")
     ax_main.set_ylabel("skani ANI (%)")
-    ax_main.legend(loc="lower right", handletextpad=0.1, borderaxespad=0.2)
-    ax_main.text(0.02, 0.97, "ANI-enriched", transform=ax_main.transAxes,
-                 ha="left", va="top", color=COLORS["ani_top"], fontsize=6)
-    ax_main.text(0.98, 0.03, "structural-enriched",
-                 transform=ax_main.transAxes, ha="right", va="bottom",
-                 color=COLORS["structural_top"], fontsize=6)
+    ax_main.legend(loc="upper left", handletextpad=0.1, borderaxespad=0.2)
 
     # Panel b: species enrichment in the two top-5% sets.
     ax_b = fig.add_subplot(outer[1])
@@ -186,7 +181,6 @@ def main():
     ax_b.set_xlabel(r"$\log_2$ enrichment-ratio ratio (ANI / structural)")
     ax_b.set_ylabel(r"$-\log_{10}$ minimum enrichment $P$")
     ax_b.legend(loc="lower right", ncol=1, handletextpad=0.15)
-    label_species(ax_b, table)
     ax_b.text(0.02, 0.02, r"$P$ axis truncated at $10^{-50}$",
               transform=ax_b.transAxes, ha="left", va="bottom", fontsize=5.5,
               color="0.35")
