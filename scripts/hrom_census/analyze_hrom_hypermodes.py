@@ -185,8 +185,12 @@ def main():
         k_struct = int(struct_by_species[code])
         k_ani = int(ani_by_species[code])
         k_both = int(both_by_species[code])
-        p_struct = hypergeom.sf(k_struct - 1, n_kept, K, n_top)
-        p_ani = hypergeom.sf(k_ani - 1, n_kept, K, n_top)
+        # logsf retains significance when the survival probability underflows
+        # to zero for extreme HROM clusters.
+        log_p_struct = hypergeom.logsf(k_struct - 1, n_kept, K, n_top)
+        log_p_ani = hypergeom.logsf(k_ani - 1, n_kept, K, n_top)
+        p_struct = math.exp(log_p_struct)
+        p_ani = math.exp(log_p_ani)
         r_struct = (k_struct / n_top) / (K / n_kept) if K and n_top else math.nan
         r_ani = (k_ani / n_top) / (K / n_kept) if K and n_top else math.nan
         pseudocount = 0.5
@@ -204,7 +208,7 @@ def main():
             "struct_p": p_struct,
             "ani_p": p_ani,
             "log2_struct_over_ani": log2_ratio,
-            "neg_log10_min_p": -math.log10(min(p_struct, p_ani)),
+            "neg_log10_min_p": -min(log_p_struct, log_p_ani),
         })
         eligible_codes.append(code)
 
