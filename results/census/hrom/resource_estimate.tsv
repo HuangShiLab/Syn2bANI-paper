@@ -1,0 +1,10 @@
+metric	value
+metadata_rows_retained	142277
+multi_genome_clusters	2241
+census_genomes	142277
+unique_pairs	62872901
+selected_bp	269946716530
+tasks	3525
+structure_core_h_est	785.4
+digest_core_h_est	1.66
+requested_capacity_core_h	1152.0

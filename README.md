@@ -163,8 +163,15 @@ plus a new cross-implementation concordance with Syn2b junctions, ρ = 0.86 on
 and the four SynTracker cohorts were re-run through Syn2bANI's own structural
 channel (medians 0/1/5/3; within-*H. pylori* 0 vs between 6; per-pair data in
 `results/syntracker_validation/rerun_v032/` of the Syn2b-paper repository).
-The withdrawn GTDB discordance figure is superseded by the Syn2b-paper
-within-species census (in progress).
+The withdrawn GTDB discordance figure is superseded by the companion
+Syn2b-paper GTDB-R207 within-species census (in progress) and the completed
+HROM census below.
+**Completed 2026-09-26:** the HROM oral-reference within-species census
+covered 62,872,901 unique pairs across 142,277 genomes in 2,241 multi-genome
+clusters; 17,535,013 pairs (27.8896%) carry at least two block-level junctions.
+Every pair has a matched skani ANI. Summaries and QC are in
+`results/census/hrom/HROM_CENSUS_REPORT.md`; the two large per-pair tables are
+archived on HPC for Zenodo.
 **Closed 2026-09-22:** the simulation-ladder and Enterobacteriaceae comparisons
 were re-run with skani 0.3.2; see
 `results/sv_validation/SKANI_0.3.2_RERUN.md`.
