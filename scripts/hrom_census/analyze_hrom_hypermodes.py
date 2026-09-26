@@ -225,11 +225,9 @@ def main():
     for i, r in enumerate(rows):
         r["struct_q"] = float(q_struct[i])
         r["ani_q"] = float(q_ani[i])
-        if r["struct_q"] < 0.05 and r["struct_q"] <= r["ani_q"] \
-                and r["log2_struct_over_ani"] <= -1:
+        if r["struct_q"] < 0.05 and r["log2_struct_over_ani"] >= 1:
             mode = "structural_enriched"
-        elif r["ani_q"] < 0.05 and r["ani_q"] <= r["struct_q"] \
-                and r["log2_struct_over_ani"] >= 1:
+        elif r["ani_q"] < 0.05 and r["log2_struct_over_ani"] <= -1:
             mode = "ani_enriched"
         elif r["struct_q"] < 0.05 and r["ani_q"] < 0.05:
             mode = "both_enriched"
