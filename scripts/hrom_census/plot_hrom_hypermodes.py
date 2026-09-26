@@ -54,6 +54,8 @@ def save_figure(fig, stem, dpi=600):
 def label_species(ax, table, max_labels=12):
     x = pd.to_numeric(table["log2_struct_over_ani"], errors="coerce")
     y = pd.to_numeric(table["neg_log10_min_p"], errors="coerce")
+    x = -x
+    y = np.minimum(y, 50.0)
     significant = table[
         (table["struct_q"] < 0.05) | (table["ani_q"] < 0.05)
     ].copy()
@@ -61,10 +63,10 @@ def label_species(ax, table, max_labels=12):
         ["neg_log10_min_p", "total_pairs"], ascending=[False, False]
     ).head(max_labels)
     x_span = np.ptp(x) if len(x) > 1 else 1.0
-    y_top = y.max() if len(y) else 1.0
+    y_top = 50.0
     for i, row in enumerate(significant.itertuples()):
-        x_val = float(row.log2_struct_over_ani)
-        y_val = float(row.neg_log10_min_p)
+        x_val = -float(row.log2_struct_over_ani)
+        y_val = min(float(row.neg_log10_min_p), 50.0)
         dx = 3.0 if x_val >= 0 else -3.0
         ha = "left" if dx > 0 else "right"
         dy = 0.8 + 0.45 * (i % 2)
@@ -166,8 +168,10 @@ def main():
 
     # Panel b: species enrichment in the two top-5% sets.
     ax_b = fig.add_subplot(outer[1])
+    table["plot_x"] = -table["log2_struct_over_ani"]
+    table["plot_y"] = np.minimum(table["neg_log10_min_p"], 50.0)
     for mode, sub in table.groupby("mode"):
-        ax_b.scatter(sub["log2_struct_over_ani"], sub["neg_log10_min_p"],
+        ax_b.scatter(sub["plot_x"], sub["plot_y"],
                      s=13 if mode == "not_enriched" else 18,
                      c=MODE_COLORS[mode], alpha=0.65 if mode == "not_enriched" else 0.88,
                      linewidths=0, label=mode.replace("_", " "), zorder=3)
@@ -179,10 +183,13 @@ def main():
     ax_b.text(0.98, 0.96, "ANI-enriched", transform=ax_b.transAxes,
               ha="right", va="top", color=MODE_COLORS["ani_enriched"],
               fontsize=6)
-    ax_b.set_xlabel(r"$\log_2$ enrichment-ratio ratio (structural / ANI)")
+    ax_b.set_xlabel(r"$\log_2$ enrichment-ratio ratio (ANI / structural)")
     ax_b.set_ylabel(r"$-\log_{10}$ minimum enrichment $P$")
     ax_b.legend(loc="lower right", ncol=1, handletextpad=0.15)
     label_species(ax_b, table)
+    ax_b.text(0.02, 0.02, r"$P$ axis truncated at $10^{-50}$",
+              transform=ax_b.transAxes, ha="left", va="bottom", fontsize=5.5,
+              color="0.35")
 
     # Panel labels in Nature style.
     fig.text(0.008, 0.955, "a", ha="left", va="top", fontsize=8, weight="bold")
