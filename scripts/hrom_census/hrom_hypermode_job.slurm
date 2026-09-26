@@ -13,12 +13,14 @@ set -euo pipefail
 REPO=/lustre1/g/aos_shihuang/Syn2bANI-paper
 CENSUS=/lustre1/g/aos_shihuang/Syn2b-paper/results/census/hrom
 METADATA=/lustre1/g/aos_shihuang/databases/HROM/data/genome_catalog/HROM_representative_genome_metadata.tsv
+CLUSTER_METADATA=$WORKDIR/hrom_genome_metadata.tsv
 OUT=$CENSUS/hypermodes
 mkdir -p "$OUT"
 cd "$REPO"
 python3 scripts/hrom_census/analyze_hrom_hypermodes.py \
     --census "$CENSUS/hrom_within_species_sv_ani.tsv.gz" \
     --species-metadata "$METADATA" \
+    --genome-cluster-metadata "$CLUSTER_METADATA" \
     --outdir "$OUT"
 python3 scripts/hrom_census/plot_hrom_hypermodes.py \
     --points "$OUT/hypermode_figure_points.tsv.gz" \

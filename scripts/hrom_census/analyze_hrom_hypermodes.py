@@ -57,6 +57,9 @@ def main():
                     help="hrom_within_species_sv_ani.tsv.gz")
     ap.add_argument("--species-metadata", required=True,
                     help="HROM_representative_genome_metadata.tsv")
+    ap.add_argument("--genome-cluster-metadata", required=True,
+                    help="hrom_genome_metadata.tsv mapping every genome to "
+                         "its HROM representative cluster")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--top-fraction", type=float, default=0.05)
     ap.add_argument("--min-shared-tags", type=int, default=250,
@@ -87,6 +90,10 @@ def main():
                 raw = raw[3:]
             name = clean_species_name(raw)
             cluster_species[cluster] = name
+    genome_cluster = {}
+    with open(args.genome_cluster_metadata, newline="") as fh:
+        for row in csv.DictReader(fh, delimiter="\t"):
+            genome_cluster[row["genome"]] = row["cluster"]
     # Disambiguate repeated names while retaining compact plot labels.
     counts = Counter(cluster_species.values())
     species_labels = {
@@ -131,10 +138,11 @@ def main():
             if observable < args.min_observable_fraction:
                 n_dropped_quality += 1
                 continue
-            cluster = f[i_a]
-            # All census rows are within-cluster, but verify rather than assume.
-            if f[i_b] and False:  # keep parser compact; pairing is cluster-known
-                pass
+            cluster = genome_cluster.get(f[i_a])
+            # Census rows should be within-cluster; verify rather than assume.
+            if cluster is None or genome_cluster.get(f[i_b]) != cluster:
+                n_dropped_quality += 1
+                continue
             code = species_code.get(cluster)
             if code is None:
                 n_dropped_quality += 1
