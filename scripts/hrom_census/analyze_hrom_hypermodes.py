@@ -252,18 +252,21 @@ def main():
             pool,
             size=min(args.plot_selected_points_per_group, len(pool)),
             replace=False)
-    plot_idx = np.concatenate(
+    # plot_positions are positions in the filtered arrays; plot_data_idx are
+    # positions in the full census and are needed to retrieve the values.
+    plot_positions = np.concatenate(
         [background_idx] + list(group_indices.values()))
-    plot_groups = np.full(len(plot_idx), "background", dtype=object)
+    plot_groups = np.full(len(plot_positions), "background", dtype=object)
     for name, idx in group_indices.items():
         plot_groups[np.isin(plot_idx, idx)] = name
     plot_tsv = out / "hypermode_figure_points.tsv.gz"
     with gzip.open(plot_tsv, "wt", newline="") as fh:
         writer = csv.writer(fh, delimiter="\t", lineterminator="\n")
         writer.writerow(["ani", "structural", "group"])
-        for i in plot_idx:
-            writer.writerow([f"{ani[i]:.6f}", f"{structural[i]:.6f}",
-                             plot_groups[i]])
+        for pos, data_idx in enumerate(plot_idx):
+            writer.writerow([f"{ani[data_idx]:.6f}",
+                             f"{structural[data_idx]:.6f}",
+                             plot_groups[pos]])
 
     # Exact counts of categorical groups (not the plotted samples).
     counts = {
