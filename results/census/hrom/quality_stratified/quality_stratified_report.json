@@ -1,0 +1,181 @@
+{
+  "pairs_seen": 62872901,
+  "pairs_dropped_quality_or_cluster": 2858163,
+  "qualifying_pairs": 60014738,
+  "top_pairs_per_axis": 3000736,
+  "quality_distribution": {
+    "high_comp90_cont5": 18210578,
+    "medium_comp70_cont10": 43676804,
+    "low": 16337934
+  },
+  "quality_association": [
+    {
+      "feature": "min_completeness_lt70",
+      "n_pairs": 16337934,
+      "n_breakpoints_ge2": 2642045,
+      "pct_breakpoints_ge2": 16.171230707628027,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": 0.3836324286694889,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "min_completeness_70_90",
+      "n_pairs": 25466226,
+      "n_breakpoints_ge2": 6293236,
+      "pct_breakpoints_ge2": 24.712087295541945,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": 0.7061665573661617,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "min_completeness_ge90",
+      "n_pairs": 18210578,
+      "n_breakpoints_ge2": 8320833,
+      "pct_breakpoints_ge2": 45.692305867501844,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": 3.0949838681894764,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "max_contamination_le5",
+      "n_pairs": 60014738,
+      "n_breakpoints_ge2": 17256114,
+      "pct_breakpoints_ge2": 28.753127273504052,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": NaN,
+      "fisher_p": 1.0
+    },
+    {
+      "feature": "max_contamination_gt5",
+      "n_pairs": 0,
+      "n_breakpoints_ge2": 0,
+      "pct_breakpoints_ge2": NaN,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": NaN,
+      "fisher_p": NaN
+    },
+    {
+      "feature": "min_N50_ge10kb",
+      "n_pairs": 23015221,
+      "n_breakpoints_ge2": 10130009,
+      "pct_breakpoints_ge2": 44.01438943384467,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": 3.295724299918373,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "min_N50_lt10kb",
+      "n_pairs": 36999517,
+      "n_breakpoints_ge2": 7126105,
+      "pct_breakpoints_ge2": 19.25999466425467,
+      "pct_all_breakpoints_ge2": 28.753127273504052,
+      "odds_ratio": 0.30342343867318256,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "structural_top_high_quality_enrichment",
+      "n_pairs": 60014738,
+      "n_breakpoints_ge2": 2553256,
+      "pct_breakpoints_ge2": 85.08765849444936,
+      "pct_all_breakpoints_ge2": 30.34350995583785,
+      "odds_ratio": 15.07123758370288,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "ani_top_high_quality_enrichment",
+      "n_pairs": 60014738,
+      "n_breakpoints_ge2": 1264108,
+      "pct_breakpoints_ge2": 42.12659827455664,
+      "pct_all_breakpoints_ge2": 30.34350995583785,
+      "odds_ratio": 1.721039056638668,
+      "fisher_p": 0.0
+    },
+    {
+      "feature": "both_top_high_quality_enrichment",
+      "n_pairs": 60014738,
+      "n_breakpoints_ge2": 281769,
+      "pct_breakpoints_ge2": 83.33254467269597,
+      "pct_all_breakpoints_ge2": 30.34350995583785,
+      "odds_ratio": 11.641998228395348,
+      "fisher_p": 0.0
+    }
+  ],
+  "quality_stratified_modes": [
+    {
+      "stratum": "all_qualified",
+      "pairs": 60014738,
+      "species_tested": 521,
+      "top_pairs_per_axis": 3000736,
+      "structural_enriched": 96,
+      "ani_enriched": 161,
+      "both_enriched": 36,
+      "not_enriched": 228
+    },
+    {
+      "stratum": "high_quality_comp90_cont5",
+      "pairs": 18210578,
+      "species_tested": 354,
+      "top_pairs_per_axis": 910528,
+      "structural_enriched": 60,
+      "ani_enriched": 93,
+      "both_enriched": 19,
+      "not_enriched": 182
+    },
+    {
+      "stratum": "medium_comp70_cont10",
+      "pairs": 43676804,
+      "species_tested": 481,
+      "top_pairs_per_axis": 2183840,
+      "structural_enriched": 88,
+      "ani_enriched": 139,
+      "both_enriched": 27,
+      "not_enriched": 227
+    },
+    {
+      "stratum": "high_completeness_only",
+      "pairs": 18210578,
+      "species_tested": 354,
+      "top_pairs_per_axis": 910528,
+      "structural_enriched": 60,
+      "ani_enriched": 93,
+      "both_enriched": 19,
+      "not_enriched": 182
+    },
+    {
+      "stratum": "continuous_N50_ge10kb",
+      "pairs": 23015221,
+      "species_tested": 425,
+      "top_pairs_per_axis": 1150761,
+      "structural_enriched": 64,
+      "ani_enriched": 118,
+      "both_enriched": 20,
+      "not_enriched": 223
+    }
+  ],
+  "mode_stability_high_quality": [
+    {
+      "mode": "structural_enriched",
+      "all_species": 96,
+      "high_quality_species": 60,
+      "intersection": 53,
+      "jaccard": 0.5145631067961165
+    },
+    {
+      "mode": "ani_enriched",
+      "all_species": 161,
+      "high_quality_species": 93,
+      "intersection": 79,
+      "jaccard": 0.4514285714285714
+    },
+    {
+      "mode": "both_enriched",
+      "all_species": 36,
+      "high_quality_species": 19,
+      "intersection": 9,
+      "jaccard": 0.1956521739130435
+    }
+  ],
+  "robust_species_n": 141,
+  "spearman_mincomp_vs_breakpoints": 0.2880811588250731,
+  "spearman_minscore_vs_breakpoints": 0.27724383997741225
+}

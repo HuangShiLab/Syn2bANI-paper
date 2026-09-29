@@ -1,0 +1,6 @@
+stratum	pairs	species_tested	top_pairs_per_axis	structural_enriched	ani_enriched	both_enriched	not_enriched
+all_qualified	60014738	521	3000736	96	161	36	228
+high_quality_comp90_cont5	18210578	354	910528	60	93	19	182
+medium_comp70_cont10	43676804	481	2183840	88	139	27	227
+high_completeness_only	18210578	354	910528	60	93	19	182
+continuous_N50_ge10kb	23015221	425	1150761	64	118	20	223
