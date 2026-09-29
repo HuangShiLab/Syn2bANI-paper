@@ -209,6 +209,13 @@ def main():
     qual_rows=[]
     for name,mask in bins:
         n=int(mask.sum()); k=int((mask&bp2).sum())
+        if n==0:
+            qual_rows.append({"feature":name,"n_pairs":0,
+                              "n_breakpoints_ge2":0,
+                              "pct_breakpoints_ge2":float("nan"),
+                              "pct_all_breakpoints_ge2":100*bp2.mean(),
+                              "odds_ratio":float("nan"),"fisher_p":float("nan")})
+            continue
         table=np.array([[k,int(n-k)],
                         [int(bp2.sum()-k),int((~bp2).sum()-int(n-k))]])
         OR,p=fisher_exact(table)
