@@ -158,6 +158,10 @@ def main():
     maxcontigs=np.frombuffer(maxcontigs,dtype=np.float64)
     minscore=np.frombuffer(minscore,dtype=np.float64)
     codes=np.frombuffer(codes,dtype=np.uint32)
+    continuous={
+        "mincomp":mincomp,"maxcont":maxcont,"minN50":minN50,
+        "maxcontigs":maxcontigs,"minscore":minscore,
+    }
     N=len(ani); n_top=int(math.floor(args.top_fraction*N))
     rng=np.random.default_rng(args.seed)
     idx=np.argpartition(ani,N-n_top)[N-n_top:]
@@ -227,12 +231,13 @@ def main():
     sample=rng.choice(N,size=min(args.correlation_sample,N),replace=False)
     cont_rows=[]
     for trait in ["mincomp","maxcont","minN50","maxcontigs","minscore"]:
-        rho,p=spearmanr(globals()[trait][sample],breakpoints[sample])
-        u,p2=mannwhitneyu(globals()[trait][bp2],globals()[trait][~bp2])
+        values=continuous[trait]
+        rho,p=spearmanr(values[sample],breakpoints[sample])
+        u,p2=mannwhitneyu(values[bp2],values[~bp2])
         cont_rows.append({"trait":trait,"spearman_rho_vs_breakpoints":rho,
                           "spearman_p":p,
-                          "median_breakpoints_ge2":float(np.median(globals()[trait][bp2])),
-                          "median_breakpoints_lt2":float(np.median(globals()[trait][~bp2])),
+                          "median_breakpoints_ge2":float(np.median(values[bp2])),
+                          "median_breakpoints_lt2":float(np.median(values[~bp2])),
                           "mannwhitney_p":p2})
     # Is either top set enriched for high-quality pairs?
     high=mincomp>=90
