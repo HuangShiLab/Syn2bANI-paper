@@ -101,7 +101,10 @@ def main():
     labels={cl:clean_species((rep.get(cl) or {}).get("species",""),cl) for cl in rep}
     # Disambiguate repeated species names.
     c=Counter(labels.values())
-    labels={k:(v if c[v]==1 else f"{v} [{k}]") for k,v in labels.items()}
+    labels.clear()
+    labels.update({k:(v if c[v]==1 else f"{v} [{k}]") for k,v in
+                   {cl:clean_species((rep.get(cl) or {}).get("species",""),cl)
+                    for cl in rep}.items()})
     names=sorted(labels); code={x:i for i,x in enumerate(names)}
 
     # Genome -> CheckM/quality metadata and representative cluster.
