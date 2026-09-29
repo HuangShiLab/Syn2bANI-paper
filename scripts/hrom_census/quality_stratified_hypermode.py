@@ -79,6 +79,7 @@ struct_top=ani_top=both_top=np.array([],dtype=bool)
 labels={}
 
 def main():
+    global labels
     ap=argparse.ArgumentParser()
     ap.add_argument("--census",required=True)
     ap.add_argument("--genome-quality",required=True)
