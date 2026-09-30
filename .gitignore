@@ -51,4 +51,6 @@ case_studies/*/fetch.log
 # FDA-ARGOS case study downloads (genome FASTAs, zips)
 case_studies/fda_argos/genomes/
 case_studies/fda_argos/*.zip
+# HROM large pair tables are archived locally and later deposited to Zenodo
+data/census_hrom_large/
 paper/manuscript/.Rhistory
