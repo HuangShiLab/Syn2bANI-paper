@@ -42,3 +42,13 @@ fragmented than HROM, switch the full run to HPC and retain only local analysis.
 - Five representative-only genome tarball downloads started.
 - Census planning code added under `scripts/oapgc_census/`.
 - Full planning files generated outside Git in `/Users/macstudio/Downloads/OAPGC/census_plan`.
+
+## Partial-archive smoke test
+
+Before the complete download finished, 100 representative FASTAs were streamed
+from the partial first tarball. They formed 67 multi-genome SGB clusters and 58
+expected unique pairs. The local census worker decompressed, digested, and
+processed all 67 tasks, emitted 58 rows, and wrote all 67 checkpoints. This
+validates the `.fna.gz` handling, genome-ID sanitization, local Syn2b binary,
+task accounting, and output schema, although it is too small to refine the full
+throughput estimate.

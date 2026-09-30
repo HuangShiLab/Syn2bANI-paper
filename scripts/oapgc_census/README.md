@@ -20,6 +20,11 @@ A local run is therefore feasible. The main uncertainty is whether MAG assembly
 fragmentation changes the 9 ms/ordered-pair planning constant; a largest-20
 cluster smoke test should be run first.
 
+A partial-tar smoke test using 100 representative FASTAs successfully generated
+all expected 58 pairs and 67 checkpoints on the local Syn2b binary. This
+confirms gzip extraction, genome-ID handling, and the census worker workflow;
+it is not a throughput benchmark.
+
 ## Workflow
 
 ```bash
