@@ -73,6 +73,7 @@ python3 scripts/gtdb_census/census_worker.py \
 
 echo "merging and QC"
 python3 scripts/gtdb_census/merge_census.py \
-  --workdir "$WORK" --out "$RESULTS"
+  --workdir "$WORK" --out "$RESULTS" \
+  --output-name oapgc_within_species_sv.tsv.gz
 
 echo "OAPGC_LOCAL_CENSUS_DONE"
