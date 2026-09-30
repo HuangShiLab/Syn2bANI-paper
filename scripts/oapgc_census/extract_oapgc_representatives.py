@@ -9,9 +9,19 @@ matching members, so it avoids expanding the redundant MAG set.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
+import shutil
 import tarfile
 from pathlib import Path
+
+
+def genome_stem(member_name: str) -> str | None:
+    name = Path(member_name).name
+    for suffix in (".fna.gz", ".fa.gz", ".fasta.gz", ".fna", ".fa", ".fasta"):
+        if name.lower().endswith(suffix):
+            return name[: -len(suffix)]
+    return None
 
 
 def md5(path: Path, expected: str | None = None) -> str:
@@ -68,9 +78,21 @@ def main():
                 for member in tf:
                     if not member.isfile():
                         continue
-                    genome = Path(member.name).stem
+                    genome = genome_stem(member.name)
+                    if genome is None:
+                        continue
                     if genome in todo:
-                        tf.extract(member, out, filter="data")
+                        source = tf.extractfile(member)
+                        if source is None:
+                            raise RuntimeError(f"cannot read tar member {member.name}")
+                        tmp = out / f".{genome}.fna.tmp"
+                        try:
+                            with gzip.open(source, "rb") as fin, tmp.open("wb") as fout:
+                                shutil.copyfileobj(fin, fout, length=8 * 1024 * 1024)
+                            tmp.replace(out / f"{genome}.fna")
+                        finally:
+                            if tmp.exists():
+                                tmp.unlink()
                         found.append(genome)
                         if len(found) % 1000 == 0:
                             print(f"{archive_path.name}: {len(found):,} files", flush=True)
