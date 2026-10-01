@@ -1,0 +1,17 @@
+metric	value
+pairs	30560247
+pairs_ge2	15247934
+fraction_ge2	0.49894669
+median_breakpoints	1.0
+mean_breakpoints	3.028136
+median_raw_inverted_fraction	0.49472
+pairs_breakpoints_gt0	20310642
+fraction_breakpoints_gt0	0.66460988
+pairs_breakpoints_gt1	15247934
+fraction_breakpoints_gt1	0.49894669
+pairs_breakpoints_gt2	11339282
+fraction_breakpoints_gt2	0.37104680
+pairs_breakpoints_gt4	6706412
+fraction_breakpoints_gt4	0.21944888
+pairs_breakpoints_gt9	2058822
+fraction_breakpoints_gt9	0.06736929
