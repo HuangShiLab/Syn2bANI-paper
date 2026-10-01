@@ -16,16 +16,16 @@ This report applies the Supervisor-Skills framework as follows:
 
 | Database | Biological scope | Multi-genome clusters | Genomes analysed | Unique unordered pairs planned | Structural census | ANI layer |
 |---|---|---:|---:|---:|---|---|
-| **GTDB R207** | global bacterial/archaeal diversity | 22,535 | 274,374 | **711,020,841** | Raw structural tasks complete: 25,582/25,582. Low-memory merge/QC running. | Streaming skani pass running; 21,965/22,535 cluster outputs done; two large clusters actively running. |
+| **GTDB R207** | global bacterial/archaeal diversity | 22,535 | 274,374 | **711,020,841 planned; effective scope smaller** | Raw tasks complete; first merge exposed legacy cross-block duplicates and missing FASTA entries. Effective-scope normalization/global-dedup job running. | Streaming skani pass running; 21,965/22,535 cluster outputs done; two large clusters actively running. |
 | **HROM** | human gut | 2,241 | 142,277 | **62,872,901** | Complete; 0 missing tasks or clusters. | Complete; 62,872,901/62,872,901 pairs matched to skani ANI. |
-| **OAPGC** | oral and airway | 1,488 | 98,229 | **30,560,247** | Running locally: 521/2,120 tasks done; 24,380,902 pair rows already emitted. | Not started; run after structural merge. |
+| **OAPGC** | oral and airway | 1,488 | 98,229 | **30,560,247** | Complete; exact QC passes at 30,560,247/30,560,247 pairs. | Running locally. |
 | **Combined planned** | — | — | — | **804,453,989** | — | — |
 
 Current interpretation boundary:
 
 - GTDB has a complete raw structural layer, but not yet a final merged/QC biological summary.
 - HROM is the only fully completed dual-axis census and therefore currently carries the strongest biological conclusions.
-- OAPGC has emitted roughly 80% of its planned pair rows by row count, but the run is not finished and has no merged/QC biological result.
+- OAPGC structural merge/QC now passes exactly; biological interpretation still requires ANI, site, and quality metadata.
 - Cross-species conclusions must be quality-stratified; unadjusted species rankings are not acceptable.
 
 ---
@@ -47,7 +47,9 @@ The GTDB task plan contains:
 
 Thus, the GTDB raw structural census is complete. The remaining work is computational consolidation, not genome collection or structural calculation.
 
-The low-memory merge is now running after replacing the original implementation. The old merger retained global pair-state in memory, which was unsuitable for 711 million pairs. The replacement writes the final pair table streamingly, performs local duplicate suppression, keeps exact per-cluster row counts and exact `breakpoints >= 2` counts, and uses reservoir sampling only for per-cluster medians.
+The first low-memory merge completed but QC failed publication gates: it emitted 964,496,198 rows versus 711,020,841 planned pairs. Diagnosis found two issues. First, some planned accessions were absent from `manifest.json` and produced no TGT; for example, *Bacillus_A paranthracis* had 231 planned genomes but only 84 manifest/TGT genomes. Second, early cross-block tasks retained within-block rows, producing 253,971,810 extra rows globally; in sampled *Escherichia coli* cross-block output, 46.17% overlapped the corresponding diagonal block.
+
+A normalization/global-deduplication job is running. It defines the effective scope from genomes with valid FASTA and TGT, maps legacy contig IDs back to accessions through TGT headers, canonicalizes unordered pairs, sorts normalized rows, and removes duplicate adjacent keys. The publication table will be `gtdb_r207_effective_normalized_dedup.tsv.gz`, followed by effective-scope QC.
 
 ### 2.2 GTDB ANI pass
 
@@ -195,6 +197,27 @@ Claim boundary:
 
 ## 4. OAPGC census status
 
+OAPGC structural census is complete. Exact QC passes:
+
+```text
+rows written:                    30,560,247
+expected pairs:                  30,560,247
+local duplicates:                         0
+clusters short of C(n,2):                 0
+```
+
+Exact structural summary:
+
+```text
+pairs:                         30,560,247
+pairs with breakpoints >=2:    15,247,934
+fraction with breakpoints >=2:  49.8947%
+median breakpoints:                     1
+mean breakpoints:                  3.028136
+```
+
+There are 935 non-numeric/uninformative breakpoint rows; they remain in the denominator but do not contribute to the SV-positive count. The largest absolute burdens include SGB0588, SGB0150, SGB0623, SGB0976, and SGB0583. Biological interpretation requires ANI, quality, and site metadata.
+
 OAPGC is the oral and airway resource intended to answer whether same-species genomes from different body sites differ more by sequence divergence or structural variation.
 
 | Item | Value |
@@ -205,13 +228,12 @@ OAPGC is the oral and airway resource intended to answer whether same-species ge
 | Genomes in structural census | 98,229 |
 | Planned unique pairs | 30,560,247 |
 | Structural tasks | 2,120 |
-| Current completed tasks | 521 |
-| Current emitted pair rows | 24,380,902 |
+| Completed tasks | 2,120 / 2,120 |
+| Emitted pair rows | 30,560,247 |
 
-The local run is healthy, but the current partial table should not be used for final OAPGC conclusions. After structural completion, the required next steps are:
+The structural run is complete and QC passes. The required next steps are:
 
-1. merge and QC the OAPGC structural table;
-2. run skani ANI on all 30.56 million pairs;
+1. finish skani ANI on all 30.56 million pairs;
 3. join oral/airway sample metadata;
 4. classify pairs as oral–oral, airway–airway, and oral–airway;
 5. compare ANI distance and structural burden with species-level normalization;
@@ -377,7 +399,7 @@ Both papers should cite the same Zenodo-hosted raw pair tables:
 GTDB: gtdb_r207_within_species_sv.tsv.gz
 HROM: hrom_within_species_sv.tsv.gz
 HROM joint: hrom_within_species_sv_ani.tsv.gz
-OAPGC: oapgc_within_species_sv.tsv.gz, after completion
+OAPGC: oapgc_within_species_sv.tsv.gz
 ```
 
 Both papers may use the same summaries, but main-text claims should not overlap:
@@ -391,8 +413,8 @@ Both papers may use the same summaries, but main-text claims should not overlap:
 Recommended order:
 
 1. **Finish GTDB merge/QC**, then lock Syn2b census numbers.
-2. **Finish OAPGC structural run**, merge and QC locally.
-3. **Run OAPGC ANI and cross-site contrast.**
+2. **Finish OAPGC ANI and cross-site contrast.**
+3. **Join OAPGC site and quality metadata.**
 4. **Finish GTDB streaming ANI**, then run a quality-adjusted GTDB joint summary.
 5. Submit **Syn2b** once GTDB structural merge and benchmark tables are final.
 6. Submit **Syn2bANI** after OAPGC and GTDB joint analyses are complete.
@@ -434,8 +456,7 @@ This paper is stronger as a **resource/analysis workflow** than as a purely synt
 
 1. Wait for GTDB structural merge to finish; validate exact row count against 711,020,841 and inspect `census_qc.md`.
 2. Monitor the streaming ANI large-cluster pass; do not cancel while tmp files and the SLURM job are active.
-3. Finish local OAPGC structural tasks, then run low-memory merge/QC.
-4. Run OAPGC skani ANI and attach site metadata.
+3. Finish OAPGC skani ANI and attach site/quality metadata.
 5. Build a GTDB quality-stratified species table after merge.
 6. Build the OAPGC oral–airway contrast after structural + ANI are complete.
 7. Freeze Syn2b census numbers only after GTDB and OAPGC merge QC pass.
