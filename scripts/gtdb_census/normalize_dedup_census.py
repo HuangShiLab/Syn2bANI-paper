@@ -65,7 +65,6 @@ def main():
                     if ia is None:
                         fields = line.rstrip("\n").split("\t")
                         ia, ib = fields.index("genome_A"), fields.index("genome_B")
-                        print("\t".join(fields), flush=True)
                     continue
                 total += 1
                 f = line.rstrip("\n").split("\t")
