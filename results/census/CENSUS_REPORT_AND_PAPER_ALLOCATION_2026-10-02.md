@@ -338,7 +338,7 @@ Median translocations:          48
 Median inversions:               2
 ```
 
-This supports the SNP-axis result in the strongest OAPGC species. The breakpoint correlation is positive but not significant in this small pilot, so SV-enriched species require long-read validation before biological interpretation.
+This supports the SNP-axis result in the strongest OAPGC species. The breakpoint correlation is positive but not significant in this small pilot, so SV-enriched species require long-read validation before biological interpretation. Parsnp was also tested for single-observation core-SNP phylogenies but failed on these fragmented multi-contig MAGs even after lowering MUM length and using the highest-N50 reference; pairwise dnadiff is therefore the more reliable Phase-2 validation route here.
 
 File:
 
