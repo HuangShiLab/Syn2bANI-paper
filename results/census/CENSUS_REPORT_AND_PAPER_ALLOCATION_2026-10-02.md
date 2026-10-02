@@ -16,7 +16,7 @@ This report applies the Supervisor-Skills framework as follows:
 
 | Database | Biological scope | Multi-genome clusters | Genomes analysed | Unique unordered pairs planned | Structural census | ANI layer |
 |---|---|---:|---:|---:|---|---|
-| **GTDB R207** | global bacterial/archaeal diversity | 22,535 | 274,374 | **711,020,841 planned; effective scope smaller** | Raw tasks complete; first merge exposed legacy cross-block duplicates and missing FASTA entries. Effective-scope normalization/global-dedup job running. | Streaming skani pass running; 21,965/22,535 cluster outputs done; two large clusters actively running. |
+| **GTDB R207** | global bacterial/archaeal diversity | 22,535 | 274,374 | **711,020,841 planned; 653,584,719 effective** | Raw tasks complete; first merge exposed legacy cross-block duplicates and missing FASTA entries. Effective scope is now 261,737 genomes in 21,973 clusters and 653,584,719 unique pairs. Normalization/global-dedup job running. | Streaming skani pass running; 21,965/22,535 cluster outputs done; two large clusters actively running. |
 | **HROM** | human gut | 2,241 | 142,277 | **62,872,901** | Complete; 0 missing tasks or clusters. | Complete; 62,872,901/62,872,901 pairs matched to skani ANI. |
 | **OAPGC** | oral and airway | 1,488 | 98,229 | **30,560,247** | Complete; exact QC passes at 30,560,247/30,560,247 pairs. | Running locally. |
 | **Combined planned** | — | — | — | **804,453,989** | — | — |
