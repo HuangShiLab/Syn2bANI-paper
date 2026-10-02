@@ -17,7 +17,7 @@ def _starmap_runner(args):
     return run_cluster(*args)
 
 
-def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1):
+def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1, sparse=False):
     paths = []
     for acc in accs:
         p = manifest.get(acc)
@@ -36,6 +36,7 @@ def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1):
     err_path.unlink(missing_ok=True)
     list_path.write_text("\n".join(paths) + "\n")
     cmd = [skani, "triangle", "-t", str(max(1, triangle_threads)), "-l", str(list_path)]
+    if sparse: cmd += ["-E", "--min-af", "5"]
     written = 0
     proc = None
     try:
@@ -48,38 +49,37 @@ def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1):
                 raise RuntimeError("skani produced no triangle header")
             n = int(header.strip())
 
-            # skani emits: N; path0; path1 value0; path2 value0 value1; ...
-            line = proc.stdout.readline()
-            if not line:
-                raise RuntimeError("missing genome path 0")
-            order = [Path(line.split("\t")[0]).stem]
             acc_for_stem = {Path(manifest[a]).stem: a
                             for a in accs if a in manifest}
-
-            row = 1
-            for line in proc.stdout:
-                if not line.strip():
-                    continue
-                fields = line.rstrip("\n").split("\t")
-                row_stem = Path(fields[0]).stem
-                values = fields[1:]
-                if len(values) != row:
-                    raise RuntimeError(
-                        f"expected {row} values on triangle row {row}, got {len(values)}")
-                for j, value in enumerate(values):
-                    a = acc_for_stem.get(order[j], order[j])
-                    b = acc_for_stem.get(row_stem, row_stem)
-                    if a == b:
-                        continue
-                    fh.write(f"{a}\t{b}\t{value}\n")
-                    written += 1
-                order.append(row_stem)
-                row += 1
-            if row != n:
-                raise RuntimeError(f"expected {n} triangle rows, got {row}")
-            ret = proc.wait()
-            if ret != 0:
-                raise subprocess.CalledProcessError(ret, cmd)
+            if sparse:
+                next(proc.stdout)
+                for line in proc.stdout:
+                    if not line.strip(): continue
+                    f=line.rstrip("\n").split("\t")
+                    a=Path(f[0]).stem; b=Path(f[1]).stem
+                    aa=acc_for_stem.get(a,a); bb=acc_for_stem.get(b,b)
+                    if aa==bb: continue
+                    if bb<aa: aa,bb=bb,aa
+                    fh.write(f"{aa}\t{bb}\t{f[2]}\n"); written+=1
+            else:
+                line=proc.stdout.readline()
+                if not line: raise RuntimeError("missing genome path 0")
+                order=[Path(line.split("\t")[0]).stem]
+                row=1
+                for line in proc.stdout:
+                    if not line.strip(): continue
+                    fields=line.rstrip("\n").split("\t")
+                    row_stem=Path(fields[0]).stem; values=fields[1:]
+                    if len(values)!=row:
+                        raise RuntimeError(f"expected {row} values on triangle row {row}, got {len(values)}")
+                    for j,value in enumerate(values):
+                        a=acc_for_stem.get(order[j],order[j]); b=acc_for_stem.get(row_stem,row_stem)
+                        if a==b: continue
+                        fh.write(f"{a}\t{b}\t{value}\n"); written+=1
+                    order.append(row_stem); row+=1
+                if row!=n: raise RuntimeError(f"expected {n} triangle rows, got {row}")
+            ret=proc.wait()
+            if ret!=0: raise subprocess.CalledProcessError(ret,cmd)
         os.replace(tmp, out)
         return cl_key, written
     except Exception as exc:
@@ -113,6 +113,7 @@ def main():
     ap.add_argument("--large-workers", type=int, default=2)
     ap.add_argument("--large-triangle-threads", type=int, default=1)
     ap.add_argument("--small-triangle-threads", type=int, default=1)
+    ap.add_argument("--large-sparse", action="store_true")
     args = ap.parse_args()
     root = Path(args.workdir)
     outdir = root / "ani"
@@ -135,7 +136,7 @@ def main():
 
     large_workers = max(1, min(args.large_workers, args.workers))
     large_args = [(args.skani, cl, accs, manifest, outdir,
-                   args.large_triangle_threads) for cl, accs in large]
+                   args.large_triangle_threads, args.large_sparse) for cl, accs in large]
     with mp.Pool(large_workers) as pool:
         for cl, n in pool.imap_unordered(_starmap_runner,
                                          large_args, chunksize=1):
