@@ -348,6 +348,28 @@ results/census/oapgc/phase2_dnadiff/dnadiff_vs_syn2b.tsv
 
 ---
 
+## 5c. HROM repair-gene screen
+
+EggNOG annotation was screened across the 93 HROM ANI-enriched candidate species (17,591 genomes). A conservative canonical MMR definition required MutS, MutL, and MutH.
+
+```text
+species with complete canonical MMR:  9 / 93
+species missing ≥1 core MMR component: 84 / 93
+species missing MutS:                  28 / 93
+species missing MutL:                  22 / 93
+species missing MutH:                  84 / 93
+```
+
+This screen identifies candidate repair-deficient lineages, especially because several Bacteroidetes lack the canonical MutH component. It is not sufficient by itself to call hypermutators: many species use non-canonical or divergent repair systems, EggNOG may miss distant homologues, and gene presence does not prove loss of function. Candidate lineages now require branch-specific SNP-rate estimation, mutation-spectrum analysis, repair-gene lesion inspection, and mutation accumulation/passaging.
+
+Files:
+
+```text
+results/census/hrom/repair_screen/hrom_ani_enriched_repair_presence_absence.tsv
+```
+
+---
+
 ## 5. Quality-aware framework for cross-species comparison
 
 Because GTDB and HROM both show strong quality dependence, cross-species analyses should use the following standard.
