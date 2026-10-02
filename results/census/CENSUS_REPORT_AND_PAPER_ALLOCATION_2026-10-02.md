@@ -254,6 +254,48 @@ The structural run is complete and QC passes. The required next steps are:
 
 ---
 
+## 5. OAPGC oral–airway joint result
+
+The completed joint pair table contains 30,559,312 informative pairs after excluding 935 uninformative breakpoint rows. Site labels were available for 1,264,327 oral–airway pairs and 16,067,030 within-site pairs among 200 eligible species (≥30 oral–airway pairs, ≥30 within-site pairs, and ≥100 total pairs).
+
+Species-level Mann–Whitney AUC tests compare oral–airway pairs against within-site pairs. AUC >0.5 means oral–airway pairs have higher values than within-site pairs.
+
+| Axis | Median species AUC | Species with AUC >0.5 | Species with FDR <0.05 | Direction among FDR-significant species |
+|---|---:|---:|---:|---|
+| SNP distance (`100−ANI`) | 0.574 | 143/200 | 150/200 | 119 higher, 31 lower |
+| Breakpoint count | 0.494 | 93/200 | 139/200 | 65 higher, 74 lower |
+
+Overall sign tests:
+
+```text
+SNP axis: 143/200 species have oral–airway AUC >0.5, p=1.03e-09
+SV axis:   93/200 species have oral–airway AUC >0.5, p=0.358
+```
+
+Sensitivity analyses support the same direction:
+
+| Stratum | Species | Median SNP AUC | Median breakpoint AUC |
+|---|---:|---:|---:|
+| min N50 ≥10 kb | 197 | 0.575 | 0.502 |
+| min N50 ≥100 kb | 52 | 0.635 | 0.504 |
+
+For ANI ≥99.9%, only 49 oral–airway pairs remain and no species passes the ≥30 oral–airway / ≥30 within-site eligibility threshold. Thus, the recent-strain subset is underpowered.
+
+**Current OAPGC inference:** oral–airway related genome pairs are significantly enriched for sequence divergence, while there is no consistent global excess of structural variation after N50 stratification. This supports a SNP/sequence-divergence-dominated pattern in the detectable OAPGC data, but it is not yet a migration-direction claim, and long-read/core-SNP/recombination validation is still required.
+
+Files:
+
+```text
+results/census/oapgc/site_effects/overall_all_pairs.tsv
+results/census/oapgc/site_effects/overall_n50_ge10kb.tsv
+results/census/oapgc/site_effects/overall_n50_ge100kb.tsv
+results/census/oapgc/site_effects/species_effects_all_pairs.tsv
+results/census/oapgc/site_effects/species_effects_n50_ge10kb.tsv
+results/census/oapgc/site_effects/species_effects_n50_ge100kb.tsv
+```
+
+---
+
 ## 5. Quality-aware framework for cross-species comparison
 
 Because GTDB and HROM both show strong quality dependence, cross-species analyses should use the following standard.

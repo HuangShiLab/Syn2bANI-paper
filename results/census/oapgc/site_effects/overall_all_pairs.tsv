@@ -1,0 +1,10 @@
+metric	value
+species_tested	200
+median_SNP_auc	0.5737193778971896
+median_BP_auc	0.49415237243802246
+species_OA_higher_SNP	143
+species_OA_higher_BP	93
+sign_test_SNP_p	1.02991938348376e-09
+sign_test_BP_p	0.35800309062450203
+n_OA_pairs	1264327
+n_within_pairs	16067030
