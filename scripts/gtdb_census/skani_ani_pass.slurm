@@ -4,7 +4,7 @@
 #SBATCH --qos=normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=96G
 #SBATCH --time=3-00:00:00
 #SBATCH --mail-type=FAIL
@@ -13,8 +13,9 @@
 set -euo pipefail
 L=/lustre1/g/aos_shihuang
 cd "$L/Syn2b-paper"
-python3 "$L/Syn2b-paper/scripts/gtdb_census/skani_ani_pass.py" \
+python3 scripts/gtdb_census/skani_ani_pass.py \
   --workdir "$L/data/syn2b_census" \
   --skani "$L/tools/bin/skani" \
-  --workers 8 --large-threshold 1000 --large-workers 2
+  --workers 8 --large-threshold 1000 --large-workers 2 \
+  --large-triangle-threads 8 --small-triangle-threads 2
 echo ANI-STREAM-PASS-DONE
