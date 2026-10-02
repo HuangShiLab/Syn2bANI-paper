@@ -218,6 +218,17 @@ mean breakpoints:                  3.028136
 
 There are 935 non-numeric/uninformative breakpoint rows; they remain in the denominator but do not contribute to the SV-positive count. The largest absolute burdens include SGB0588, SGB0150, SGB0623, SGB0976, and SGB0583.
 
+Although all OAPGC representatives pass the catalog’s high-quality completeness/contamination cutoff, SV detection remains strongly contiguity-dependent:
+
+| Minimum pair N50 | Pairs | % breakpoints ≥2 |
+|---|---:|---:|
+| <10 kb | 4,716,590 | 31.67% |
+| 10–100 kb | 22,602,503 | 51.01% |
+| ≥100 kb | 3,240,219 | 68.67% |
+| All informative pairs | 30,559,312 | 49.90% |
+
+Thus, the higher OAPGC prevalence should not be interpreted as purely biological without N50 stratification.
+
 OAPGC site/quality metadata are now linked for all 99,215 representatives from Nature Supplementary Data 2/5 and the public cluster table. All representatives pass completeness ≥90% and contamination ≤5%, but N50 spans 1,167 bp to 7.66 Mb, so contiguity stratification remains essential. Site labels are available for 75,243 genomes (72,497 oral cavity, 2,746 airway); 23,972 isolate representatives lack a public site label in the supplement. The first cross-site analysis should therefore use the labelled subset and report sensitivity to this restriction. Biological interpretation additionally requires ANI.
 
 OAPGC is the oral and airway resource intended to answer whether same-species genomes from different body sites differ more by sequence divergence or structural variation.
