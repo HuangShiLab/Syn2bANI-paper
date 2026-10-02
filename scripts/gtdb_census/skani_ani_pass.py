@@ -131,10 +131,6 @@ def main():
     print(f"{len(jobs)} clusters; {len(large)} large; {len(small)} small",
           flush=True)
 
-    def task_args(items):
-        return [(args.skani, cl, accs, manifest, outdir)
-                for cl, accs in items]
-
     large_workers = max(1, min(args.large_workers, args.workers))
     with mp.Pool(large_workers) as pool:
         for cl, n in pool.imap_unordered(_starmap_runner,

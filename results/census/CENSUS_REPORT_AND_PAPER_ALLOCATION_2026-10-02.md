@@ -324,6 +324,30 @@ results/census/hrom/quality_stratified/orthogonal_validation_pairs_top20.tsv
 
 ---
 
+## 5b. Phase-2 OAPGC orthogonal validation pilot
+
+For the ten strongest SNP-enriched oral–airway species (SNP AUC ≥0.78), we selected the highest-N50 oral and airway representative and reanalysed each pair with MUMmer/dnadiff.
+
+```text
+Syn2b SNP distance vs dnadiff total SNPs: Spearman rho=0.648, p=0.043
+Syn2b breakpoints vs dnadiff breakpoints: Spearman rho=0.548, p=0.101
+Median dnadiff SNPs:       58,957
+Median dnadiff breakpoints:    498
+Median relocations:              5
+Median translocations:          48
+Median inversions:               2
+```
+
+This supports the SNP-axis result in the strongest OAPGC species. The breakpoint correlation is positive but not significant in this small pilot, so SV-enriched species require long-read validation before biological interpretation.
+
+File:
+
+```text
+results/census/oapgc/phase2_dnadiff/dnadiff_vs_syn2b.tsv
+```
+
+---
+
 ## 5. Quality-aware framework for cross-species comparison
 
 Because GTDB and HROM both show strong quality dependence, cross-species analyses should use the following standard.

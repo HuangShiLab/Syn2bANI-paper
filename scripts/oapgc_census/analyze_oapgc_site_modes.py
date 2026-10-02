@@ -90,7 +90,7 @@ def main():
     summary_path=Path(a.out_prefix+"_species_site_summary.tsv")
     audit_path=Path(a.out_prefix+"_audit.tsv")
     reservoirs=collections.defaultdict(lambda: collections.defaultdict(list))
-    exact=collections.defaultdict(lambda: collections.defaultdict(lambda: collections.Counter()))
+    exact=collections.defaultdict(lambda: collections.defaultdict(int))
     counts=collections.Counter()
     with gzip.open(pair_path,"wt") as out:
         out.write("cluster\tgenome_A\tgenome_B\tsite_pair\tANI\tSNP_distance\tbreakpoints\tge2\tbreakpoint_density\tobservable_adjacencies\tstructural\n")

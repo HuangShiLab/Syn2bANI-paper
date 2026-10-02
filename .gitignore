@@ -54,3 +54,6 @@ case_studies/fda_argos/*.zip
 # HROM large pair tables are archived locally and later deposited to Zenodo
 data/census_hrom_large/
 paper/manuscript/.Rhistory
+skani_matrix.af
+results/census/hrom/phase2_dnadiff/*/
+results/census/oapgc/phase2_dnadiff/*/
