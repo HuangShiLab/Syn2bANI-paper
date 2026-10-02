@@ -296,6 +296,34 @@ results/census/oapgc/site_effects/species_effects_n50_ge100kb.tsv
 
 ---
 
+## 5a. Phase-2 HROM orthogonal validation pilot
+
+We selected 20 high-confidence HROM candidates: 10 SV-enriched species (closest strain, ANI ≥99%, maximum Syn2b breakpoints) and 10 ANI-enriched species (lowest ANI with Syn2b breakpoints <2). Each selected pair was reanalysed with MUMmer/dnadiff.
+
+Results:
+
+```text
+skani ANI vs dnadiff AvgIdentity: Spearman rho=0.915, p=1.55e-08
+Syn2b breakpoints vs dnadiff breakpoints: Spearman rho=-0.357, p=0.123
+Median dnadiff breakpoints: SV-candidate pairs 478; ANI-candidate pairs 651
+Median dnadiff SNPs:          SV-candidate pairs 9,986; ANI-candidate pairs 59,582
+```
+
+Interpretation:
+
+- The ANI channel validates strongly against dnadiff.
+- The preliminary breakpoint validation is not sufficient and suggests assembly/selection confounding. Several ANI-selected pairs had substantial dnadiff breakpoints after quality inspection, and Syn2b breakpoint correlation was not significant in this small, extremal subset.
+- Therefore these data do **not** yet support direct hyper-recombinator calls. They reinforce the need for N50/completeness-stratified validation and long-read confirmation.
+
+Files:
+
+```text
+results/census/hrom/phase2_dnadiff/dnadiff_vs_syn2b.tsv
+results/census/hrom/quality_stratified/orthogonal_validation_pairs_top20.tsv
+```
+
+---
+
 ## 5. Quality-aware framework for cross-species comparison
 
 Because GTDB and HROM both show strong quality dependence, cross-species analyses should use the following standard.

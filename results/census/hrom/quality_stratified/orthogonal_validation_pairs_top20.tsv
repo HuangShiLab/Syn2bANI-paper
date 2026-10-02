@@ -1,0 +1,21 @@
+cluster	species	mode	selection_reason	genome_A	genome_B	skani_ani	breakpoints	breakpoint_density	observable_adjacencies
+HROM_Genome_1047	Alloprevotella sp900095835 [HROM_Genome_1047]	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_1047	HROM_Genome_1047_80	99.140000	5	0.00183	2601
+HROM_Genome_4822	Neisseria sp000186165	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_4822	HROM_Genome_4822_69	99.050000	4	0.00145	2617
+HROM_Genome_2727	Centipeda noxia	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_2727	HROM_Genome_2727_126	99.540000	3	0.00084	3470
+HROM_Genome_2925	HOT-345 sp013333295	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_2925	HROM_Genome_2925_189	99.000000	3	0.00361	800
+HROM_Genome_4990	HROM_Genome_4990	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_4990	HROM_Genome_4990_110	99.280000	3	0.00253	1160
+HROM_Genome_1004	Prevotella nanceiensis	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_1004	HROM_Genome_1004_1545	99.890000	2	0.00083	1525
+HROM_Genome_3421	HROM_Genome_3421	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_3421	HROM_Genome_3421_43	99.650000	2	0.00164	1202
+HROM_Genome_1045	Alloprevotella sp000318095	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_1045	HROM_Genome_1045_21	99.580000	1	0.00030	3162
+HROM_Genome_1055	Alloprevotella sp905369775	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_1055	HROM_Genome_1055_31	99.270000	1	0.00026	3791
+HROM_Genome_2934	GN02-872 sp003260325	structural_enriched	max_breakpoints_ani_ge99	HROM_Genome_2934	HROM_Genome_2934_317	99.030000	1	0.00155	280
+HROM_Genome_3463	Nanosynbacter sp900557595	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_3463	HROM_Genome_3463_66	94.610000	0	0.00000	176
+HROM_Genome_4824	Neisseria sicca_A	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_4824	HROM_Genome_4824_52	94.720000	1	0.00117	732
+HROM_Genome_0392	Arachnia sp013333945	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_0392	HROM_Genome_0392_99	95.300000	0	0.00000	1109
+HROM_Genome_0266	Pauljensenia sp000185285	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_0266	HROM_Genome_0266_34	95.320000	0	0.00000	1116
+HROM_Genome_4964	Aggregatibacter segnis_A	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_4964	HROM_Genome_4964_12	95.360000	1	0.00187	519
+HROM_Genome_4930	Haemophilus_A paraphrohaemolyticus	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_4930	HROM_Genome_4930_59	95.380000	0	0.00000	254
+HROM_Genome_0387	Arachnia propionica	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_0387	HROM_Genome_0387_75	95.420000	0	0.00000	1692
+HROM_Genome_1226	HROM_Genome_1226	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_1226	HROM_Genome_1226_20	95.660000	1	0.00143	664
+HROM_Genome_1185	HROM_Genome_1185	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_1185	HROM_Genome_1185_33	95.700000	0	0.00000	272
+HROM_Genome_1522	Campylobacter_A showae_A [HROM_Genome_1522]	ani_enriched	max_SNP_distance_bp_lt2	HROM_Genome_1522	HROM_Genome_1522_94	95.700000	0	0.00000	455
