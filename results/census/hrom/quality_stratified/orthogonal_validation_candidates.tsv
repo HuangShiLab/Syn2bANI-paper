@@ -1,0 +1,154 @@
+cluster	species	mode	hq_pairs	hq_struct_top	hq_ani_top	hq_struct_q	hq_ani_q	all_pairs	all_mode	stable_flag
+HROM_Genome_0999	Prevotella pallens	ani_enriched	1142316	565	320776	1.0	0.0	2293115	ani_enriched	1
+HROM_Genome_1157	Prevotella shahii	ani_enriched	148240	1542	26478	1.0	0.0	275067	both_enriched	0
+HROM_Genome_0997	Prevotella nigrescens	ani_enriched	132355	799	8913	1.0	9.139425684390372e-169	589587	ani_enriched	1
+HROM_Genome_1931	Peptostreptococcus sp900759325	ani_enriched	94226	2	7867	1.0	0.0	202444	ani_enriched	1
+HROM_Genome_1711	F0428 sp003043955	ani_enriched	92235	4608	79033	0.5247436224361357	0.0	186075	ani_enriched	1
+HROM_Genome_1209	HROM_Genome_1209	ani_enriched	90092	8223	38043	0.0	0.0	128546	both_enriched	0
+HROM_Genome_1032	Prevotella pleuritidis	ani_enriched	85905	17145	84630	0.0	0.0	188660	ani_enriched	1
+HROM_Genome_0346	Peptidiphaga sp000466165	ani_enriched	50721	9902	50713	0.0	0.0	123753	ani_enriched	1
+HROM_Genome_0971	Prevotella denticola	ani_enriched	49770	540	3450	1.0	8.990203978111088e-79	154719	both_enriched	0
+HROM_Genome_1106	Porphyromonas gingivalis	ani_enriched	34980	365	27603	1.0	0.0	56953	ani_enriched	1
+HROM_Genome_1217	HROM_Genome_1217	ani_enriched	27261	239	2583	1.0	8.116272641827214e-203	59753	both_enriched	0
+HROM_Genome_2553	Streptococcus mutans	ani_enriched	18145	2769	17987	0.0	0.0	27261	ani_enriched	1
+HROM_Genome_1109	Tannerella forsythia	ani_enriched	17205	1477	17029	1.9693842185961947e-86	0.0	54285	ani_enriched	1
+HROM_Genome_1226	HROM_Genome_1226	ani_enriched	10811	21	924	1.0	5.0124009019032137e-54	28737	ani_enriched	1
+HROM_Genome_4850	CAJPNX01 sp905372165	ani_enriched	9870	183	956	1.0	4.567329956733418e-81	29399	not_enriched	0
+HROM_Genome_1522	Campylobacter_A showae_A [HROM_Genome_1522]	ani_enriched	8778	95	663	1.0	7.42090588225928e-25	21894	ani_enriched	1
+HROM_Genome_5100	HROM_Genome_5100	ani_enriched	8128	56	4771	1.0	0.0	17245	ani_enriched	1
+HROM_Genome_0315	Actinomyces sp000220835	ani_enriched	8001	538	8001	8.849722061236189e-12	0.0	25651	ani_enriched	1
+HROM_Genome_1943	Eubacterium_M brachy	ani_enriched	7875	2416	7587	0.0	0.0	19390	ani_enriched	1
+HROM_Genome_1216	Capnocytophaga sp905372595	ani_enriched	7381	9	463	1.0	7.220697043148629e-07	52860	ani_enriched	1
+HROM_Genome_1185	HROM_Genome_1185	ani_enriched	6903	38	476	1.0	4.087633982499479e-12	22035	ani_enriched	1
+HROM_Genome_1965	Parvimonas sp015257355	ani_enriched	6441	886	2319	1.3084393297030231e-158	0.0	16337	both_enriched	0
+HROM_Genome_0389	Arachnia rubra	ani_enriched	5671	1317	3948	0.0	0.0	11935	both_enriched	0
+HROM_Genome_2711	HROM_Genome_2711	ani_enriched	5460	1202	3618	0.0	0.0	10878	both_enriched	0
+HROM_Genome_0392	Arachnia sp013333945	ani_enriched	4950	407	1721	7.0933180734333e-22	0.0	13861	ani_enriched	1
+HROM_Genome_4963	Aggregatibacter kilianii	ani_enriched	4560	147	1074	0.9999999981745248	0.0	12383	ani_enriched	1
+HROM_Genome_2645	Metamycoplasma salivarium	ani_enriched	4510	584	3952	1.1167074405698964e-94	0.0	5456	ani_enriched	1
+HROM_Genome_0387	Arachnia propionica	ani_enriched	4278	176	1570	0.9971623804204558	0.0	18129	ani_enriched	1
+HROM_Genome_4816	Simonsiella muelleri	ani_enriched	4095	32	1938	1.0	0.0	11664	ani_enriched	1
+HROM_Genome_0250	Pauljensenia odontolytica_A	ani_enriched	3486	75	1670	1.0	0.0	14535	ani_enriched	1
+HROM_Genome_0351	HROM_Genome_0351	ani_enriched	3240	701	3233	3.520530194283427e-236	0.0	6445	ani_enriched	1
+HROM_Genome_1704	HROM_Genome_1704	ani_enriched	2926	275	2084	8.080437110469883e-23	0.0	9790	ani_enriched	1
+HROM_Genome_2708	CAJPQU01 sp905372875	ani_enriched	2926	108	391	0.999702568707105	1.0498773948328048e-67	6354	ani_enriched	1
+HROM_Genome_2040	Bulleidia extructa	ani_enriched	2775	173	2629	0.002187519849586002	0.0	6425	ani_enriched	1
+HROM_Genome_0998	Prevotella aurantiaca	ani_enriched	2701	24	1097	1.0	0.0	13861	ani_enriched	1
+HROM_Genome_5041	HROM_Genome_5041	ani_enriched	2556	14	1028	1.0	0.0	8643	ani_enriched	1
+HROM_Genome_1932	Peptostreptococcus stomatis	ani_enriched	2445	0	147	1.0	0.01394980112166701	5147	ani_enriched	1
+HROM_Genome_0242	Pauljensenia hongkongensis	ani_enriched	2346	4	319	1.0	2.8248823733902426e-57	36853	ani_enriched	1
+HROM_Genome_2854	Anaeroglobus geminatus	ani_enriched	2278	171	1716	1.709589131222377e-07	0.0	5535	ani_enriched	1
+HROM_Genome_1369	HROM_Genome_1369	ani_enriched	2232	104	526	0.7826640695192021	1.9140305835776874e-195	3842	ani_enriched	1
+HROM_Genome_0965	Prevotella sp905372445	ani_enriched	2211	18	2172	1.0	0.0	8128	ani_enriched	1
+HROM_Genome_1035	Prevotella micans	ani_enriched	2211	1	387	1.0	4.5111604628104846e-101	5297	ani_enriched	1
+HROM_Genome_4930	Haemophilus_A paraphrohaemolyticus	ani_enriched	2211	38	277	0.9999999999999999	2.774332318852967e-43	7585	ani_enriched	1
+HROM_Genome_2905	HROM_Genome_2905	ani_enriched	2080	41	814	0.9999999999997712	0.0	3559	ani_enriched	1
+HROM_Genome_4964	Aggregatibacter segnis_A	ani_enriched	2080	79	229	0.996104041468558	5.140158178728506e-28	9481	ani_enriched	1
+HROM_Genome_0011	Rothia mucilaginosa [HROM_Genome_0011]	ani_enriched	1711	537	1403	6.575782910329153e-265	0.0	4278	ani_enriched	1
+HROM_Genome_0311	Actinomyces naeslundii	ani_enriched	1711	62	205	0.9973264469191605	6.257563170215321e-30	14143	ani_enriched	1
+HROM_Genome_0353	Alloscardovia omnicolens	ani_enriched	1653	641	1535	0.0	0.0	3828	ani_enriched	1
+HROM_Genome_2574	HROM_Genome_2574	ani_enriched	1653	0	100	1.0	0.03133150739811524	5344	not_enriched	0
+HROM_Genome_2043	Bulleidia moorei	ani_enriched	1596	0	995	1.0	0.0	3457	ani_enriched	1
+HROM_Genome_0262	Pauljensenia sp000466265 [HROM_Genome_0262]	ani_enriched	1485	19	510	0.9999999999999982	9.231572197922855e-273	7626	ani_enriched	1
+HROM_Genome_1706	Johnsonella sp900766185	ani_enriched	1326	2	110	1.0	2.6491132635457884e-07	8577	ani_enriched	1
+HROM_Genome_2548	Streptococcus sobrinus	ani_enriched	1275	26	1273	0.9999999850744488	0.0	1770	ani_enriched	1
+HROM_Genome_1208	Bergeyella_A cardium	ani_enriched	1176	183	963	1.7293550833252196e-41	0.0	1970	ani_enriched	1
+HROM_Genome_1910	Mogibacterium timidum	ani_enriched	1035	101	1029	2.597092567804134e-10	0.0	5151	ani_enriched	1
+HROM_Genome_2884	HROM_Genome_2884	ani_enriched	1035	0	516	1.0	0.0	3050	ani_enriched	1
+HROM_Genome_4851	Neisseria bacilliformis	ani_enriched	990	5	171	1.0	6.0684636380201e-45	3788	ani_enriched	1
+HROM_Genome_4961	Aggregatibacter aphrophilus	ani_enriched	903	26	79	0.9993853269298166	1.6417511722868268e-06	2598	both_enriched	0
+HROM_Genome_2697	Staphylococcus aureus	ani_enriched	861	50	358	0.15647641197178297	2.1575468802755643e-225	962	both_enriched	0
+HROM_Genome_0266	Pauljensenia sp000185285	ani_enriched	861	11	178	0.9999999991947425	2.3649902760988262e-58	6197	ani_enriched	1
+HROM_Genome_4959	Mesocricetibacter sp905373425	ani_enriched	861	5	57	0.9999999999999873	0.02100176481814661	12859	ani_enriched	1
+HROM_Genome_2902	HROM_Genome_2902	ani_enriched	820	5	371	0.9999999999999146	9.879857455049473e-250	1360	ani_enriched	1
+HROM_Genome_2756	Allisonella pneumosintes	ani_enriched	703	122	703	8.703329238610244e-33	0.0	3873	ani_enriched	1
+HROM_Genome_0399	Propionibacterium acidifaciens	ani_enriched	703	157	598	2.3035080685842255e-56	0.0	1649	ani_enriched	1
+HROM_Genome_0360	Bifidobacterium dentium	ani_enriched	666	102	445	2.2092331332763977e-23	0.0	2145	ani_enriched	1
+HROM_Genome_1078	Bacteroides_D periocalifornicus [HROM_Genome_1078]	ani_enriched	630	0	95	1.0	2.0502671071154443e-21	1864	ani_enriched	1
+HROM_Genome_2058	Limosilactobacillus fermentum	ani_enriched	595	2	393	0.9999999999982021	0.0	1163	ani_enriched	1
+HROM_Genome_4824	Neisseria sicca_A	ani_enriched	595	0	97	1.0	2.4326280736685408e-24	3988	ani_enriched	1
+HROM_Genome_1933	Filifactor alocis	ani_enriched	595	0	61	1.0	1.4297354094613063e-07	3009	ani_enriched	1
+HROM_Genome_1701	HROM_Genome_1701	ani_enriched	593	2	492	0.9999999999980144	0.0	1381	ani_enriched	1
+HROM_Genome_0391	Arachnia sp905372155	ani_enriched	561	4	224	0.9999999984936504	3.3548074870245535e-137	1953	ani_enriched	1
+HROM_Genome_3463	Nanosynbacter sp900557595	ani_enriched	535	24	56	0.7347135557175042	2.294170485492941e-07	1007	both_enriched	0
+HROM_Genome_4818	HROM_Genome_4818	ani_enriched	528	0	85	1.0	3.5220046356243036e-21	2733	ani_enriched	1
+HROM_Genome_0397	HROM_Genome_0397	ani_enriched	465	141	465	7.994619442602787e-69	0.0	1203	ani_enriched	1
+HROM_Genome_5023	HROM_Genome_5023	ani_enriched	465	7	160	0.9999834440374236	4.643788213542411e-87	1347	ani_enriched	1
+HROM_Genome_1937	HROM_Genome_1937	ani_enriched	465	10	99	0.9994565183948915	2.261426285652006e-34	729	ani_enriched	1
+HROM_Genome_2037	Eggerthia catenaformis	ani_enriched	406	4	306	0.9999983164409384	5.455934598023307e-304	1149	ani_enriched	1
+HROM_Genome_1940	HROM_Genome_1940	ani_enriched	406	0	297	1.0	2.3892102306321945e-288	823	ani_enriched	1
+HROM_Genome_0356	Parascardovia denticolens	ani_enriched	378	60	348	3.730335498992294e-15	0.0	611	ani_enriched	1
+HROM_Genome_2910	HROM_Genome_2910	ani_enriched	325	136	322	3.018440726151599e-87	0.0	435	ani_enriched	1
+HROM_Genome_2757	Dialister micraerophilus	ani_enriched	325	107	300	1.2223409136866317e-56	0.0	857	ani_enriched	1
+HROM_Genome_0384	Cutibacterium acnes	ani_enriched	325	16	195	0.5609928233025636	1.1423519281930739e-163	595	ani_enriched	1
+HROM_Genome_1213	Capnocytophaga sp000466425	ani_enriched	300	0	38	1.0	1.8173277703879227e-07	1891	ani_enriched	1
+HROM_Genome_0348	HROM_Genome_0348	ani_enriched	253	50	253	8.814251021824451e-17	0.0	741	ani_enriched	1
+HROM_Genome_5043	HROM_Genome_5043	ani_enriched	253	0	41	1.0	3.8168342173230576e-11	2016	ani_enriched	1
+HROM_Genome_3420	Saccharimonas sp013333675	ani_enriched	253	5	25	0.9959057580381814	0.0010181353287062591	378	both_enriched	0
+HROM_Genome_1375	HROM_Genome_1375	ani_enriched	231	42	152	4.550325197925326e-13	4.727421604307438e-137	820	ani_enriched	1
+HROM_Genome_3289	Saccharimonas sp905373835 [HROM_Genome_3289]	ani_enriched	231	37	82	4.627672448414723e-10	1.0806298827412403e-46	351	both_enriched	0
+HROM_Genome_1531	Campylobacter_A showae_A [HROM_Genome_1531]	ani_enriched	231	6	57	0.975780681866336	7.528533519408224e-24	692	ani_enriched	1
+HROM_Genome_2894	HROM_Genome_2894	ani_enriched	231	2	23	0.9999059592635618	0.0014273035909025146	2011	ani_enriched	1
+HROM_Genome_1946	Hornefia nodata	ani_enriched	210	0	99	1.0	3.612553806557992e-70	528	ani_enriched	1
+HROM_Genome_0324	Actinomyces massiliensis	ani_enriched	210	0	31	1.0	7.784976067084688e-08	22578	ani_enriched	1
+HROM_Genome_1079	Bacteroides_D periocalifornicus [HROM_Genome_1079]	ani_enriched	210	1	28	0.999979013775703	2.5518859181827927e-06	693	ani_enriched	1
+HROM_Genome_4892	Lautropia mirabilis [HROM_Genome_4892]	structural_enriched	846951	201492	1576	0.0	1.0	2382702	structural_enriched	1
+HROM_Genome_0381	Corynebacterium matruchotii	structural_enriched	796947	43671	1673	1.0782951071098298e-87	1.0	1599189	structural_enriched	1
+HROM_Genome_1004	Prevotella nanceiensis	structural_enriched	616605	93584	5010	0.0	1.0	1727861	structural_enriched	1
+HROM_Genome_1055	Alloprevotella sp905369775	structural_enriched	558096	153096	1807	0.0	1.0	1365109	structural_enriched	1
+HROM_Genome_3572	SDRW01 sp007845485	structural_enriched	259324	29359	3238	0.0	1.0	363087	structural_enriched	1
+HROM_Genome_1126	Porphyromonas endodontalis [HROM_Genome_1126]	structural_enriched	235638	26972	4513	0.0	1.0	457328	structural_enriched	1
+HROM_Genome_0004	Rothia mucilaginosa [HROM_Genome_0004]	structural_enriched	185136	15806	82	0.0	1.0	434888	structural_enriched	1
+HROM_Genome_1673	Butyrivibrio sp015258065	structural_enriched	118828	12097	276	0.0	1.0	227913	structural_enriched	1
+HROM_Genome_1911	Mogibacterium diversum	structural_enriched	113526	14163	329	0.0	1.0	369179	structural_enriched	1
+HROM_Genome_4822	Neisseria sp000186165	structural_enriched	111628	6422	2614	5.377553619136026e-30	1.0	222454	structural_enriched	1
+HROM_Genome_3822	Nanogingivalis sp015257795 [HROM_Genome_3822]	structural_enriched	87235	6954	1635	5.160965533596615e-305	1.0	131184	structural_enriched	1
+HROM_Genome_1046	Alloprevotella sp015259235	structural_enriched	74305	20062	1348	0.0	1.0	183087	structural_enriched	1
+HROM_Genome_1007	Prevotella sp013333285	structural_enriched	66430	3573	904	4.764557043558897e-06	1.0	223930	structural_enriched	1
+HROM_Genome_2925	HOT-345 sp013333295	structural_enriched	54508	3217	656	2.395714471893469e-21	1.0	81992	structural_enriched	1
+HROM_Genome_1006	Prevotella sp015256945	structural_enriched	50086	5381	1905	0.0	1.0	135558	structural_enriched	1
+HROM_Genome_0006	Rothia mucilaginosa_A	structural_enriched	37401	3737	161	0.0	1.0	199302	structural_enriched	1
+HROM_Genome_1710	Oribacterium sp015258095	structural_enriched	31878	1854	54	3.5065918205645854e-11	1.0	115311	structural_enriched	1
+HROM_Genome_2928	GN02-873 sp003260345	structural_enriched	28790	5381	1008	0.0	1.0	42255	structural_enriched	1
+HROM_Genome_2727	Centipeda noxia	structural_enriched	26335	5680	2469	0.0	3.388825965307001e-188	102378	both_enriched	0
+HROM_Genome_2934	GN02-872 sp003260325	structural_enriched	26176	4265	1199	0.0	0.9992355023740057	55756	both_enriched	0
+HROM_Genome_1956	CAG-793 sp013333395	structural_enriched	23425	2233	79	1.3283955678792695e-178	1.0	32032	structural_enriched	1
+HROM_Genome_1093	Porphyromonas sp018127745 [HROM_Genome_1093]	structural_enriched	19503	1291	222	2.0029255107111832e-23	1.0	51771	structural_enriched	1
+HROM_Genome_1047	Alloprevotella sp900095835 [HROM_Genome_1047]	structural_enriched	14028	2079	137	0.0	1.0	44347	structural_enriched	1
+HROM_Genome_1088	Porphyromonas catoniae	structural_enriched	13695	1181	333	1.467843502979224e-70	1.0	108701	not_enriched	0
+HROM_Genome_0013	Rothia mucilaginosa_B [HROM_Genome_0013]	structural_enriched	12403	686	20	0.003948068245796635	1.0	43693	structural_enriched	1
+HROM_Genome_2754	Veillonella sp900550455	structural_enriched	12090	3887	527	0.0	0.9995494418401766	21273	structural_enriched	1
+HROM_Genome_4990	HROM_Genome_4990	structural_enriched	11325	3150	1165	0.0	8.165785883360206e-115	16931	structural_enriched	1
+HROM_Genome_1082	Bacteroides_D sp013333195	structural_enriched	10296	950	19	2.2727277258039934e-70	1.0	36858	structural_enriched	1
+HROM_Genome_1003	HROM_Genome_1003	structural_enriched	10153	1102	179	2.043761428672174e-123	1.0	20075	structural_enriched	1
+HROM_Genome_3430	Nanosynbacter sp900556355 [HROM_Genome_3430]	structural_enriched	9704	614	90	4.227236368295341e-09	1.0	11793	structural_enriched	1
+HROM_Genome_4498	HROM_Genome_4498	structural_enriched	7881	625	19	1.4004069346108163e-28	1.0	15129	structural_enriched	1
+HROM_Genome_0211	Scardovia wiggsiae	structural_enriched	5995	1296	75	0.0	1.0	25764	structural_enriched	1
+HROM_Genome_4479	Nanosyncoccus sp013332965 [HROM_Genome_4479]	structural_enriched	5800	661	4	2.9841809765072048e-83	1.0	9953	structural_enriched	1
+HROM_Genome_3821	Nanogingivalis sp900555945	structural_enriched	5478	1578	343	0.0	1.980101955938179e-05	13504	structural_enriched	1
+HROM_Genome_3282	SDRW01 sp013333595 [HROM_Genome_3282]	structural_enriched	4753	520	8	2.3027557053331367e-60	1.0	10047	structural_enriched	1
+HROM_Genome_1125	HROM_Genome_1125	structural_enriched	4005	1479	138	0.0	0.9999992057516695	6870	structural_enriched	1
+HROM_Genome_1053	Alloprevotella sp003639005	structural_enriched	3570	295	31	1.2861046216975386e-16	1.0	22155	structural_enriched	1
+HROM_Genome_0350	Peptidiphaga sp905373325	structural_enriched	3486	688	91	6.954841844822339e-208	0.9999999999995123	9909	structural_enriched	1
+HROM_Genome_3819	SDRK01 sp007845205	structural_enriched	2850	252	1	8.730677915309067e-18	1.0	3418	structural_enriched	1
+HROM_Genome_0382	HROM_Genome_0382	structural_enriched	2278	155	39	9.766894433255165e-05	1.0	8359	not_enriched	0
+HROM_Genome_3435	HROM_Genome_3435	structural_enriched	2202	482	151	3.180280383934339e-165	8.324776410333021e-05	4074	structural_enriched	1
+HROM_Genome_1045	Alloprevotella sp000318095	structural_enriched	1770	227	58	2.3886816032280863e-37	0.9998314501784037	7018	structural_enriched	1
+HROM_Genome_3424	Saccharimonas sp010202265	structural_enriched	1711	311	28	9.072707758981845e-86	0.9999999999999517	3160	structural_enriched	1
+HROM_Genome_4510	Nanosyncoccus sp905372495	structural_enriched	1326	313	9	2.474372452754163e-117	1.0	2662	structural_enriched	1
+HROM_Genome_1101	HROM_Genome_1101	structural_enriched	1176	153	7	2.062327153589215e-26	1.0	11933	structural_enriched	1
+HROM_Genome_3421	HROM_Genome_3421	structural_enriched	861	77	20	9.713875611397604e-07	0.9999777164650482	1819	structural_enriched	1
+HROM_Genome_1021	HROM_Genome_1021	structural_enriched	741	132	42	1.532248558990828e-36	0.2232192398746961	2645	both_enriched	0
+HROM_Genome_1926	JABZIP01 sp015258265	structural_enriched	741	56	26	0.001698015442581695	0.9788683690295696	1867	both_enriched	0
+HROM_Genome_4502	HROM_Genome_4502	structural_enriched	703	197	25	1.2756749006417643e-88	0.9723844464632699	1928	structural_enriched	1
+HROM_Genome_4830	Neisseria cinerea	structural_enriched	703	48	10	0.01979489860644472	0.9999999024615307	5395	structural_enriched	1
+HROM_Genome_0952	Slackia exigua	structural_enriched	666	78	7	5.917276962341193e-12	0.9999999955921997	1596	structural_enriched	1
+HROM_Genome_3279	VGLK01 sp013333495	structural_enriched	630	200	21	6.026201882961437e-101	0.9826771905223433	945	structural_enriched	1
+HROM_Genome_2507	Streptococcus gordonii	structural_enriched	630	75	4	6.7592234960966215e-12	0.9999999999387378	4158	structural_enriched	1
+HROM_Genome_3293	HROM_Genome_3293	structural_enriched	528	125	13	3.8115512523542654e-48	0.9988425328919489	780	structural_enriched	1
+HROM_Genome_3280	VGLK01 sp905372785	structural_enriched	496	220	86	1.3702264906155817e-146	1.3351827337021756e-23	666	structural_enriched	1
+HROM_Genome_3472	HROM_Genome_3472	structural_enriched	369	109	4	2.340943606395983e-52	0.9999914477887767	670	structural_enriched	1
+HROM_Genome_3457	HROM_Genome_3457	structural_enriched	237	45	4	1.3467585147612968e-14	0.9978441941680173	410	structural_enriched	1
+HROM_Genome_2497	Streptococcus intermedius	structural_enriched	231	100	19	2.306225892975011e-66	0.023927939427489667	1275	both_enriched	0
+HROM_Genome_3294	HROM_Genome_3294	structural_enriched	210	26	7	2.1535928365667242e-05	0.9041946790806684	351	structural_enriched	1
+HROM_Genome_3440	HROM_Genome_3440	structural_enriched	202	33	2	2.3308470267353752e-09	0.9996320488002881	392	structural_enriched	1
