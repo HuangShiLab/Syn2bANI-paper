@@ -46,13 +46,12 @@ def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1, spars
                                     stderr=errfh, text=True, bufsize=1)
             header = proc.stdout.readline()
             if not header:
-                raise RuntimeError("skani produced no triangle header")
-            n = int(header.strip())
-
+                raise RuntimeError("skani produced no output header")
             acc_for_stem = {Path(manifest[a]).stem: a
                             for a in accs if a in manifest}
             if sparse:
-                next(proc.stdout)
+                if header.strip().split("\t")[:3] != ["Ref_file","Query_file","ANI"]:
+                    raise RuntimeError(f"unexpected sparse header: {header[:100]}")
                 for line in proc.stdout:
                     if not line.strip(): continue
                     f=line.rstrip("\n").split("\t")
@@ -62,6 +61,10 @@ def run_cluster(skani, cl_key, accs, manifest, outdir, triangle_threads=1, spars
                     if bb<aa: aa,bb=bb,aa
                     fh.write(f"{aa}\t{bb}\t{f[2]}\n"); written+=1
             else:
+                try:
+                    n=int(header.strip())
+                except ValueError:
+                    raise RuntimeError(f"expected dense triangle size, got {header[:100]}")
                 line=proc.stdout.readline()
                 if not line: raise RuntimeError("missing genome path 0")
                 order=[Path(line.split("\t")[0]).stem]
