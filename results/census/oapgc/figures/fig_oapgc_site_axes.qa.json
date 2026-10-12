@@ -1,0 +1,30 @@
+{
+  "species_rows": 200,
+  "category_counts": {
+    "SNP-distance enriched only": 73,
+    "SV/breakpoint enriched only": 19,
+    "Both axes enriched": 46,
+    "Not significant / depleted": 62
+  },
+  "strata": [
+    {
+      "label": "All informative",
+      "fraction": 0.4989619530701477,
+      "pairs": 30559312,
+      "species": 200
+    },
+    {
+      "label": "N50 \u2265 10 kb",
+      "fraction": 0.5322319761826947,
+      "pairs": 25842722,
+      "species": 197
+    },
+    {
+      "label": "N50 \u2265 100 kb",
+      "fraction": 0.6866535873038211,
+      "pairs": 3240219,
+      "species": 52
+    }
+  ],
+  "random_seed_for_future_jitter": 42
+}
