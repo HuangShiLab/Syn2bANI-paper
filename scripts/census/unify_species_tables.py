@@ -31,9 +31,19 @@ def fnum(x, default=""):
 def main():
     # ---- structural census table ----
     rows = []
-    for r in read_tsv(ROOT / "gtdb/effective/effective_species_summary.tsv"):
+    gtdb_repaired = (ROOT / "gtdb/effective_repaired/effective_species_summary.tsv").is_file()
+    gtdb_summary_path = (
+        ROOT / "gtdb/effective_repaired/effective_species_summary.tsv" if gtdb_repaired
+        else ROOT / "gtdb/effective/effective_species_summary.tsv"
+    )
+    joint_path = ROOT / "gtdb/gtdb_species_ani_sv_joint.tsv"
+    gtdb_joint = {r["species_cluster"]: r for r in read_tsv(joint_path)} if joint_path.is_file() else {}
+    for r in read_tsv(gtdb_summary_path):
         reported = int(r["rows"])
         ge2 = round(reported * float(r["pct_ge2"]) / 100.0)
+        j = gtdb_joint.get(r["cluster"], {})
+        ani_pairs = int(fnum(j.get("ani_pairs"), 0))
+        expected = int(r["effective_pairs"])
         rows.append({
             "database": "GTDB_R207",
             "species_id": r["cluster"],
@@ -43,8 +53,14 @@ def main():
             "sv_ge2_pairs": ge2,
             "sv_ge2_fraction": ge2 / reported if reported else "",
             "median_breakpoints": r["median_breakpoints"],
-            "ani_layer": "pending",
-            "quality_note": "effective scope; one E. coli row-count exception",
+            "ani_reported_pairs": ani_pairs,
+            "ani_coverage": ani_pairs / expected if expected else "",
+            "mean_ani": j.get("mean_skani_ani", ""),
+            "ani_layer": j.get("ani_sv_layer", "pending"),
+            "quality_note": (
+                "effective scope; E. coli block-pair repair applied" if gtdb_repaired
+                else "effective scope; one E. coli row-count exception"
+            ),
         })
 
     for r in read_tsv(ROOT / "hrom/species_summary.tsv"):
@@ -60,40 +76,42 @@ def main():
             "sv_ge2_pairs": ge2,
             "sv_ge2_fraction": ge2 / reported if reported else "",
             "median_breakpoints": r["median_junctions"],
+            "ani_reported_pairs": reported,
+            "ani_coverage": 1.0,
+            "mean_ani": "",
             "ani_layer": "complete",
-            "quality_note": "",
+            "quality_note": "HQ comp>=90/contam<=5 sensitivity reported",
         })
 
     oapgc_counts = {r["cluster"]: r for r in read_tsv(ROOT / "oapgc/oapgc_species_structural_counts.tsv")}
-    oapgc_meta = {r["cluster"]: r for r in read_tsv("data/oapgc/oapgc_genome_metadata.tsv")}
-    clusters = set(oapgc_meta)
-    clusters.update(oapgc_counts)
-    for cl in sorted(clusters):
-        c = oapgc_counts.get(cl, {"pairs": 0, "pairs_ge2": 0, "fraction_ge2": 0})
-        m = oapgc_meta.get(cl, {})
-        rows.append({
-            "database": "OAPGC",
-            "species_id": cl,
-            "n_genomes": sum(1 for r in read_tsv("data/oapgc/oapgc_genome_metadata.tsv") if False),  # filled below
-            "planned_pairs": c.get("pairs", 0),
-            "reported_pairs": c.get("pairs", 0),
-            "sv_ge2_pairs": c.get("pairs_ge2", 0),
-            "sv_ge2_fraction": c.get("fraction_ge2", ""),
-            "median_breakpoints": "",
-            "ani_layer": "complete",
-            "quality_note": m.get("site_raw", ""),
-        })
-
-    # avoid re-reading metadata inside loop
     cluster_counts = Counter()
     for r in read_tsv("data/oapgc/oapgc_genome_metadata.tsv"):
         cluster_counts[r["cluster"]] += 1
-    for row in rows:
-        if row["database"] == "OAPGC":
-            row["n_genomes"] = cluster_counts[row["species_id"]]
+    clusters = {cl for cl, n in cluster_counts.items() if n >= 2}
+    clusters.update(cl for cl, r in oapgc_counts.items() if int(r.get("pairs", 0)) > 0)
+    for cl in sorted(clusters):
+        c = oapgc_counts.get(cl, {"pairs": 0, "pairs_ge2": 0, "fraction_ge2": 0})
+        n_genomes = cluster_counts[cl]
+        reported = int(c.get("pairs", 0))
+        rows.append({
+            "database": "OAPGC",
+            "species_id": cl,
+            "n_genomes": n_genomes,
+            "planned_pairs": c.get("pairs", 0),
+            "reported_pairs": reported,
+            "sv_ge2_pairs": c.get("pairs_ge2", 0),
+            "sv_ge2_fraction": c.get("fraction_ge2", ""),
+            "median_breakpoints": "",
+            "ani_reported_pairs": reported,
+            "ani_coverage": 1.0 if reported else "",
+            "mean_ani": "",
+            "ani_layer": "complete",
+            "quality_note": "site-label test; N50 sensitivity reported",
+        })
 
     fields = ["database", "species_id", "n_genomes", "planned_pairs", "reported_pairs",
-              "sv_ge2_pairs", "sv_ge2_fraction", "median_breakpoints", "ani_layer", "quality_note"]
+              "sv_ge2_pairs", "sv_ge2_fraction", "median_breakpoints",
+              "ani_reported_pairs", "ani_coverage", "mean_ani", "ani_layer", "quality_note"]
     write_tsv(OUTDIR / "species_structural_census_unified.tsv", rows, fields)
 
     # ---- effect/mode long table ----
@@ -147,9 +165,6 @@ def main():
     efields = ["database", "species_id", "species_name", "analysis", "axis",
                "effect_size", "effect_direction", "p_value", "q_value"]
     write_tsv(OUTDIR / "species_effects_unified_long.tsv", effects, efields)
-
-
-from collections import Counter
 
 if __name__ == "__main__":
     main()
