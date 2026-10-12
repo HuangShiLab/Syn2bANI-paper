@@ -1,0 +1,17 @@
+{
+  "block_pairs_complete": 1331,
+  "block_pairs_expected": 1431,
+  "block_pairs_extra": 0,
+  "block_pairs_missing": 0,
+  "block_pairs_partial": 100,
+  "block_size": 500,
+  "blocks": 53,
+  "cluster": "Escherichia coli",
+  "cross_cluster_or_unmapped_rows_ignored": 314791254,
+  "expected_pairs": 338793465,
+  "genomes": 26031,
+  "invalid_in_cluster_ids": 0,
+  "missing_pairs_vs_expected": 7571899,
+  "observed_pairs": 331221566,
+  "table_rows_scanned": 646012820
+}
