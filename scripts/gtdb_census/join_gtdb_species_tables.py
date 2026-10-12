@@ -51,6 +51,7 @@ def main():
             struct_cov = struct_rows / expected if expected else None
             ani_cov = ani_rows / expected if expected else None
             pct_ge2 = fnum(srow.get("pct_ge2", ""))
+            sv_ge2_pairs = round(struct_rows * pct_ge2 / 100.0) if pct_ge2 is not None else ""
             if expected and struct_cov == 1 and ani_cov == 1:
                 layer, note = "complete", ""
             elif expected and ani_cov == 1:
@@ -68,7 +69,7 @@ def main():
                 "expected_pairs": expected or "",
                 "structural_rows": struct_rows or "",
                 "structural_coverage": struct_cov if struct_cov is not None else "",
-                "sv_ge2_pairs": srow.get("pairs_ge2", ""),
+                "sv_ge2_pairs": sv_ge2_pairs,
                 "sv_ge2_fraction": pct_ge2 / 100 if pct_ge2 is not None else "",
                 "median_breakpoints": srow.get("median_breakpoints", ""),
                 "ani_pairs": ani_rows or "",
