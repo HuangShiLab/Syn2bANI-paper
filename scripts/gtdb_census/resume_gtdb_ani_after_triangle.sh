@@ -11,4 +11,7 @@ python3 scripts/gtdb_census/promote_gtdb_ani_layers.py \
   --output "$W/ani_layer_promotion_report.json"
 CHUNK=$(sbatch --parsable scripts/gtdb_census/skani_ani_pass_chunked.slurm)
 echo "resume_chunk_job=$CHUNK"
-sbatch --dependency=afterok:"$CHUNK" scripts/gtdb_census/merge_gtdb_ani.sh
+MERGE=$(sbatch --parsable --dependency=afterok:"$CHUNK" scripts/gtdb_census/merge_gtdb_ani.sh)
+echo "merge_job=$MERGE"
+SUMMARY=$(sbatch --parsable --dependency=afterok:"$MERGE" scripts/gtdb_census/gtdb_ani_summary_join.slurm)
+echo "summary_join_job=$SUMMARY"
