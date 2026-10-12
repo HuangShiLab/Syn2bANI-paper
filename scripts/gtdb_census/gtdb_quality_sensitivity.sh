@@ -40,5 +40,5 @@ END {
   n=asorti(pairs,idx)
   for(i=1;i<=n;i++) { s=idx[i]; print s,pairs[s],ge2[s],ge2[s]/pairs[s] }
 }
-' > "$OUT"
+' "$QUAL" > "$OUT"
 echo GTDB-QUALITY-SENSITIVITY-DONE
