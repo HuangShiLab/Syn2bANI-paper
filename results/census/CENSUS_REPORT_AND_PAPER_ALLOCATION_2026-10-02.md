@@ -589,3 +589,30 @@ This paper is stronger as a **resource/analysis workflow** than as a purely synt
 5. Build a GTDB quality-stratified species table after merge.
 6. Build the OAPGC oral–airway contrast after structural + ANI are complete.
 7. Freeze Syn2b census numbers only after GTDB and OAPGC merge QC pass.
+
+---
+
+# Update: GTDB effective quality sensitivity
+
+A streaming quality-stratified analysis of the 646,012,820 reported effective GTDB pairs is complete.
+
+| Stratum | Pairs | Pairs ≥2 breakpoints | Fraction |
+|---|---:|---:|---:|
+| All reported pairs | 580,471,914 | 580,471,914 | 1.00000000 |
+| min completeness ≥90% | 580,471,914 | 578,036,636 | 0.99580466 |
+| min completeness <70% | 580,471,914 | 498,549 | 0.00085887 |
+| min completeness 70–90% | 580,471,914 | 1,936,729 | 0.00333647 |
+| max contamination ≤5% | 580,471,914 | 576,532,867 | 0.99321406 |
+| max contamination >5% | 580,471,914 | 3,939,047 | 0.00678594 |
+| HQ: comp ≥90%, contam ≤5% | 580,471,914 | 574,119,495 | 0.98905646 |
+| min N50 ≥10 kb | 580,471,914 | 578,004,185 | 0.99574875 |
+| min N50 ≥100 kb | 580,471,914 | 297,582,171 | 0.51265559 |
+| HQ + N50 ≥10 kb | 580,471,914 | 572,147,094 | 0.98565853 |
+
+These denominators are identical because all 580.47M numerically scored structural pairs in the effective table passed the completeness, contamination, and N50≥10 kb filters. The only quality gradient observed is N50≥100 kb, where SV detection is lower. Thus GTDB effective structural output is effectively restricted to high-quality, contiguity-supported genome pairs, and completeness/contamination sensitivity cannot be assessed within the reported structural layer.
+
+Files:
+
+```text
+results/census/gtdb/effective/effective_quality_sensitivity.tsv
+```
