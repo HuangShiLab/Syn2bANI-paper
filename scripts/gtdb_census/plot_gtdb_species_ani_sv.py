@@ -20,13 +20,19 @@ if str(QC_DIR) not in sys.path:
 from audit_panel_alignment import require_matplotlib_panel_alignment  # noqa: E402
 
 
-def save_figure(fig, stem, dpi):
+def save_figure(fig, stem, dpi, row_group_ids):
     require_matplotlib_panel_alignment(
         fig,
         json_out=f"{stem}.alignment.json",
         overlay_svg=f"{stem}.alignment.svg",
         tolerance_pt=1.5,
         gutter_tolerance_pt=1.5,
+        row_groups=[{"id": "figure-row", "panels": row_group_ids}],
+        exemptions=[{
+            "panels": row_group_ids,
+            "checks": ["panel-width"],
+            "reason": "Panel a carries a colorbar and is intentionally wider than the quality-stratum bar panel.",
+        }],
         strict=True,
     )
     fig.savefig(f"{stem}.pdf", bbox_inches="tight")
@@ -70,10 +76,10 @@ def main():
 
     quality = pd.read_csv(args.quality_sensitivity, sep="\t").set_index("stratum")
     strata = [
-        ("all", "All effective pairs", "#4D4D4D"),
-        ("HQ_comp90_contam5", "Completeness ≥ 90%\ncontamination ≤ 5%", "#2166AC"),
-        ("min_N50_ge10kb", "Both N50 ≥ 10 kb", "#B2182B"),
-        ("HQ_N50_ge10kb", "HQ and N50 ≥ 10 kb", "#762A83"),
+        ("all", "All", "#4D4D4D"),
+        ("HQ_comp90_contam5", "HQ\ncomp ≥ 90%\ncontam ≤ 5%", "#2166AC"),
+        ("min_N50_ge10kb", "N50\n≥ 10 kb", "#B2182B"),
+        ("HQ_N50_ge10kb", "HQ +\nN50\n≥ 10 kb", "#762A83"),
     ]
 
     fig = plt.figure(figsize=(180 / 25.4, 72 / 25.4))
@@ -128,7 +134,7 @@ def main():
     fig.text(0.006, 0.96, "a", ha="left", va="top", fontsize=8, weight="bold")
     fig.text(0.625, 0.96, "b", ha="left", va="top", fontsize=8, weight="bold")
     fig.canvas.draw()
-    save_figure(fig, args.outstem, args.dpi)
+    save_figure(fig, args.outstem, args.dpi, ["a", "b"])
 
     qa = {
         "joint_table": args.joint,
@@ -140,7 +146,8 @@ def main():
             key: {
                 "pairs": int(quality.loc[key, "pairs"]),
                 "pairs_ge2": int(quality.loc[key, "pairs_ge2"]),
-                "fraction_ge2": float(quality.loc[key, "fraction_ge2"]),
+                "fraction_ge2_reported": float(quality.loc[key, "fraction_ge2_reported"]),
+                "fraction_ge2_informative": float(quality.loc[key, "fraction_ge2_informative"]),
             }
             for key, _, _ in strata
         },
