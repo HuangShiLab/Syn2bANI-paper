@@ -11,6 +11,7 @@
 #SBATCH --output=/lustre1/g/aos_shihuang/data/syn2b_census/logs/gtdb_struct_repair_%j.out
 #SBATCH --error=/lustre1/g/aos_shihuang/data/syn2b_census/logs/gtdb_struct_repair_%j.err
 set -euo pipefail
+export RAYON_NUM_THREADS=1
 L=/lustre1/g/aos_shihuang
 W=$L/data/syn2b_census
 R=$L/Syn2b-paper/results/census/gtdb
