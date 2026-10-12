@@ -15,4 +15,6 @@ cd "$L/Syn2b-paper"
 python3 scripts/gtdb_census/gtdb_quality_sensitivity.py \
   --table "$L/Syn2b-paper/results/census/gtdb/gtdb_r207_effective_normalized_dedup.tsv.gz" \
   --quality "$L/data/syn2b_census/gtdb_genome_quality.tsv" \
-  --output "$L/Syn2b-paper/results/census/gtdb/effective_quality_sensitivity.tsv"
+  --output "$L/Syn2b-paper/results/census/gtdb/effective_quality_sensitivity.tsv.tmp"
+mv "$L/Syn2b-paper/results/census/gtdb/effective_quality_sensitivity.tsv.tmp" \
+   "$L/Syn2b-paper/results/census/gtdb/effective_quality_sensitivity.tsv"
