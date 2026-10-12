@@ -24,6 +24,7 @@ def main():
             "max_contamination_le5","max_contamination_gt5","HQ_comp90_contam5",
             "min_N50_ge10kb","min_N50_ge100kb","HQ_N50_ge10kb"]
     pairs={s:0 for s in strata}; ge2={s:0 for s in strata}
+    missing_bp={s:0 for s in strata}
     n=0; missing_quality=0
     with gzip.open(a.table,"rt") as stream:
         header=stream.readline().rstrip("\n").split("\t")
@@ -36,8 +37,7 @@ def main():
             qa=q.get(a1); qb=q.get(b1)
             if qa is None or qb is None: missing_quality+=1; continue
             mc=min(qa["comp"],qb["comp"]); xc=max(qa["cont"],qb["cont"]); mn=min(qa["n50"],qb["n50"])
-            try: bp=float(row[ix["breakpoints"]])
-            except ValueError: continue
+            bp=num(row[ix["breakpoints"]])
             add=[
                 ("all",1),
                 ("min_completeness_ge90",int(mc is not None and mc>=90)),
@@ -54,12 +54,16 @@ def main():
                 if not ok:
                     continue
                 pairs[s]+=1
-                ge2[s]+=int(bp>=2)
+                missing_bp[s]+=int(bp is None)
+                ge2[s]+=int(bp is not None and bp>=2)
     with open(a.output,"w") as o:
-        o.write("stratum\tpairs\tpairs_ge2\tfraction_ge2\n")
+        o.write("stratum\tpairs\tpairs_ge2\tbreakpoints_missing\t"
+                "fraction_ge2_reported\tfraction_ge2_informative\n")
         for s in strata:
-            frac=f"{ge2[s]/pairs[s]:.8f}" if pairs[s] else ""
-            o.write(f"{s}\t{pairs[s]}\t{ge2[s]}\t{frac}\n")
+            informative=pairs[s]-missing_bp[s]
+            reported=f"{ge2[s]/pairs[s]:.8f}" if pairs[s] else ""
+            informative_frac=f"{ge2[s]/informative:.8f}" if informative else ""
+            o.write(f"{s}\t{pairs[s]}\t{ge2[s]}\t{missing_bp[s]}\t{reported}\t{informative_frac}\n")
     print(f"rows={n} missing_quality={missing_quality}",file=__import__('sys').stderr)
 
 if __name__=="__main__": main()
