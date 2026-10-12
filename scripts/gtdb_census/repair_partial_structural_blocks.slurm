@@ -4,8 +4,8 @@
 #SBATCH --qos=normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=64
-#SBATCH --mem=240G
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=160G
 #SBATCH --time=72:00:00
 #SBATCH --mail-type=FAIL
 #SBATCH --output=/lustre1/g/aos_shihuang/data/syn2b_census/logs/gtdb_struct_repair_%j.out
