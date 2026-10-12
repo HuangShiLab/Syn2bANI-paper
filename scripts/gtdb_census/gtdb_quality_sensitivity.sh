@@ -10,7 +10,7 @@ gzip -cd "$TABLE" | awk -v QUAL="$QUAL" '
 BEGIN { FS="\t"; OFS="\t" }
 NR==FNR {
   if (FNR==1) next
-  comp[$1]=$4+0; cont[$1]=$5+0; n50[$1]=$7+0
+  comp[$1]=$4+0; cont[$1]=$5+0; n50[$1]=$8+0
   next
 }
 FNR==1 { next }
