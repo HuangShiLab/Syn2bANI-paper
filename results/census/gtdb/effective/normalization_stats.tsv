@@ -1,0 +1,8 @@
+metric	value
+input_rows	964496198
+emitted_rows	964496198
+skipped_self	0
+skipped_unmapped	0
+mapping_keys	1274207
+mapping_conflict_keys	8253
+conflict_examples	length=4457049,length=1665702,length=1056881,length=3596020,length=3499388,length=2108303,length=1612091,length=1829425,length=3438961,length=4372177,length=847999,length=2317847,length=3654751,length=1876981,length=1142243,length=786008,length=1113470,length=1757158,length=1003629,length=4942932,length=1491415,length=2902150,length=4981029,length=4872341,length=4608128,length=1718940,length=1038029,length=4273558,length=3252935,length=2107986,length=3084227,length=3982639,length=3671336,length=6166452,length=1191537,length=1188528,length=1192219,length=1196108,length=1202699,length=1187996,length=1186085,length=1188287,length=1187410,length=1186931,length=1198003,length=1193700,length=1187229,length=1175739,length=1330657,length=1267783
