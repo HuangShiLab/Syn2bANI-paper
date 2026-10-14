@@ -26,6 +26,9 @@ def load_contig_map(root, included_by_cluster):
             candidates = {token}
             if "|" in token:
                 candidates.update(token.split("|"))
+            # The final component is often a redundant `length=<bp>` tag shared
+            # by unrelated contig headers; it is not a genome identifier.
+            candidates = {key for key in candidates if not key.startswith("length=")}
             for key in candidates:
                 if key in m and m[key] != acc:
                     conflicts[key].update([m[key], acc])
