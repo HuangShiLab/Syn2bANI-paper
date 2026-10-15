@@ -278,17 +278,18 @@ class Worker:
                         continue
                     a = f[cols["genome_A"]] if "genome_A" in cols else f[0]
                     b = f[cols["genome_B"]] if "genome_B" in cols else f[1]
-                    # The matrix emits each unique pair once, oriented by
-                    # sorted-filename loading order, so a pair is attributed to
-                    # the task of its positionally-earlier genome: keeping rows
-                    # whose genome_A is in the query batch partitions the output
-                    # exactly, with no duplicates and no losses.
+                    # The matrix emits each unique pair once, but orientation
+                    # follows sorted-filename loading order rather than task
+                    # insertion order. Diagonal tasks own within-block pairs.
+                    # For a cross-block task, accept either orientation of a
+                    # pair whose members lie in its two blocks; no other task
+                    # contains that block pair, so this remains a partition.
                     if a not in batch_ids or a == b:
                         continue
-                    # Diagonal tasks own within-block pairs. Cross tasks must
-                    # retain only batch x partner rows; otherwise the batch x
-                    # batch rows are duplicated by the explicit diagonal task.
-                    if bi != bj and b not in partner_ids:
+                    if bi != bj and not (
+                        (a in batch_ids and b in partner_ids)
+                        or (a in partner_ids and b in batch_ids)
+                    ):
                         continue
                     fout.write("\t".join(f) + "\n")
                     kept += 1
