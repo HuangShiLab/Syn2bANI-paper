@@ -23,10 +23,30 @@ def main():
     promoted = []
     skipped_existing = []
     empty_norms = []
+    # Link complete triangle outputs first. This makes the four large clusters
+    # visible before legacy chunk norms are inspected.
+    linked = []
+    for src in sorted(triangledir.glob("*.ani.tsv.gz")):
+        final = anidir / (src.name[:-5] + ".ani.tsv.gz")
+        if final.exists():
+            skipped_existing.append(src.name)
+            continue
+        try:
+            os.link(src, final)
+        except OSError:
+            final.write_bytes(src.read_bytes())
+        linked.append({"source": str(src), "output": str(final)})
+
+    invalid_norms = []
     for src in sorted(normdir.glob("*.norm")):
         final = anidir / (src.name[:-5] + ".ani.tsv.gz")
         if final.exists():
             skipped_existing.append(src.name)
+            continue
+        with src.open("rb") as probe:
+            magic = probe.read(2)
+        if magic != b"\x1f\x8b":
+            invalid_norms.append({"source": str(src), "magic": magic.hex()})
             continue
         if src.stat().st_size == 0:
             empty_norms.append(src.name)
@@ -49,32 +69,22 @@ def main():
         tmp.replace(final)
         promoted.append({"source": str(src), "output": str(final), "rows": rows})
 
-    linked = []
-    for src in sorted(triangledir.glob("*.ani.tsv.gz")):
-        final = anidir / src.name
-        if final.exists():
-            skipped_existing.append(src.name)
-            continue
-        try:
-            os.link(src, final)
-        except OSError:
-            final.write_bytes(src.read_bytes())
-        linked.append({"source": str(src), "output": str(final)})
-
     report = {
         "norm_promoted": len(promoted),
         "norm_promoted_rows": sum(x["rows"] for x in promoted),
         "triangle_linked": len(linked),
         "skipped_existing": len(skipped_existing),
         "empty_norm_left_for_retry": empty_norms,
+        "invalid_norms_left_unpromoted": invalid_norms,
         "promoted": promoted,
         "linked": linked,
     }
     Path(args.output).write_text(json.dumps(report, indent=2) + "\n")
     summary = {
-        key: report[key] for key in (
+            key: report[key] for key in (
             "norm_promoted", "norm_promoted_rows", "triangle_linked",
             "skipped_existing", "empty_norm_left_for_retry",
+            "invalid_norms_left_unpromoted",
         )
     }
     print(json.dumps(summary, sort_keys=True))
