@@ -45,15 +45,20 @@ def main():
             continue
         with src.open("rb") as probe:
             magic = probe.read(2)
-        if magic != b"\x1f\x8b":
-            invalid_norms.append({"source": str(src), "magic": magic.hex()})
-            continue
         if src.stat().st_size == 0:
             empty_norms.append(src.name)
             continue
+        if magic == b"\x1f\x8b":
+            inp_ctx = gzip.open(src, "rt")
+        elif magic == b"ge":
+            # Earlier chunk workers wrote uncompressed TSV but kept `.norm`.
+            inp_ctx = src.open("rt")
+        else:
+            invalid_norms.append({"source": str(src), "magic": magic.hex()})
+            continue
         tmp = Path(str(final) + ".tmp")
         rows = 0
-        with gzip.open(src, "rt") as inp, gzip.open(tmp, "wt") as out:
+        with inp_ctx as inp, gzip.open(tmp, "wt") as out:
             out.write("genome_A\tgenome_B\tskani_ani\n")
             for line in inp:
                 fields = line.rstrip("\n").split("\t")
