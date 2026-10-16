@@ -284,9 +284,12 @@ class Worker:
                     # For a cross-block task, accept either orientation of a
                     # pair whose members lie in its two blocks; no other task
                     # contains that block pair, so this remains a partition.
-                    if a not in batch_ids or a == b:
+                    if a == b:
                         continue
-                    if bi != bj and not (
+                    if bi == bj:
+                        if a not in batch_ids:
+                            continue
+                    elif not (
                         (a in batch_ids and b in partner_ids)
                         or (a in partner_ids and b in batch_ids)
                     ):
