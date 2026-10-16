@@ -46,6 +46,7 @@ def run_cluster(task):
     skani, cl, accs, manifest, tmpdir, normdir, a = task
     safe = cl.replace("/", "_")
     cdir = tmpdir / safe
+    shutil.rmtree(cdir, ignore_errors=True)
     cdir.mkdir(parents=True, exist_ok=True)
     paths = [manifest[x] for x in accs if x in manifest and os.path.isfile(manifest[x])]
     if len(paths) < 2:

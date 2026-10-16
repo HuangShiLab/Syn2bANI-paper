@@ -50,7 +50,7 @@ def main():
             continue
         if magic == b"\x1f\x8b":
             inp_ctx = gzip.open(src, "rt")
-        elif magic == b"ge":
+        elif magic == b"GC":
             # Earlier chunk workers wrote uncompressed TSV but kept `.norm`.
             inp_ctx = src.open("rt")
         else:
