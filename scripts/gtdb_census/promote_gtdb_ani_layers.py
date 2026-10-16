@@ -27,7 +27,7 @@ def main():
     # visible before legacy chunk norms are inspected.
     linked = []
     for src in sorted(triangledir.glob("*.ani.tsv.gz")):
-        final = anidir / (src.name[:-5] + ".ani.tsv.gz")
+        final = anidir / src.name
         if final.exists():
             skipped_existing.append(src.name)
             continue
