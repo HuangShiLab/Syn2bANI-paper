@@ -60,7 +60,7 @@ def main():
         required = {"Ref_file", "Query_file", "ANI"}
         if not required.issubset(reader.fieldnames or []):
             raise SystemExit(f"unexpected triangle columns: {reader.fieldnames}")
-        pigz.write("genome_A\tgenome_B\tskani_ani\n")
+        pigz.stdin.write("genome_A\tgenome_B\tskani_ani\n")
         for row in reader:
             aa = Path(row["Ref_file"]).stem
             bb = Path(row["Query_file"]).stem
@@ -77,9 +77,9 @@ def main():
                 continue
             if bb < aa:
                 aa, bb = bb, aa
-            pigz.write(f"{aa}\t{bb}\t{row['ANI']}\n")
+            pigz.stdin.write(f"{aa}\t{bb}\t{row['ANI']}\n")
             rows += 1
-    pigz.close()
+    pigz.stdin.close()
     if pigz.returncode:
         raise SystemExit(f"pigz failed with code {pigz.returncode}")
     tmp_out.replace(args.output)
