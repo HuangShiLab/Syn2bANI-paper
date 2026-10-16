@@ -12,7 +12,9 @@ find "$W/ani" -maxdepth 1 -type f -name '*.ani.tsv.gz' -print0 > "$TMP/inputs.li
 printf '%s\0' "$R/gtdb_ani_remaining_chunked.tsv.gz" >> "$TMP/inputs.list"
 (
   printf 'genome_A\tgenome_B\tskani_ani\n'
-  xargs -0 -n 64 -P 8 zcat < "$TMP/inputs.list"
+  # Do not run concurrent zcat processes with a shared stdout: large stdio
+  # writes can interleave and corrupt the merged stream.
+  while IFS= read -r -d '' input; do zcat "$input"; done < "$TMP/inputs.list"
 ) | awk -F '\t' 'NR==1 {next} $1!="" && $2!="" && $1!=$2 {print $1 "\t" $2 "\t" $3}' |
   LC_ALL=C sort -t "$(printf '\t')" -k1,1 -k2,2 -u -S 64G --parallel=16 -T "$TMP" |
   pigz -p 16 > "$OUT"
