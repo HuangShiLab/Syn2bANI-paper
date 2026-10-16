@@ -55,9 +55,11 @@ def main():
             if expected and struct_cov == 1 and ani_cov == 1:
                 layer, note = "complete", ""
             elif expected and ani_cov == 1:
-                layer, note = "structural_partial"
+                layer = "structural_partial"
+                note = "structural layer partial"
             elif expected and struct_cov == 1:
-                layer, note = "ani_partial"
+                layer = "ani_partial"
+                note = "ANI layer partial"
             elif expected:
                 layer, note = "partial", "both layers incomplete"
             else:
