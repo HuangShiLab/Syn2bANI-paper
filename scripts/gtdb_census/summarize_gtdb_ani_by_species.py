@@ -9,6 +9,7 @@ within-species pair. The script never holds pair-level data in memory.
 import argparse
 import csv
 import gzip
+import itertools
 import json
 import math
 from collections import Counter, defaultdict
@@ -65,13 +66,24 @@ def main():
     total_rows = 0
     opener = gzip.open if str(args.ani).endswith(".gz") else open
     with opener(args.ani, "rt") as fh:
-        header = fh.readline().rstrip("\n").split("\t")
         expected_header = ["genome_A", "genome_B", "skani_ani"]
-        checks["header_ok"] = header == expected_header
-        ix = {name: i for i, name in enumerate(header)}
-        for line in fh:
+        first_line = fh.readline().rstrip("\n")
+        first = first_line.split("\t")
+        if first == expected_header:
+            checks["header_ok"] = True
+            ix = {name: i for i, name in enumerate(expected_header)}
+            lines = fh
+        else:
+            # Some sorted streams place the lowercase header after accession
+            # keys; process the first line and continue scanning for fields.
+            checks["header_ok"] = False
+            ix = {name: i for i, name in enumerate(expected_header)}
+            lines = itertools.chain((first_line,), fh)
+        for line in lines:
             row = line.rstrip("\n").split("\t")
-            if len(row) < len(header):
+            if row[:3] == expected_header:
+                continue
+            if len(row) < 3:
                 continue
             total_rows += 1
             a, b = row[ix["genome_A"]], row[ix["genome_B"]]
