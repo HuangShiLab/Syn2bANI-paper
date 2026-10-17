@@ -1,0 +1,17 @@
+{
+  "ani_table": "/lustre1/g/aos_shihuang/Syn2b-paper/results/census/gtdb/gtdb_r207_ani_merged_sorted.tsv.gz",
+  "cross_species_pairs": 0,
+  "duplicate_keys": 0,
+  "effective_genomes": 261737,
+  "effective_species": 22535,
+  "expected_unique_pairs": 653584719,
+  "header_ok": false,
+  "invalid_ani": 0,
+  "missing_pairs_vs_effective_scope": 62439,
+  "reported_unique_pairs": 653522280,
+  "reported_within_expected_species": 653522280,
+  "self_pairs": 0,
+  "sorted_canonical": true,
+  "total_rows": 653522280,
+  "unknown_genomes": 0
+}
