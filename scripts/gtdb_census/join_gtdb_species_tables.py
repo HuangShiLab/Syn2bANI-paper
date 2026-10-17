@@ -46,6 +46,10 @@ def main():
             srow = structural.get(species, {})
             arow = ani.get(species, {})
             expected = int(fnum(srow.get("effective_pairs", arow.get("expected_pairs", ""))) or 0)
+            if expected == 0 and not srow.get("rows") and not arow.get("ani_pairs"):
+                # QC writers emit zero-genome placeholder rows for taxonomy
+                # clusters outside the effective scope; exclude these ghosts.
+                continue
             struct_rows = int(fnum(srow.get("rows", "")) or 0)
             ani_rows = int(fnum(arow.get("ani_pairs", "")) or 0)
             struct_cov = struct_rows / expected if expected else None
