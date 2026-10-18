@@ -58,3 +58,9 @@ skani_matrix.af
 results/census/hrom/phase2_dnadiff/*/
 results/census/oapgc/phase2_dnadiff/*/
 results/census/hrom/repair_screen/hrom_ani_enriched_repair_genes.tsv
+
+# Empty generated run log
+/allmums.out
+
+# OAPGC Parsnp intermediates are retained locally only
+results/census/oapgc/phase2_parsnp/
