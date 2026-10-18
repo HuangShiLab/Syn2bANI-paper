@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from plot_style import set_publication_style, figure_size, label_panel, save_figure, COLORS
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
 set_publication_style()
 D = Path("results/gtdb50k")
@@ -65,6 +66,20 @@ def robust_partial_residuals(x, y, ctrls):
     return rx, ry, len(df), spr
 
 
+def pearson_partial(x, y, ctrls):
+    """Return Pearson partial correlation after linear residualization."""
+    df = pd.DataFrame({"x": x, "y": y})
+    for i, c in enumerate(ctrls):
+        df[f"c{i}"] = c
+    df = df.replace([np.inf, -np.inf], np.nan).dropna()
+    if len(df) < 10:
+        return np.nan, 0
+    Z = df[[f"c{i}" for i in range(len(ctrls))]].values
+    model = LinearRegression().fit(Z, np.column_stack([df["x"], df["y"]]))
+    resid = np.column_stack([df["x"], df["y"]]) - model.predict(Z)
+    return stats.pearsonr(resid[:, 0], resid[:, 1])[0], len(df)
+
+
 def load_sv_efficiency():
     """Return aggregated SV timing data for panels e-f."""
     sv = pd.read_csv(E / "sv_benchmark.tsv", sep="\t")
@@ -106,7 +121,7 @@ def panel_a(ax):
     r, _ = stats.pearsonr(x[m], y[m])
     hb = ax.hexbin(x[m], y[m], gridsize=60, cmap="Blues", mincnt=1, linewidths=0)
     ax.plot([0, 1], [0, 1], "k--", lw=0.8)
-    ax.set_xlabel("Syn2bANI raw inverted fraction")
+    ax.set_xlabel("Syn2b raw inverted fraction")
     ax.set_ylabel("dnadiff inverted fraction")
     ax.set_xlim(-0.02, 1.02)
     ax.set_ylim(-0.02, 1.02)
@@ -137,16 +152,16 @@ def panel_b(ax):
 
 
 def panel_c(ax):
-    sv = pd.read_csv(D / "sv_comparison_merged.tsv", sep="\t")
-    truth = pd.read_csv(D / "truth_50k.tsv", sep="\t")
-    sv = sv.merge(truth[["pairid", "anim_ani", "anim_af_qry"]], on="pairid", how="inner")
-    sv["n_ctg"] = (sv["synteny_blocks"] - sv["breakpoint_count"]).clip(lower=1)
-    sv = sv.dropna(subset=["anim_ani", "breakpoint_count", "dnadiff_breakpoints", "af_query"])
-    n_ctg_safe = sv["n_ctg"].replace([np.inf, -np.inf], np.nan)
-    rx, ry, n, rp = robust_partial_residuals(
-        sv["breakpoint_count"], sv["dnadiff_breakpoints"],
-        [sv["anim_ani"], n_ctg_safe]
+    sv = pd.read_csv(D / "rerun_v011/s2b_50k_v011_merged.tsv", sep="\t")
+    n_ctg_safe = sv["n_contigs"].copy()
+    rp, n = pearson_partial(
+        sv["breakpoint_count"], sv["dd_bp"], [sv["anim_ani"], n_ctg_safe]
     )
+    Z = pd.DataFrame({"c0": sv["anim_ani"], "c1": n_ctg_safe})
+    Z = (Z - Z.mean()) / (Z.std() + 1e-12)
+    model = LinearRegression().fit(Z, np.column_stack([sv["breakpoint_count"], sv["dd_bp"]]))
+    resid = np.column_stack([sv["breakpoint_count"], sv["dd_bp"]]) - model.predict(Z)
+    rx, ry = resid[:, 0], resid[:, 1]
     ax.scatter(rx, ry, alpha=0.25, s=5, c=COLORS["vermillion"], edgecolors="none")
     ax.axhline(0, color="k", ls="--", lw=0.8)
     ax.axvline(0, color="k", ls="--", lw=0.8)
@@ -157,7 +172,7 @@ def panel_c(ax):
     ax.set_xlabel("Breakpoint count residual")
     ax.set_ylabel("dnadiff breakpoints residual")
     label_panel(ax, "c")
-    ax.set_title(f"Partial correlation (\u03c1 = {rp:.3f}, n = {n})", fontsize=8)
+    ax.set_title(f"Partial correlation (r = {rp:.3f}, n = {n})", fontsize=8)
 
 
 def panel_d(ax):
