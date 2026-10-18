@@ -1,0 +1,14 @@
+category	group	count	denominator_or_total	fraction
+AMR_discordance	ANI_ge_99.9	60	103	0.583
+AMR_discordance	ANI_ge_99.99	11	24	0.458
+AMR_discordance	ANI_ge_99.999	3	10	0.300
+Structural_pair_class	global_flip_or_rotation	41	103	0.398
+Structural_pair_class	partial_inversion	16	103	0.155
+Structural_pair_class	collinear_local	46	103	0.447
+Pair_level_genuine_SV	ANI_ge_99.9	101	103	0.981
+Event_accounting	artifact_INV_or_TRA	355	2718	0.131
+Event_accounting	artifact_indel_at_rotation_junction	3	2718	0.001
+Event_accounting	genuine_chromosomal_indel_ge1kb	876	2718	0.322
+Event_accounting	genuine_rearrangement	445	2718	0.164
+Event_accounting	genuine_off_chromosome_difference	880	2718	0.324
+Event_accounting	likely_genuine_small_indel_unverified	159	2718	0.058

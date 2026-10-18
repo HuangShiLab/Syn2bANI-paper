@@ -1,0 +1,24 @@
+{
+  "pairs": 103,
+  "class_counts": {
+    "global_flip_or_rotation": 41,
+    "partial_inversion": 16,
+    "collinear_local": 46
+  },
+  "amr_bands": {
+    "99.9": {
+      "total": 103,
+      "discordant": 60
+    },
+    "99.99": {
+      "total": 24,
+      "discordant": 11
+    },
+    "99.999": {
+      "total": 10,
+      "discordant": 3
+    }
+  },
+  "panel_d_pair": "GCF_002209105.2__GCF_006364695.1",
+  "panel_d_chromosome_blocks_ge100kb": 3
+}

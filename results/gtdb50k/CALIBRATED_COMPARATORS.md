@@ -12,7 +12,7 @@ Band-holdout linear recalibration of skani and FastANI on their own outputs, eva
 | skani                                              |   1.984 |   0.893 |   0.431 |    0.319 | 0.958 |
 | skani + linear(ani), band-holdout                  |   0.828 |   0.652 |   0.823 |    0.561 | 0.753 |
 | skani + linear(ani, AF), band-holdout              |   0.832 |   0.652 |   0.861 |    0.567 | 0.768 |
-| syn2bani calibrated v5                             |   0.716 |   0.645 |   0.54  |    0.441 | 0.619 |
+| syn2bani calibrated v6                             |   0.716 |   0.645 |   0.54  |    0.441 | 0.619 |
 | syn2bani raw gated                                 |   2.201 |   1.894 |   1.214 |    0.754 | 1.699 |
 
 ## MAE by band, all 43,334 pairs (Syn2bANI calibrated is undefined on 3,431 of them)
@@ -25,7 +25,7 @@ Band-holdout linear recalibration of skani and FastANI on their own outputs, eva
 | skani                                              |   1.969 |   0.893 |   0.431 |    0.319 | 1.032 |
 | skani + linear(ani), band-holdout                  |   0.803 |   0.654 |   0.823 |    0.561 | 0.753 |
 | skani + linear(ani, AF), band-holdout              |   0.813 |   0.654 |   0.861 |    0.567 | 0.769 |
-| syn2bani calibrated v5                             |   0.716 |   0.645 |   0.54  |    0.441 | 0.619 |
+| syn2bani calibrated v6                             |   0.716 |   0.645 |   0.54  |    0.441 | 0.619 |
 | syn2bani raw gated                                 |   1.964 |   1.892 |   1.214 |    0.754 | 1.67  |
 
 ## Pearson r by band, common subset
@@ -38,7 +38,7 @@ Band-holdout linear recalibration of skani and FastANI on their own outputs, eva
 | skani                                              |   0.657 |   0.831 |   0.933 |    0.727 | 0.973 |
 | skani + linear(ani), band-holdout                  |   0.657 |   0.831 |   0.933 |    0.727 | 0.955 |
 | skani + linear(ani, AF), band-holdout              |   0.669 |   0.834 |   0.932 |    0.624 | 0.954 |
-| syn2bani calibrated v5                             |   0.414 |   0.774 |   0.9   |    0.607 | 0.962 |
+| syn2bani calibrated v6                             |   0.414 |   0.774 |   0.9   |    0.607 | 0.962 |
 | syn2bani raw gated                                 |  -0.061 |   0.488 |   0.769 |    0.512 | 0.834 |
 
 ## The 3,431 pairs without a calibrated Syn2bANI value

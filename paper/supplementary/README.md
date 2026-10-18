@@ -4,10 +4,10 @@ This directory contains submission-ready supplementary materials for the Syn2bAN
 
 ## Contents
 
-- `SUPPLEMENTARY.md` / `SUPPLEMENTARY.docx` — Supplementary figures S1–S11 captions, supplementary tables S1–S3, and supplementary notes 1–3.
-- `figures/` — High-resolution PNG copies of Supplementary Figures S1–S11.
-- `tables/` — Source data for supplementary tables (MAG metrics, mid-ANI ANIm evaluation, hybrid threshold sweep, struct top cases).
-- `notes/` — Additional analysis reports (Phase 3 report).
+- `SUPPLEMENTARY.md` / `SUPPLEMENTARY.docx` — Supplementary figures S1–S15, supplementary tables S1–S7, and supplementary notes 1–7.
+- `figures/` — Locally archived high-resolution PNG copies of selected supplementary figures; the current submission figures are referenced from their canonical paths under `paper/figures/`.
+- `tables/` — Source data for supplementary tables, including Table S7 for FDA-ARGOS AMR and structural validation.
+- `notes/` — Additional analysis reports retained for provenance.
 
 ## Source data
 

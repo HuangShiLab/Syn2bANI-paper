@@ -2,7 +2,7 @@
 """Publication-grade figure for the GTDB 50k held-out benchmark.
 
 Panels:
-  a-c. syn2bani calibrated v5, skani, FastANI vs ANIm (hexbin, scored subset)
+  a-c. syn2bani calibrated v6, skani, FastANI vs ANIm (hexbin, scored subset)
   d. per-band MAE bars (three methods)
   e. signed-error distributions (three methods)
 
@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
 RES = os.path.join(ROOT, "results", "gtdb50k")
-OUT = os.path.join(ROOT, "figures", "report", "fig_gtdb50k_heldout.png")
+OUT = os.path.join(ROOT, "paper", "figures", "supplementary", "fig_s2_gtdb50k_heldout")
 
 BAND_ORDER = ["80-85", "85-90", "90-95", "95-100"]
 
@@ -41,14 +41,14 @@ def main():
     df = df[np.isfinite(df["ani_cal"])]
 
     fig = plt.figure(figsize=(10.5, 6.2))
-    gs = fig.add_gridspec(2, 3, hspace=0.35, wspace=0.35)
+    gs = fig.add_gridspec(2, 3, hspace=0.48, wspace=0.35)
     axs = [fig.add_subplot(gs[0, i]) for i in range(3)]
     ax_bar = fig.add_subplot(gs[1, :2])
     ax_hist = fig.add_subplot(gs[1, 2])
     lo, hi = 79.5, 100.5
 
     for ax, col, title in (
-        (axs[0], "ani_cal", "a  Syn2bANI calibrated (v5)"),
+        (axs[0], "ani_cal", "a  Syn2bANI calibrated (v6)"),
         (axs[1], "skani_ani", "b  skani"),
         (axs[2], "fastani_ani", "c  FastANI"),
     ):
@@ -59,7 +59,8 @@ def main():
         ax.set_xlabel("ANIm (dnadiff) [%]")
         ax.set_ylabel("estimated ANI [%]")
         mae = np.mean(np.abs(df[col] - df["anim_ani"]))
-        ax.set_title(f"{title}   MAE {mae:.3f}", loc="left", fontweight="bold")
+        ax.set_title(f"{title}\nMAE {mae:.3f}", loc="left", fontweight="bold",
+                     pad=8)
         ax.set_aspect("equal")
         fig.colorbar(hb, ax=ax, label="pairs (log)", shrink=0.85)
 
@@ -68,7 +69,7 @@ def main():
     mae_sk = [np.mean(np.abs(df.loc[df.band == b, "skani_ani"] - df.loc[df.band == b, "anim_ani"])) for b in BAND_ORDER]
     mae_fa = [np.mean(np.abs(df.loc[df.band == b, "fastani_ani"] - df.loc[df.band == b, "anim_ani"])) for b in BAND_ORDER]
     x = np.arange(len(BAND_ORDER)); w = 0.25
-    ax_bar.bar(x - w, mae_cal, w, label="Syn2bANI cal", color="#219ebc")
+    ax_bar.bar(x - w, mae_cal, w, label="Syn2bANI v6", color="#219ebc")
     ax_bar.bar(x, mae_sk, w, label="skani", color="#fb8500")
     ax_bar.bar(x + w, mae_fa, w, label="FastANI", color="#8338ec")
     for xi, v in zip(x - w, mae_cal):
@@ -95,7 +96,7 @@ def main():
     ax_hist.hist(e_sk, bins=bins, density=True, histtype="step", lw=1.2, color="#fb8500",
             label=f"skani (bias {np.mean(e_sk):+.2f})")
     ax_hist.hist(e_cal, bins=bins, density=True, histtype="step", lw=1.2, color="#219ebc",
-            label=f"Syn2bANI cal (bias {np.mean(e_cal):+.2f})")
+            label=f"Syn2bANI v6 (bias {np.mean(e_cal):+.2f})")
     ax_hist.axvline(0, color="grey", lw=0.7, ls=":")
     ax_hist.set_xlabel("estimate − ANIm [ANI points]")
     ax_hist.set_ylabel("density")
@@ -106,7 +107,8 @@ def main():
                  f"(scored subset n = {len(df):,})", fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.965))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    fig.savefig(OUT, dpi=300)
+    fig.savefig(OUT + ".png", dpi=300)
+    fig.savefig(OUT + ".pdf", bbox_inches="tight")
     print("wrote", OUT)
 
 if __name__ == "__main__":

@@ -18,15 +18,15 @@ real MAG pairs (dnadiff-derived truth, median 0 breaks): median
 anchor_adjacency 0.9997, no spurious structural flags. Data and report:
 `results/synteny_bench/`.
 
-## Supplementary Figure S2 — Held-out GTDB-R207 benchmark (v5 detail)
+## Supplementary Figure S2 — Held-out GTDB-R207 benchmark (v6 detail)
 
 (`paper/figures/supplementary/fig_s2_gtdb50k_heldout.png`)
 
 43,334 same-genus pairs sampled from GTDB R207 representatives (24,831
 genomes, 74 phyla), with every genome of the 2,520-pair calibration training
 matrix excluded in both directions; dnadiff/ANIm truth for all pairs. The
-gate, consistency flag, and calibration v5 were frozen before evaluation.
-Panels (a–c) Calibrated Syn2bANI v5, skani, and FastANI vs ANIm (MAE 0.619, 0.958, 0.977 respectively). (d) Per-band MAE. (e) Signed-error distributions: skani and FastANI carry a large negative bias at divergent bands; the calibrated estimator is centered (bias −0.12). Per-pair truth, tool output, per-band and per-phylum metrics:
+gate, consistency flag, and benchmark calibration v6 were frozen before evaluation.
+Panels (a–c) Calibrated Syn2bANI v6, skani, and FastANI vs ANIm (MAE 0.619, 0.958, 0.977 respectively). (d) Per-band MAE. (e) Signed-error distributions: skani and FastANI carry a large negative bias at divergent bands; the calibrated estimator is centered (bias −0.12). Per-pair truth, tool output, per-band and per-phylum metrics:
 `results/gtdb50k/` (report `GTDB50K_HELDOUT_REPORT.md`, metrics
 `gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
 
@@ -44,7 +44,7 @@ per-band detail behind the unified benchmark of Fig. 3.
 
 39,903 held-out same-genus pairs with GTDB R207 metadata (completeness,
 contamination, contig count, mean contig length) and dnadiff/ANIm truth.
-Calibrated Syn2bANI v5 overall MAE = 0.619, Pearson r = 0.962. (a) MAE by
+Calibrated Syn2bANI v6 overall MAE = 0.619, Pearson r = 0.962. (a) MAE by
 minimum pair completeness (n = 3,972 below 70%, MAE 0.82; n = 22,259 at
 95–100%, MAE 0.59). (b) MAE by maximum pair contamination. (c) MAE by maximum
 contig count. (d) MAE by minimum mean contig length (<5 kb: MAE 0.81; ≥10 kb:
@@ -172,6 +172,24 @@ chromosomes should additionally be normalized to a common origin before
 comparison.
 Source data: `results/gtdb50k/syn2b_inverted_fraction_closed.tsv`; diagnostic
 report: `results/gtdb50k/CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`.
+
+## Supplementary Figure S15 — FDA-ARGOS *E. coli* structural and AMR discordance
+
+(`paper/figures/supplementary/fig_s15_fda_argos_ecoli.png`)
+
+One hundred and twenty-nine FDA-ARGOS *E. coli* assemblies; 103 pairs at
+skani ANI ≥ 99.9. (a) ANI distribution. (b) Structural classes from minimap2
+validation: global flip/rotation convention artifacts (41 pairs), partial
+inversions confirmed by minus-strand blocks (16 pairs), and collinear/local
+events (46 pairs). (c) Core AMR-genotype discordance from NCBI Pathogen
+Detection AMRFinderPlus calls: 60/103 pairs (58.3%) differ, including 11/24 at
+ANI ≥ 99.99 and 3/10 at ANI ≥ 99.999. (d) Chromosome alignment blocks of at
+least 100 kb for the ANI = 100.0 pair FDAARGOS_348/772, which differs by
+tet(A)/tet(K) and a 48-kb insertion. These very-high-ANI reference-genome pairs
+are not interpreted as inferred outbreak or transmission clusters. Source data:
+`case_studies/fda_argos/ANALYSIS.md`, `case_studies/fda_argos/validate/VALIDATION.md`,
+`case_studies/fda_argos/amr_discordance.tsv`, and
+`paper/supplementary/tables/Table_S7_FDA_ARGOS_AMR_structural.tsv`.
 
 
 
@@ -336,6 +354,37 @@ Screen numbers at the full GTDB-R207 scale (65,703 genomes) do not exist: the
 50k held-out benchmark ran `ani` on pre-selected pairs, so the largest scale at
 which the screen was exercised is the n = 5,000 all-vs-all above.
 
+## Supplementary Table S7 — FDA-ARGOS *E. coli* structural validation and AMR-genotype discordance
+
+One hundred and twenty-nine FDA-ARGOS assemblies yielded 103 skani pairs at
+ANI ≥ 99.9. AMR genotypes were derived from NCBI Pathogen Detection
+AMRFinderPlus core calls; prevalent/intrinsic genes (≥50% prevalence) were
+removed before acquired-gene analysis, although no gene met that prevalence
+threshold in this collection. Structural calls were classified after minimap2
+validation and orientation/rotation-artifact review. Pair-level and event-level
+source data are in `case_studies/fda_argos/amr_discordance.tsv` and
+`case_studies/fda_argos/validate/VALIDATION.md`; the machine-readable summary is
+`paper/supplementary/tables/Table_S7_FDA_ARGOS_AMR_structural.tsv`.
+
+| Category | Group | Count | Value |
+|---|---|---:|---:|
+| AMR discordance | ANI ≥ 99.9 | 60/103 | 58.3% |
+| AMR discordance | ANI ≥ 99.99 | 11/24 | 45.8% |
+| AMR discordance | ANI ≥ 99.999 | 3/10 | 30.0% |
+| Structural pair class | global flip/rotation | 41/103 | 39.8% |
+| Structural pair class | partial inversion | 16/103 | 15.5% |
+| Structural pair class | collinear/local | 46/103 | 44.7% |
+| Pair-level genuine SV | ANI ≥ 99.9 | 101/103 | 98.1% |
+| Event accounting | artifact INV/TRA | 355/2,718 | 13.1% |
+| Event accounting | artifact indel at rotation junction | 3/2,718 | 0.1% |
+| Event accounting | genuine chromosomal indel ≥1 kb | 876/2,718 | 32.2% |
+| Event accounting | genuine rearrangement | 445/2,718 | 16.4% |
+| Event accounting | genuine off-chromosome difference | 880/2,718 | 32.4% |
+| Event accounting | likely genuine, unverified small indel | 159/2,718 | 5.8% |
+
+These very-high-ANI reference-genome pairs are not interpreted as inferred
+outbreak or transmission clusters.
+
 ## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
 
 The 695 MAG anchor pairs were re-run with `ani --calibrate` (deployed v5
@@ -496,6 +545,16 @@ post-rescue binary before training, so there is no version skew between the
 shipped estimator and the deployed model. Calibrated output is a separate column
 (`--calibrate`); it returns no value on `BELOW_DETECTION` pairs rather than
 extrapolating.
+
+**Model versions.** v5 is the deployed model embedded in the Syn2bANI 0.1.0
+snapshot and is trained on the 2,520 pairs described above. Benchmark
+calibration v6 uses the same ridge feature set and selection protocol, but adds
+1,614 usable pairs from the high-ANI training split (1,615 sampled; one pair was
+dropped for non-finite model features), for `training_n = 4,134`. High-ANI
+candidate genomes were excluded bidirectionally from the v5 training genomes and
+from all genomes in the 43,334-pair hold-out before genome-level train/test
+assignment. Thus the held-out benchmark and the separate 727-pair high-ANI test
+split are independent of v6 training.
 
 **Hybrid estimator threshold.** The raw gated estimate is more accurate than the
 calibrated estimate in the near-clonal regime, whereas calibration is essential

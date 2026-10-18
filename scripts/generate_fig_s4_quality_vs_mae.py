@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate Supplementary Figure S4: GTDB-R207 genome quality vs MAE.
 
-Four panels show calibrated Syn2bANI v5 MAE binned by:
+Four panels show benchmark-calibrated Syn2bANI v6 MAE binned by:
   (a) minimum pair completeness,
   (b) maximum pair contamination,
   (c) maximum pair contig count,
@@ -183,7 +183,7 @@ def main():
     label_panel(axes[1, 1], "d")
 
     fig.suptitle(
-        f"Calibrated Syn2bANI v5 accuracy is stable across GTDB-R207 genome quality "
+        f"Calibrated Syn2bANI v6 MAE across GTDB-R207 genome quality "
         f"(n = {len(df)}, MAE = {overall_mae:.3f}, r = {overall_r:.3f})",
         fontsize=9, y=0.98
     )

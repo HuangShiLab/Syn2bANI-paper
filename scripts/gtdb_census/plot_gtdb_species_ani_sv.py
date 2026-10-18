@@ -82,10 +82,10 @@ def main():
         ("HQ_N50_ge10kb", "HQ +\nN50\n≥ 10 kb", "#762A83"),
     ]
 
-    fig = plt.figure(figsize=(180 / 25.4, 72 / 25.4))
+    fig = plt.figure(figsize=(180 / 25.4, 80 / 25.4))
     outer = fig.add_gridspec(
         1, 2, width_ratios=[1.28, 1.0], wspace=0.30,
-        left=0.065, right=0.985, top=0.88, bottom=0.17,
+        left=0.065, right=0.985, top=0.89, bottom=0.26,
     )
 
     ax_a = fig.add_subplot(outer[0])
@@ -110,24 +110,42 @@ def main():
 
     ax_b = fig.add_subplot(outer[1])
     xpos = np.arange(len(strata))
-    fractions = []
+    reported_fractions = []
+    informative_fractions = []
     labels = []
     colors = []
     for i, (key, label, color) in enumerate(strata):
         row = quality.loc[key]
-        pairs = int(row["pairs"])
-        ge2 = int(row["pairs_ge2"])
-        fraction = ge2 / pairs if pairs else np.nan
-        fractions.append(fraction)
+        reported_fractions.append(float(row["fraction_ge2_reported"]))
+        informative_fractions.append(float(row["fraction_ge2_informative"]))
         labels.append(label)
         colors.append(color)
-        ax_b.text(
-            i, fraction + 0.025, f"{fraction * 100:.1f}%\nn={pairs:,}",
-            ha="center", va="bottom", fontsize=5.5,
-        )
-    bars = ax_b.bar(xpos, fractions, width=0.60, color=colors, edgecolor="white", lw=0.3)
+    width = 0.36
+    reported_bars = ax_b.bar(
+        xpos - width / 2, reported_fractions, width,
+        color="0.72", edgecolor="white", lw=0.3,
+        label="Reported pairs",
+    )
+    informative_bars = ax_b.bar(
+        xpos + width / 2, informative_fractions, width,
+        color=colors, edgecolor="white", lw=0.3,
+        label="Breakpoint-informative pairs",
+    )
+    for bars in (reported_bars, informative_bars):
+        for rect in bars:
+            height = rect.get_height()
+            ax_b.text(
+                rect.get_x() + rect.get_width() / 2,
+                height + 0.018,
+                f"{height * 100:.1f}%",
+                ha="center", va="bottom", fontsize=5.0, rotation=90,
+            )
+    ax_b.legend(
+        loc="upper center", bbox_to_anchor=(0.5, -0.30), ncol=2,
+        handlelength=1.2, columnspacing=1.2,
+    )
     ax_b.set_xticks(xpos, labels)
-    ax_b.set_ylim(0, 1.03)
+    ax_b.set_ylim(0, 1.08)
     ax_b.set_ylabel("Pairs with ≥2 breakpoints")
     ax_b.set_xlabel("GTDB quality stratum")
 

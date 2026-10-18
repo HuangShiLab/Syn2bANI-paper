@@ -1,7 +1,7 @@
 {
   "species_rows": 200,
   "category_counts": {
-    "SNP-distance enriched only": 73,
+    "Sequence-distance enriched only": 73,
     "SV/breakpoint enriched only": 19,
     "Both axes enriched": 46,
     "Not significant / depleted": 62

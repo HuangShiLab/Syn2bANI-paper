@@ -1,0 +1,9 @@
+{
+  "seed": 20261018,
+  "replicates": 2000,
+  "gtdb_pairs_input": 43334,
+  "gtdb_common_calibrated_pairs": 39903,
+  "gtdb_genomes": 24831,
+  "hrom_species": 521,
+  "oapgc_species": 200
+}

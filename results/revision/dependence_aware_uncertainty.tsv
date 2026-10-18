@@ -1,0 +1,11 @@
+analysis	metric	point_estimate	ci95_lower	ci95_upper	units
+gtdb_43k_genome_bootstrap	mae_syn2bani_hybrid_minus_skani	-0.336671	-0.358863	-0.315444	ANI points; positive favours second method
+gtdb_43k_genome_bootstrap	mae_syn2bani_v6_minus_skani	-0.338146	-0.359687	-0.316837	ANI points; positive favours second method
+oapgc_species_bootstrap	median_sequence_distance_auc	0.573719	0.555313	0.582423	Mann-Whitney AUC
+oapgc_species_bootstrap	fraction_sequence_distance_auc_above_0.5	0.715	0.625	0.8	species fraction
+oapgc_species_bootstrap	median_BP_auc	0.494152	0.48867	0.508545	Mann-Whitney AUC
+oapgc_species_bootstrap	fraction_BP_auc_above_0.5	0.465	0.365	0.57	species fraction
+hrom_all_pairs_species_bootstrap	fraction_ani_enriched	0.307102	0.268714	0.345537	tested-species fraction
+hrom_all_pairs_species_bootstrap	fraction_both_enriched	0.0690979	0.0479846	0.0921305	tested-species fraction
+hrom_all_pairs_species_bootstrap	fraction_not_enriched	0.439539	0.395393	0.485605	tested-species fraction
+hrom_all_pairs_species_bootstrap	fraction_structural_enriched	0.184261	0.153551	0.216891	tested-species fraction

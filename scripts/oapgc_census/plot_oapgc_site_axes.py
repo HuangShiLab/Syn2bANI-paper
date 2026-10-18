@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Two-panel figure for OAPGC oral-airway SNP and SV effects."""
+"""Two-panel figure for OAPGC oral-airway ANI-derived sequence and SV effects."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from audit_panel_alignment import require_matplotlib_panel_alignment  # noqa: E4
 
 
 CATEGORY_COLORS = {
-    "SNP-distance enriched only": "#2166AC",
+    "Sequence-distance enriched only": "#2166AC",
     "SV/breakpoint enriched only": "#B2182B",
     "Both axes enriched": "#762A83",
     "Not significant / depleted": "#8C8C8C",
@@ -34,7 +34,7 @@ def classify(row):
     if snp_high and bp_high:
         return "Both axes enriched"
     if snp_high:
-        return "SNP-distance enriched only"
+        return "Sequence-distance enriched only"
     if bp_high:
         return "SV/breakpoint enriched only"
     return "Not significant / depleted"
@@ -83,7 +83,7 @@ def main():
     species = pd.read_csv(args.species, sep="\t")
     species["category"] = species.apply(classify, axis=1)
     category_order = [
-        "SNP-distance enriched only",
+    "Sequence-distance enriched only",
         "SV/breakpoint enriched only",
         "Both axes enriched",
         "Not significant / depleted",
@@ -140,8 +140,8 @@ def main():
     ax_a.axhline(0.5, color="0.70", lw=0.6, zorder=0)
     ax_a.set_xlim(lim)
     ax_a.set_ylim(lim)
-    ax_a.set_xlabel("AUC: oral-airway > within-site SNP distance")
-    ax_a.set_ylabel("AUC: oral-airway > within-site breakpoints")
+    ax_a.set_xlabel("AUC: oral-airway > within-habitat ANI-derived distance")
+    ax_a.set_ylabel("AUC: oral-airway > within-habitat breakpoints")
     ax_a.legend(loc="upper left", handletextpad=0.15, borderaxespad=0.2)
     ax_a.text(
         0.98, 0.03,

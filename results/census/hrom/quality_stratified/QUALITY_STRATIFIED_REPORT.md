@@ -8,7 +8,7 @@
 
 | stratum | pairs | species tested | structural | ANI | both | not |
 |---|---:|---:|---:|---:|---:|---:|
-| all_qualified | 60,014,738 | 521 | 96 | 161 | 36 | 228 |
+| all_qualified | 60,014,738 | 521 | 96 | 160 | 36 | 229 |
 | high_quality_comp90_cont5 | 18,210,578 | 354 | 60 | 93 | 19 | 182 |
 | medium_comp70_cont10 | 43,676,804 | 481 | 88 | 139 | 27 | 227 |
 | high_completeness_only | 18,210,578 | 354 | 60 | 93 | 19 | 182 |
@@ -19,7 +19,7 @@
 | mode | all | high-quality | intersection | Jaccard |
 |---|---:|---:|---:|---:|
 | structural_enriched | 96 | 60 | 53 | 0.515 |
-| ani_enriched | 161 | 93 | 79 | 0.451 |
+| ani_enriched | 160 | 93 | 79 | 0.451 |
 | both_enriched | 36 | 19 | 9 | 0.196 |
 
 See TSV files for exact odds ratios, P values, per-stratum species and robust candidates.
