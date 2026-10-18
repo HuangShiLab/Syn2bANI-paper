@@ -64,3 +64,6 @@ results/census/hrom/repair_screen/hrom_ani_enriched_repair_genes.tsv
 
 # OAPGC Parsnp intermediates are retained locally only
 results/census/oapgc/phase2_parsnp/
+
+# HPC-only working data and legacy benchmark scratch directories
+/hpc_workspace/
