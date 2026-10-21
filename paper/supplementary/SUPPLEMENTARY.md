@@ -38,7 +38,7 @@ Band-holdout cross-validation on the 2,074-pair GTDB-R207 ANIm benchmark:
 MAE by ANI band for raw gamma, calibrated v5, skani, and FastANI. This is the
 per-band detail behind the unified benchmark of Fig. 3.
 
-## Supplementary Figure S4 — Genome quality does not drive ANI error on GTDB-R207
+## Supplementary Figure S4 — Common quality variation has little association with GTDB-R207 ANI error, but extreme fragmentation does
 
 (`paper/figures/supplementary/fig_s4_gtdb_quality_vs_mae.png`)
 
@@ -361,8 +361,19 @@ ANI ≥ 99.9. AMR genotypes were derived from NCBI Pathogen Detection
 AMRFinderPlus core calls; prevalent/intrinsic genes (≥50% prevalence) were
 removed before acquired-gene analysis, although no gene met that prevalence
 threshold in this collection. Structural calls were classified after minimap2
-validation and orientation/rotation-artifact review. Pair-level and event-level
-source data are in `case_studies/fda_argos/amr_discordance.tsv` and
+validation and orientation/rotation-artifact review. Pair classification used
+the reference chromosome only: minus-strand aligned fraction >0.8 defined global
+flip/rotation, 0.2–0.8 defined partial inversion, and ≤0.2 defined
+collinear/local. An INV/TRA was accepted as genuine when at least 50% of its
+span overlapped minus-strand alignment zones, or plus-strand zones in a flipped
+background; otherwise it was called an artifact if either endpoint lay within
+2 kb of an alignment-block boundary and the pair had >4 blocks. A chromosomal
+INS/DEL was genuine when minimap2 cs-tag parsing supported an indel of at least
+1 kb within 3 kb of the call; off-chromosome content differences were genuine,
+and smaller chromosomal indels were retained as likely genuine but unverified.
+Genotype discordance was the measured AMR outcome; phenotype and expression were
+not tested. Pair-level and event-level source data are in
+`case_studies/fda_argos/amr_discordance.tsv` and
 `case_studies/fda_argos/validate/VALIDATION.md`; the machine-readable summary is
 `paper/supplementary/tables/Table_S7_FDA_ARGOS_AMR_structural.tsv`.
 
@@ -522,7 +533,9 @@ finite pairs from a stratified 2,074-pair GTDB benchmark and 467 targeted
 95.0–99.15% ANIm pairs selected by screening all 2.26 M same-genus GTDB-R207
 representative pairs with skani and running dnadiff on 650 candidates. The
 expanded set spans 607 species and 26 phyla and has zero genome-level overlap
-with the original 2,074-pair set.
+with the original 2,074-pair set. Thus 21 of the nominal 2,074 source pairs
+lacked finite v5 training features and were not used; all provenance and
+manuscript accounting reports the finite training total of 2,520 pairs.
 
 **Validation.** Band-holdout cross-validation: each of the four ANI bands
 (80–85, 85–90, 90–95, 95–99) is predicted by a model trained on the other three
@@ -556,7 +569,8 @@ from all genomes in the 43,334-pair hold-out before genome-level train/test
 assignment. Thus the held-out benchmark and the separate 727-pair high-ANI test
 split are independent of v6 training.
 
-**Hybrid estimator threshold.** The raw gated estimate is more accurate than the
+**Hybrid estimator threshold.** This is a post-benchmark selection audit, not an
+independent evaluation of threshold choice. The raw gated estimate is more accurate than the
 calibrated estimate in the near-clonal regime, whereas calibration is essential
 at lower ANI. A hybrid rule was therefore evaluated: report the raw gated
 estimate when it exceeds a threshold `t`, otherwise report the calibrated
@@ -578,7 +592,10 @@ n = 40,629 pairs with non-missing raw and calibrated values):
 MAE decreases sharply from 95% to 97%, then plateaus; 98% was selected as the
 operating threshold because it lies on the plateau while keeping the calibrated
 estimate active for the broadest range of strain-level pairs. The hybrid rule is
-not sensitive to the exact threshold in the 97–99% window.
+not sensitive to the exact threshold in the 97–99% window. Because selection and
+evaluation use the same complete-case set, the corresponding Table 1 unified row
+is an operational-threshold sensitivity analysis; the confirmatory claims are
+the genome-disjoint raw and v6-calibrated results.
 
 ## Supplementary Note 7 — Count-based versus ratio-based structural metrics under assembly fragmentation
 

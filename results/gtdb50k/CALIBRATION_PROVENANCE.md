@@ -4,8 +4,10 @@
 
 - **v5** (`results/panel_by_band/linear_cal_v5.json`) is the deployed model in
   the Syn2bANI 0.1.0 software snapshot. It was trained on 2,520 ANIm-truth
-  pairs (2,074 post-rescue pairs plus the 467-pair 95--99.5% expansion) and its
-  2,074-pair band-holdout CV result is MAE 0.731.
+  finite pairs (2,053 usable pairs from the nominal 2,074-pair post-rescue set
+  plus the 467-pair 95--99.5% expansion); its 2,074-pair band-holdout CV
+  result is MAE 0.731. The other 21 source pairs lacked finite training
+  features and were excluded before training.
 - **v6** (`results/panel_by_band/linear_cal_v6.json`) is the benchmark model
   used by `ani_cal` in `results/gtdb50k/s2b_50k.tsv`,
   `results/gtdb50k/high_ani_results.tsv`, the GTDB held-out benchmark, and the
@@ -29,3 +31,10 @@ The previously generated reports labelled the held-out `ani_cal` column as
 "v5"; those labels were stale. The numerical results are v6 results and are now
 labelled as v6. No numerical benchmark value has been changed by this
 correction.
+
+## Threshold provenance
+
+The 98% hybrid-rule threshold was selected by MAE on the unified benchmark.
+Accordingly, unified hybrid rows are operational-threshold sensitivity analyses;
+the confirmatory hold-out claims are restricted to the raw gated and
+benchmark-v6-calibrated estimates.

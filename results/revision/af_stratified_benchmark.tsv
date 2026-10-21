@@ -1,0 +1,21 @@
+af_tier	denominator	method	n_pairs	mae_ani_points	bias_ani_points	pearson_r
+strict	common_complete_case	syn2bani_raw_gated	22323	1.32496	1.11259	0.874478
+strict	common_complete_case	syn2bani_calibrated_v6	22323	0.532932	-0.0447366	0.963636
+strict	common_complete_case	skani	22323	0.508052	-0.271016	0.975779
+strict	common_complete_case	fastani	22323	0.507179	-0.389443	0.983743
+strict	all_pairs_in_stratum	all_methods_complete	22323			
+low-AF	common_complete_case	syn2bani_raw_gated	17521	2.17106	1.9868	0.684943
+low-AF	common_complete_case	syn2bani_calibrated_v6	17521	0.727737	-0.221419	0.897235
+low-AF	common_complete_case	skani	17521	1.52848	-1.46498	0.943928
+low-AF	common_complete_case	fastani	17521	1.56812	-1.56433	0.957617
+low-AF	all_pairs_in_stratum	all_methods_complete	17521			
+verylow-AF	common_complete_case	syn2bani_raw_gated	59	2.89563	2.72688	0.708559
+verylow-AF	common_complete_case	syn2bani_calibrated_v6	59	1.15389	-0.0514254	0.852859
+verylow-AF	common_complete_case	skani	59	1.46949	-0.916271	0.888948
+verylow-AF	common_complete_case	fastani	59	2.97273	-2.96594	0.825485
+verylow-AF	all_pairs_in_stratum	all_methods_complete	59			
+all	common_complete_case	syn2bani_raw_gated	39903	1.6988	1.49884	0.833579
+all	common_complete_case	syn2bani_calibrated_v6	39903	0.619387	-0.122326	0.962042
+all	common_complete_case	skani	39903	0.957533	-0.796227	0.973373
+all	common_complete_case	fastani	39903	0.976672	-0.909133	0.980125
+all	all_pairs_in_stratum	all_methods_complete	39903			
