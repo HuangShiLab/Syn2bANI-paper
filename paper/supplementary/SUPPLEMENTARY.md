@@ -1,10 +1,10 @@
-# Supplementary Information — Syn2b-ANI: Strain-level ANI estimation and structural comparison via fixed restriction-site anchors
+# Supplementary Information; Syn2bANI: Strain-level ANI estimation and structural comparison via fixed restriction-site anchors
 
 This document collects the supplementary figures and tables referenced from
 the main text. All underlying data and analysis scripts are released at
 https://github.com/HuangShiLab/Syn2bANI-paper.
 
-## Supplementary Figure S1 — Synteny benchmark: exact-truth inversion ladder
+## Supplementary Figure S1; Synteny benchmark: exact-truth inversion ladder
 
 (`paper/figures/supplementary/fig_s1_synteny_ladder.png`)
 
@@ -18,7 +18,7 @@ real MAG pairs (dnadiff-derived truth, median 0 breaks): median
 anchor_adjacency 0.9997, no spurious structural flags. Data and report:
 `results/synteny_bench/`.
 
-## Supplementary Figure S2 — Held-out GTDB-R207 benchmark (v6 detail)
+## Supplementary Figure S2; Held-out GTDB-R207 benchmark (v6 detail)
 
 (`paper/figures/supplementary/fig_s2_gtdb50k_heldout.png`)
 
@@ -27,10 +27,10 @@ genomes, 74 phyla), with every genome of the 2,520-pair calibration training
 matrix excluded in both directions; dnadiff/ANIm truth for all pairs. The
 gate, consistency flag, and benchmark calibration v6 were frozen before evaluation.
 Panels (a–c) Calibrated Syn2bANI v6, skani, and FastANI vs ANIm (MAE 0.619, 0.958, 0.977 respectively). (d) Per-band MAE. (e) Signed-error distributions: skani and FastANI carry a large negative bias at divergent bands; the calibrated estimator is centered (bias −0.12). Per-pair truth, tool output, per-band and per-phylum metrics:
-`results/gtdb50k/` (report `GTDB50K_HELDOUT_REPORT.md`, metrics
-`gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
+`results/gtdb50k/` (report `results/gtdb50k/GTDB50K_HELDOUT_REPORT.md`, metrics
+`results/gtdb50k/gtdb50k_metrics.tsv`); pipeline `scripts/gtdb50k/`.
 
-## Supplementary Figure S3 — Per-band ANI comparison
+## Supplementary Figure S3; Per-band ANI comparison
 
 (`paper/figures/supplementary/fig_s3_anim_by_band.png`)
 
@@ -38,7 +38,7 @@ Band-holdout cross-validation on the 2,074-pair GTDB-R207 ANIm benchmark:
 MAE by ANI band for raw gamma, calibrated v5, skani, and FastANI. This is the
 per-band detail behind the unified benchmark of Fig. 3.
 
-## Supplementary Figure S4 — Common quality variation has little association with GTDB-R207 ANI error, but extreme fragmentation does
+## Supplementary Figure S4; Common quality variation has little association with GTDB-R207 ANI error, but extreme fragmentation does
 
 (`paper/figures/supplementary/fig_s4_gtdb_quality_vs_mae.png`)
 
@@ -53,7 +53,7 @@ most fragmented genomes (<5 kb mean contig length) show a modest accuracy
 degradation; typical MAG-level completeness/contamination variation has little
 effect on ANI accuracy.
 
-## Supplementary Figure S5 — GC coverage ladder
+## Supplementary Figure S5; GC coverage ladder
 
 (`paper/figures/supplementary/fig_s5_simulation_gc.png`)
 
@@ -61,7 +61,7 @@ Substitution ladders evolved on five real template genomes spanning GC
 27.2–72.1%. Syn2bANI error is 0.074–0.356 ANI points and is *not* monotone in
 GC; the worst genome (*B. longum*, GC 60.1%) sits mid-range.
 
-## Supplementary Figure S6 — Mosaic/rate-heterogeneity family
+## Supplementary Figure S6; Mosaic/rate-heterogeneity family
 
 (`paper/figures/supplementary/fig_s6_simulation_mosaic.png`)
 
@@ -72,7 +72,7 @@ estimator reduces error relative to the uniform estimator (e.g., gamma MAE
 misspecification (gamma MAE 2.43 vs uniform 3.42), motivating the real-genome
 ridge calibration of Results 2.5.
 
-## Supplementary Figure S7 — Accuracy on 695 CAMI2 MAGs
+## Supplementary Figure S7; Accuracy on 695 CAMI2 MAGs
 
 (`paper/figures/supplementary/fig_s7_mag_validation.png`)
 
@@ -81,11 +81,11 @@ ridge calibration of Results 2.5.
 class. (b) Absolute-error distributions by tool. (c) Syn2bANI error by CheckM2
 quality tier.
 
-## Supplementary Figure S8 — *H. pylori* junction counts resolve by participant
+## Supplementary Figure S8; *H. pylori* junction counts resolve by participant
 
 (`paper/figures/supplementary/fig_s8_syntracker_h_pylori_by_host.png`)
 
-The *H. pylori* panel of Fig. 6 coloured by the participant each isolate came
+The *H. pylori* panel of Extended Data Fig. 2 coloured by the participant each isolate came
 from, 2,926 pairs scored with the Syn2b structural channel. Same-participant
 pairs sit at the zero floor (median 0 junctions, n = 476); different-participant
 pairs carry a median of 8 (n = 2,450; Mann–Whitney p = 4.1 × 10⁻²²⁶). The
@@ -93,7 +93,7 @@ cohort-level medians are 0 (hypermutator *E. coli*), 3 (*N. gonorrhoeae*),
 7 (*H. pylori*) and 10 (*S. rimosus*); see
 `results/syntracker_validation/SYNTRACKER_STRUCTURAL_REANALYSIS.md`.
 
-## Supplementary Figure S9 — Near-clonal *E. coli* O157:H7 pairs still differ structurally
+## Supplementary Figure S9; Near-clonal *E. coli* O157:H7 pairs still differ structurally
 
 (`paper/figures/supplementary/fig_s9_ecoli_o157_breakpoints.png`)
 
@@ -104,7 +104,7 @@ lineages). (b) The same by host category (bovine, human, other/unknown). Every
 pairwise ANI exceeds 99.886%, yet the median pair differs by 7 breakpoints
 (IQR 4–9, max 19) and only 7.1% of pairs are structurally identical.
 
-## Supplementary Figure S10 — The FDA-ARGOS *Staphylococcus aureus* collection is structurally conserved
+## Supplementary Figure S10; The FDA-ARGOS *Staphylococcus aureus* collection is structurally conserved
 
 (`paper/figures/supplementary/fig_s10_saureus_breakpoints.png`)
 
@@ -117,7 +117,7 @@ Breakpoint-count distribution: 60.5% of pairs carry no breakpoints and the
 maximum is 7. This collection is the negative control for the ANI–structure
 decoupling: here the two are not decoupled.
 
-## Supplementary Figure S11 — cagPAI extended state by country and phylogenetic population
+## Supplementary Figure S11; cagPAI extended state by country and phylogenetic population
 
 (`paper/figures/supplementary/fig_s11_cagpai_country_population.png`)
 
@@ -125,7 +125,7 @@ Stacked-bar distribution of extended cagPAI states (after circular-origin
 filtering) across countries of isolation and phylogenetic population for the
 528 *H. pylori* cohort genomes.
 
-## Supplementary Figure S12 — Circular-origin artifact filtering and sensitivity in *H. pylori* cagPAI
+## Supplementary Figure S12; Circular-origin artifact filtering and sensitivity in *H. pylori* cagPAI
 
 (`paper/figures/supplementary/fig_s12_circular_origin_filtering.png`)
 
@@ -139,7 +139,7 @@ and number of excluded calls as a function of the artifact-span threshold.
 same threshold range; the association remains non-significant throughout.
 Source data: `case_studies/h_pylori_cagpai/results/cagpai_artifact_threshold_sensitivity.tsv`.
 
-## Supplementary Figure S13 — Lineage-stratified association forest plot for *H. pylori* metadata tests
+## Supplementary Figure S13; Lineage-stratified association forest plot for *H. pylori* metadata tests
 
 (`case_studies/h_pylori_cagpai/results/metadata_assoc/fig_forest_stratified.png`)
 
@@ -151,7 +151,7 @@ stratification). The macrolide rows straddle OR = 1, visually demonstrating the
 lineage confounding described in the main text.
 Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`.
 
-## Supplementary Figure S14 — Orientation artifact in undirected all-vs-all inversion calling and its correction
+## Supplementary Figure S14; Orientation artifact in undirected all-vs-all inversion calling and its correction
 
 (`paper/figures/supplementary/fig_s14_closed_genome_inversion.png`)
 
@@ -173,7 +173,7 @@ comparison.
 Source data: `results/gtdb50k/syn2b_inverted_fraction_closed.tsv`; diagnostic
 report: `results/gtdb50k/CLOSED_INVERSION_DIAGNOSTIC_REPORT.md`.
 
-## Supplementary Figure S15 — FDA-ARGOS *E. coli* structural and AMR discordance
+## Supplementary Figure S15; FDA-ARGOS *E. coli* structural and AMR discordance
 
 (`paper/figures/supplementary/fig_s15_fda_argos_ecoli.png`)
 
@@ -193,7 +193,7 @@ are not interpreted as inferred outbreak or transmission clusters. Source data:
 
 
 
-## Supplementary Table S1 — MAG accuracy by CheckM2 quality tier
+## Supplementary Table S1; MAG accuracy by CheckM2 quality tier
 
 695 CAMI2 bins vs dnadiff ANIm truth (raw gated syn2bani; skani; FastANI).
 Full per-group metrics: `results/mag_validation/MAG_METRICS.tsv`.
@@ -204,7 +204,7 @@ Full per-group metrics: `results/mag_validation/MAG_METRICS.tsv`.
 | MQ | 210 | 0.105 | 0.067 | 0.131 | 99.0% |
 | LQ | 285 | 0.291 | 0.160 | 0.426 | 86.7% |
 
-## Supplementary Table S2 — MAG accuracy by contamination class
+## Supplementary Table S2; MAG accuracy by contamination class
 
 Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 253 / cross-species 137).
@@ -215,7 +215,7 @@ Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 | strain-mixed | 0.170 | +0.159 | 0.111 | 0.165 | −0.081 |
 | cross-species | 0.326 | +0.314 | 0.196 | 0.656 | −0.605 |
 
-## Supplementary Table S3 — MAG accuracy by dnadiff alignment-fraction tier
+## Supplementary Table S3; MAG accuracy by dnadiff alignment-fraction tier
 
 | AF tier | n | syn2bani MAE | syn2bani within 0.5 |
 |---|---|---|---|
@@ -223,7 +223,7 @@ Class from CAMI2 ground-truth contig assignment (clean 305 / strain-mixed
 | low-AF (30–60%) | 40 | 0.461 | 72.5% |
 | verylow-AF (< 30%) | 17 | 0.744 | 52.9% |
 
-## Supplementary Table S4 — Crude and lineage-stratified cagPAI–disease associations
+## Supplementary Table S4; Crude and lineage-stratified cagPAI–disease associations
 
 Five hundred and twenty-eight *H. pylori* isolates from Song et al. (2026) were
 classified into extended cagPAI states after circular-origin filtering (empty
@@ -262,7 +262,7 @@ Benjamini–Hochberg FDR across these three locality tests.
 
 | Locality test | n | Effect | 95% CI | p | q |
 |---|---:|---:|---|---:|---:|
-| Four-stage × four-level locality | 432 | χ² = 19.75 (df = 9) | — | 0.0195 | 0.0302 |
+| Four-stage × four-level locality | 432 | χ² = 19.75 (df = 9) | | 0.0195 | 0.0302 |
 | Island-altering locality, GC vs NAG | 230 | crude OR = 1.18 | 0.69–2.04 | 0.579 | 0.579 |
 | Island-altering locality, advanced vs early | 432 | crude OR = 1.61 | 1.08–2.39 | 0.0201 | 0.0302 |
 
@@ -282,7 +282,7 @@ thresholds from 0.20 to 0.50; p-values remained non-significant throughout
 Full per-stratum counts and CMH diagnostics:
 `case_studies/h_pylori_cagpai/results/cagpai_association_crude_and_stratified.tsv`.
 
-## Supplementary Table S5 — cagPAI cross-validation against independent cagA/vacA typing and SV–resistance associations
+## Supplementary Table S5; cagPAI cross-validation against independent cagA/vacA typing and SV–resistance associations
 
 Five hundred and twenty-eight isolates were merged with collaborator-generated
 metadata (cagA detection with EPIYA genotyping and genome-level rescue, vacA
@@ -294,7 +294,7 @@ executed test family are shown; q ≈ 0 denotes underflow.
 | Test | n | crude OR (95% CI) | crude p | stratified OR (95% CI) | CMH p | B–D p | q |
 |---|---:|---|---|---|---|---|---:|---:|
 | cagPAI complete vs cagA detected | 524 | 782.9 (179.2–3420.8) | 7.2 × 10⁻⁶⁸ | 3986 (263.3–60342.6) | < 10⁻¹⁶ | 0.956 | ≈ 0 |
-| cagPAI complete vs cagA EPIYA genotype (4-level) | 450 | — | 0.515 (χ²) | — | — | — | 0.57 |
+| cagPAI complete vs cagA EPIYA genotype (4-level) | 450 | | 0.515 (χ²) | | | | | 0.57 |
 | cagPAI complete vs vacA s1 | 462 | 556.1 (74.0–4180.4) | 1.4 × 10⁻³⁹ | 510.9 (74.1–3520.8) | < 10⁻¹⁶ | 1 × 10⁻⁶ | ≈ 0 |
 | cagPAI complete vs vacA i1 | 477 | 38.0 (19.6–73.7) | 4.6 × 10⁻³² | 27.0 (13.6–53.8) | < 10⁻¹⁶ | 0.77 | ≈ 0 |
 | cagPAI complete vs vacA m1 | 519 | 11.8 (6.6–21.4) | 1.4 × 10⁻²¹ | 11.4 (6.4–20.4) | < 10⁻¹⁶ | 0.018 | ≈ 0 |
@@ -315,7 +315,7 @@ incompleteness.
 Source data: `case_studies/h_pylori_cagpai/results/metadata_assoc/association_tests.tsv`;
 assembly-level review: `case_studies/h_pylori_cagpai/results/metadata_assoc/discordant_review/`.
 
-## Supplementary Table S6 — Stage-level runtime decomposition and Stage-1 screen recall
+## Supplementary Table S6; Stage-level runtime decomposition and Stage-1 screen recall
 
 **Stage decomposition (n = 22-genome panel, 484 ordered pairs, median of 3
 replicates).** Syn2bANI does not emit per-stage timers; stages that are measured
@@ -328,9 +328,9 @@ machine-readable table: `results/efficiency_v8/stage_breakdown.tsv`.
 | End-to-end, sketch mode (sketch load + screen + chain + MLE) | 2.79 s | measured |
 | `sketch` command (digest + build + write) | 0.50 s | measured; digestion vs build/write not separable from these data |
 | In-silico digestion (in-memory) | ≈0.9 s | derived upper bound (FASTA − sketch mode; sub-second I/O noise) |
-| Screen (pass-1 index lookup) | — | not separately timed; 0 < t < 2.79 s |
-| Chaining (anchor DP) | — | not separately timed (merged with screen + MLE) |
-| MLE fit + calibration | — | not separately timed (calibration is a linear-model evaluation, sub-ms per pair) |
+| Screen (pass-1 index lookup) | | not separately timed; 0 < t < 2.79 s |
+| Chaining (anchor DP) | | not separately timed (merged with screen + MLE) |
+| MLE fit + calibration | | not separately timed (calibration is a linear-model evaluation, sub-ms per pair) |
 | Marginal cost of screen+chain+MLE | 5.7 ms/pair | derived from sketch-mode scaling (n = 2 → 22) |
 | `syn2bani struct` (SV stage, 16-way process pool) | 4.36 s | measured (includes process-spawn overhead) |
 
@@ -354,7 +354,7 @@ Screen numbers at the full GTDB-R207 scale (65,703 genomes) do not exist: the
 50k held-out benchmark ran `ani` on pre-selected pairs, so the largest scale at
 which the screen was exercised is the n = 5,000 all-vs-all above.
 
-## Supplementary Table S7 — FDA-ARGOS *E. coli* structural validation and AMR-genotype discordance
+## Supplementary Table S7; FDA-ARGOS *E. coli* structural validation and AMR-genotype discordance
 
 One hundred and twenty-nine FDA-ARGOS assemblies yielded 103 skani pairs at
 ANI ≥ 99.9. AMR genotypes were derived from NCBI Pathogen Detection
@@ -396,7 +396,7 @@ not tested. Pair-level and event-level source data are in
 These very-high-ANI reference-genome pairs are not interpreted as inferred
 outbreak or transmission clusters.
 
-## Supplementary Note 1 — Calibration is input-regime-specific (MAG test)
+## Supplementary Note 1; Calibration is input-regime-specific (MAG test)
 
 The 695 MAG anchor pairs were re-run with `ani --calibrate` (deployed v5
 ridge model trained on complete GTDB genomes). Calibrated MAE is 1.261
@@ -409,7 +409,7 @@ calibrated output is a separate, labelled column and never a silent
 replacement; on draft/MAG inputs the raw gated estimate is recommended.
 Data: `results/mag_validation/collect/ani_calibrated.tsv`.
 
-## Supplementary Note 2 — Calibration learning curve
+## Supplementary Note 2; Calibration learning curve
 
 Band-holdout CV MAE of the v5 ridge model as a function of training-set
 size (subsampled from the 2,520-pair ANIm training matrix):
@@ -424,12 +424,12 @@ size (subsampled from the 2,520-pair ANIm training matrix):
 The linear model plateaus at ~1,500 pairs; expanding the training set
 further is not expected to improve it (main text, Methods 4.6).
 
-## Supplementary Note 3 — Pipeline failure modes and fixes (MAG benchmark)
+## Supplementary Note 3; Pipeline failure modes and fixes (MAG benchmark)
 
 The CAMI2 MAG pipeline required six engineering fixes that bear on
 reproducibility of metagenome benchmarks generally: (i) dnadiff/nucmer
 (MUMmer 3.23) rejects FASTA files containing any embedded whitespace, and
-the CAMI2 source genomes carry spaces in both headers and sequence lines —
+the CAMI2 source genomes carry spaces in both headers and sequence lines;
 inputs were sanitized (headers truncated at first space, sequence
 whitespace stripped) with cached copies; (ii) the FastANI CLI flag for the
 query is `-q`, not `--q`; (iii) conda environments on shared clusters can
@@ -437,7 +437,7 @@ be shadowed by user-site packages (numpy ABI mismatch in CheckM2), fixed
 with PYTHONNOUSERSITE=1. Full incident log:
 `results/mag_validation/RUNBOOK.md`.
 
-## Supplementary Note 4 — Chain-restricted stratified MLE, gating, and flags
+## Supplementary Note 4; Chain-restricted stratified MLE, gating, and flags
 
 For a query tag inside a chained region, with tag length `k`, recognition-site
 length `s`, mutable body `b = k − s`, and mismatch budget `tol`, the outcome
@@ -447,8 +447,8 @@ probabilities under per-base identity `a` are:
   `P_m(a) = C(b, m) · (1 − a)^m · a^(k−m)`.
 - **Not found** (miss): `P_miss(a) = 1 − Σ_{m=0}^{tol} P_m(a)`.
 
-Mismatches are observable only in the mutable body — a mutation inside the
-recognition site deletes the tag entirely — so the site contributes a factor
+Mismatches are observable only in the mutable body; a mutation inside the
+recognition site deletes the tag entirely; so the site contributes a factor
 `a^s` to `P_found` but never appears in the histogram. This also sets a hard
 retention ceiling (for example, ~0.72 at 95% ANI and ~0.50 at 90% with the
 default budget). The per-enzyme strata differ in `k` and `b`; the total
@@ -457,8 +457,8 @@ golden-section search.
 
 Two partial estimators are computed as diagnostics:
 
-- `ani_from_loss` — uses `P_miss(a)` only (the miss-rate channel).
-- `ani_from_hist` — uses the mismatch histogram renormalized by `P_found(a)`.
+- `ani_from_loss`; uses `P_miss(a)` only (the miss-rate channel).
+- `ani_from_hist`; uses the mismatch histogram renormalized by `P_found(a)`.
 
 When the data are well behaved these two estimates agree; large divergence
 signals either model misspecification or sparse data.
@@ -486,17 +486,17 @@ exactly where it is real.
 
 **Flags.** The `flag` column is hierarchical:
 
-- `BELOW_DETECTION` — expected retention < 0.20 (takes precedence).
-- `INCONSISTENT` — the gate fell back to the uniform model, or the chains carry
+- `BELOW_DETECTION`; expected retention < 0.20 (takes precedence).
+- `INCONSISTENT`; the gate fell back to the uniform model, or the chains carry
   > 0.5 rearrangement breakpoints per anchor (a structural statistic independent
   of the chain-restricted likelihood denominator).
-- `ok` — otherwise.
+- `ok`; otherwise.
 
 The recalibrated flag never inverts its error ranking on any validation set
 (kept vs flagged MAE: GTDB-ANIm 2.415 vs 4.153; oral/gut 0.514 vs 4.269;
 mid-ANI 0.343 vs 1.113), at a disclosed cost in near-clonal sensitivity.
 
-## Supplementary Note 5 — The spatial-model negative result (identifiability analysis)
+## Supplementary Note 5; The spatial-model negative result (identifiability analysis)
 
 A mechanistic spatial-rate model was evaluated as an alternative to the ridge
 calibration layer. The prototype was written in Python, tested on 19 exact-truth
@@ -520,7 +520,7 @@ identifiability floor at 4-enzyme tag density; this negative result is why the
 shipped pipeline uses calibration, rather than a more elaborate likelihood, as
 the real-genome correction layer.
 
-## Supplementary Note 6 — Ridge calibration protocol details
+## Supplementary Note 6; Ridge calibration protocol details
 
 The v5 calibration model is ridge regression on nine Syn2bANI-internal features:
 `ani_gated`, `ani_uniform`, `af_query`, `af_reference`, `std_err`, `retention`,
@@ -597,7 +597,7 @@ evaluation use the same complete-case set, the corresponding Table 1 unified row
 is an operational-threshold sensitivity analysis; the confirmatory claims are
 the genome-disjoint raw and v6-calibrated results.
 
-## Supplementary Note 7 — Count-based versus ratio-based structural metrics under assembly fragmentation
+## Supplementary Note 7; Count-based versus ratio-based structural metrics under assembly fragmentation
 
 The choice of structural metric is not arbitrary: under assembly fragmentation,
 count-based and length-weighted ratio-based statistics fail in *different*, closed
@@ -608,11 +608,11 @@ additional measurements, in the companion Syn2b repository,
 **Setup.** Every observation process partitions a genome into contiguous observed
 segments: contigs (assembly), 1-to-1 blocks (nucmer), or anchor chains (Syn2bANI).
 A genome carrying `S` landmarks, cut into `K` segments, has `K − 1` internal
-boundaries at which adjacency information is absent — not contradicted.
+boundaries at which adjacency information is absent; not contradicted.
 
 **Transition counts acquire a term linear in K.** Observable adjacencies drop
-from `S` (circular) to `S − K`, so any statistic that counts transitions —
-junctions, breakpoints, blocks, chain ends — has
+from `S` (circular) to `S − K`, so any statistic that counts transitions;
+junctions, breakpoints, blocks, chain ends; has
 
     E[T] = T_true + c·(K − 1) + …
 
@@ -628,7 +628,7 @@ therefore removable in principle, not merely reducible.
 **Length-weighted ratios are invariant to K.** Define
 `F = Σ_{i∈P} ℓ_i / Σ_i ℓ_i`, where `P` is a property that splitting preserves
 ("this segment is inverted relative to the other genome" is one). Splitting a
-segment leaves both sums unchanged, so `F` does not depend on `K` at all — no
+segment leaves both sums unchanged, so `F` does not depend on `K` at all; no
 correction term exists to get wrong. Measured: `inverted_fraction` reads 0.000 on
 a 120-contig self-assembly and regresses on the true inverted base-pair fraction
 at slope 0.97, R² = 0.999 across a 512-fold range of event lengths and 0–5%
@@ -643,7 +643,7 @@ all-vs-all screens the mirror-corrected `min(raw, 1 − raw)` is appropriate
 (Supplementary Fig. S14).
 
 **Corollary: the sensitivity discount, in closed form.** With `c = 0`, what
-remains is a loss of sensitivity — junctions falling at segment boundaries are
+remains is a loss of sensitivity; junctions falling at segment boundaries are
 invisible. That share is exactly the observable adjacency fraction,
 `observable_fraction ≈ 1 − (K − 1)/S`, exact to four decimals up to K = 300 on
 *E. coli* with the default panel, and an unbiased predictor of surviving junctions
@@ -651,3 +651,61 @@ invisible. That share is exactly the observable adjacency fraction,
 10, over 16 fragmentation levels). In scale-free form: recovery is essentially
 complete while segments hold ≳10 landmarks, i.e. contig N50 ≳ 10× the landmark
 spacing (~15 kb for the default four-enzyme panel).
+
+## Supplementary Note 8; Extended structural, case-study and census results
+
+This note preserves the full result-level detail underlying the condensed main text. It uses the final display-item numbering; Extended Data items are packaged with the main submission.
+
+### Structural outputs show metric-specific agreement with independent truth
+
+To test whether the coverage metrics are reliable, we compared them with alignment-based truth on the GTDB-R207 held-out benchmark (43,334 pairs). The base-pair coverage metric `af_query` correlates with dnadiff and minimap2 coverage scores (Spearman r = 0.39 and 0.26); this moderate-to-weak rank agreement is directionally consistent with its definition but does not by itself validate SV detection. The anchor-adjacency metric `anchor_adjacency` is uncorrelated with rearrangement count and only weakly correlated with base-pair synteny/coverage scores; it should be read as a separate anchor-order statistic, not as a proxy for base-pair synteny. `synteny_blocks` (the raw chain count) is dominated by assembly fragmentation (62% of its variance tracks contig count) and is therefore reported as an assembly-structure diagnostic rather than a rearrangement metric. The mathematical distinction between count-based and ratio-based synteny metrics, and the fragmentation invariance of the latter, is summarized in Supplementary Note 7 and derived in full in the companion Syn2b repository (`docs/MATH_REVIEW.md`; https://github.com/HuangShiLab/Syn2b).
+
+The corresponding correlations for `breakpoint_count` against dnadiff structural truth on this set have been recomputed with the released statistic over all 43,334 pairs (re-analysis archived in the companion Syn2b-paper repository, `results/gtdb50k/sv_reanalysis_v011.md`). The corrected agreement is moderate rather than near-exact: partial r = 0.411 against dnadiff breakpoints controlling for ANIm and contig count (the withdrawn pre-fix value was 0.414), with the raw correlation improving from 0.133 to 0.361 and no residual contig-count dependence (r = −0.05). The counter is therefore a detection statistic with known missed-event modes, not a complete rearrangement census; events whose flanking chains have fewer than four anchors, homologous replacements that preserve tag phase, and events hidden by unresolved repeats or contig breaks can be missed. The withdrawn values that do not survive were themselves artifacts of the inflated counter: against large indels the partial correlation drops from the withdrawn 0.453 to 0.327, and among ANIm ≥ 95% pairs the Spearman coefficient drops from 0.674 to 0.633. Beyond the aligner comparison, the released counter agrees at scale with the independent Syn2b adjacency implementation over the same pairs (Spearman ρ = 0.86, Pearson r = 0.84 on 43,312 pairs; the chain-based count reads systematically lower, median ratio 0.30, consistent with its stricter evidence rules). The released statistic is additionally validated by construction on in-silico edits, where it is exact (above), and on the closed-genome and isolate collections reported here.
+
+A length-weighted orientation metric, `raw_inverted_fraction`; computed by the companion Syn2b implementation from the same anchor definition; avoids the fragmentation confounder by construction. In fixed-reference mode it agrees one-to-one with dnadiff on the 43,334-pair held-out set (Pearson r = 0.936; slope 1.004, intercept −0.002). That set does not sample the strain range, containing only two pairs at ANIm ≥ 97%; the strain range is instead covered by a separately sampled high-ANI set, in which agreement is near-exact over 3,826 pairs at ANIm ≥ 97% (r = 0.996, slope 1.006, intercept −0.004; Fig. 4a,b). Bias is zero in every divergence band from 80% ANIm upward, with only the spread changing, so the residual is a reportable standard error rather than a systematic error. Because the metric is reference-oriented, undirected all-vs-all comparisons require the mirror-corrected value `min(raw, 1 − raw)`: in a cohort of 701 closed GTDB-R207 genomes (61,537 conspecific pairs), the raw ratio has a biologically implausible median of 0.36, driven by arbitrary global strand and start-coordinate conventions; 38.9% of pairs are whole-genome reverse-complements of each other; whereas the corrected ratio has a median of 0.18 (Supplementary Fig. S14). A closed-form standard-error model based on the number of shared landmarks reproduces the observed spread (R² = 0.999 across divergence bins), so each reported inversion fraction can carry its own uncertainty. The detection-power limits underlying these resolution numbers are characterized in `docs/PHASE2_DETECTION_POWER.md` of the companion Syn2b repository (https://github.com/HuangShiLab/Syn2b).
+
+On an engineered *H. pylori* cagPAI test panel, a 36,154 bp deletion/insertion is recovered as a single insertion call of 36,154 bp (Fig. 6a).
+
+### A functional locus invisible to ANI is detectable by local chain coverage
+
+The limitation of a single ANI value is not merely theoretical. In a published collection of 185 *Bifidobacterium longum* isolates associated with constipation treatment44, all pairwise ANIs are ≥98.67% and cannot separate strains that carry a complete abfA gene cluster from those with a deleted or peripheral-truncated cluster. Whole-genome aligned fraction is also uninformative (median 0.861 vs 0.867, MWU p = 0.66). However, locus-targeted Syn2bANI chain coverage over the abfA cluster periphery (17.2–37.1 kb) differs significantly between complete and deleted groups (median coverage 1.0 vs 0.16, MWU p = 1.4 × 10⁻³; Fig. 5). The signal is specific to the functional locus (the adjacent downstream region is indistinguishable, p = 0.40) and demonstrates that coordinate-carrying anchors can localize phenotype-relevant structural differences that are invisible to genome-wide ANI.
+
+### Very-high-ANI reference genomes differ in resistance cassettes and structure
+
+The same limitation matters for public-health surveillance. In 129 FDA-ARGOS *E. coli* assemblies, skani reported 103 very-high-ANI reference-genome pairs at ANI ≥ 99.9; this numerical identity does not by itself establish outbreak or transmission identity. Minimap2 validation of `syn2bani struct` calls showed that 101/103 pairs (98%) carry at least one genuine structural difference, including 16 pairs with genuine large inversions and 876 chromosomal indels ≥ 1 kb. Resistance genotypes differed in 60/103 pairs (58.3%), including 11/24 pairs at ANI ≥ 99.99 and one ANI = 100.0 pair (FDAARGOS_348/772) that differs by a tet(A)/tet(K) cassette and a 48 kb insertion (Supplementary Fig. S15 and Table S7). ANI therefore does not ensure interchangeable structural or acquired-resistance profiles in these reference genomes.
+
+### cagPAI architecture in *H. pylori* is invisible to ANI and tracks lineage
+
+The *Helicobacter pylori* cagPAI pathogenicity island is a classic example of a functionally important locus whose presence and architecture are lost in a genome-wide ANI average. We combined marker-gene presence/absence with `syn2bani struct` calls inside the cagPAI coordinates (NC_000915.1: 547,327–583,481) for 528 genomes from a recent gastric-cancer risk study41. The extended state was validated on an engineered eight-genome panel (wild-type, ΔcagPAI, inversion, translocation, and the same events on a ~1%-substituted background) and classified all controls correctly.
+
+Among the 528 isolates, 85 (16.1%) lacked the island (`empty`), 11 (2.1%) were `partial`, 145 (27.5%) retained a collinear complete island (`complete_collinear`), and 287 (54.4%) retained the markers with an inversion or translocation call overlapping the cagPAI window (`complete_rearranged`; Fig. 6a). The remaining 133 complete-marker genomes that were originally classified as rearranged carried a single genome-spanning translocation consistent with a different arbitrary start coordinate on the circular *H. pylori* chromosome; these were reclassified as collinear after circular-origin filtering (Online Methods). Overlap with the window is, however, a weaker statement than rearrangement *of* the island. Splitting the 287 by where their calls break (`case_studies/h_pylori_cagpai/scripts/classify_locality.py`), 53 genomes carry a call lying entirely inside the island (`island_internal`), 101 carry a call with one endpoint inside it (`island_boundary`), and 133 carry only calls that span the whole island; inversions or translocations of 100–600 kb in which the island is intact and merely lies on the other strand of a larger block (`island_spanned`). Only the first two classes, 154 genomes or 29% of the collection, alter the island's own architecture, and the `complete_rearranged` label should be read with that in mind. A diagnostic check confirmed that this pattern is origin rotation (different start coordinate) rather than whole-genome reverse complement: among calls spanning ≥20% of the chromosome, 496/497 were translocations and only one was an inversion.
+
+The extended state remained strongly associated with FastBAPS lineage (χ² = 58.75, df = 12, p = 3.8 × 10⁻⁸). Disease-stage associations were evaluated with both crude 2×2 odds ratios and Cochran–Mantel–Haenszel tests stratified by FastBAPS lineage (Supplementary Table S4). Only cagPAI presence (GC vs NAG) showed a nominally significant crude association (OR = 2.16, 95% CI 1.13–4.13, p = 0.018); after lineage stratification the Mantel–Haenszel OR was 1.70 (CMH p = 0.12), and the Breslow–Day test indicated significant heterogeneity across lineages (p = 0.005). The other three contrasts were not significant even before stratification (rearrangement GC vs NAG crude p = 0.70; presence advanced vs early p = 0.58; rearrangement advanced vs early p = 0.93), and rearrangement associations remained non-significant across artifact-span thresholds from 0.20 to 0.50. In an exploratory locality analysis among the 432 complete-marker genomes, the four disease stages and four locality levels were associated (χ² = 19.75, df = 9, p = 0.020, q = 0.030 across the three locality tests; Supplementary Table S4). Collapsing locality to whether a call altered the island versus leaving it collinear or spanning, the advanced-versus-early contrast was nominally significant before stratification (OR = 1.61, 95% CI 1.08–2.39, p = 0.020, q = 0.030), but not after lineage stratification (Mantel–Haenszel OR = 1.36, 95% CI 0.90–2.06, CMH p = 0.14); the GC-versus-NAG contrast was null (crude p = 0.58). These locality tests are post hoc and partition the architecture signal rather than independently validating a disease association. Thus the architecture–disease signal in this collection is largely driven by lineage structure. The key biological result that survives is lineage-associated cagPAI presence/absence: `empty` rates range from 4% in FastBAPS L2 to 33% in L6. Because all pairwise ANIs in this collection are >95%, these presence/absence and architecture patterns are invisible to ANI-only tools and illustrate how Syn2bANI's structural output can reveal genotype–population relationships that ANI alone cannot.
+
+The marker panel was further cross-validated against independent molecular typing generated by the study collaborators (cagA detection with EPIYA genotyping and genome-level rescue, vacA s/i/m typing). cagA detection agreed with cagPAI presence with near-perfect concordance; cagPAI-complete genomes were cagA-positive in 429/431 cases (OR = 783, 95% CI 179–3,421, p = 7 × 10⁻⁶⁸); and the association was homogeneous across FastBAPS lineages (Mantel–Haenszel OR = 3,986, CMH p < 10⁻¹⁶; Breslow–Day p = 0.96), so it is not driven by any single lineage. As expected for a presence/absence assay, the panel does not predict cagA EPIYA allele structure (χ² p = 0.52), and cagPAI presence tracked the toxigenic vacA s1/i1 genotypes (OR = 556 and 38), consistent with their known co-inheritance (Supplementary Table S5).
+
+To establish whether discordant isolates represent panel errors or biology, we reviewed all 26 genomes with disagreement between marker state and cagA typing at the assembly level, re-anchoring all 28 markers with minimap2, running a cagA-specific alignment, and measuring cagPAI-window coverage against reference 26695. None was caused by assembly incompleteness. Seventeen genomes had lost the island backbone but retained cagA sequence at the evacuated site; near full-length in 8 and fragmentary in 9; including 11 of the 13 genomes classified as cagPAI-empty (the other two carry a clean, fully assembled island deletion with assembled flanks and struct-supported deletion calls). The two cagPAI-complete but cagA-negative genomes (both FastBAPS L3; Mexico and Honduras) carry a precise excision restricted to the cagA locus; 25–26 of 28 markers present, island identity 0.97, cagA-locus coverage dropping from 100% to 0% at 2-kb resolution; a genuine cagA-loss architecture for which the panel and the typing call are both correct. The remaining five disagreements were partial-state calls in high-divergence East-Asian and Latin-American backgrounds where cagA coverage fell just below the 80% marker threshold (0.77–0.79). The panel therefore made no empty-state errors among discordant genomes, and the discordant set itself yielded structural biology invisible to either assay alone: cagA-specific loss on an otherwise intact island, and full-length cagA retention at an evacuated insertion site.
+
+We finally tested whether structural burden marks antibiotic resistance, using genotype-based resistance markers (CARD; macrolide resistance defined by 23S rRNA A2146G/A2147G mutations, for which genotype–phenotype concordance is established). Above-median SV burden was associated with macrolide resistance in the crude analysis (OR = 2.81, 95% CI 1.71–4.62, q = 8.5 × 10⁻⁵) but did not survive lineage stratification (Mantel–Haenszel OR = 1.33, 95% CI 0.73–2.40, p = 0.35; Breslow–Day p = 0.90): FastBAPS L2 (hspEAsia) carries both the highest macrolide-resistance prevalence (28%) and the highest SV burden, so the crude signal reflects lineage structure rather than resistance biology (Supplementary Fig. S13). Fluoroquinolone, tetracycline, and nitroimidazole classes were untestable because CARD annotates the chromosomally intrinsic hp1181 efflux pump in 99.8% of genomes, leaving macrolides as the only discriminatory class in this collection. This negative result reinforces the methodological lesson of the case study: unstratified SV–phenotype correlations in structured bacterial collections are readily confounded by lineage, and structural hypotheses require lineage-aware tests.
+
+### A census separates sequence-divergent and structural-divergent species
+
+To test whether the two output channels provide distinct population-level information, we performed a two-layer anchor-derived within-species census of the Human Reference Oral Microbiome database (HROM)45. The structural layer was generated by the companion Syn2b structural channel and joined by canonical genome pairs to an independent skani ANI layer; it is not an end-to-end Syn2bANI census. After restricting to species clusters with at least two non-empty genome digests, the census covered 142,277 genomes in 2,241 clusters and yielded 62,872,901 unique pairs with both structural and ANI measurements; no structural pair lacked ANI and no cluster had fewer pairs than its genome-level expectation. Overall, 17,535,013 pairs (27.89%) carried at least two detected breakpoints. The relationship between axes was non-monotonic: breakpoint prevalence decreased from 31.1% at ANI 95–97% to 20.8% at 97–98%, but rose to 31.6% at 98–99%, showing that high sequence identity alone does not imply architectural conservation. In a 2,000-replicate species-level bootstrap, tested-species fractions were 0.184 (95% CI 0.154–0.217) structural-similarity enriched, 0.307 (0.269–0.346) ANI-similarity enriched and 0.069 (0.048–0.092) both-set enriched.
+
+For each of the 521 species with at least 200 pairs passing evidence filters (≥250 shared tags and ≥0.50 observable fraction), we selected the top 5% of pairs independently by skani ANI and by Syn2b structural similarity; that is, the pairs each channel considers most similar; and tested species enrichment in each set with one-sided hypergeometric tests (BH q < 0.05). This identified 96 structural-similarity-enriched, 160 ANI-similarity-enriched, and 36 both-similarity-enriched species; the remainder were not enriched. A species overrepresented among structurally similar but not ANI-similar pairs has an anchor-derived detection phenotype enriched for architecture-level differences, whereas overrepresentation among ANI-similar but not structurally similar pairs points disproportionately to sequence-level divergence. We therefore treat these labels as candidate anchor-statistic enrichment phenotypes rather than divergence modes. Examples retained in the high-quality subset included *Lautropia mirabilis*, *Corynebacterium matruchotii* and *Porphyromonas endodontalis* in the structural-enrichment set, and *Prevotella pallens*, *Porphyromonas gingivalis*, *Streptococcus mutans* and *Tannerella forsythia* in the ANI-enrichment set (Extended Data Fig. 3). These are not demonstrated hypermutator or hyper-recombinator states, because the screen does not measure mutation rates or recombination directly.
+
+Assembly quality changed species assignment; we therefore give the all-pair and high-quality sets equal analytical status. Restricting pairs to completeness ≥90% and contamination ≤5% reduced the tested set from 521 to 354 species and identified 60 structural-similarity-enriched, 93 ANI-similarity-enriched and 19 both-similarity-enriched species. Overlap between all-pair and high-quality analyses was moderate (Jaccard 0.515 for structural-similarity-enriched, 0.451 for ANI-similarity-enriched and 0.196 for both-similarity-enriched species), so examples above were restricted to labels retained after quality filtering. Across all pairs, SV detection was strongly associated with the minimum pair N50 (44.0% breakpoint-positive when both genomes had N50 ≥ 10 kb versus 19.3% otherwise), reinforcing that structural sensitivity is contiguity-dependent and that assembly quality is a plausible confounder of species-level labels. Species-level bootstrap intervals quantify composition uncertainty but do not remove pair dependence, shared ancestry or quality correlation. These labels are therefore screening candidates for follow-up, not measured mutation- or recombination-rate phenotypes.
+
+### Oral-airway divergence is mainly sequence-level rather than breakpoint-level
+
+We next asked whether the same two-layer framework can answer an ecological question in the Oral and Airway Prokaryotic Genome Catalog (OAPGC)46. The representative catalogue yielded 98,229 analysed genomes in 1,488 multi-genome SGB clusters and 30,559,312 informative pairs; 49.90% had at least two detected breakpoints. Public oral/airway site labels enabled within-species comparison of 1,264,327 oral-airway pairs with 16,067,030 within-habitat pairs (oral-oral or airway-airway) across 200 species satisfying at least 30 pairs in each group and at least 100 total pairs.
+
+Across species, oral-airway pairs had elevated ANI-derived sequence distance relative to within-habitat pairs (median species AUC 0.574; 143/200 species had AUC > 0.5; sign-test p = 1.0 × 10⁻⁹), but not elevated breakpoints (median AUC 0.494; 93/200; p = 0.358). Species-level bootstrap medians were 0.574 (95% CI 0.555–0.582) for sequence distance and 0.494 (0.489–0.509) for breakpoints. With BH q < 0.05, 73 species were sequence-distance enriched only, 19 were breakpoint enriched only and 46 were enriched on both axes (Extended Data Fig. 4). The sequence signal persisted when pairs were restricted to minimum N50 ≥ 10 kb (median ANI-distance AUC 0.575) and ≥100 kb (0.635), whereas the breakpoint signal remained null in both strata. The estimand is an alignable-sequence ANI distance, not whole-genome substitution load: skani conditions on shared sequence, and assembly contiguity, aligned fraction, accessory content and ancestry can affect what is compared. These results therefore support a public-label-associated difference in ANI-derived distance among cross-site conspecifics, but not a habitat process, directional migration, or a consistent global excess of detectable structural rearrangement. `100 − skani ANI` is an ANI-derived distance, not a counted base-level SNP distance. Because the recent-strain subset (ANI ≥ 99.9%) contained only 49 eligible oral-airway pairs, it does not support species-level migration claims or directional inference.
+
+### GTDB extends the census to hundreds of millions of pairs
+
+To test scale without restricting the analysis to representative genomes, we applied the same two-layer census to 261,737 effective GTDB-R207 genomes in 22,535 species clusters: structural calls came from the companion Syn2b structural channel and were joined to a separate skani ANI layer. Structural calls covered 651,961,758 of 653,584,719 planned unique pairs (99.75%); the shortfall was confined to *Escherichia coli* (99.52% of 338,793,465 planned pairs). After merging the ANI layer, 653,522,280 pairs (99.99% of the effective scope) had valid canonical skani ANI values, with no duplicate, self or cross-species pairs. The resulting joint table contained 21,973 usable species clusters: 21,968 had complete structural and ANI coverage, four lacked only structural calls and one lacked both layers. Among the 1,311 complete species with at least 100 expected pairs, the unweighted median fraction of reported pairs carrying at least two detected breakpoints was 61.3%; the pair-weighted fraction was 56.2% because large clusters differ in breakpoint prevalence. The fraction remained high at ANI 95–99% (median 61.3% for 1,309 species) but decreased with very close sequence identity (38.5% for 391 species at ANI ≥ 99%; 9.5% for 53 species at ANI ≥ 99.9%). This association was robust to cluster scope: all 1,316 clusters with at least 100 expected pairs, including the five partially covered clusters such as *E. coli*, had an unweighted species median of 61.6% and a pair-weighted fraction of 77.9%. At ANI ≥ 99%, the corresponding unweighted median was 38.5% and the pair-weighted fraction was 67.6%; genus- and family-aggregated medians retained the same decrease (`results/revision/gtdb_cluster_scope_sensitivity.tsv`). These are descriptive observational summaries, not estimates with hierarchical uncertainty, but they reproduce at catalog scale the decoupling between sequence divergence and genome architecture (Extended Data Fig. 5).
+
+Quality stratification showed that the census-wide structural result was not driven by low-quality assemblies. Restricting pairs to CheckM completeness ≥ 90% and contamination ≤ 5% retained 645,271,663 pairs and gave breakpoint-positive fractions of 77.90% of reported pairs and 86.69% of breakpoint-informative pairs, versus 77.93% and 86.66% for all reported pairs. Requiring both genomes to have N50 ≥ 10 kb gave 78.02% and 86.78%, whereas the complete-HQ/N50 stratum gave 77.98% and 86.78%. The N50 ≥100 kb stratum was more conservative (75.05% and 86.00%), showing residual contiguity sensitivity. Of the reported pairs, 10.08% lacked a numeric breakpoint; both denominators are therefore shown in Extended Data Fig. 5b. These analyses support GTDB as the scalability layer of the census rather than as a source of unsupported hypermutator labels, and the *E. coli* residual shortfall remains explicit rather than imputed.
+
+---

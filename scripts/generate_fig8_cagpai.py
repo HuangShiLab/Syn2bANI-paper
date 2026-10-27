@@ -398,7 +398,7 @@ def main() -> int:
 
     # Panel (b)
     plot_panel_b(ax_b)
-    plot_style.label_panel(ax_b, "b")
+    plot_style.label_panel(ax_b, "b", x=-0.18, y=1.12)
 
     # Panel (e)
     plot_panel_e(ax_e, merged)
@@ -414,7 +414,7 @@ def main() -> int:
     ax_c.text(0.03, 0.97,
               f"$\\chi^2$ = {chi2:.2f}, df = {dof},\n$p$ = {p_str}",
               transform=ax_c.transAxes, ha="left", va="top", fontsize=7)
-    plot_style.label_panel(ax_c, "c")
+    plot_style.label_panel(ax_c, "c", x=-0.22, y=1.08)
 
     # Panel (d)
     group_order = ["NAG", "AG", "IM", "GC"]
@@ -429,7 +429,7 @@ def main() -> int:
     )
     ax_d.text(0.03, 0.97, cmh_text,
               transform=ax_d.transAxes, ha="left", va="top", fontsize=7)
-    plot_style.label_panel(ax_d, "d")
+    plot_style.label_panel(ax_d, "d", x=-0.22, y=1.08)
 
     # Panel (f)
     plot_panel_f(ax_f, merged)
