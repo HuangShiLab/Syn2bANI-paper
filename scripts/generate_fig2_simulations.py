@@ -15,9 +15,8 @@ Data provenance
 The exact-truth simulations were generated in the companion Syn2bANI
 repository under prototype/ and then copied/rerun into this paper repo.
 This script looks for the needed TSVs in the following order:
-  1. results/simulations/           (preferred, self-contained)
-  2. results/sv_validation/         (copies already in the paper repo)
-  3. ../Syn2bANI/prototype/         (original raw outputs)
+  1. results/simulations/           (self-contained release copy)
+  2. results/sv_validation/         (legacy copies)
 
 The panel (a,b) cross-tool comparison requires simindel_cross_tool_4e.tsv,
 which is currently only available in the Syn2bANI prototype directory; the
@@ -47,7 +46,6 @@ OUTDIR = ROOT / "paper" / "figures" / "main"
 SEARCH_ROOTS = [
     ROOT / "results" / "simulations",
     ROOT / "results" / "sv_validation",
-    Path("/Users/macstudio/Downloads/Syn2bANI/prototype"),
 ]
 
 

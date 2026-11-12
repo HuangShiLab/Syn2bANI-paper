@@ -8,9 +8,9 @@ ground truth.
 
 Data provenance
 ---------------
-Reads rerun outputs from the Syn2bANI prototype directory:
-  prototype/simmosaic_results_4e.tsv
-  prototype/simmosaic/manifest.tsv
+Reads self-contained release outputs:
+  results/simulations/simmosaic_results_4e.tsv
+  results/simulations/simmosaic/manifest.tsv
 
 Outputs
 -------
@@ -29,9 +29,8 @@ from plot_style import set_publication_style, figure_size, label_panel, save_fig
 # Paths
 # ---------------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parents[1]
-PROTOTYPE = Path("/Users/macstudio/Downloads/Syn2bANI/prototype")
-RESULTS_TSV = PROTOTYPE / "simmosaic_results_4e.tsv"
-MANIFEST_TSV = PROTOTYPE / "simmosaic" / "manifest.tsv"
+RESULTS_TSV = ROOT / "results" / "simulations" / "simmosaic_results_4e.tsv"
+MANIFEST_TSV = ROOT / "results" / "simulations" / "simmosaic" / "manifest.tsv"
 
 
 def load_data():
@@ -58,7 +57,7 @@ def main():
     if not RESULTS_TSV.exists():
         raise FileNotFoundError(
             f"Mosaic results not found at {RESULTS_TSV}. "
-            "Regenerate them in the Syn2bANI prototype directory."
+            "Regenerate them in the Syn2bANI source repository and copy the TSVs into results/simulations/."
         )
     if not MANIFEST_TSV.exists():
         raise FileNotFoundError(f"Mosaic manifest not found at {MANIFEST_TSV}.")
