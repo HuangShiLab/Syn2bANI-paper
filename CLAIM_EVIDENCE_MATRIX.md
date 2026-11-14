@@ -16,7 +16,7 @@ the 2026-11-12 skill audit.
 | C09 | SV follow-up ~60–90× faster | 7 top-hit pairs | Syn2bANI faster | `results/one_to_all/sv_benchmark.tsv` | ED Fig. 1f; Table 2 | pass |
 | C10 | Breakpoint partial correlation 0.411 | 43,334 held-out pairs, controlling ANIm and contigs | moderate not exact | `results/gtdb50k/rerun_v011/s2b_50k_v011_merged.tsv` | Fig. 4c | pass |
 | C11 | High-ANI inversion agreement r=0.996 | 3,826 pairs at ANIm ≥97% | near identity | `results/gtdb50k/inverted_fraction_comparison_report.md` | Fig. 4b | regression direction clarified |
-| C12 | abfA locus coverage separates complete/deleted | 127 complete and 56 deleted/truncated | deleted lower coverage | abfA case-study outputs | Fig. 5 | pass |
+| C12 | abfA periphery coverage is lower for curated deleted/peripheral-truncated strains | 183 non-reference genomes: 127 complete and 56 deleted/truncated | deleted lower coverage | `results/b_longum_abfA/abfA_region_coverage.tsv`; `results/b_longum_abfA/ABFA_CASE_REPORT.md` | Fig. 5 | pass |
 | C13 | FDA-ARGOS 98% structural and 58% genotype discordance | 103 pairs at ANI ≥99.9 | high ANI does not imply equivalence | `case_studies/fda_argos/validate/VALIDATION.md`, `amr_discordance.tsv` | Results; Supp Fig. S15 | pass |
 | C14 | cagPAI lineage association survives; disease association does not | 528 isolates; lineage-stratified tests | lineage confounding explicit | `case_studies/h_pylori_cagpai/results/` | Fig. 6 | pass |
 | C15 | HROM enrichment fractions | 60,014,738 qualifying pairs; 521 tested clusters | axes provide partly distinct information | `results/census/hrom/hypermodes/` | ED Fig. 3 | pass |

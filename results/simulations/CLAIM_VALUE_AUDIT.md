@@ -35,6 +35,15 @@ and the same 0.093 MAE as the manuscript. The older
 `results/SIMULATION_RERUN_REPORT.md` value 0.0695 used the duplicated row set
 directly and is superseded for manuscript reporting.
 
+## Ground-truth manifest convention
+
+`simindel/manifest.tsv` records the query name, true ANI, retained fraction and
+the source FASTA path relative to a sibling checkout of the Syn2bANI source
+repository (`Syn2bANI/prototype/...`). Host-specific absolute paths are not
+used. The manifests and output tables are copied into this paper repository;
+the deterministic simulation harness itself is archived with the Syn2bANI code
+release.
+
 ## Figure and caption
 
 The packaged figure is

@@ -15,7 +15,7 @@ loci, and catalog-scale population screens.
 | A3 | GTDB benchmark | Calibrated Syn2bANI outperforms shipped comparators on a genome-disjoint ANIm benchmark, but calibration boundaries are explicit | Fig. 3; Table 1 | `results/gtdb50k/` |
 | A4 | Search/runtime | Syn2bANI is slower than skani but much faster than dnadiff for SV follow-up and returns ANI plus structure | ED Fig. 1; Table 2 | `results/one_to_all/` |
 | A5 | Structural validation | Structural metrics are metric-specific: inversion fraction is strongly validated; breakpoint count is moderate; adjacency/chains are diagnostics | Fig. 4 | `results/gtdb50k/`; `results/sv_validation/` |
-| A6 | Functional loci | Coordinate-carrying anchors reveal high-ANI strains with abfA deletion or resistance-genotype/structural differences | Fig. 5 | abfA and FDA-ARGOS case studies |
+| A6 | Functional loci | Coordinate-carrying anchors reveal high-ANI strains with abfA-cluster differences or resistance-genotype/structural differences | Fig. 5 | abfA and FDA-ARGOS case studies |
 | A7 | cagPAI | Syn2bANI structural calls resolve cagPAI architecture, but associations require lineage-aware interpretation | Fig. 6 | H. pylori case study |
 | A8 | HROM census | HROM shows non-monotonic ANI-architecture relationships and candidate dual-axis phenotypes | ED Fig. 3 | `results/census/hrom/` |
 | A9 | OAPGC census | Cross-site conspecifics show ANI-derived distance enrichment, not a global breakpoint excess | ED Fig. 4 | `results/census/oapgc/` |
