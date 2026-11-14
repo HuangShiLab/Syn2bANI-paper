@@ -74,14 +74,18 @@ def main() -> int:
     ]:
         check(f"manuscript-phrase:{phrase[:38]}", phrase in m, "missing or stale claim")
 
-    for stale in ["0.377 for skani", "20–201 contigs", "abfA loss", "Manuscript draft —", "/Users/", "/Volumes/"]:
+    for stale in [
+        "0.377 for skani", "20–201 contigs", "abfA loss", "Manuscript draft —",
+        "/Users/", "/Volumes/", "collections10", "Fitzgerald et al. (2021)42",
+        "assemblies20", "Fitzgerald et al. (2021)42", "HROM)45", "OAPGC)46",
+    ]:
         check(f"stale:{stale}", stale not in m, "stale host/process/value string")
 
     # Display and citation architecture.
     body = m[:m.index("## Online Methods")]
     ref_text = m[m.index("## References"):m.index("## Figure Legends")]
     refs = [int(x) for x in re.findall(r"^(\d+)\.\s", ref_text, re.M)]
-    check("references-46", refs == list(range(1, 47)), f"references {len(refs)} or nonconsecutive")
+    check("references-33", refs == list(range(1, 34)), f"references {len(refs)} or nonconsecutive")
     check("main-figures", sorted(set(map(int, re.findall(r"\bFig\. (\d+)", body)))) == list(range(1, 7)), "main figure refs")
     check("ed-figures", sorted(set(map(int, re.findall(r"Extended Data Fig\. (\d+)", body)))) == list(range(1, 6)), "ED figure refs")
     check("main-tables", sorted(set(map(int, re.findall(r"\bTable (\d+)", body)))) == [1, 2], "main table refs")
