@@ -49,6 +49,7 @@ defa56474b3d328b216ba87fd973f5bf53326b5c588b5d5634dda233fa52ec5c  results/simula
 | Result | Software/model | Primary script(s) | Archived output |
 |---|---|---|---|
 | Exact-truth simulations and Fig. 2 | Syn2bANI 0.1.0 `fe0f36c`; skani 0.3.2; FastANI 1.33/1.34 | `scripts/generate_fig2_simulations.py`; source harness in Syn2bANI `fe0f36c` | `results/simulations/`, `paper/figures/main/final/figure2.pdf` |
+| Extended Data Fig. 2 | packaged source PNG plus deterministic label overlay | `scripts/generate_extended_data_figure2.py` | `paper/figures/main/fig6_syntracker_structure.png`, `paper/figures/extended_data/extended_data_figure2.pdf` |
 | GTDB v5 CV | Syn2bANI `fe0f36c`, v5 | `scripts/calibration_v5.py` | `results/panel_by_band/linear_cal_v5.json` |
 | GTDB v6 hold-out | benchmark-only v6 | `scripts/calibration_v6.py`, `scripts/generate_fig3_gtdb_benchmark.py` | `results/gtdb50k/*`, `paper/figures/main/fig3*` |
 | GTDB census | companion Syn2b `64717ab`, skani 0.3.2 | `scripts/gtdb_census/*` | `results/census/gtdb/*` |

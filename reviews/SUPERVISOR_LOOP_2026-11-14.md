@@ -8,13 +8,13 @@ Deliver the current Syn2bANI Nature Methods manuscript only when:
 2. all reviewer feedback has a fixed/answered/rejected disposition;
 3. every captioned panel exists in the packaged rendering;
 4. current figure generators run without private-path dependencies;
-5. `scripts/audit_release.py` returns `RELEASE READY`;
+5. `scripts/audit_release.py` returns `RELEASE READY` after every repair;
 6. DOCX/PDF package is regenerated and inspected.
 
 ## Skill packet
 
 - Repository: `https://github.com/HuangShiLab/Supervisor-Skills`
-- HEAD reviewed: `d3cfcf72a96237f907f884bb534f7a4ad004fe47`
+- HEAD reviewed: `2edb32733e4042a0408824441f0e832e2476b07b`
 - Skills used: `supervisor`, `supervisor-review`, `delivery-evidence-audit`,
   `computational-method-release-audit`, and the local generalized counterparts
   `benchmark-design-guard`, `paper-architecture`, and `claim-evidence-check`.
@@ -44,10 +44,10 @@ Deliver the current Syn2bANI Nature Methods manuscript only when:
 
 ## Final gate result
 
-`scripts/audit_release.py` returned:
+`scripts/audit_release.py` returned after the final repair cycle:
 
 ```json
-{"verdict":"RELEASE READY","checks":42,"failures":[]}
+{"verdict":"RELEASE READY","checks":55,"failures":[]}
 ```
 
 ## Reviewer-round clean checkout

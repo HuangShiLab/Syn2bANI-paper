@@ -1,27 +1,7 @@
 # Supplementary Materials Package — Syn2bANI
 
-This directory contains submission-ready supplementary materials for the Syn2bANI manuscript.
-
-## Contents
-
-- `SUPPLEMENTARY.md` / `SUPPLEMENTARY.docx` — Supplementary figures S1–S15, supplementary tables S1–S7, and supplementary notes 1–7.
-- `figures/` — Locally archived high-resolution PNG copies of selected supplementary figures; the current submission figures are referenced from their canonical paths under `paper/figures/`.
-- `tables/` — Source data for supplementary tables, including Table S7 for FDA-ARGOS AMR and structural validation.
-- `notes/` — Additional analysis reports retained for provenance.
+This directory contains the current supplementary manuscript source and rendered DOCX. The current canonical figures are referenced from `paper/figures/supplementary/`; superseded manuscripts, figures and reports are not part of the release package and remain only in repository history if needed.
 
 ## Source data
 
-All per-pair benchmark data, simulation manifests, and figure-generation scripts are available in the main repository:
-
-- `results/panel_by_band/` — 2,074-pair GTDB-R207 ANIm benchmark
-- `results/gtdb50k/` — 43,334 held-out + unified benchmark
-- `results/mag_validation/` — 695 CAMI2 MAG benchmark
-- `results/syntracker_validation/` — Syntracker isolate re-analysis
-- `results/validation_mid_ani_anim/` — mid-ANI ANIm validation
-- `results/synteny_bench/` — exact-truth inversion ladder
-- `analysis/` — figure generation scripts
-
-## Manuscript versions
-
-- `paper/manuscript/manuscript.md` — full detailed version
-- `paper/manuscript/manuscript_nature_methods.md` — Nature Methods format draft
+Current benchmark outputs, manifests and figure-generation scripts are in the main repository under `results/`, `case_studies/` and `scripts/`. The primary release-check entry point is `scripts/audit_release.py`.

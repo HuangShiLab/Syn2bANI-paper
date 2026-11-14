@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS_DIR = ROOT / "case_studies" / "fda_argos_s_aureus" / "results"
 TRIANGLE_PATH = RESULTS_DIR / "triangle_rerun.tsv"
 METADATA_PATH = RESULTS_DIR / "assembly_metadata.tsv"
-OUT = ROOT / "paper" / "figures" / "supplementary" / "fig_s10_saureus_breakpoints"
+OUT = ROOT / "paper" / "figures" / "supplementary" / "fig_s9_saureus_breakpoints"
 
 
 def load_data():
@@ -75,7 +75,7 @@ def main():
     ax.set_xticks(range(0, 9, 1))
     label_panel(ax, "b")
     ax.set_title(
-        f"{(tri['breakpoint_count'] == 0).mean():.1%} of pairs have zero breakpoints",
+        f"{(tri['breakpoint_count'] == 0).mean():.1%} of pairs carry none",
         fontsize=9,
     )
 

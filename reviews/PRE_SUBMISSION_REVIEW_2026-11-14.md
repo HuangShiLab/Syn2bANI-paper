@@ -11,7 +11,7 @@
 
 ## Scope
 
-Audited the current Nature Methods package at commit `ab2e752` before this
+Audited the current Nature Methods package at commit `d89db7bba6bc2bc957b4e169bde29fcfc2da78b6` before this
 round, including the manuscript, Supplement, rendered DOCX/PDF, main and
 Extended Data displays, source tables, scripts, checksums, release scripts and
 clean-checkout path. The frozen 2026-10-21 reviewer reports were not edited.
@@ -70,4 +70,23 @@ After committing the reviewer repairs, a fresh GitHub clone at manuscript commit
 
 ```json
 {"verdict":"RELEASE READY","checks":48,"failures":[]}
+```
+
+## Post-review repair cycle (2026-11-14)
+
+The final supervisor pass found additional release-gate violations not covered
+by the initial prose-only review. Repairs were applied in checklist order:
+
+1. **GC sweep provenance.** Removed the unsupported historical GC ladder from Methods, Supplement, Extended Data Table 1 and release scripts; the result is no longer claimed.
+2. **ED Fig. 2 provenance.** Added `scripts/generate_extended_data_figure2.py`, which regenerates the packaged PDF/PNG from the unchanged SynTracker source figure and records the generator in the manifest.
+3. **Reviewer minor comments.** Added `R1-m1–R1-m4`, `R2-m1–R2-m7` and `R3-m1–R3-m10` to the feedback disposition ledger with evidence for each disposition.
+4. **Superseded artifacts.** Removed old manuscript variants, legacy captions, archive figures and archive result tables from the current release branch; Git history retains them.
+5. **Process leakage.** Removed time-sensitive test-suite wording, caption history about withdrawn figures, and unnecessary “re-run” phrasing.
+6. **Companion provenance.** Methods now specifies the Syn2b digest command, `.tgt` anchor format and batch `syn2b synteny` call.
+7. **Supplement renumbering.** After GC removal, supplementary figures were renumbered S1–S14, all packaged files renamed, and every main-text reference updated.
+
+The binary release gate now performs **55 checks** and reports:
+
+```json
+{"verdict":"RELEASE READY","checks":55,"failures":[]}
 ```

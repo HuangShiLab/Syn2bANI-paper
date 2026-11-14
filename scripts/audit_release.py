@@ -75,9 +75,11 @@ def main() -> int:
         check(f"manuscript-phrase:{phrase[:38]}", phrase in m, "missing or stale claim")
 
     for stale in [
-        "0.377 for skani", "20–201 contigs", "abfA loss", "Manuscript draft —",
-        "/Users/", "/Volumes/", "collections10", "Fitzgerald et al. (2021)42",
-        "assemblies20", "Fitzgerald et al. (2021)42", "HROM)45", "OAPGC)46",
+        "0.377 for skani", "20–201 contigs", "abfA loss", "GC ladders",
+        "GC coverage ladder", "Manuscript draft —", "/Users/", "/Volumes/",
+        "collections10", "Fitzgerald et al. (2021)42", "assemblies43",
+        "scikit-learn29", "HROM)45", "OAPGC)46", "at the time of writing",
+        "previous version of this figure", "re-run with Syn2bANI",
     ]:
         check(f"stale:{stale}", stale not in m, "stale host/process/value string")
 
@@ -165,10 +167,14 @@ def main() -> int:
         fig2 = subprocess.check_output(["pdftotext", str(ROOT / "paper/figures/main/final/figure2.pdf"), "-"], text=True)
         for expected in ["MAE Syn2bANI 0.073", "MAE skani 0.477", "MAE FastANI 0.742"]:
             check(f"fig2-render:{expected}", expected in fig2, "rendered label missing")
-        s10 = subprocess.check_output(["pdftotext", str(ROOT / "paper/figures/supplementary/fig_s10_saureus_breakpoints.pdf"), "-"], text=True)
-        check("fig-s10-render", "60.5% of pairs have zero breakpoints" in s10 and "0.1.0" not in s10, "stale S10 rendering")
+        s9 = subprocess.check_output(["pdftotext", str(ROOT / "paper/figures/supplementary/fig_s9_saureus_breakpoints.pdf"), "-"], text=True)
+        check("fig-s9-render", "60.5% of pairs carry none" in s9 and "0.1.0" not in s9, "stale S9 rendering")
     else:
         check("pdftotext-available", False, "pdftotext is required for release rendering gate")
+
+    check("ed2-generator", (ROOT / "scripts/generate_extended_data_figure2.py").exists() and (ROOT / "paper/figures/main/fig6_syntracker_structure.png").exists(), "ED Fig. 2 generator or source missing")
+    supp_headings = [int(x) for x in re.findall(r"^## Supplementary Figure S(\d+);", supp, re.M)]
+    check("supplement-figure-numbering", supp_headings == list(range(1, 15)), f"supplement figures {supp_headings}")
 
     # Code/data release plan is explicit and not represented only by a commit hash.
     check("software-archive-plan", "Zenodo DOI for the code and embedded model will be added before acceptance" in m, "missing code archive release condition")
