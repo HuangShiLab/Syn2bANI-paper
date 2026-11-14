@@ -50,6 +50,26 @@ Deliver the current Syn2bANI Nature Methods manuscript only when:
 {"verdict":"RELEASE READY","checks":42,"failures":[]}
 ```
 
-A fresh clean clone check is recorded below in the loop log. The binary
-supervisor verdict is **RELEASE READY for submission**, with acceptance-stage
-Zenodo archives explicitly stated as release conditions.
+## Clean-checkout log
+
+```text
+git clone --depth 1 https://github.com/HuangShiLab/Syn2bANI-paper.git
+HEAD: 957aadeef4f125213bbebaedc199514751785b7a
+python3 scripts/audit_release.py
+  verdict: RELEASE READY
+  checks: 42
+  failures: 0
+python3 -m venv .venv
+.venv/bin/python -m pip install pandas==3.0.6 numpy==2.5.4 matplotlib==3.11.2
+.venv/bin/python scripts/generate_fig2_simulations.py          # pass
+.venv/bin/python scripts/generate_fig_s6_simulation_mosaic.py # pass
+.venv/bin/python scripts/generate_fig_s10_saureus_breakpoints.py
+  n=2211, zero=1337, max=7, ANI=93.6-100.0
+```
+
+Rendered clean-checkout Figure 2 labels were rechecked as Syn2bANI 0.073,
+skani 0.477 and FastANI 0.742; S10 showed the 60.5% zero-breakpoint result and
+no obsolete 0.1.0 label. Regenerated PDF binaries may differ only in embedded
+timestamps. The binary supervisor verdict is **RELEASE READY for
+submission**, with acceptance-stage Zenodo archives explicitly stated as
+release conditions.
