@@ -11,7 +11,7 @@
 
 ## Scope
 
-Audited the current Nature Methods package at commit `d89db7bba6bc2bc957b4e169bde29fcfc2da78b6` before this
+Audited the current Nature Methods package at pre-repair commit `d89db7bba6bc2bc957b4e169bde29fcfc2da78b6`; repaired release commit `f049d038e392f55ce72fe9c7d246869b84602f40` before this
 round, including the manuscript, Supplement, rendered DOCX/PDF, main and
 Extended Data displays, source tables, scripts, checksums, release scripts and
 clean-checkout path. The frozen 2026-10-21 reviewer reports were not edited.
@@ -90,3 +90,11 @@ The binary release gate now performs **55 checks** and reports:
 ```json
 {"verdict":"RELEASE READY","checks":55,"failures":[]}
 ```
+
+## Final clean checkout after repairs
+
+A fresh clone at `f049d038e392f55ce72fe9c7d246869b84602f40` passed
+`python3 scripts/audit_release.py` with **55 checks and 0 failures**. Running
+`scripts/generate_extended_data_figure2.py` in that clone regenerated ED Fig. 2
+and the subsequent audit remained **RELEASE READY**. Only PDF creation metadata
+changed; the labeled panels remained deterministic.

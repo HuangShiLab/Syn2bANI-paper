@@ -79,3 +79,9 @@ no obsolete 0.1.0 label. Regenerated PDF binaries may differ only in embedded
 timestamps. The binary supervisor verdict is **RELEASE READY for
 submission**, with acceptance-stage Zenodo archives explicitly stated as
 release conditions.
+
+## Final repaired clean checkout
+
+Fresh clone `f049d038e392f55ce72fe9c7d246869b84602f40`: release audit passed
+55/55 checks; ED Fig. 2 generator ran successfully. PDF binaries may differ in
+creation metadata, but the panel content and audit remained deterministic.
