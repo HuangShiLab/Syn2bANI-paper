@@ -50,6 +50,12 @@ Deliver the current Syn2bANI Nature Methods manuscript only when:
 {"verdict":"RELEASE READY","checks":42,"failures":[]}
 ```
 
+## Reviewer-round clean checkout
+
+After the 2026-11-14 citation-order repair, a fresh GitHub clone at manuscript
+commit `3e3716fe4b8526d265d7e632f25e96db83420e42` ran
+`python3 scripts/audit_release.py`: **RELEASE READY, 48 checks, 0 failures**.
+
 ## Clean-checkout log
 
 ```text

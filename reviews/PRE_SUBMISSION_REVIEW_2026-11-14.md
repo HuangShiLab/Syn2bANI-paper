@@ -61,3 +61,13 @@ release-blocking for a Nature-style submission and were repaired.
 **READY.** No unresolved CRITICAL or MAJOR issue remains. The only non-blocking
 acceptance-stage action is the already stated Zenodo deposition for the code
 release and complete pair-level census tables.
+
+## Final clean checkout
+
+After committing the reviewer repairs, a fresh GitHub clone at manuscript commit
+`3e3716fe4b8526d265d7e632f25e96db83420e42` ran
+`python3 scripts/audit_release.py` successfully:
+
+```json
+{"verdict":"RELEASE READY","checks":48,"failures":[]}
+```
