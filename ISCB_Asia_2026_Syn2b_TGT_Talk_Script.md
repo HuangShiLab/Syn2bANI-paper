@@ -1,19 +1,19 @@
-# ISCB-Asia 2026 — revised 20-minute talk script  
-**Title:** One coordinate system, three kingdoms: type IIB restriction landmarks from community composition to genome architecture  
-**Deck:** `ISCB_Asia_2026_Syn2b_TGT_Landmarks.pptx`  
-**Narrative:** Type IIB landmarks are identity tags and genomic coordinates. One coordinate system moves from community composition to genome architecture.  
+# ISCB-Asia 2026 — revised 20-minute talk script
+**Title:** One coordinate system, three kingdoms: type IIB restriction landmarks from community composition to genome architecture
+**Deck:** `ISCB_Asia_2026_Syn2b_TGT_Landmarks.pptx`
+**Narrative:** Type IIB landmarks are identity tags and genomic coordinates. One coordinate system moves from community composition to genome architecture.
 **Time allocation:** Introduction and Part I ≈ 8 minutes; Part II ≈ 10–11 minutes; closing ≈ 1 minute.
 
 ---
 
-## Slide 1 — Title  
+## Slide 1 — Title
 **Time:** 00:00–00:30
 
 Good morning. Today I will talk about one representation rather than one isolated tool. Type IIB restriction landmarks let us compare bacteria, archaea and fungi in a shared coordinate system. The same data model starts with community composition and ends with genome architecture.
 
 ---
 
-## Slide 2 — Opening narrative  
+## Slide 2 — Opening narrative
 **Time:** 00:30–01:30
 
 The premise is simple. Type IIB restriction enzymes cut fixed, reproducible positions across bacterial, archaeal and fungal genomes. The resulting landmarks are homologous. Each one is both an identity tag and a genomic coordinate.
@@ -22,14 +22,14 @@ Because identity and position are retained together, we do not need one method f
 
 ---
 
-## Slide 3 — Part I divider  
+## Slide 3 — Part I divider
 **Time:** 01:30–01:45
 
 The first part treats landmarks as identity tags: who is present, which strain is present, and what functions may follow.
 
 ---
 
-## Slide 4 — Why a shared coordinate system is needed  
+## Slide 4 — Why a shared coordinate system is needed
 **Time:** 01:45–02:45
 
 Current representations diverge because each discards something important.
@@ -40,7 +40,7 @@ If a landmark retains both sequence identity and position, one search can be reu
 
 ---
 
-## Slide 5 — Fast2bRAD-M concept  
+## Slide 5 — Fast2bRAD-M concept
 **Time:** 02:45–03:30
 
 Fast2bRAD-M uses type IIB cut sites to define that shared search space.
@@ -49,7 +49,7 @@ Fixed cut sites produce reproducible tags. Because the same tag logic applies ac
 
 ---
 
-## Slide 6 — Fast2bRAD-M benchmark  
+## Slide 6 — Fast2bRAD-M benchmark
 **Time:** 03:30–05:00
 
 The expanded database contains 394,921 bacterial genomes, 7,777 archaeal genomes and 11,184 fungal genomes.
@@ -60,7 +60,7 @@ This is the identity-tag benchmark. It shows that the shared landmark scan remai
 
 ---
 
-## Slide 7 — One phylogeny across kingdoms  
+## Slide 7 — One phylogeny across kingdoms
 **Time:** 05:00–05:50
 
 Because the landmarks are homologous, they support one phylogeny across 19,709 taxa spanning bacteria, archaea and fungi.
@@ -69,7 +69,7 @@ That matters because beta-diversity can now be evolutionary rather than only com
 
 ---
 
-## Slide 8 — Strain2bScan key result  
+## Slide 8 — Strain2bScan key result
 **Time:** 05:50–06:50
 
 The strain layer is Strain2bScan.
@@ -80,7 +80,7 @@ This is the step where species-level profiles often stop. Strain resolution lets
 
 ---
 
-## Slide 9 — Strain2bScan evidence  
+## Slide 9 — Strain2bScan evidence
 **Time:** 06:50–07:50
 
 The supporting evidence has two parts.
@@ -89,7 +89,7 @@ Reduced-representation markers preserve strain relationships better than 16S. An
 
 ---
 
-## Slide 10 — Meta2bAnalyst  
+## Slide 10 — Meta2bAnalyst
 **Time:** 07:50–08:20
 
 Meta2bAnalyst closes the identity-tag loop.
@@ -98,7 +98,7 @@ It connects landmark profiles to downstream statistics, ecological visualization
 
 ---
 
-## Slide 11 — Part II divider  
+## Slide 11 — Part II divider
 **Time:** 08:20–08:40
 
 The second part is the core of the talk.
@@ -107,7 +107,7 @@ We now stop treating the landmark only as an identity tag and start using its po
 
 ---
 
-## Slide 12 — From tag identity to tag order  
+## Slide 12 — From tag identity to tag order
 **Time:** 08:40–09:40
 
 Here is the hypothesis.
@@ -118,7 +118,7 @@ If two genomes share landmark order, they share architecture. If landmark order 
 
 ---
 
-## Slide 13 — TGT structure  
+## Slide 13 — TGT structure
 **Time:** 09:40–10:20
 
 The TGT table is the structural bridge.
@@ -129,7 +129,7 @@ That is why this is not just a classification hash. It is a genomic anchor.
 
 ---
 
-## Slide 14 — Syn2b / Syn2bANI method  
+## Slide 14 — Syn2b / Syn2bANI method
 **Time:** 10:20–11:30
 
 Syn2b and Syn2bANI compare landmark order directly.
@@ -140,7 +140,7 @@ There is no alignment-first step. The coordinate-carrying anchors provide both s
 
 ---
 
-## Slide 15 — Structural benchmark  
+## Slide 15 — Structural benchmark
 **Time:** 11:30–13:30
 
 This is the key structural benchmark.
@@ -151,7 +151,7 @@ For indels, Syn2b calls 184 of 201 events correctly, with a median size ratio of
 
 ---
 
-## Slide 16 — Contrast with ANI-only sketches  
+## Slide 16 — Contrast with ANI-only sketches
 **Time:** 13:30–14:20
 
 This leads to the central contrast.
@@ -162,7 +162,7 @@ Architecture may also be nearly invisible at the ANI level. Syn2bANI fills that 
 
 ---
 
-## Slide 17 — ANI accuracy at GTDB-R207 scale  
+## Slide 17 — ANI accuracy at GTDB-R207 scale
 **Time:** 14:20–15:30
 
 The coordinate layer is added without losing ANI performance.
@@ -171,7 +171,7 @@ On the GTDB-R207 benchmark, Syn2bANI was evaluated on 43,334 genome-disjoint pai
 
 ---
 
-## Slide 18 — Catalog-scale search and SV follow-up  
+## Slide 18 — Catalog-scale search and SV follow-up
 **Time:** 15:30–16:20
 
 At catalog scale, skani remains the fastest ANI-only search. Syn2bANI is slower but returns coordinate-aware architecture in the same framework.
@@ -180,17 +180,26 @@ For top-hit structural follow-up, the landmark route is substantially lighter th
 
 ---
 
-## Slide 19 — Biological interpretation  
-**Time:** 16:20–17:30
+## Slide 19 — B. longum abfA
+**Time:** 16:20–17:00
 
-These examples show why the architecture layer matters biologically.
+The first biological example is Bifidobacterium longum.
 
-In Bifidobacterium longum, local landmark coverage resolves abfA cluster state even when genome-wide ANI is high. In Helicobacter pylori, cagPAI architecture and lineage-associated structure are invisible to ANI alone.
+Although pairwise ANI is high, local landmark coverage resolves abfA-cluster state. Species-level identity therefore does not guarantee conservation of a functionally important locus.
 
 ---
 
-## Slide 20 — Census scale  
-**Time:** 17:30–18:20
+## Slide 20 — H. pylori cagPAI
+**Time:** 17:00–18:00
+
+The second example is the Helicobacter pylori cagPAI cohort.
+
+The coordinate layer reveals island states and lineage-associated architecture, while disease associations remain lineage-confounded. These are exactly the distinctions that ANI alone cannot provide.
+
+---
+
+## Slide 21 — Census scale
+**Time:** 18:00–18:50
 
 The coordinate layer also extends to catalogs.
 
@@ -198,8 +207,8 @@ Across GTDB, breakpoint prevalence declines in the very-high-ANI range. This is 
 
 ---
 
-## Slide 21 — How to use the two layers  
-**Time:** 18:20–19:10
+## Slide 22 — How to use the two layers
+**Time:** 18:50–19:30
 
 The practical message is to match the tool to the question.
 
@@ -207,8 +216,8 @@ Use Fast2bM or Meta2bSeek for cross-kingdom community profiling. Use Strain2bSca
 
 ---
 
-## Slide 22 — Conclusion  
-**Time:** 19:10–20:00
+## Slide 23 — Conclusion
+**Time:** 19:30–20:00
 
 To conclude, return to the opening idea.
 
@@ -220,29 +229,29 @@ Thank you.
 
 ## Timing checkpoint
 
-- Slide 1: 0:00  
-- Slide 2: 0:30  
-- Slide 3: 1:30  
-- Slide 4: 1:45  
-- Slide 5: 2:45  
-- Slide 6: 3:30  
-- Slide 7: 5:00  
-- Slide 8: 5:50  
-- Slide 9: 6:50  
-- Slide 10: 7:50  
-- Slide 11: 8:20  
-- Slide 12: 8:40  
-- Slide 13: 9:40  
-- Slide 14: 10:20  
-- Slide 15: 11:30  
-- Slide 16: 13:30  
-- Slide 17: 14:20  
-- Slide 18: 15:30  
-- Slide 19: 16:20  
-- Slide 20: 17:30  
-- Slide 21: 18:20  
-- Slide 22: 19:10  
-- Finish: 20:00  
+- Slide 1: 0:00
+- Slide 2: 0:30
+- Slide 3: 1:30
+- Slide 4: 1:45
+- Slide 5: 2:45
+- Slide 6: 3:30
+- Slide 7: 5:00
+- Slide 8: 5:50
+- Slide 9: 6:50
+- Slide 10: 7:50
+- Slide 11: 8:20
+- Slide 12: 8:40
+- Slide 13: 9:40
+- Slide 14: 10:20
+- Slide 15: 11:30
+- Slide 16: 13:30
+- Slide 17: 14:20
+- Slide 18: 15:30
+- Slide 19: 16:20
+- Slide 20: 17:30
+- Slide 21: 18:20
+- Slide 22: 19:10
+- Finish: 20:00
 
 ## If running short
 
