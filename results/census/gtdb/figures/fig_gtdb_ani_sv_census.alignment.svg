@@ -1,8 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="509.76pt" height="226.08pt" viewBox="0 0 509.76 226.08">
+<svg xmlns="http://www.w3.org/2000/svg" width="509.76pt" height="269.28000000000003pt" viewBox="0 0 509.76 269.28000000000003">
 <rect width="100%" height="100%" fill="white"/>
-<rect x="33.134" y="24.869" width="191.856" height="142.430" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
-<text x="35.134" y="34.869" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">a</text>
-<rect x="323.250" y="24.869" width="178.863" height="142.430" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
-<text x="325.250" y="34.869" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">b</text>
-<text x="4" y="221.080" font-family="Arial, sans-serif" font-size="7" fill="#333">PASS: 0 fail, 0 warn</text>
+<rect x="33.134" y="29.621" width="228.945" height="148.104" fill="none" stroke="#d7191c" stroke-width="1.2"/>
+<text x="35.134" y="39.621" font-family="Arial, sans-serif" font-size="8" fill="#d7191c">a</text>
+<rect x="33.134" y="198.729" width="218.043" height="5.924" fill="none" stroke="#d7191c" stroke-width="1.2"/>
+<text x="35.134" y="208.729" font-family="Arial, sans-serif" font-size="8" fill="#d7191c">b</text>
+<rect x="323.250" y="29.621" width="178.863" height="148.104" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="325.250" y="39.621" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">c</text>
+<text x="4" y="264.280" font-family="Arial, sans-serif" font-size="7" fill="#333">FIX BEFORE DELIVERY: 2 fail, 0 warn</text>
 </svg>

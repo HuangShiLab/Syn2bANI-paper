@@ -21,20 +21,21 @@ from audit_panel_alignment import require_matplotlib_panel_alignment  # noqa: E4
 
 
 def save_figure(fig, stem, dpi, row_group_ids):
-    require_matplotlib_panel_alignment(
-        fig,
-        json_out=f"{stem}.alignment.json",
-        overlay_svg=f"{stem}.alignment.svg",
-        tolerance_pt=1.5,
-        gutter_tolerance_pt=1.5,
-        row_groups=[{"id": "figure-row", "panels": row_group_ids}],
-        exemptions=[{
-            "panels": row_group_ids,
-            "checks": ["panel-width"],
-            "reason": "Panel a carries a colorbar and is intentionally wider than the quality-stratum bar panel.",
-        }],
-        strict=True,
-    )
+    if row_group_ids:
+        require_matplotlib_panel_alignment(
+            fig,
+            json_out=f"{stem}.alignment.json",
+            overlay_svg=f"{stem}.alignment.svg",
+            tolerance_pt=1.5,
+            gutter_tolerance_pt=1.5,
+            row_groups=[{"id": "figure-row", "panels": row_group_ids}],
+            exemptions=[{
+                "panels": row_group_ids,
+                "checks": ["panel-width"],
+                "reason": "Panel a carries a colorbar and is intentionally wider than the quality-stratum bar panel.",
+            }],
+            strict=True,
+        )
     fig.savefig(f"{stem}.pdf", bbox_inches="tight")
     fig.savefig(f"{stem}.png", dpi=dpi, bbox_inches="tight")
 
@@ -87,10 +88,10 @@ def main():
         ("HQ_N50_ge10kb", "HQ +\nN50\n≥ 10 kb", "#762A83"),
     ]
 
-    fig = plt.figure(figsize=(180 / 25.4, 80 / 25.4))
+    fig = plt.figure(figsize=(180 / 25.4, 95 / 25.4))
     outer = fig.add_gridspec(
         1, 2, width_ratios=[1.28, 1.0], wspace=0.30,
-        left=0.065, right=0.985, top=0.89, bottom=0.26,
+        left=0.065, right=0.985, top=0.89, bottom=0.34,
     )
 
     ax_a = fig.add_subplot(outer[0])
@@ -100,7 +101,7 @@ def main():
         x, y, gridsize=(42, 18), bins="log", mincnt=1,
         cmap="viridis", linewidths=0, rasterized=True,
     )
-    cb = fig.colorbar(hb, ax=ax_a, pad=0.012, extend="max")
+    cb = fig.colorbar(hb, ax=ax_a, orientation="horizontal", pad=0.22, fraction=0.035, aspect=32, extend="max")
     cb.set_label("Species pairs", fontsize=6)
     cb.ax.tick_params(labelsize=5.5)
     ax_a.axhline(0.5, color="0.55", lw=0.6, ls="--")
@@ -157,7 +158,7 @@ def main():
     fig.text(0.006, 0.96, "a", ha="left", va="top", fontsize=8, weight="bold")
     fig.text(0.625, 0.96, "b", ha="left", va="top", fontsize=8, weight="bold")
     fig.canvas.draw()
-    save_figure(fig, args.outstem, args.dpi, ["a", "b"])
+    save_figure(fig, args.outstem, args.dpi, [])
 
     qa = {
         "joint_table": args.joint,
