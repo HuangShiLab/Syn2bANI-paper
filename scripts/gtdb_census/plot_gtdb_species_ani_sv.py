@@ -50,7 +50,7 @@ def main():
 
     mpl.rcParams.update({
         "font.family": "sans-serif",
-        "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"],
+        "font.sans-serif": ["Arial"],
         "font.size": 7,
         "axes.labelsize": 7,
         "axes.titlesize": 7,
@@ -58,6 +58,11 @@ def main():
         "xtick.labelsize": 6,
         "ytick.labelsize": 6,
         "pdf.fonttype": 42,
+        "mathtext.fontset": "custom",
+        "mathtext.rm": "Arial",
+        "mathtext.it": "Arial:italic",
+        "mathtext.bf": "Arial:bold",
+        "mathtext.cal": "Arial",
         "axes.spines.top": False,
         "axes.spines.right": False,
         "legend.frameon": False,

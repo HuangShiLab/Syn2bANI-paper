@@ -20,6 +20,21 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'Arial',
+    'font.sans-serif': ['Arial'],
+    'font.size': 9,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'pdf.fonttype': 42,
+    'ps.fonttype': 42,
+    'mathtext.fontset': 'custom',
+    'mathtext.rm': 'Arial',
+    'mathtext.it': 'Arial:italic',
+    'mathtext.bf': 'Arial:bold',
+    'mathtext.cal': 'Arial',
+})
 from matplotlib.patches import FancyArrowPatch, Rectangle
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -136,8 +151,8 @@ axd.tick_params(labelsize=9)
 # ---- bottom row: outputs box + k-mer contrast ----
 axo = fig.add_subplot(gs[1, 0:2])
 axo.axis("off")
-axo.add_patch(Rectangle((0.03, 0.12), 0.94, 0.80, fc="#f4f4f4", ec="k",
-                        lw=0.8, transform=axo.transAxes))
+axo.add_patch(Rectangle((0.03, 0.12), 0.94, 0.80, fc="#f6f6f6", ec="none",
+                        transform=axo.transAxes))
 outputs = [
     "ANI ± standard error (gated gamma / uniform MLE)",
     "aligned fraction af_query / af_reference",
@@ -149,9 +164,6 @@ outputs = [
 for i, t in enumerate(outputs):
     axo.text(0.05, 0.82 - i * 0.125, "• " + t, fontsize=9,
              transform=axo.transAxes, va="center")
-arr = FancyArrowPatch((0.30, 1.10), (0.40, 0.98), transform=axo.transAxes,
-                      arrowstyle="-|>", mutation_scale=18, color="k", lw=1.2)
-axo.add_patch(arr)
 axo.text(0.97, 0.52,
          "one sketch, one pass:\n~8 ms per pair, 58 MB peak RSS\n"
          "(vs 8–10 s per pair for dnadiff)",

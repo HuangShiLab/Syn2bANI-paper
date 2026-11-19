@@ -41,7 +41,7 @@ def set_publication_style():
     """Apply Nature Methods-compatible defaults."""
     mpl.rcParams.update({
         'font.family': 'sans-serif',
-        'font.sans-serif': ['Arial', 'Helvetica', 'DejaVu Sans'],
+        'font.sans-serif': ['Arial'],
         'font.size': 8,
         'axes.labelsize': 9,
         'axes.titlesize': 9,
@@ -72,6 +72,15 @@ def set_publication_style():
         'savefig.format': 'png',
         'savefig.facecolor': 'white',
         'pdf.fonttype': 42,
+        'mathtext.fontset': 'custom',
+        'mathtext.rm': 'Arial',
+        'mathtext.it': 'Arial:italic',
+        'mathtext.bf': 'Arial:bold',
+        'mathtext.cal': 'Arial',
+        'ps.fonttype': 42,
+        'axes.spines.top': False,
+        'axes.spines.right': False,
+        'axes.unicode_minus': False,
         'ps.fonttype': 42,
     })
     plt.rcParams.update(mpl.rcParams)

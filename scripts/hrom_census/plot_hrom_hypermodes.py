@@ -97,7 +97,7 @@ def main():
 
     mpl.rcParams.update({
         "font.family": "sans-serif",
-        "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"],
+        "font.sans-serif": ["Arial"],
         "font.size": 7,
         "axes.labelsize": 7,
         "axes.titlesize": 7,
@@ -105,6 +105,11 @@ def main():
         "xtick.labelsize": 6,
         "ytick.labelsize": 6,
         "pdf.fonttype": 42,
+        "mathtext.fontset": "custom",
+        "mathtext.rm": "Arial",
+        "mathtext.it": "Arial:italic",
+        "mathtext.bf": "Arial:bold",
+        "mathtext.cal": "Arial",
         "axes.spines.top": False,
         "axes.spines.right": False,
         "legend.frameon": False,
@@ -172,15 +177,16 @@ def main():
                      linewidths=0, label=mode.replace("_", " "), zorder=3)
     ax_b.axvline(0, color="0.25", lw=0.7, ls="--", zorder=1)
     ax_b.axhline(-np.log10(0.05), color="0.55", lw=0.6, ls=":", zorder=1)
-    ax_b.text(0.02, 0.96, "structural-enriched", transform=ax_b.transAxes,
+    ax_b.text(0.02, 1.04, "structural-enriched", transform=ax_b.transAxes,
               ha="left", va="top", color=MODE_COLORS["structural_enriched"],
               fontsize=6)
-    ax_b.text(0.98, 0.96, "ANI-enriched", transform=ax_b.transAxes,
+    ax_b.text(0.98, 1.04, "ANI-enriched", transform=ax_b.transAxes,
               ha="right", va="top", color=MODE_COLORS["ani_enriched"],
               fontsize=6)
     ax_b.set_xlabel(r"$\log_2$ enrichment-ratio ratio (ANI / structural)")
     ax_b.set_ylabel(r"$-\log_{10}$ minimum enrichment $P$")
-    ax_b.legend(loc="lower right", ncol=1, handletextpad=0.15)
+    ax_b.legend(loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2,
+                handletextpad=0.15, columnspacing=0.9)
     ax_b.text(0.02, 0.02, r"$P$ axis truncated at $10^{-50}$",
               transform=ax_b.transAxes, ha="left", va="bottom", fontsize=5.5,
               color="0.35")

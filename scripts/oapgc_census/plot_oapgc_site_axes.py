@@ -29,7 +29,9 @@ CATEGORY_COLORS = {
 
 
 def classify(row):
-    snp_high = float(row["SNP_q"]) < 0.05 and float(row["SNP_auc"]) > 0.5
+    snp_q = row.get("ANI_distance_q", row.get("SNP_q"))
+    snp_auc = row.get("ANI_distance_auc", row.get("SNP_auc"))
+    snp_high = float(snp_q) < 0.05 and float(snp_auc) > 0.5
     bp_high = float(row["BP_q"]) < 0.05 and float(row["BP_auc"]) > 0.5
     if snp_high and bp_high:
         return "Both axes enriched"
@@ -67,7 +69,7 @@ def main():
 
     mpl.rcParams.update({
         "font.family": "sans-serif",
-        "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"],
+        "font.sans-serif": ["Arial"],
         "font.size": 7,
         "axes.labelsize": 7,
         "axes.titlesize": 7,
@@ -75,6 +77,11 @@ def main():
         "xtick.labelsize": 6,
         "ytick.labelsize": 6,
         "pdf.fonttype": 42,
+        "mathtext.fontset": "custom",
+        "mathtext.rm": "Arial",
+        "mathtext.it": "Arial:italic",
+        "mathtext.bf": "Arial:bold",
+        "mathtext.cal": "Arial",
         "axes.spines.top": False,
         "axes.spines.right": False,
         "legend.frameon": False,
@@ -125,7 +132,7 @@ def main():
     ax_a = fig.add_subplot(outer[0])
     for category in category_order:
         sub = species[species["category"] == category]
-        x = pd.to_numeric(sub["SNP_auc"], errors="coerce")
+        x = pd.to_numeric(sub["ANI_distance_auc"], errors="coerce")
         y = pd.to_numeric(sub["BP_auc"], errors="coerce")
         ax_a.scatter(
             x, y, s=13 if category.startswith("Not") else 17,
