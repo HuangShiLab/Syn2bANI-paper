@@ -35,12 +35,6 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 import plot_style  # noqa: E402
 
-def _label_panel_large(ax, label, x=-0.12, y=1.05):
-    ax.text(x, y, label, transform=ax.transAxes, fontsize=18,
-            fontweight="bold", va="bottom", ha="right")
-
-plot_style.label_panel = _label_panel_large
-
 REPO_ROOT = SCRIPT_DIR.parent
 CASE_DIR = REPO_ROOT / "case_studies" / "h_pylori_cagpai" / "results"
 OUT_DIR = REPO_ROOT / "conference_assets"
@@ -195,8 +189,8 @@ def plot_panel_a(ax, rows: list[dict[str, str]]) -> None:
     ax.set_xticklabels(labels, rotation=45, ha="right")
     ax.set_ylim(0, 1.05)
     ax.set_ylabel("Marker fraction present")
-    ax.set_title("Engineered control validation\n9/9 controls correctly classified",
-                 fontsize=24, pad=16)
+    ax.set_title("(a) Engineered control validation; 9/9 controls correctly classified",
+                 fontsize=18, fontweight="bold", loc="left", pad=20)
 
     correct = sum(1 for e, p in zip(expected, predicted) if e == p)
 
@@ -206,7 +200,7 @@ def plot_panel_b(ax) -> None:
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Extended-state classification workflow")
+    ax.set_title("(b) Extended-state classification workflow", fontsize=18, fontweight="bold", loc="left", pad=20)
 
     boxes = [
         (0.82, "28 cagPAI markers", None),
@@ -224,8 +218,8 @@ def plot_panel_b(ax) -> None:
             linewidth=1.0,
         )
         ax.add_patch(box)
-        ax.text(0.5, y + 0.022, title, ha="center", va="center", fontsize=24, fontweight="bold")
-        ax.text(0.5, y - 0.026, subtitle, ha="center", va="center", fontsize=24, color="#333333")
+        ax.text(0.5, y + 0.022, title, ha="center", va="center", fontsize=16, fontweight="bold")
+        ax.text(0.5, y - 0.026, subtitle, ha="center", va="center", fontsize=14, color="#333333")
 
     for i in range(len(boxes) - 1):
         y0 = boxes[i][0] - 0.065
@@ -242,11 +236,12 @@ def plot_panel_b(ax) -> None:
         "• SVs split complete state.\n"
         "• Genome-spanning calls filtered."
     )
-    ax.text(0.5, 0.10, notes, ha="center", va="top", fontsize=24, color="#333333")
+    ax.text(0.5, 0.10, notes, ha="center", va="top", fontsize=14, color="#333333")
 
 
 def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
-                     title: str, ylabel: str, stats: str | None = None) -> None:
+                     title: str, ylabel: str, stats: str | None = None,
+                     panel_label: str | None = None) -> None:
     """Horizontal stacked bar of state proportions."""
     counts = np.array([[table[g].get(s, 0) for s in STATE_ORDER] for g in order], dtype=float)
     totals = counts.sum(axis=1, keepdims=True)
@@ -265,15 +260,16 @@ def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
     ax.set_xlim(0, 1)
     ax.set_xlabel("Proportion of isolates")
     ax.set_ylabel(ylabel)
+    full_title = title if panel_label is None else f"({panel_label}) {title}"
     if stats:
-        ax.set_title(f"{title}\n{stats}", fontsize=24, fontweight="bold", loc="left", pad=34)
+        ax.set_title(f"{full_title}\n{stats}", fontsize=18, fontweight="bold", loc="left", pad=28)
     else:
-        ax.set_title(title, fontsize=24, fontweight="bold", loc="left", pad=30)
+        ax.set_title(full_title, fontsize=18, fontweight="bold", loc="left", pad=24)
     ax.invert_yaxis()
 
     # Add sample-size labels to the right of each bar.
     for j, g in enumerate(order):
-        ax.text(1.02, j, f"n={int(totals[j].item())}", va="center", ha="left", fontsize=24, color="#333333")
+        ax.text(1.02, j, f"n={int(totals[j].item())}", va="center", ha="left", fontsize=14, color="#333333")
     ax.set_xlim(0, 1.18)
 
 
@@ -313,18 +309,15 @@ def plot_panel_e(ax, merged: pd.DataFrame) -> None:
     # Annotate complete fraction per group.
     for i in range(len(order)):
         ax.text(i, fracs[i, 2] / 2 + fracs[i, :2].sum(), f"{fracs[i, 2]:.2f}",
-                ha="center", va="center", fontsize=24, color="white")
+                ha="center", va="center", fontsize=14, color="white")
 
     ax.set_xticks(np.arange(len(order)))
-    ax.set_xticklabels(labels, fontsize=24)
+    ax.set_xticklabels(labels, fontsize=14)
     ax.set_ylim(0, 1.34)
     ax.set_ylabel("cagPAI presence")
     ax.set_xlabel("Independent cagA typing (collaborator)")
-    ax.set_title("Cross-validation vs cagA typing")
-    ax.text(-0.38, 1.20,
-            "OR = 783 (179–3,421); stratified OR = 3,986;\n"
-            "CMH p < 10$^{-16}$; Breslow–Day p = 0.96",
-            ha="left", va="top", fontsize=24)
+    ax.set_title("(e) cagA cross-validation\nOR = 783 (179–3,421); stratified OR = 3,986;\nCMH p < 10$^{-16}$; Breslow–Day p = 0.96",
+             fontsize=18, fontweight="bold", loc="left", pad=24)
 
 
 def plot_panel_f(ax, merged: pd.DataFrame) -> None:
@@ -350,24 +343,22 @@ def plot_panel_f(ax, merged: pd.DataFrame) -> None:
 
     ax.set_ylabel("SV calls vs 26695")
     ax.set_xlabel("CARD macrolide genotype (23S rRNA)")
-    ax.set_title("SV burden vs macrolide resistance")
+    ax.set_title("(f) SV burden vs macrolide resistance\ncrude OR = 2.81 (1.71–4.62), q = 8.5 × 10$^{-5}$;\nlineage-stratified OR = 1.33 (0.73–2.40), p = 0.35",
+             fontsize=18, fontweight="bold", loc="left", pad=24)
     ymax = max(res.max(), sens.max())
     ax.set_ylim(0, ymax * 1.22)
-    ax.text(0.03, 0.97,
-            "crude OR = 2.81 (1.71–4.62), q = 8.5 $\\times$ 10$^{-5}$\n"
-            "lineage-stratified OR = 1.33 (0.73–2.40), p = 0.35",
-            transform=ax.transAxes, ha="left", va="top", fontsize=24)
 
 
 def main() -> int:
     plot_style.set_publication_style()
     plt.rcParams.update({
-    "font.size": 18,
-    "axes.labelsize": 20,
-    "axes.titlesize": 22,
-    "xtick.labelsize": 18,
-    "ytick.labelsize": 18,
-    "legend.fontsize": 18,
+    "font.size": 14,
+    "axes.labelsize": 16,
+    "axes.titlesize": 18,
+    "xtick.labelsize": 14,
+    "ytick.labelsize": 14,
+    "legend.fontsize": 14,
+    "savefig.dpi": 300,
 })
 
     assoc_path = CASE_DIR / "cagpai_association_filtered.tsv"
@@ -394,9 +385,9 @@ def main() -> int:
 
     min_cmh_p = min(cmh_pvals.values()) if cmh_pvals else 0.21
 
-    fig = plt.figure(figsize=plot_style.figure_size(60.0, aspect=0.45))
+    fig = plt.figure(figsize=plot_style.figure_size(70.0, aspect=0.55))
     gs = fig.add_gridspec(2, 3, left=0.045, right=0.94, top=0.90, bottom=0.18,
-                          wspace=0.42, hspace=0.70)
+                          wspace=0.48, hspace=0.62)
 
     ax_a = fig.add_subplot(gs[0, 0])
     ax_b = fig.add_subplot(gs[0, 1])
@@ -421,7 +412,8 @@ def main() -> int:
     plot_stacked_bar(ax_c, fastbaps_table, fb_order,
                      title="Extended state by FastBAPS lineage",
                      ylabel="FastBAPS lineage",
-                     stats=f"χ² = {chi2:.2f}, df = {dof}, p = {p_str}")
+                     stats=f"χ² = {chi2:.2f}, df = {dof}, p = {p_str}",
+                     panel_label="c")
     
     # Panel (d)
     group_order = ["NAG", "AG", "IM", "GC"]
@@ -430,7 +422,8 @@ def main() -> int:
     plot_stacked_bar(ax_d, group_table, group_order,
                      title="Extended state by disease stage",
                      ylabel="Correa stage",
-                     stats=f"marginal χ² = {chi2_g:.2f}, p = {p_g_str}; CMH p ≥ {min_cmh_p:.2f}")
+                     stats=f"marginal χ² = {chi2_g:.2f}, p = {p_g_str}; CMH p ≥ {min_cmh_p:.2f}",
+                     panel_label="d")
     
     # Panel (f)
     plot_panel_f(ax_f, merged)
@@ -447,8 +440,8 @@ def main() -> int:
         ncol=4,
         frameon=False,
         title="State",
-        title_fontsize=24,
-        fontsize=24,
+        title_fontsize=16,
+        fontsize=14,
         bbox_to_anchor=(0.5, -0.02),
     )
 
