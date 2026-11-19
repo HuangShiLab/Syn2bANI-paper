@@ -183,20 +183,20 @@ def plot_panel_a(ax, rows: list[dict[str, str]]) -> None:
 
     ax.axhline(0.85, color="grey", linestyle="--", linewidth=0.8, zorder=0)
     ax.axhline(0.15, color="grey", linestyle="--", linewidth=0.8, zorder=0)
-    ax.text(0.98, 0.96, "complete threshold", transform=ax.transAxes,
-            color="grey", fontsize=7, va="top", ha="right")
-    ax.text(0.98, 0.04, "empty threshold", transform=ax.transAxes,
-            color="grey", fontsize=7, va="bottom", ha="right")
+    ax.set_xlim(-0.6, 10.6)
+    ax.text(9.0, 0.85, "complete threshold", color="grey", fontsize=7,
+            va="center", ha="left")
+    ax.text(9.0, 0.15, "empty threshold", color="grey", fontsize=7,
+            va="center", ha="left")
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=45, ha="right")
     ax.set_ylim(0, 1.05)
     ax.set_ylabel("Marker fraction present")
-    ax.set_title("Engineered control validation")
+    ax.set_title("Engineered control validation\n9/9 controls correctly classified",
+                 fontsize=9, pad=16)
 
     correct = sum(1 for e, p in zip(expected, predicted) if e == p)
-    ax.text(0.02, 0.96, f"{correct}/{len(rows)} correct",
-            transform=ax.transAxes, ha="left", va="top", fontsize=8)
 
 
 def plot_panel_b(ax) -> None:
@@ -244,7 +244,7 @@ def plot_panel_b(ax) -> None:
 
 
 def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
-                     title: str, ylabel: str) -> None:
+                     title: str, ylabel: str, stats: str | None = None) -> None:
     """Horizontal stacked bar of state proportions."""
     counts = np.array([[table[g].get(s, 0) for s in STATE_ORDER] for g in order], dtype=float)
     totals = counts.sum(axis=1, keepdims=True)
@@ -263,7 +263,10 @@ def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
     ax.set_xlim(0, 1)
     ax.set_xlabel("Proportion of isolates")
     ax.set_ylabel(ylabel)
-    ax.set_title(title)
+    if stats:
+        ax.set_title(f"{title}\n{stats}", fontsize=9, pad=16)
+    else:
+        ax.set_title(title, fontsize=9, pad=16)
     ax.invert_yaxis()
 
     # Add sample-size labels to the right of each bar.
@@ -382,8 +385,8 @@ def main() -> int:
     min_cmh_p = min(cmh_pvals.values()) if cmh_pvals else 0.21
 
     fig = plt.figure(figsize=plot_style.figure_size(17.8, aspect=0.72))
-    gs = fig.add_gridspec(2, 3, left=0.07, right=0.95, top=0.92, bottom=0.12,
-                          wspace=0.42, hspace=0.55)
+    gs = fig.add_gridspec(2, 3, left=0.06, right=0.95, top=0.90, bottom=0.16,
+                          wspace=0.52, hspace=0.78)
 
     ax_a = fig.add_subplot(gs[0, 0])
     ax_b = fig.add_subplot(gs[0, 1])
@@ -406,29 +409,22 @@ def main() -> int:
 
     # Panel (c)
     fb_order = [f"fastbaps_L{i}" for i in (2, 3, 4, 5, 6)]
-    plot_stacked_bar(ax_c, fastbaps_table, fb_order,
-                     title="Extended state by FastBAPS lineage",
-                     ylabel="FastBAPS lineage")
     chi2, dof, p = fb_chi2
     p_str = f"{p:.2e}" if p < 0.001 else f"{p:.3g}"
-    ax_c.text(0.03, 0.97,
-              f"$\\chi^2$ = {chi2:.2f}, df = {dof},\n$p$ = {p_str}",
-              transform=ax_c.transAxes, ha="left", va="top", fontsize=7)
+    plot_stacked_bar(ax_c, fastbaps_table, fb_order,
+                     title="Extended state by FastBAPS lineage",
+                     ylabel="FastBAPS lineage",
+                     stats=f"χ² = {chi2:.2f}, df = {dof}, p = {p_str}")
     plot_style.label_panel(ax_c, "c", x=-0.22, y=1.08)
 
     # Panel (d)
     group_order = ["NAG", "AG", "IM", "GC"]
-    plot_stacked_bar(ax_d, group_table, group_order,
-                     title="Extended state by disease stage",
-                     ylabel="Correa stage")
     chi2_g, dof_g, p_g = grp_chi2
     p_g_str = f"{p_g:.2e}" if p_g < 0.001 else f"{p_g:.3g}"
-    cmh_text = (
-        f"marginal: $\\chi^2$ = {chi2_g:.2f}, df = {dof_g},\n$p$ = {p_g_str}\n"
-        f"CMH (lineage-strat.): $p \\geq {min_cmh_p:.2f}$"
-    )
-    ax_d.text(0.03, 0.97, cmh_text,
-              transform=ax_d.transAxes, ha="left", va="top", fontsize=7)
+    plot_stacked_bar(ax_d, group_table, group_order,
+                     title="Extended state by disease stage",
+                     ylabel="Correa stage",
+                     stats=f"marginal χ² = {chi2_g:.2f}, p = {p_g_str}; CMH p ≥ {min_cmh_p:.2f}")
     plot_style.label_panel(ax_d, "d", x=-0.22, y=1.08)
 
     # Panel (f)

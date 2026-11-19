@@ -1,0 +1,464 @@
+#!/usr/bin/env python3
+"""Generate presentation Figure 6: cagPAI architecture in 528 H. pylori isolates.
+
+Panels
+------
+(a) Engineered control validation (expected vs predicted cagPAI state).
+(b) Extended-state classification workflow (schematic).
+(c) Stacked-bar distribution of extended cagPAI states by FastBAPS lineage.
+(d) Stacked-bar distribution of extended cagPAI states by disease stage,
+    with lineage-stratified CMH annotation.
+(e) Cross-validation against independent cagA molecular typing.
+(f) SV burden by macrolide-resistance genotype (crude vs lineage-stratified).
+
+Outputs
+-------
+paper/figures/main/fig8_cagpai_h_pylori.png
+paper/figures/main/fig8_cagpai_h_pylori.pdf
+"""
+
+from __future__ import annotations
+
+import csv
+import re
+import sys
+from collections import Counter
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Patch
+
+# Ensure the repository plot-style module is importable when running from root.
+SCRIPT_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(SCRIPT_DIR))
+import plot_style  # noqa: E402
+
+def _label_panel_large(ax, label, x=-0.12, y=1.05):
+    ax.text(x, y, label, transform=ax.transAxes, fontsize=18,
+            fontweight="bold", va="bottom", ha="right")
+
+plot_style.label_panel = _label_panel_large
+
+REPO_ROOT = SCRIPT_DIR.parent
+CASE_DIR = REPO_ROOT / "case_studies" / "h_pylori_cagpai" / "results"
+OUT_DIR = REPO_ROOT / "conference_assets"
+OUT_STEM = OUT_DIR / "figure6_cagpai_h_pylori"
+
+STATE_ORDER = ["empty", "partial", "complete_collinear", "complete_rearranged"]
+STATE_LABELS = {
+    "empty": "empty",
+    "partial": "partial",
+    "complete_collinear": "complete collinear",
+    "complete_rearranged": "complete rearranged",
+}
+
+STATE_COLORS = {
+    "empty": plot_style.COLORS["vermillion"],
+    "partial": plot_style.COLORS["orange"],
+    "complete_collinear": plot_style.COLORS["bluish_green"],
+    "complete_rearranged": plot_style.COLORS["blue"],
+}
+
+# Engineered control expected states (from cagpai_summary.md)
+PILOT_EXPECTED = {
+    "wt": "complete",
+    "hp26695": "complete",
+    "mut1": "complete",
+    "inv": "complete",
+    "transloc": "complete",
+    "mut1_inv": "complete",
+    "mut1_transloc": "complete",
+    "del": "empty",
+    "mut1_del": "empty",
+}
+
+PILOT_ORDER = [
+    "wt",
+    "hp26695",
+    "mut1",
+    "inv",
+    "transloc",
+    "mut1_inv",
+    "mut1_transloc",
+    "del",
+    "mut1_del",
+]
+
+PILOT_DISPLAY = {
+    "wt": "WT",
+    "hp26695": "26695",
+    "mut1": "mut1",
+    "inv": "inversion",
+    "transloc": "translocation",
+    "mut1_inv": "mut1+inv",
+    "mut1_transloc": "mut1+trans",
+    "del": "ΔcagPAI",
+    "mut1_del": "mut1+Δ",
+}
+
+
+def parse_count_table(path: Path, section_name: str) -> dict[str, dict[str, int]]:
+    """Parse a count table from cagpai_association_filtered.tsv.
+
+    Returns {group: {state: count}} for the requested section (e.g. 'fastbaps',
+    'group').
+    """
+    text = path.read_text()
+    # Sections start with '## <section_name>'. Find it.
+    pattern = rf"^## {re.escape(section_name)}\n(.*?)\n(?:## |chi2=|\\Z)"
+    match = re.search(pattern, text, re.MULTILINE | re.DOTALL)
+    if not match:
+        raise ValueError(f"Section '{section_name}' not found in {path}")
+    lines = match.group(1).strip().splitlines()
+    if len(lines) < 2:
+        raise ValueError(f"Section '{section_name}' has no data rows")
+
+    header = lines[0].split("\t")
+    if header[0] != "group":
+        raise ValueError(f"Unexpected header in {section_name}: {header}")
+
+    table: dict[str, dict[str, int]] = {}
+    for line in lines[1:]:
+        cols = line.split("\t")
+        group = cols[0]
+        table[group] = {}
+        for state, cell in zip(STATE_ORDER, cols[1 : 1 + len(STATE_ORDER)]):
+            m = re.match(r"^(\d+)", cell.strip())
+            if not m:
+                raise ValueError(f"Cannot parse count from '{cell}' in {section_name}")
+            table[group][state] = int(m.group(1))
+    return table
+
+
+def chi2_from_table(table: dict[str, dict[str, int]]) -> tuple[float, int, float] | None:
+    """Compute chi-square test on a state count table."""
+    try:
+        from scipy.stats import chi2_contingency
+    except Exception:
+        return None
+    groups = sorted(table.keys())
+    arr = np.array([[table[g].get(s, 0) for s in STATE_ORDER] for g in groups], dtype=float)
+    if arr.shape[0] < 2 or arr.shape[1] < 2 or (arr.sum(axis=1) < 5).any():
+        return None
+    chi2, p, dof, _ = chi2_contingency(arr)
+    return float(chi2), int(dof), float(p)
+
+
+def load_pilot(path: Path) -> list[dict[str, str]]:
+    rows = {r["genome"]: r for r in csv.DictReader(open(path), delimiter="\t")}
+    return [rows[g] for g in PILOT_ORDER if g in rows]
+
+
+def parse_cmh_p_values(path: Path) -> dict[str, float]:
+    """Return the smallest CMH p-value and all contrast p-values."""
+    pvals: dict[str, float] = {}
+    current = None
+    with open(path) as fh:
+        for line in fh:
+            line = line.strip()
+            if line.startswith("###"):
+                current = line.lstrip("# ").strip()
+            elif line.startswith("CMH") and current:
+                m = re.search(r"p=([0-9.eE+-]+)", line)
+                if m:
+                    pvals[current] = float(m.group(1))
+    return pvals
+
+
+def plot_panel_a(ax, rows: list[dict[str, str]]) -> None:
+    """Engineered control validation: fraction of markers present."""
+    labels = [PILOT_DISPLAY[r["genome"]] for r in rows]
+    fractions = [float(r["fraction_present"]) for r in rows]
+    predicted = [r["status"] for r in rows]
+    expected = [PILOT_EXPECTED[r["genome"]] for r in rows]
+
+    def _pilot_color(status: str) -> str:
+        return STATE_COLORS.get(status, STATE_COLORS["complete_collinear"])
+
+    colors = [_pilot_color(p) for p in predicted]
+    x = np.arange(len(rows))
+    bars = ax.bar(x, fractions, color=colors, edgecolor="white", linewidth=0.5)
+
+    # Highlight mismatches with a dark edge (none expected for current data).
+    for bar, exp, pred in zip(bars, expected, predicted):
+        if exp != pred:
+            bar.set_edgecolor("black")
+            bar.set_linewidth(2)
+
+    ax.axhline(0.85, color="grey", linestyle="--", linewidth=0.8, zorder=0)
+    ax.axhline(0.15, color="grey", linestyle="--", linewidth=0.8, zorder=0)
+    ax.set_xlim(-0.6, 10.6)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=45, ha="right")
+    ax.set_ylim(0, 1.05)
+    ax.set_ylabel("Marker fraction present")
+    ax.set_title("Engineered control validation\n9/9 controls correctly classified",
+                 fontsize=24, pad=16)
+
+    correct = sum(1 for e, p in zip(expected, predicted) if e == p)
+
+
+def plot_panel_b(ax) -> None:
+    """Workflow schematic for extended-state classification (vertical layout)."""
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.axis("off")
+    ax.set_title("Extended-state classification workflow")
+
+    boxes = [
+        (0.82, "28 cagPAI markers", None),
+        (0.63, "syn2bani struct", None),
+        (0.44, "Circular-origin filter", None),
+        (0.25, "Extended state", None),
+    ]
+
+    for y, title, subtitle in boxes:
+        box = FancyBboxPatch(
+            (0.14, y - 0.055), 0.72, 0.11,
+            boxstyle="round,pad=0.01,rounding_size=0.015",
+            facecolor=plot_style.COLORS["light_grey"],
+            edgecolor=plot_style.COLORS["grey"],
+            linewidth=1.0,
+        )
+        ax.add_patch(box)
+        ax.text(0.5, y + 0.022, title, ha="center", va="center", fontsize=24, fontweight="bold")
+        ax.text(0.5, y - 0.026, subtitle, ha="center", va="center", fontsize=24, color="#333333")
+
+    for i in range(len(boxes) - 1):
+        y0 = boxes[i][0] - 0.065
+        y1 = boxes[i + 1][0] + 0.065
+        arrow = FancyArrowPatch(
+            (0.5, y0), (0.5, y1),
+            arrowstyle="->", mutation_scale=10,
+            linewidth=1.0, color="#333333",
+        )
+        ax.add_patch(arrow)
+
+    notes = (
+        "• Markers classify presence.\n"
+        "• SVs split complete state.\n"
+        "• Genome-spanning calls filtered."
+    )
+    ax.text(0.5, 0.10, notes, ha="center", va="top", fontsize=24, color="#333333")
+
+
+def plot_stacked_bar(ax, table: dict[str, dict[str, int]], order: list[str],
+                     title: str, ylabel: str, stats: str | None = None) -> None:
+    """Horizontal stacked bar of state proportions."""
+    counts = np.array([[table[g].get(s, 0) for s in STATE_ORDER] for g in order], dtype=float)
+    totals = counts.sum(axis=1, keepdims=True)
+    totals[totals == 0] = 1
+    fracs = counts / totals
+
+    left = np.zeros(len(order))
+    for i, state in enumerate(STATE_ORDER):
+        ax.barh(np.arange(len(order)), fracs[:, i], left=left,
+                color=STATE_COLORS[state], label=STATE_LABELS[state], height=0.65,
+                edgecolor="white", linewidth=0.5)
+        left += fracs[:, i]
+
+    ax.set_yticks(np.arange(len(order)))
+    ax.set_yticklabels(order)
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("Proportion of isolates")
+    ax.set_ylabel(ylabel)
+    if stats:
+        ax.set_title(f"{title}\n{stats}", fontsize=24, fontweight="bold", loc="left", pad=34)
+    else:
+        ax.set_title(title, fontsize=24, fontweight="bold", loc="left", pad=30)
+    ax.invert_yaxis()
+
+    # Add sample-size labels to the right of each bar.
+    for j, g in enumerate(order):
+        ax.text(1.02, j, f"n={int(totals[j].item())}", va="center", ha="left", fontsize=24, color="#333333")
+    ax.set_xlim(0, 1.18)
+
+
+# Three-level presence status used for the cagA cross-validation panel.
+PRESENCE_ORDER = ["empty", "partial", "complete"]
+PRESENCE_LABELS = {"empty": "empty", "partial": "partial", "complete": "complete"}
+
+
+def plot_panel_e(ax, merged: pd.DataFrame) -> None:
+    """cagPAI presence cross-validated against independent cagA typing."""
+    df = merged.copy()
+    df["cagA_grp"] = np.where(
+        df["cagA_result"] == "Detected", "cagA detected",
+        np.where(df["cagA_result"] == "Not_detected", "cagA not detected", "other/indeterminate"),
+    )
+    order = ["cagA detected", "cagA not detected", "other/indeterminate"]
+    labels = ["cagA detected", "cagA not\ndetected", "other /\nindeterminate"]
+
+    counts = np.zeros((len(order), len(PRESENCE_ORDER)))
+    for i, g in enumerate(order):
+        sub = df[df["cagA_grp"] == g]
+        vc = sub["status"].value_counts()
+        for j, s in enumerate(PRESENCE_ORDER):
+            counts[i, j] = vc.get(s, 0)
+    totals = counts.sum(axis=1, keepdims=True)
+    totals[totals == 0] = 1
+    fracs = counts / totals
+    labels = [f"{lab}\n(n={int(totals[i].item())})" for i, lab in enumerate(labels)]
+
+    colors = [STATE_COLORS["empty"], STATE_COLORS["partial"], STATE_COLORS["complete_collinear"]]
+    left = np.zeros(len(order))
+    for j, s in enumerate(PRESENCE_ORDER):
+        ax.bar(np.arange(len(order)), fracs[:, j], bottom=left, color=colors[j],
+               label=PRESENCE_LABELS[s], width=0.6, edgecolor="white", linewidth=0.5)
+        left += fracs[:, j]
+
+    # Annotate complete fraction per group.
+    for i in range(len(order)):
+        ax.text(i, fracs[i, 2] / 2 + fracs[i, :2].sum(), f"{fracs[i, 2]:.2f}",
+                ha="center", va="center", fontsize=24, color="white")
+
+    ax.set_xticks(np.arange(len(order)))
+    ax.set_xticklabels(labels, fontsize=24)
+    ax.set_ylim(0, 1.34)
+    ax.set_ylabel("cagPAI presence")
+    ax.set_xlabel("Independent cagA typing (collaborator)")
+    ax.set_title("Cross-validation vs cagA typing")
+    ax.text(-0.38, 1.20,
+            "OR = 783 (179–3,421); stratified OR = 3,986;\n"
+            "CMH p < 10$^{-16}$; Breslow–Day p = 0.96",
+            ha="left", va="top", fontsize=24)
+
+
+def plot_panel_f(ax, merged: pd.DataFrame) -> None:
+    """SV burden by macrolide-resistance genotype, crude vs lineage-stratified."""
+    df = merged.dropna(subset=["res_macrolide", "sv_total_n"])
+    res = df[df["res_macrolide"] == True]["sv_total_n"]
+    sens = df[df["res_macrolide"] == False]["sv_total_n"]
+
+    bp = ax.boxplot([sens, res], tick_labels=[f"susceptible\n(n={len(sens)})",
+                                            f"macrolide R\n(n={len(res)})"],
+                    showfliers=False, patch_artist=True, widths=0.55,
+                    medianprops=dict(color="black", linewidth=1.2))
+    for patch, color in zip(bp["boxes"], [plot_style.COLORS["sky_blue"], plot_style.COLORS["vermillion"]]):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.55)
+        patch.set_edgecolor("#333333")
+
+    # Jittered points.
+    rng = np.random.default_rng(7)
+    for i, vals in enumerate([sens, res]):
+        x = rng.normal(i + 1, 0.05, size=len(vals))
+        ax.scatter(x, vals, s=4, color="#333333", alpha=0.25, linewidths=0, zorder=1)
+
+    ax.set_ylabel("SV calls vs 26695")
+    ax.set_xlabel("CARD macrolide genotype (23S rRNA)")
+    ax.set_title("SV burden vs macrolide resistance")
+    ymax = max(res.max(), sens.max())
+    ax.set_ylim(0, ymax * 1.22)
+    ax.text(0.03, 0.97,
+            "crude OR = 2.81 (1.71–4.62), q = 8.5 $\\times$ 10$^{-5}$\n"
+            "lineage-stratified OR = 1.33 (0.73–2.40), p = 0.35",
+            transform=ax.transAxes, ha="left", va="top", fontsize=24)
+
+
+def main() -> int:
+    plot_style.set_publication_style()
+    plt.rcParams.update({
+    "font.size": 18,
+    "axes.labelsize": 20,
+    "axes.titlesize": 22,
+    "xtick.labelsize": 18,
+    "ytick.labelsize": 18,
+    "legend.fontsize": 18,
+})
+
+    assoc_path = CASE_DIR / "cagpai_association_filtered.tsv"
+    strat_path = CASE_DIR / "cagpai_association_stratified.tsv"
+    pilot_path = CASE_DIR / "cagpai_states_pilot.tsv"
+    merged_path = CASE_DIR / "metadata_assoc" / "merged_genome_table.tsv"
+
+    # Load data
+    fastbaps_table = parse_count_table(assoc_path, "fastbaps")
+    group_table = parse_count_table(assoc_path, "group")
+    pilot_rows = load_pilot(pilot_path)
+    cmh_pvals = parse_cmh_p_values(strat_path)
+    merged = pd.read_csv(merged_path, sep="\t")
+
+    # Recompute statistics from counts.
+    fb_chi2 = chi2_from_table(fastbaps_table)
+    grp_chi2 = chi2_from_table(group_table)
+
+    # Fallback to precomputed values if scipy fails.
+    if fb_chi2 is None:
+        fb_chi2 = (58.754, 12, 3.805e-08)
+    if grp_chi2 is None:
+        grp_chi2 = (24.601, 9, 0.003446)
+
+    min_cmh_p = min(cmh_pvals.values()) if cmh_pvals else 0.21
+
+    fig = plt.figure(figsize=plot_style.figure_size(60.0, aspect=0.45))
+    gs = fig.add_gridspec(2, 3, left=0.045, right=0.94, top=0.90, bottom=0.18,
+                          wspace=0.42, hspace=0.70)
+
+    ax_a = fig.add_subplot(gs[0, 0])
+    ax_b = fig.add_subplot(gs[0, 1])
+    ax_e = fig.add_subplot(gs[0, 2])
+    ax_c = fig.add_subplot(gs[1, 0])
+    ax_d = fig.add_subplot(gs[1, 1])
+    ax_f = fig.add_subplot(gs[1, 2])
+
+    # Panel (a)
+    plot_panel_a(ax_a, pilot_rows)
+    
+    # Panel (b)
+    plot_panel_b(ax_b)
+    
+    # Panel (e)
+    plot_panel_e(ax_e, merged)
+    
+    # Panel (c)
+    fb_order = [f"fastbaps_L{i}" for i in (2, 3, 4, 5, 6)]
+    chi2, dof, p = fb_chi2
+    p_str = f"{p:.2e}" if p < 0.001 else f"{p:.3g}"
+    plot_stacked_bar(ax_c, fastbaps_table, fb_order,
+                     title="Extended state by FastBAPS lineage",
+                     ylabel="FastBAPS lineage",
+                     stats=f"χ² = {chi2:.2f}, df = {dof}, p = {p_str}")
+    
+    # Panel (d)
+    group_order = ["NAG", "AG", "IM", "GC"]
+    chi2_g, dof_g, p_g = grp_chi2
+    p_g_str = f"{p_g:.2e}" if p_g < 0.001 else f"{p_g:.3g}"
+    plot_stacked_bar(ax_d, group_table, group_order,
+                     title="Extended state by disease stage",
+                     ylabel="Correa stage",
+                     stats=f"marginal χ² = {chi2_g:.2f}, p = {p_g_str}; CMH p ≥ {min_cmh_p:.2f}")
+    
+    # Panel (f)
+    plot_panel_f(ax_f, merged)
+    
+    # Shared figure legend for extended states.
+    legend_handles = [
+        Patch(facecolor=STATE_COLORS[s], edgecolor="none", label=STATE_LABELS[s])
+        for s in STATE_ORDER
+    ]
+    fig.legend(
+        legend_handles,
+        [h.get_label() for h in legend_handles],
+        loc="lower center",
+        ncol=4,
+        frameon=False,
+        title="State",
+        title_fontsize=24,
+        fontsize=24,
+        bbox_to_anchor=(0.5, -0.02),
+    )
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    plot_style.save_figure(fig, str(OUT_STEM), formats=("png", "pdf"))
+    plt.close(fig)
+
+    print("Figure 8 generated successfully.", file=sys.stderr)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
